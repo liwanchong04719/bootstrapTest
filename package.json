@@ -1,0 +1,21 @@
+{
+  "name": "BootStrap",
+  "version": "0.1.0",
+  "description": "",
+  "homepage": "",
+  "author": "",
+  "scripts": {
+
+    "start": "http-server -a localhost -p 8000 -c-1 ../BOOTSTRAPTEST"
+  },
+  "devDependencies": {
+
+    "http-server": "^0.9.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "license": "ISC"
+
+}
