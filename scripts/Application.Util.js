@@ -32,8 +32,7 @@ Application.Util.ajaxConstruct = function (url, type, data, dataType, successFuc
     $.ajax({
         headers : {
             'Accept' : 'application/json',
-            'Content-Type' : accept,
-            'X-Auth-Token':access_token
+            'Content-Type' : accept
         },
 
         url: url,
