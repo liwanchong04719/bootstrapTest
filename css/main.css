@@ -1,5 +1,21 @@
-.wrapperDiv{
+
+.wrapperDiv {
     position: fixed;
-    height:100%;
+    height: 100%;
     width: 100%;
+}
+
+#pieChart{
+    width: 100%;
+    height: 500px;
+}
+
+#barChart{
+    width: 100%;
+    height: 500px;
+}
+
+.mapContainer{
+    width: 400px;
+    height: 400px;
 }

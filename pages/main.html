@@ -7,18 +7,19 @@
     <link rel="stylesheet" type="text/css" href="../lib/bootstrap3.3.5/css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="../lib/bootstrap-table/dist/bootstrap-table.css" />
     <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../css/keen-dashboards.css">
     <script src="../lib/echarts-3.3.1/dist/echarts.min.js"></script>
 </head>
 <script type="text/javascript">
     function test() {
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('chartLine'));
+        var myChart = echarts.init(document.getElementById('inventoryOfAssetsChart'));
         var pieLine = echarts.init(document.getElementById('pieLine'));
 
         // 指定图表的配置项和数据
         var option = {
             title: {
-                text: 'ECharts 入门示例'
+                text: '资产'
             },
             tooltip: {},
             legend: {
@@ -53,7 +54,6 @@
             </button>
             <a class="navbar-brand" href="#">Brand</a>
         </div>
-
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <form class="navbar-form navbar-left" role="search">
@@ -64,11 +64,34 @@
             </form>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
+    <!--<div class="container-fluid">-->
+        <!--<div class="row">-->
+            <!--<div class="col-md-2">-->
+                <!--菜单-->
+            <!--</div>-->
+            <!--<div class="col-md-10">-->
+                 <!--<div class="container-fluid">-->
+                     <!--<div class="row">-->
+                         <!--<div class="col-md-6">-->
+                             <!--<div id="pieChart">-->
+
+                             <!--</div>-->
+                         <!--</div>-->
+                         <!--<div class="col-md-6">-->
+                             <!--<div id="barChart">-->
+
+                             <!--</div>-->
+                         <!--</div>-->
+                     <!--</div>-->
+                 <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
 </nav>
 <div class="wrapperDiv">
     <div class="container-fluid" style="height: 100%">
         <div class="row" style="height: 100%">
-            <div class="col-md-3" style="height:100%;background-color: #dedef8;box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
+            <div class="col-md-1" style="height:100%;background-color: #dedef8;box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
                 <div style="height: 25%">
                     iiii
                 </div>
@@ -82,11 +105,19 @@
                     iiii
                 </div>
             </div>
-            <div class="col-md-9" style="height: 100%;background-color: #dedef8;box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
+            <div class="col-md-11" style="height: 100%;background-color: #dedef8;box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
                 <div class="row" style="height: 50%">
                     <div class="col-md-6" style="height: 100%;background-color: #B18904; box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-                        <div style="height: 100%;" id="chartLine">
-                            iiii
+                        <div class="chart-wrapper" style="height:100%;">
+                            <div class="chart-title">
+                                资产盘点
+                            </div>
+                            <div class="chart-stage" style="height: 100%">
+                                <div class="chart-title" style="height: 30%">
+
+                                </div>
+                                <div id="inventoryOfAssetsChart" style="height: 70%"></div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-6" style="height: 100%;background-color: #B18904; box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
@@ -116,4 +147,6 @@
 <script src="../lib/jquery/jquery-1.11.3.js"></script>
 <script src="../lib/bootstrap3.3.5/js/bootstrap.js"></script>
 <script src="../lib/bootstrap-table/dist/bootstrap-table.js"></script>
+<script src="../lib/echarts/echarts.js"></script>
+<!--<script src="../scripts/main.js"></script>-->
 </html>
