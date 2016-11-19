@@ -2,8 +2,8 @@
  * Created by wangtun on 2016/11/17.
  */
 $(function () {
-  //initPieChart();
-  //initBarChart();
+  initPieChart();
+  initBarChart();
 })
 
 function initPieChart(){
