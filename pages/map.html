@@ -11,14 +11,21 @@
     <div class="container mapwarp">
         <div class="row">
             <div class="leftmenuContainer col-md-2"></div>
-            <div class="mapContainer col-md-2" id="map"></div>
+            <div class="mapContainer col-md-10" id="map"></div>
         </div>
-
+        <div id="zoomcontainer" style="position:absolute;bottom:5px;right:5px">
+            <label id="zoom"></label>
+            </div>            
     </div>
 </body>
 <script src="../lib/jquery/jquery-1.11.3.js"></script>
 <script src="../lib/bootstrap3.3.5/js/bootstrap.js"></script>
 <script src="../lib/bootstrap-table/dist/bootstrap-table.js"></script>
-	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=AXQ7RGL4oSjsANXUG8OQofPywGmb04QV"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=AXQ7RGL4oSjsANXUG8OQofPywGmb04QV"></script>
+<script src="../scripts/Application.js"></script>
+<script src="../scripts/Application.Util.js"></script>
+<script type="text/javascript" src="../lib/testdata/CommunityData.js"></script>
+<script type="text/javascript" src="../lib/testdata/DistricData.js"></script>
+<script type="text/javascript" src="../lib/testdata/BusinessAreaData.js"></script>
 <script src="../scripts/map.js"></script>
 </html>
