@@ -7,7 +7,7 @@ $(document).ready(function(){
 	//初始化左侧列表
 	initHoouseList();
 	var housedata = house.data.list;
-	$('#left_house_list').bootstrapTable('load',housedata);
+	//$('#left_house_list').bootstrapTable('load',housedata);
 	//地图
 	var map = initmap();
 	//根据地图级别绘制图标
@@ -70,6 +70,7 @@ function createMarker(options) {
 //生成房产列表
 
 function initHoouseList(){
+	return;
    $('#left_house_list').bootstrapTable({
         height: (document.documentElement.clientHeight || document.body.clientHeight) - 230,
         classes:"table table-hover table-condensed",

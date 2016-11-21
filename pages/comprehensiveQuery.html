@@ -9,70 +9,95 @@
     <link rel="stylesheet" type="text/css" href="../lib/Flat-UI-master/dist/css/flat-ui.css" />
     <link rel="stylesheet" type="text/css" href="../lib/bootstrap-table/dist/bootstrap-table.css" />
     <link rel="stylesheet" type="text/css" href="../lib/bootstrap-treeview-master/dist/bootstrap-treeview.min.css" />
-    <link rel="stylesheet" type="text/css" href="../css/keen-dashboards.css">
     <!--[if lt IE 9]>
     <script src="../lib/Flat-UI-master/dist/js/vendor/html5shiv.js"></script>
     <script src="../lib/Flat-UI-master/dist/js/vendor/respond.min.js"></script>
     <![endif]-->
-    <link rel="stylesheet" type="text/css" href="../css/main.css">
-    <script src="../lib/echarts-3.3.1/dist/echarts.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/comprehensivequery.css">
 </head>
 <body>
-<div class="wrapperDiv">
-    <div class="container-fluid" style="height: 100%">
-        <div class="row" style="height: 100%">
-            <div class="col-md-2" style="height: 100%">
-                <button class="btn btn-success">机构</button>
-                <button class="btn btn-warning">区域</button>
-                <button class="btn btn-inverse">业态</button>
-                <div   style="width:100%;">
-                    <div id="tree" style="width:100%;max-height: 600px;overflow-y: scroll;position: absolute"></div>
-                </div>
-
+<nav class="navbar navbar-default" role="navigation">
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-5">
+                <span class="sr-only">Toggle navigation</span>
+            </button>
+            <a class="navbar-brand" href="#">城建</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-collapse-5">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="main.html">首页</a></li>
+                <li><a href="comprehensiveQuery.html">综合查询</a></li>
+                <li><a href="map.html">地图模式</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">消息</a></li>
+                        <li><a href="#">待办事项</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">个人资料</a></li>
+                    </ul>
+                </li>
+                <li><a href="#"><span class="visible-sm visible-xs">Settings<span class="fui-gear"></span></span><span class="visible-md visible-lg"><span class="fui-gear"></span></span></a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav>
+</nav>
+<div class="container-fluid" style="height: 100%">
+    <div class="row" style="height: 100%">
+        <div class="col-md-2" style="height: 100%">
+            <button class="btn btn-success">机构</button>
+            <button class="btn btn-warning">区域</button>
+            <button class="btn btn-inverse">业态</button>
+            <div   style="width:100%;">
+                <div id="tree" style="width:100%;max-height: 600px;overflow-y: scroll;position: absolute"></div>
             </div>
 
-            <div class="col-md-10" style="height: 100%;">
-                <nav class="navbar navbar-inverse" role="navigation">
-                    <div class="collapse navbar-collapse navbar-collapse-01">
-                        <ul class="nav navbar-nav navbar-left">
-                            <li class="active"><a href="index.html">地产</a></li>
-                            <li><a href="#fakelink">房产</a></li>
-                            <li><a href="#fakelink">业态</a></li>
-                            <li><a href="#fakelink">房源</a></li>
-                        </ul>
-                    </div><!--/.nav -->
-                </nav>
-                <div style="height: 100%">
-                    <table id="table"
-                           data-toggle="table"
-                           data-height="600"
-                           data-url="../json/data1.json"
-                           data-pagination="true"
-                           data-page-size="5"
-                           data-page-list="[5,8,10]"
-                           data-pagination-first-text="首页"
-                           data-pagination-pre-text="前一页"
-                           data-pagination-next-text="下一页"
-                           data-pagination-last-text="最后一页">
-                        <thead>
-                        <tr>
-                            <th data-field="id">编号</th>
-                            <th data-field="name">房产名称</th>
-                            <th data-field="area">面积</th>
-                            <th data-field="position" data-formatter="positionFormatter">地理位置</th>
-                            <th data-field="handle" data-formatter="handleFormatter">操作</th>
-                        </tr>
-                        </thead>
-                    </table>
-                </div>
+        </div>
+
+        <div class="col-md-10" style="height: 100%;">
+            <nav class="navbar navbar-inverse" role="navigation">
+                <div class="collapse navbar-collapse navbar-collapse-01">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li class="active"><a href="index.html">地产</a></li>
+                        <li><a href="#fakelink">房产</a></li>
+                        <li><a href="#fakelink">业态</a></li>
+                        <li><a href="#fakelink">房源</a></li>
+                    </ul>
+                </div><!--/.nav -->
+            </nav>
+            <div style="height: 100%">
+                <table id="table"
+                       data-toggle="table"
+                       data-height="600"
+                       data-url="../json/data1.json"
+                       data-pagination="true"
+                       data-page-size="5"
+                       data-page-list="[5,8,10]"
+                       data-pagination-first-text="首页"
+                       data-pagination-pre-text="前一页"
+                       data-pagination-next-text="下一页"
+                       data-pagination-last-text="最后一页">
+                    <thead>
+                    <tr>
+                        <th data-field="id">编号</th>
+                        <th data-field="name">房产名称</th>
+                        <th data-field="area">面积</th>
+                        <th data-field="position" data-formatter="positionFormatter">地理位置</th>
+                        <th data-field="handle" data-formatter="handleFormatter">操作</th>
+                    </tr>
+                    </thead>
+                </table>
             </div>
         </div>
     </div>
 </div>
 
 </body>
-<script src="../lib/jquery/jquery.js"></script>
-<script src="../lib/bootstrap3.3.5/js/bootstrap.js"></script>
+<script src="../lib/Flat-UI-master/dist/js/vendor/jquery.min.js"></script>
+<script src="../lib/Flat-UI-master/dist/js/flat-ui.js"></script>
 <script src="../lib/bootstrap-table/dist/bootstrap-table.js"></script>
 <script src="../lib/echarts/echarts.js"></script>
 <script src="../lib/bootstrap-treeview-master/dist/bootstrap-treeview.min.js"></script>
