@@ -1,8 +1,70 @@
+html,body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(246, 247, 250);
+    font-family:'Microsoft YaHei', '微软雅黑', '黑体', Arial,'Times New Roman', sans-serif;
+}
 
+.navbar{
+    border-radius: 0px;
+    margin-bottom: 5px;
+}
+.navbar-nav{
+    margin-left: 30px;
+}
+
+.title-info{
+    line-height: 24px;
+    font-size: 24px;
+    font-weight: 700;
+    color: #1e3657;
+    padding-bottom: 8px;
+}
+.titleInfo_bottom {
+    font-size: 12px;
+    color: #9db0c1;
+    line-height: 12px;
+}
 .wrapperDiv {
     position: fixed;
     height: 100%;
     width: 100%;
+}
+.produceInfoDiv{
+    padding-left: 120px;
+    background-color: white;
+    border-radius: 5px;
+    height:100%;
+}
+.produceInfoDiv_left{
+    float:left;
+    margin-left: -120px;
+    width: 120px;
+    height: 100%;
+    background-color: #ff5782;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    text-align: center;
+    /*padding-top: 22px;*/
+}
+.produceInfoDiv_left >div > span {
+    color: white;
+    padding-top: 8px;
+}
+.produceInfoDiv_right{
+    padding-top: 22px;
+    text-align: center;
+    width:100%;
+}
+.produceInfoDiv_right >div >span{
+    font-size: 36px;
+    font-weight: bold;
+    color: #63829B;
+}
+.produceInfoDiv_right >div >a{
+    color: red;
 }
 
 #pieChart{
@@ -19,3 +81,35 @@
     width: 400px;
     height: 400px;
 }
+.treeDiv{
+    background-color: white;
+    border-radius: 5px;
+    height:100%;
+}
+.treeDiv_left{
+    float:left;
+    width:80%;
+    height: 100%;
+    background-color: #ff5782;
+    border-radius: 5px;
+    text-align: center;
+    /*padding-top: 22px;*/
+}
+::-webkit-scrollbar {
+    width: 15px;
+} /* 这是针对缺省样式 (必须的) */
+::-webkit-scrollbar-track {
+    background-color: #b46868;
+} /* 滚动条的滑轨背景颜色 */
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+} /* 滑块颜色 */
+
+::-webkit-scrollbar-button {
+    background-color: #7c2929;
+} /* 滑轨两头的监听按钮颜色 */
+
+::-webkit-scrollbar-corner {
+    background-color: black;
+} /* 横向滚动条和纵向滚动条相交处尖角的颜色 */
