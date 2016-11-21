@@ -16,110 +16,116 @@
     <link rel="stylesheet" type="text/css" href="../css/comprehensivequery.css">
 </head>
 <body>
-<nav class="navbar navbar-default" role="navigation">
-    <nav class="navbar navbar-inverse" role="navigation">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-5">
-                <span class="sr-only">Toggle navigation</span>
-            </button>
-            <a class="navbar-brand" href="#">城建</a>
-        </div>
-        <div class="collapse navbar-collapse" id="navbar-collapse-5">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">首页</a></li>
-                <li><a href="#">综合查询</a></li>
-                <li><a href="#">地图模式</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">消息</a></li>
-                        <li><a href="#">待办事项</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">个人资料</a></li>
-                    </ul>
-                </li>
-                <li><a href="#"><span class="visible-sm visible-xs">Settings<span class="fui-gear"></span></span><span class="visible-md visible-lg"><span class="fui-gear"></span></span></a></li>
-            </ul>
-        </div><!-- /.navbar-collapse -->
-    </nav>
-</nav>
-<div class="wrapperDiv">
-    <div class="container-fluid" style="height: 100%">
-        <div class="row" style="height: 100%">
-            <div class="col-md-2" style="height: 100%">
-                <button class="btn btn-success">机构</button>
-                <button class="btn btn-warning">区域</button>
-                <button class="btn btn-inverse">业态</button>
-                <div   style="width:100%;">
-                    <div id="tree" style="width:100%;position: absolute"></div>
-                </div>
-
+<div class="container-fluid" style="height: 100%;padding-top: 55px;padding-left: 0px;padding-right: 0px" >
+    <nav class="navbar navbar-default" role="navigation"  style="margin-top: -55px">
+        <nav class="navbar navbar-inverse" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-5">
+                    <span class="sr-only">Toggle navigation</span>
+                </button>
+                <a class="navbar-brand" href="#">城建</a>
             </div>
-            <div class="col-md-10" style="height: 100%;">
-                <ul id="myTab" class="nav nav-tabs">
-                    <li class="active">
-                        <a href="#home" data-toggle="tab">
-                            Home
-                        </a>
-                    </li>
-                    <li><a href="#ios" data-toggle="tab">iOS</a></li>
+            <div class="collapse navbar-collapse" id="navbar-collapse-5">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">首页</a></li>
+                    <li><a href="#">综合查询</a></li>
+                    <li><a href="#">地图模式</a></li>
                 </ul>
-                <div id="myTabContent" class="tab-content">
-                    <div class="tab-pane fade in active" id="home">
-                        <table id="table"
-                               data-toggle="table"
-                               data-height="560"
-                               data-url="../json/data1.json"
-                               data-pagination="true"
-                               data-page-size="5"
-                               data-page-list="[5,8,10]"
-                               data-pagination-first-text="首页"
-                               data-pagination-pre-text="前一页"
-                               data-pagination-next-text="下一页"
-                               data-pagination-last-text="最后一页">
-                            <thead>
-                            <tr>
-                                <th data-field="id">11</th>
-                                <th data-field="name">123</th>
-                                <th data-field="area">1234</th>
-                                <th data-field="position" data-formatter="positionFormatter">12345</th>
-                                <th data-field="handle" data-formatter="handleFormatter">123456</th>
-                            </tr>
-                            </thead>
-                        </table>
-                    </div>
-                    <div class="tab-pane fade" id="ios">
-                        <table id="table1"
-                               data-toggle="table"
-                               data-height="570"
-                               data-url="../json/data.json"
-                               data-pagination="true"
-                               data-page-size="5"
-                               data-page-list="[5,8,10]"
-                               data-pagination-first-text="首页"
-                               data-pagination-pre-text="前一页"
-                               data-pagination-next-text="下一页"
-                               data-pagination-last-text="最后一页">
-                            <thead>
-                            <tr>
-                                <th data-field="id">11</th>
-                                <th data-field="name">123</th>
-                                <th data-field="area">1234</th>
-                                <th data-field="position" data-formatter="positionFormatter">12345</th>
-                                <th data-field="handle" data-formatter="handleFormatter">123456</th>
-                            </tr>
-                            </thead>
-                        </table>
-                    </div>
-                    <div class="tab-pane fade" id="jmeter"></div>
-                    <div class="tab-pane fade" id="ejb"></div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">消息</a></li>
+                            <li><a href="#">待办事项</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">个人资料</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><span class="visible-sm visible-xs">Settings<span class="fui-gear"></span></span><span class="visible-md visible-lg"><span class="fui-gear"></span></span></a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </nav>
+    </nav>
+    <div class="row" style="height: 100%;margin-left: 0px;margin-right: 0px">
+        <div class="col-md-2" style="height: 100%;padding-right: 5px">
+            <div style="height: 100%;padding-top: 50px;">
+                <div style="margin-top: -50px;height: 46px;">
+                    <button class="btn btn-success">机构</button>
+                    <button class="btn btn-warning">区域</button>
+                    <button class="btn btn-inverse">业态</button>
                 </div>
+                <div style="height: 100%">
+                    <div id="tree" style="width:100%;height: 100%"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10" style="height: 100%;padding-top: 50px">
+            <ul id="myTab" class="nav nav-tabs" style="margin-top: -50px;border-bottom: none;">
+                <li>
+                    <a href="#realEstate" Edata-toggle="tab">
+                        地产
+                    </a>
+                </li>
+                <li  class="active"><a href="#house" data-toggle="tab">房产</a></li>
+                <li><a href="#building" data-toggle="tab">楼栋</a></li>
+                <li><a href="#resources" data-toggle="tab">房源</a></li>
+            </ul>
+            <div id="myTabContent" class="tab-content" style="height: 100%">
+                <div class="tab-pane fade in active" id="realEstate" style="height: 100%">
+                    <table id="table"
+                           data-toggle="table"
+                           data-url="../json/data1.json"
+                           data-pagination="true"
+                           data-page-size="5"
+                           data-page-list="[5,8,10]"
+                           data-pagination-first-text="首页"
+                           data-pagination-pre-text="前一页"
+                           data-pagination-next-text="下一页"
+                           data-pagination-last-text="最后一页">
+                        <thead>
+                        <tr>
+                            <th data-field="id">编号</th>
+                            <th data-field="name">名称</th>
+                            <th data-field="area">面积</th>
+                            <th data-field="position" data-formatter="positionFormatter">地理位置</th>
+                            <th data-field="handle" data-formatter="handleFormatter">操作</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="house" style="height: 100%">
+                    <table id="table1"
+                           data-toggle="table"
+                           data-height="570"
+                           data-url="../json/data.json"
+                           data-pagination="true"
+                           data-page-size="5"
+                           data-page-list="[5,8,10]"
+                           data-pagination-first-text="首页"
+                           data-pagination-pre-text="前一页"
+                           data-pagination-next-text="下一页"
+                           data-pagination-last-text="最后一页">
+                        <thead>
+                        <tr>
+                            <th data-field="id">11</th>
+                            <th data-field="name">123</th>
+                            <th data-field="area">1234</th>
+                            <th data-field="position" data-formatter="positionFormatter">12345</th>
+                            <th data-field="handle" data-formatter="handleFormatter">123456</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="building" style="height: 100%">
+
+                </div>
+                <div class="tab-pane fade" id="resources" style="height: 100%">
+
                 </div>
             </div>
         </div>
     </div>
+</div>
 </body>
 <script src="../lib/Flat-UI-master/dist/js/vendor/jquery.min.js"></script>
 <script src="../lib/Flat-UI-master/dist/js/flat-ui.js"></script>
