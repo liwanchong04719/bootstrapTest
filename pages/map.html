@@ -5,9 +5,221 @@
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="../lib/Flat-UI-master/dist/css/vendor/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../lib/Flat-UI-master/dist/css/flat-ui.css" />
-    <link rel="stylesheet" type="text/css" href="../lib/bootstrap-table/dist/bootstrap-table.css" />
     <link rel="stylesheet" type="text/css" href="../css/map.css" />
     <style>
+        .r-content{
+            padding-left: 0px;
+            list-style-type: none;
+        }
+        .r-content .list-item {
+            border-bottom: 1px solid #e4e4e4;
+            list-style-type: none;
+        }
+
+        .r-content .list-item p {
+            margin: 0;
+            padding: 0;
+        }
+
+        .r-content .list-item a {
+            display: block;
+            width: 100%;
+            padding: 22px 17px;
+            color: #555;
+            font-size: 12px;
+            position: relative;
+            background-color: #fff;
+            -webkit-transition: background-color .15s ease-in-out;
+            transition: background-color .15s ease-in-out
+        }
+
+        .r-content .list-item a:hover {
+            background-color: #fbfbfb
+        }
+
+        .r-content .list-item a .item-aside {
+            float: left;
+            width: 116px;
+            height: 116px;
+            margin-right: 18px;
+            border-bottom: 4px solid transparent
+        }
+
+        .r-content .list-item a .item-aside img {
+            width: 100%;
+            height: 100%
+        }
+
+        .r-content .list-item a .item-aside .item-btm {
+            height: 22px;
+            background-color: #494848;
+            background-color: rgba(0,0,0,0.7);
+            color: #fff;
+            line-height: 22px;
+            overflow: hidden;
+            margin-top: -22px;
+            margin-left: 0;
+            position: absolute;
+            z-index: 2
+        }
+
+        .r-content .list-item a .item-aside .item-btm .item-img-icon {
+            border: 2px solid #fff;
+            height: 8px;
+            width: 8px;
+            margin-left: 5px;
+            float: left;
+            margin-top: 5px;
+            padding: 0
+        }
+
+        .r-content .list-item a .item-aside .item-btm .item-img-icon .i-icon-arrow {
+            display: block;
+            width: 0;
+            height: 0;
+            border: 3px solid transparent;
+            border-width: 3px 3px 4px 5px;
+            border-bottom-color: #fff
+        }
+
+        .r-content .list-item a .item-aside .item-btm .item-img-icon .i-icon-dot {
+            display: block;
+            width: 2px;
+            height: 2px;
+            background-color: #fff;
+            margin-top: -6px;
+            margin-left: 1px
+        }
+
+        .r-content .list-item a .item-aside .item-btm span {
+            float: left;
+            text-align: center;
+            padding-left: 4px;
+            padding-right: 4px
+        }
+
+        .r-content .list-item a .item-aside .item-top {
+            position: absolute;
+            top: 22px;
+            padding: 5px 7px;
+            font-size: 12px;
+            background-color: #fcb846;
+            color: #fff
+        }
+
+        .r-content .list-item a .item-main .item-tle {
+            font-size: 14px;
+            color: #262626;
+            font-weight: 800;
+            height: 38px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 1.36
+        }
+
+        .r-content .list-item a .item-main .item-tip_new,.mod-side .detail .r-list .r-main .r-content .list-item a .item-main .item-tip_decrease {
+            font-size: 12px;
+            color: #fff;
+            font-weight: 400;
+            background-color: #e23b41;
+            margin-left: 4px;
+            border-radius: 1px;
+            padding: 2px
+        }
+
+        .r-content .list-item a .item-main .item-tip_decrease {
+            background-color: #45ac71
+        }
+
+        .r-content .list-item a .item-main .item-des {
+            white-space: nowrap;
+            position: relative;
+            margin-top: 2px;
+            line-height: 1.84
+        }
+
+        .r-content .list-item a .item-main .item-des span {
+            margin-right: 5px;
+            font-size: 12px;
+        }
+
+        .r-content .list-item a .item-main .item-des .item-side {
+            margin-right: 0;
+            font-size: 16px;
+            position: absolute;
+            right: 0;
+            bottom: 0px;
+            color: #e4393c;
+            font-weight: 800;
+            font-family: tahoma
+        }
+
+        .r-content .list-item a .item-main .item-des .item-side span {
+            font-size: 12px;
+            font-weight: normal;
+            margin-left: 2px;
+            margin-right: 0
+        }
+
+        .r-content .list-item a .item-main .item-community {
+            line-height: 1.84;
+            min-height: 21px
+        }
+
+        .r-content .list-item a .item-main .item-community .item-replace-com {
+            font-size: 12px;
+        }
+
+        .r-content .list-item a .item-main .item-tag-wrap {
+            margin-top: 3px;
+            min-height: 29px
+        }
+
+        .r-content .list-item a .item-main .item-extra {
+            display: inline-block;
+            border: 1px solid;
+            margin-right: 6px;
+            padding: 1px 6px 2px;
+            margin-top: 6px
+        }
+
+        .r-content .list-item a .item-main .item-tag-color_1 {
+            color: #2973b3
+        }
+
+        .r-content .list-item a .item-main .item-tag-color_2 {
+            color: #ff7800
+        }
+
+        .r-content .list-item a .item-main .item-tag-color_3 {
+            color: #fcb846
+        }
+
+        .r-content .list-item a .item-main .item-tag-color_4 {
+            color: #9ec77d
+        }
+
+        .r-content .list-item a:hover {
+            text-decoration: none
+        }
+
+        .r-content .list-item a:hover .item-main .item-community .item-exact-com {
+            display: none
+        }
+
+        .r-content .list-item a:hover .item-main .item-community .item-replace-com {
+            display: inline
+        }
+
+        .r-content .list-item-remind {
+            font-size: 18px;
+            text-align: center;
+            line-height: 400px;
+            color: #888;
+            background: url(img/map/list404.png) no-repeat center 90px
+        }
+
+
         .tableitem {
             display: block;
             width: 370px;
@@ -21,13 +233,6 @@
             text-decoration: none;
             outline: none;
         }
-        .item-aside {
-            float: left;
-            width: 116px;
-            height: 116px;
-            margin-right: 18px;
-            border-bottom: 4px solid transparent;
-        }
         .item-aside img {
             width: 100%;
             height: 100%;
@@ -40,6 +245,9 @@
         #left_house_list{
             height:100%
         }
+    </style>
+    <style>
+
     </style>
 </head>
 <body>
@@ -75,6 +283,27 @@
     </nav>
     <div class="row"  style="height: 100%;margin-left: 0px;margin-right: 0px">
         <div class="col-md-4">
+            <ol class="r-content">
+                <li class="list-item">
+                    <a>
+                        <div class="item-aside">
+                            <img alt="示例图片" src="http://image1.ljcdn.com/110000-inspection/8acb6b28-69c1-4828-b6c7-89f78953408e.jpg.116x116.jpg">
+                        </div>
+                        <div class="item-main">
+                            <p class="item-tle">永乐东区&nbsp;2室1厅</p>
+                            <p class="item-des">
+                                <span>2室1厅</span>
+                                <span data-origin="48.53">48平米</span>
+                                <span>南 北</span>
+                                <span class="item-side">4000<span>元/月</span></span>
+                            </p>
+                            <p class="item-community">
+                                <span class="item-replace-com" data-origin="">永乐东区</span>
+                            </p>
+                        </div>
+                    </a>
+                </li>
+            </ol>
             <table id="left_house_list" style="height: 100%;"></table>
         </div>
         <div class="col-md-8" style="height: 100%;padding-top: 55px;">
