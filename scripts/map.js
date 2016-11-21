@@ -29,10 +29,7 @@ $(document).ready(function(){
 				map.addOverlay(customMarker);
 			}
 		}
-
 	})
-
-
 })
 
 //初始化地图， 百度地图API功能
