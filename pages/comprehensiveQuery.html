@@ -61,11 +61,13 @@
             <div class="col-md-10" style="height: 100%;">
                 <ul id="myTab" class="nav nav-tabs">
                     <li class="active">
-                        <a href="#home" data-toggle="tab">
+                        <a href="#home" data-toggle="tab" onclick="changeData(1)">
                             Home
                         </a>
                     </li>
-                    <li><a href="#ios" data-toggle="tab">iOS</a></li>
+                    <li><a href="#home" data-toggle="tab"
+                           onclick="changeData(2)"
+                    >iOS</a></li>
                 </ul>
                 <div id="myTabContent" class="tab-content">
                     <div class="tab-pane fade in active" id="home">
@@ -90,31 +92,31 @@
                             </thead>
                         </table>
                     </div>
-                    <div class="tab-pane fade" id="ios">
-                        <table id="table1"
-                               data-toggle="table"
-                               data-height="570"
-                               data-url="../json/data.json"
-                               data-pagination="true"
-                               data-page-size="5"
-                               data-page-list="[5,8,10]"
-                               data-pagination-first-text="首页"
-                               data-pagination-pre-text="前一页"
-                               data-pagination-next-text="下一页"
-                               data-pagination-last-text="最后一页">
-                            <thead>
-                            <tr>
-                                <th data-field="id">11</th>
-                                <th data-field="name">123</th>
-                                <th data-field="area">1234</th>
-                                <th data-field="position" data-formatter="positionFormatter">12345</th>
-                                <th data-field="handle" data-formatter="handleFormatter">123456</th>
-                            </tr>
-                            </thead>
-                        </table>
-                    </div>
-                    <div class="tab-pane fade" id="jmeter"></div>
-                    <div class="tab-pane fade" id="ejb"></div>
+                    <!--<div class="tab-pane fade" id="ios">-->
+                        <!--<table id="table1"-->
+                               <!--data-toggle="table"-->
+                               <!--data-height="570"-->
+                               <!--data-url="../json/data.json"-->
+                               <!--data-pagination="true"-->
+                               <!--data-page-size="5"-->
+                               <!--data-page-list="[5,8,10]"-->
+                               <!--data-pagination-first-text="首页"-->
+                               <!--data-pagination-pre-text="前一页"-->
+                               <!--data-pagination-next-text="下一页"-->
+                               <!--data-pagination-last-text="最后一页">-->
+                            <!--<thead>-->
+                            <!--<tr>-->
+                                <!--<th data-field="id">11</th>-->
+                                <!--<th data-field="name">123</th>-->
+                                <!--<th data-field="area">1234</th>-->
+                                <!--<th data-field="position" data-formatter="positionFormatter">12345</th>-->
+                                <!--<th data-field="handle" data-formatter="handleFormatter">123456</th>-->
+                            <!--</tr>-->
+                            <!--</thead>-->
+                        <!--</table>-->
+                    <!--</div>-->
+                    <!--<div class="tab-pane fade" id="jmeter"></div>-->
+                    <!--<div class="tab-pane fade" id="ejb"></div>-->
                 </div>
                 </div>
             </div>

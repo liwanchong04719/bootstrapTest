@@ -33,6 +33,7 @@ $(function () {
   $('#tree').treeview({ expandIcon: "glyphicon glyphicon-stop",
     levels: 1,
     data: tree});
+  $('#tree').on('nodeSelected',treeCallback)
 });
 function positionFormatter(v,row) {
   return [
@@ -81,4 +82,10 @@ function changeData(type) {
       break;
   }
 
+}
+function treeCallback(event, data) {
+  console.log('ddddd');
+  $table.bootstrapTable('refresh',{
+    url: '../json/data4.json'
+  });
 }
