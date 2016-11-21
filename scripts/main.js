@@ -4,60 +4,134 @@
 $(function () {
   initPieChart();
   initBarChart();
+  initPieStatus();
+  $('select[name="inverse-select"]').select2({dropdownCssClass: 'select-inverse-dropdown'});
 })
+
+function initPieStatus(){
+  var dom = document.getElementById("pieStatus");
+  var myChart = echarts.init(dom);
+  var app = {};
+  option = null;
+  app.title = '饼状图';
+
+  option = {
+    backgroundColor:'#fff',
+    title : {
+      text: '出租率',
+      subtext: '',
+      x:'center'
+    },
+    tooltip : {
+      trigger: 'item',
+      formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+      orient : 'vertical',
+      x : 'left',
+      data:['已租','未租','自用']
+    },
+    toolbox: {
+      show : true,
+      feature : {
+        mark : {show: false},
+        dataView : {show: false, readOnly: false},
+        magicType : {
+          show: true,
+          type: ['pie', 'funnel'],
+          option: {
+            funnel: {
+              x: '25%',
+              width: '50%',
+              funnelAlign: 'left',
+              max: 1548
+            }
+          }
+        },
+        restore : {show: false},
+        saveAsImage : {show: true}
+      }
+    },
+    calculable : true,
+    series : [
+      {
+        name:'出租率',
+        type:'pie',
+        radius : '55%',
+        center: ['50%', '60%'],
+        data:[
+          {value:335, name:'已租'},
+          {value:310, name:'未租'},
+          {value:234, name:'自用'}
+        ]
+      }
+    ]
+  };
+
+  if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+  }
+}
 
 function initPieChart(){
   var dom = document.getElementById("pieChart");
   var myChart = echarts.init(dom);
   var app = {};
   option = null;
-  app.title = '环形图';
+  app.title = '饼状图';
 
   option = {
-    tooltip: {
+    backgroundColor:'#fff',
+    title : {
+      text: '',
+      subtext: '',
+      x:'center'
+    },
+    tooltip : {
       trigger: 'item',
-      formatter: "{a} <br/>{b}: {c} ({d}%)"
+      formatter: "{a} <br/>{b} : {c} ({d}%)"
     },
     legend: {
-      orient: 'vertical',
-      x: 'left',
-      data:['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
+      orient : 'vertical',
+      x : 'left',
+      data:['自用','工业用房','商业用房','办公楼']
     },
-    series: [
-      {
-        name:'访问来源',
-        type:'pie',
-        radius: ['50%', '70%'],
-        avoidLabelOverlap: false,
-        label: {
-          normal: {
-            show: false,
-            position: 'center'
-          },
-          emphasis: {
-            show: true,
-            textStyle: {
-              fontSize: '30',
-              fontWeight: 'bold'
+    toolbox: {
+      show : true,
+      feature : {
+        mark : {show: true},
+        dataView : {show: false, readOnly: false},
+        magicType : {
+          show: true,
+          type: ['pie', 'funnel'],
+          option: {
+            funnel: {
+              x: '25%',
+              width: '50%',
+              funnelAlign: 'left',
+              max: 1548
             }
           }
         },
-        labelLine: {
-          normal: {
-            show: false
-          }
-        },
+        restore : {show: false},
+        saveAsImage : {show: true}
+      }
+    },
+    calculable : true,
+    series : [
+      {
+        name:'访问来源',
+        type:'pie',
+        radius : ['50%', '70%'],
         data:[
-          {value:335, name:'直接访问'},
-          {value:310, name:'邮件营销'},
-          {value:234, name:'联盟广告'},
-          {value:135, name:'视频广告'},
-          {value:1548, name:'搜索引擎'}
+          {value:335, name:'自用'},
+          {value:310, name:'工业用房'},
+          {value:234, name:'商业用房'},
+          {value:135, name:'办公楼'}
         ]
       }
     ]
   };
-  ;
   if (option && typeof option === "object") {
     myChart.setOption(option, true);
   }
@@ -68,127 +142,63 @@ function  initBarChart() {
   var dom = document.getElementById("barChart");
   var myChart = echarts.init(dom);
   var app = {};
-  option = null;
   option = {
-    title: {
-      text: '动态数据',
-      subtext: '纯属虚构'
-    },
-    tooltip: {
+    backgroundColor:'#fff',
+    tooltip : {
       trigger: 'axis'
     },
-    legend: {
-      data:['最新成交价', '预购队列']
-    },
     toolbox: {
-      show: true,
-      feature: {
-        dataView: {readOnly: false},
-        restore: {},
-        saveAsImage: {}
+      show : true,
+      feature : {
+        mark : {show: false},
+        dataView : {show: false, readOnly: false},
+        magicType: {show: false, type: ['line', 'bar']},
+        restore : {show: false},
+        saveAsImage : {show: true}
       }
     },
-    dataZoom: {
-      show: false,
-      start: 0,
-      end: 100
+    calculable : true,
+    legend: {
+      data:['出租率','单价']
     },
-    xAxis: [
+    xAxis : [
       {
-        type: 'category',
-        boundaryGap: true,
-        data: (function (){
-          var now = new Date();
-          var res = [];
-          var len = 10;
-          while (len--) {
-            res.unshift(now.toLocaleTimeString().replace(/^\D*/,''));
-            now = new Date(now - 2000);
-          }
-          return res;
-        })()
-      },
-      {
-        type: 'category',
-        boundaryGap: true,
-        data: (function (){
-          var res = [];
-          var len = 10;
-          while (len--) {
-            res.push(len + 1);
-          }
-          return res;
-        })()
+        type : 'category',
+        data : ['1公司','2公司','3公司','4公司','5公司','6公司','7公司','8公司','9公司','10公司','11公司','12公司']
       }
     ],
-    yAxis: [
+    yAxis : [
       {
-        type: 'value',
-        scale: true,
-        name: '价格',
-        max: 30,
-        min: 0,
-        boundaryGap: [0.2, 0.2]
+        type : 'value',
+        name : '100%',
+        axisLabel : {
+          formatter: '{value}'
+        }
       },
       {
-        type: 'value',
-        scale: true,
-        name: '预购量',
-        max: 1200,
-        min: 0,
-        boundaryGap: [0.2, 0.2]
+        type : 'value',
+        name : '单价',
+        axisLabel : {
+          formatter: '{value}元'
+        }
       }
     ],
-    series: [
+    series : [
+
       {
-        name:'预购队列',
+        name:'出租率',
         type:'bar',
-        xAxisIndex: 1,
-        yAxisIndex: 1,
-        data:(function (){
-          var res = [];
-          var len = 10;
-          while (len--) {
-            res.push(Math.round(Math.random() * 1000));
-          }
-          return res;
-        })()
+        data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 90, 100, 32.6, 20.0, 6.4, 3.3]
       },
       {
-        name:'最新成交价',
+        name:'单价',
         type:'line',
-        data:(function (){
-          var res = [];
-          var len = 0;
-          while (len < 10) {
-            res.push((Math.random()*10 + 5).toFixed(1) - 0);
-            len++;
-          }
-          return res;
-        })()
+        yAxisIndex: 1,
+        data:[2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
       }
     ]
   };
-  clearInterval(app.timeTicket);
-  app.count = 11;
-  app.timeTicket = setInterval(function (){
-    axisData = (new Date()).toLocaleTimeString().replace(/^\D*/,'');
 
-    var data0 = option.series[0].data;
-    var data1 = option.series[1].data;
-    data0.shift();
-    data0.push(Math.round(Math.random() * 1000));
-    data1.shift();
-    data1.push((Math.random() * 10 + 5).toFixed(1) - 0);
-
-    option.xAxis[0].data.shift();
-    option.xAxis[0].data.push(axisData);
-    option.xAxis[1].data.shift();
-    option.xAxis[1].data.push(app.count++);
-
-    myChart.setOption(option);
-  }, 2100);
-  ;
   if (option && typeof option === "object") {
     myChart.setOption(option, true);
   }
