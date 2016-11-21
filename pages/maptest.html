@@ -1,104 +1,129 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <link rel="stylesheet" type="text/css" href="../lib/bootstrap3.3.5/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="../lib/bootstrap-table/dist/bootstrap-table.css" />
     <style type="text/css">
-        body, html {width: 100%;height: 100%;margin:0;font-family:"微软雅黑";}
-        #allmap{width:100%;height:500px;}
-        p{margin-left:5px; font-size:14px;}
+        body,
+        html {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            font-family: "微软雅黑";
+        }
+        
+        a {
+            display: block;
+            width: 370px;
+            padding: 22px 17px;
+            color: #555;
+            font-size: 12px;
+            position: relative;
+            background-color: #fff;
+            -webkit-transition: background-color .15s ease-in-out;
+            transition: background-color .15s ease-in-out;
+            text-decoration: none;
+            outline: none;
+        }
+        
+        body,
+        div,
+        p {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .item-aside {
+            float: left;
+            width: 116px;
+            height: 116px;
+            margin-right: 18px;
+            border-bottom: 4px solid transparent;
+        }
+        
+    
+        .item-aside img {
+            width: 100%;
+            height: 100%;
+        }
     </style>
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=AXQ7RGL4oSjsANXUG8OQofPywGmb04QV"></script>
     <title>添加自定义覆盖物</title>
 </head>
+
 <body>
-    <div id="allmap"></div>
-    <div id="control">
-        <input type="button" onclick="hide_show()" value="点击">
+    <div class="row">
+        <a class="tableitem" href="/ershoufang/101100781178.html" target="_blank" title="富力城B区&nbsp;3室1厅" data-community="1111027374273">
+            <div class="item-aside">
+                <img src="house.jpg">
+
+            </div>
+            <div class="item-main">
+                <p class="item-tle">富力城B区&nbsp;3室1厅</p>
+                <p class="item-des"><span>3室1厅</span>
+                    <span data-origin="102.8">102平米</span>
+                    <span>南 北</span>
+                    <span class="item-side">1050<span>万</span>
+                    </span>
+                </p>
+                <p class="item-community">
+                    <span class="item-replace-com" data-origin="">富力城B区</span>
+                    <span class="item-exact-com">富力城B区</span>
+                </p>
+                <p class="item-tag-wrap">
+                    <span class="item-tag-subway item-extra" title="距离10号线双井站462米">地铁</span>
+                    <span class="item-tag-school item-extra" title="芳草地国际学校双花园校区">学区</span>
+                    <span class="item-tag-taxfree item-extra" title="">房本满两年</span>
+                </p>
+            </div>
+        </a>
+    </div>
+    <div>
+        <table id="left_house_list"></table>
     </div>
 </body>
-</html>
-<script type="text/javascript">
-    // 百度地图API功能
-    var mp = new BMap.Map("allmap");//创建地图实例
-    mp.centerAndZoom(new BMap.Point(116.3964,39.9093), 15);
-    //地图初始化，设置中心点坐标和地图级别。地图必须经过初始化才可以执行其他操作
-　　//启用鼠标滚轮放大缩小
-    mp.enableScrollWheelZoom();
-    //1、定义构造函数并继承Overlay
-　　//定义自定义覆盖物的构造函数  
-    function ComplexCustomOverlay(point){
-      this._point = point;
-      
-    }
-　　 // 继承API的BMap.Overlay  
-    ComplexCustomOverlay.prototype = new BMap.Overlay();
-    //2、初始化自定义覆盖物
-    // 实现初始化方法  
-    ComplexCustomOverlay.prototype.initialize = function(map){
-      // 保存map对象实例 
-      this._map = map;
-      // 创建div元素，作为自定义覆盖物的容器  
-      var div = this._div = document.createElement("div");
-      div.style.position = "absolute";
-      div.style.zIndex = BMap.Overlay.getZIndex(this._point.lat);//聚合功能?
-      // 可以根据参数设置元素外观
-      div.style.height = "35px";
-      div.style.width="35px";
+<script src="../lib/jquery/jquery-1.11.3.js"></script>
+<script src="../lib/bootstrap3.3.5/js/bootstrap.js"></script>
+<script src="../lib/bootstrap-table/dist/bootstrap-table.js"></script>
+<script type="text/javascript" src="../lib/testdata/CommunityData.js"></script>
+<script type="text/javascript" src="../lib/testdata/DistricData.js"></script>
+<script type="text/javascript" src="../lib/testdata/BusinessAreaData.js"></script>
+<script type="text/javascript" src="../lib/testdata/HouseData.js"></script>
 
-      var arrow = this._arrow = document.createElement("img");
-      arrow.src = "http://www.yantiansf.cn/mapImage/1.gif";
-      arrow.style.width = "35px";
-      arrow.style.height = "35px";
-      arrow.style.top = "22px";
-      arrow.style.left = "10px";
-      div.appendChild(arrow);
-     
-　    // 将div添加到覆盖物容器中  
-      mp.getPanes().labelPane.appendChild(div);//getPanes(),返回值:MapPane,返回地图覆盖物容器列表  labelPane呢???
-      // 需要将div元素作为方法的返回值，当调用该覆盖物的show、  
-      // hide方法，或者对覆盖物进行移除时，API都将操作此元素。
-      return div;
-      
-    }
-    
-    //3、绘制覆盖物
-    // 实现绘制方法
-    ComplexCustomOverlay.prototype.draw = function(){
-      var map = this._map;
-      var pixel = map.pointToOverlayPixel(this._point);
-      this._div.style.left = pixel.x - parseInt(this._arrow.style.left) + "px";
-      this._div.style.top  = pixel.y - 30 + "px";
-    }
-   
-        
-   
-    //4、自定义覆盖物添加事件方法
-    ComplexCustomOverlay.prototype.addEventListener = function(event,fun){
-        this._div['on'+event] = fun;
-    }
+<script>
+
+initHoouseList();
+var housedata = house.data.list;
+	$('#left_house_list').bootstrapTable('load',housedata);
 
     
-    var myCompOverlay = new ComplexCustomOverlay(new BMap.Point(116.407845,39.914101));
-    mp.addOverlay(myCompOverlay);//将标注添加到地图中
-    
+    function initHoouseList(){
+   $('#left_house_list').bootstrapTable({
+        height: (document.documentElement.clientHeight || document.body.clientHeight) - 230,
+        classes:"table table-hover table-condensed",
+        striped:true,
+        toolbar:'#rawdata-toolbar',
+        pagination:true,
+		showHeader:false,
+        showColumns: false,
+        showRefresh:false,
+        showToggle:false,
+        pageSize: 10,
+        columns: [ {
+            field: 'house_code',
+            align: 'center',
+            title: '编号',
+         	formatter:function(value, row){
+                    var html='<div class="row"><a class="tableitem" href="/ershoufang/101100781178.html" target="_blank" title="富力城B区&nbsp;3室1厅" data-community="1111027374273"><div class="item-aside"><img src="house.jpg"></div><div class="item-main"><p class="item-tle">富力城B区&nbsp;3室1厅</p><p class="item-des"><span>3室1厅</span><span data-origin="102.8">102平米</span><span>南 北</span><span class="item-side">1050<span>万</span></span></p><p class="item-community"><span class="item-replace-com" data-origin="">富力城B区</span><span class="item-exact-com">富力城B区</span></p><p class="item-tag-wrap"><span class="item-tag-subway item-extra" title="距离10号线双井46铁</span><span class="item-tag-school item-extra" title="芳草地国际学校双花园校区">学区</span><span class="item-tag-taxfree item-extra" title="">房本满两年</span></p></div></a></div>'
 
-    //5、 为自定义覆盖物添加点击事件
-    myCompOverlay.addEventListener('click',function(){
-        alert("点击图标");
-        //hide_show();
-    });
+return html;
 
-    var show=0; 
-
-    function hide_show(){ 
-
-        if(show==0){ 
-            myCompOverlay.hide(); 
-            show=1; 
-        }else{ 
-            myCompOverlay.show(); 
-            show=0; 
-        } 
-    } 
+                }
+        }]
+    })
+}
 </script>
+</html>
