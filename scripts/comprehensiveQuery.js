@@ -33,12 +33,12 @@ $(function () {
   $('#tree').treeview({ expandIcon: "glyphicon glyphicon-stop",
     levels: 1,
     data: tree});
-  $('#tree').on('nodeSelected',treeCallback)
+  $('#tree').on('nodeSelected', treeCallback);
 });
 function positionFormatter(v,row) {
   return [
     '<div class="name">',
-    '<a title="' + row.position + '" href="https://github.com/'+ '" target="_blank">',
+    '<a title="' + row.position + '" href="../pages/map.html'+ '" target="_blank">',
     +row.position,
     '<span class="glyphicon glyphicon-map-marker" style="text-align: right;"></span>',
     '</a>',
@@ -84,7 +84,6 @@ function changeData(type) {
 
 }
 function treeCallback(event, data) {
-  console.log('ddddd');
   $table.bootstrapTable('refresh',{
     url: '../json/data4.json'
   });
