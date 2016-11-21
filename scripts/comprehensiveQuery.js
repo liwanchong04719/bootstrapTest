@@ -57,3 +57,28 @@ function handleFormatter(v,row) {
     '</div>'
   ].join('');
 }
+function changeData(type) {
+  switch (type) {
+    case 1:
+    $table.bootstrapTable('refresh',{
+      url: '../json/data1.json'
+    });
+      break;
+    case 2:
+      $table.bootstrapTable('refresh',{
+        url: '../json/data.json'
+      });
+      break;
+    case 3:
+      $table.bootstrapTable('refresh',{
+        url: '../json/data2.json'
+      });
+      break;
+    case 4:
+      $table.bootstrapTable('refresh',{
+        url: '../json/data3.json'
+      });
+      break;
+  }
+
+}
