@@ -1,13 +1,10 @@
 $(document).ready(function(){
  //根据屏幕计算高度
-    var height = document.documentElement.clientHeight;
-    var width = document.documentElement.clientWidth;
-	$('#map').css("height", height);
 	$('select[name="inverse-select"]').select2({dropdownCssClass: 'select-inverse-dropdown'});
 	//初始化左侧列表
 	initHoouseList();
 	var housedata = house.data.list;
-	$('#left_house_list').bootstrapTable('load',housedata);
+	//$('#left_house_list').bootstrapTable('load',housedata);
 	//地图
 	var map = initmap();
 	//根据地图级别绘制图标
@@ -32,10 +29,7 @@ $(document).ready(function(){
 				map.addOverlay(customMarker);
 			}
 		}
-
 	})
-
-
 })
 
 //初始化地图， 百度地图API功能
@@ -70,6 +64,7 @@ function createMarker(options) {
 //生成房产列表
 
 function initHoouseList(){
+	return;
    $('#left_house_list').bootstrapTable({
         height: (document.documentElement.clientHeight || document.body.clientHeight) - 230,
         classes:"table table-hover table-condensed",

@@ -3,15 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="../lib/bootstrap3.3.5/css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="../lib/bootstrap-table/dist/bootstrap-table.css" />
+    <link rel="stylesheet" type="text/css" href="../lib/Flat-UI-master/dist/css/vendor/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../lib/Flat-UI-master/dist/css/flat-ui.css" />
-    <link rel="stylesheet" type="text/css" href="../css/main.css" />
+    <link rel="stylesheet" type="text/css" href="../lib/bootstrap-table/dist/bootstrap-table.css" />
+    <link rel="stylesheet" type="text/css" href="../css/map.css" />
     <style>
-        .select{
-            width:80px;
-           min-width:70px;
-        }
         .tableitem {
             display: block;
             width: 370px;
@@ -25,14 +21,6 @@
             text-decoration: none;
             outline: none;
         }
-        
-        body,
-        div,
-        p {
-            margin: 0;
-            padding: 0;
-        }
-        
         .item-aside {
             float: left;
             width: 116px;
@@ -40,78 +28,101 @@
             margin-right: 18px;
             border-bottom: 4px solid transparent;
         }
-        
-
         .item-aside img {
             width: 100%;
             height: 100%;
         }
-.tableitem p{
-    font-size:12px;
-    text-align:left
-}
+        .tableitem p{
+            font-size:12px;
+            text-align:left
+        }
 
-#left_house_list{
-    height:100%
-}
-.pagination-detail{
-    display:none
-}
-
+        #left_house_list{
+            height:100%
+        }
     </style>
 </head>
 <body>
-    <div class="container mapwarp">
-        <div class="row container">
-            <div class="leftmenuContainer container col-md-4">
-
-                    <div class="container row" style="width: 100%;background-color: #fff;border-radius: 4px;">
-                      
-                        <div class="container col-md-4">
-                            <select data-toggle="select" name="inverse-select" class="form-control select select-primary select-sm mrs mbm">
-                            <option value="0">城建集团</option>
-                            <option value="1">城建集团1公司</option>
-                            <option value="2">城建集团2公司</option>
-                            <option value="3">城建集团3公司</option>
-                            <option value="4">城建集团4公司</option>
-                            </select>
-                        </div>
-                   
-                        <div class="container col-md-4">
-                            <select data-toggle="select" name="inverse-select" class="form-control select select-info select-sm mrs mbm">
-                            <option value="0">朝阳区</option>
-                            <option value="1">西城区</option>
-                            <option value="2">东城区</option>
-                            <option value="3">海淀区</option>
-                            <option value="4">丰台区</option>
-                        </select>
-                        </div>
-                   
-                        <div class="container col-md-4">
-                            <select style="width: 150px" data-toggle="select" name="inverse-select" class="form-control select select-info select-sm mrs mbm">
-                            <option value="0">自用</option>
-                            <option value="1">工业用房</option>
-                            <option value="2">商业用房</option>
-                            <option value="3">写字楼</option>
-                        </select>
-                        </div>
-                 
-                    </div>
-                    <div class="col-md-12">
-                        <table id="left_house_list"></table>
-                    </div>
-                
+<div class="container-fluid" style="height: 100%;padding-top: 55px;padding-left: 0px;padding-right: 0px" >
+    <nav class="navbar navbar-default" role="navigation"  style="margin-top: -55px">
+        <nav class="navbar navbar-inverse" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-5">
+                    <span class="sr-only">Toggle navigation</span>
+                </button>
+                <a class="navbar-brand" href="#">城建</a>
             </div>
-            <div class="mapContainer col-md-8" id="map"></div>
+            <div class="collapse navbar-collapse" id="navbar-collapse-5">
+                <ul class="nav navbar-nav">
+                    <li><a href="main.html">首页</a></li>
+                    <li><a href="comprehensiveQuery.html">综合查询</a></li>
+                    <li class="active"><a href="map.html">地图模式</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">消息</a></li>
+                            <li><a href="#">待办事项</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">个人资料</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><span class="visible-sm visible-xs">Settings<span class="fui-gear"></span></span><span class="visible-md visible-lg"><span class="fui-gear"></span></span></a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </nav>
+    </nav>
+    <div class="row"  style="height: 100%;margin-left: 0px;margin-right: 0px">
+        <div class="col-md-4">
+            <table id="left_house_list" style="height: 100%;"></table>
         </div>
-        <div id="zoomcontainer" style="position:absolute;bottom:5px;right:5px">
-            <label id="zoom"></label>
-            </div>            
+        <div class="col-md-8" style="height: 100%;padding-top: 55px;">
+            <div class="row" style="text-align: center;margin-top: -45px;margin-right: 0px;margin-left: 0px">
+                <div class="col-md-4">
+                    <select data-toggle="select" name="inverse-select" class="form-control select select-primary select-sm mrs mbm">
+                        <option value="0">城建集团</option>
+                        <option value="1">城建集团1公司</option>
+                        <option value="2">城建集团2公司</option>
+                        <option value="3">城建集团3公司</option>
+                        <option value="4">城建集团4公司</option>
+                    </select>
+                </div>
+
+                <div class="col-md-4">
+                    <select data-toggle="select" name="inverse-select" class="form-control select select-info select-sm mrs mbm">
+                        <option value="0">朝阳区</option>
+                        <option value="1">西城区</option>
+                        <option value="2">东城区</option>
+                        <option value="3">海淀区</option>
+                        <option value="4">丰台区</option>
+                    </select>
+                </div>
+
+                <div class="col-md-4">
+                    <select style="width: 150px" data-toggle="select" name="inverse-select" class="form-control select select-info select-sm mrs mbm">
+                        <option value="0">自用</option>
+                        <option value="1">工业用房</option>
+                        <option value="2">商业用房</option>
+                        <option value="3">写字楼</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row" style="height: 100%;margin-right: 0px;margin-left: 0px">
+                <div class="col-md-12" style="height: 100%">
+                    <div  id="map" style="width: 100%;height: 100%">
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    <div id="zoomcontainer" style="position:absolute;bottom:5px;right:5px">
+        <label id="zoom"></label>
+    </div>
+</div>
 </body>
-<script src="../lib/jquery/jquery-1.11.3.js"></script>
-<script src="../lib/bootstrap3.3.5/js/bootstrap.js"></script>
-<script src="../lib/bootstrap-table/dist/bootstrap-table.js"></script>
+<script src="../lib/Flat-UI-master/dist/js/vendor/jquery.min.js"></script>
 <script src="../lib/Flat-UI-master/dist/js/flat-ui.js"></script>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=AXQ7RGL4oSjsANXUG8OQofPywGmb04QV"></script>
 <script src="../scripts/Application.js"></script>

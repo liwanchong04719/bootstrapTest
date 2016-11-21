@@ -1,0 +1,79 @@
+html,body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(246, 247, 250);
+    font-family:'Microsoft YaHei', '微软雅黑', '黑体', Arial,'Times New Roman', sans-serif;
+}
+
+.navbar{
+    border-radius: 0px;
+    margin-bottom: 0px;
+}
+.navbar-nav{
+    margin-left: 30px;
+}
+
+.wrapperDiv {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+}
+
+.mapContainer{
+    width: 400px;
+    height: 400px;
+}
+.treeDiv{
+    background-color: white;
+    border-radius: 5px;
+    height:100%;
+}
+.treeDiv_left{
+    float:left;
+    width:80%;
+    height: 100%;
+    background-color: #ff5782;
+    border-radius: 5px;
+    text-align: center;
+    /*padding-top: 22px;*/
+}
+.bubble{
+    width: 92px;
+    height: 92px;
+    line-height: 20px;
+    font-size: 12px;
+    border: 1px solid transparent;
+    background-color: rgba(57,172,106,0.9);
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    box-shadow: 0 2px 2px rgba(0,0,0,0.2);
+    -webkit-transition: background-color .15s ease-in-out;
+    -moz-transition: background-color .15s ease-in-out;
+    -o-transition: background-color .15s ease-in-out;
+    transition: background-color .15s ease-in-out;
+}
+
+.bubble p{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-left: 6px;
+    padding-right: 6px;
+    text-align: center;
+}
+
+.bubble-mouseover{
+    background-color:orangered;
+}
+
+.bubble:hover {
+    background-color: #e4393c;
+    background-color: rgba(228,57,60,0.9);
+}

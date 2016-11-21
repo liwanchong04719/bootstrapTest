@@ -27,48 +27,6 @@ var tree = [
   },
   {
     text: "Parent 3"
-  },
-  {
-    text: "Parent 4"
-  },
-  {
-    text: "Parent 5"
-  },
-  {
-    text: "Parent 6"
-  },
-  {
-    text: "Parent 7"
-  },
-  {
-    text: "Parent 8"
-  },
-  {
-    text: "Parent 9"
-  },
-  {
-    text: "Parent 10"
-  },
-  {
-    text: "Parent 11"
-  },
-  {
-    text: "Parent 12"
-  },
-  {
-    text: "Parent 13"
-  },
-  {
-    text: "Parent 14"
-  },
-  {
-    text: "Parent 15"
-  },
-  {
-    text: "Parent 16"
-  },
-  {
-    text: "Parent 17"
   }
 ];
 $(function () {

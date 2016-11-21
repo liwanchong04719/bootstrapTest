@@ -27,27 +27,22 @@ html,body{
     color: #9db0c1;
     line-height: 12px;
 }
-.wrapperDiv {
-    position: fixed;
-    height: 100%;
-    width: 100%;
-}
 .produceInfoDiv{
     padding-left: 120px;
     background-color: white;
     border-radius: 5px;
-    height:100%;
+    height:120px;
 }
 .produceInfoDiv_left{
     float:left;
     margin-left: -120px;
     width: 120px;
-    height: 100%;
+    height: 120px;
     background-color: #ff5782;
     border-bottom-left-radius: 5px;
     border-top-left-radius: 5px;
     text-align: center;
-    /*padding-top: 22px;*/
+    padding-top: 22px;
 }
 .produceInfoDiv_left>div>span {
     color: white;
@@ -78,83 +73,3 @@ html,body{
     width: 100%;
     height: 300px;
 }
-
-<<<<<<< HEAD
-.mapContainer{
-    width: 400px;
-    height: 400px;
-}
-.treeDiv{
-    background-color: white;
-    border-radius: 5px;
-    height:100%;
-}
-.treeDiv_left{
-    float:left;
-    width:80%;
-    height: 100%;
-    background-color: #ff5782;
-    border-radius: 5px;
-    text-align: center;
-    /*padding-top: 22px;*/
-}
-::-webkit-scrollbar {
-    width: 15px;
-} /* 这是针对缺省样式 (必须的) */
-::-webkit-scrollbar-track {
-    background-color: #b46868;
-} /* 滚动条的滑轨背景颜色 */
-
-::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.2);
-} /* 滑块颜色 */
-
-::-webkit-scrollbar-button {
-    background-color: #7c2929;
-} /* 滑轨两头的监听按钮颜色 */
-
-::-webkit-scrollbar-corner {
-    background-color: black;
-} /* 横向滚动条和纵向滚动条相交处尖角的颜色 */
-=======
-.bubble{
-    width: 92px;
-    height: 92px;
-    line-height: 20px;
-    font-size: 12px;
-    border: 1px solid transparent;
-    background-color: rgba(57,172,106,0.9);
-    border-radius: 50%;
-    overflow: hidden;
-    cursor: pointer;
-
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    box-shadow: 0 2px 2px rgba(0,0,0,0.2);
-    -webkit-transition: background-color .15s ease-in-out;
-    -moz-transition: background-color .15s ease-in-out;
-    -o-transition: background-color .15s ease-in-out;
-    transition: background-color .15s ease-in-out;
-}
-
-.bubble p{
-        overflow: hidden;
-    text-overflow: ellipsis;
-    padding-left: 6px;
-    padding-right: 6px;
-    text-align: center;
-} 
-
-.bubble-mouseover{
-     background-color:orangered;
-}
-
-.bubble:hover {
-    background-color: #e4393c;
-    background-color: rgba(228,57,60,0.9);
-}
-
-
->>>>>>> bt/master
