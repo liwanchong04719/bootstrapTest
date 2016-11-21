@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <link rel="stylesheet" type="text/css" href="../lib/bootstrap3.3.5/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="../lib/bootstrap-table/dist/bootstrap-table.css" />
+    <style type="text/css">
+        body,
+        html {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            font-family: "微软雅黑";
+        }
+        
+        a {
+            display: block;
+            width: 370px;
+            padding: 22px 17px;
+            color: #555;
+            font-size: 12px;
+            position: relative;
+            background-color: #fff;
+            -webkit-transition: background-color .15s ease-in-out;
+            transition: background-color .15s ease-in-out;
+            text-decoration: none;
+            outline: none;
+        }
+        
+        body,
+        div,
+        p {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .item-aside {
+            float: left;
+            width: 116px;
+            height: 116px;
+            margin-right: 18px;
+            border-bottom: 4px solid transparent;
+        }
+        
+    
+        .item-aside img {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=AXQ7RGL4oSjsANXUG8OQofPywGmb04QV"></script>
+    <title>添加自定义覆盖物</title>
+</head>
+
+<body>
+    <div class="row">
+        <a class="tableitem" href="/ershoufang/101100781178.html" target="_blank" title="富力城B区&nbsp;3室1厅" data-community="1111027374273">
+            <div class="item-aside">
+                <img src="house.jpg">
+
+            </div>
+            <div class="item-main">
+                <p class="item-tle">富力城B区&nbsp;3室1厅</p>
+                <p class="item-des"><span>3室1厅</span>
+                    <span data-origin="102.8">102平米</span>
+                    <span>南 北</span>
+                    <span class="item-side">1050<span>万</span>
+                    </span>
+                </p>
+                <p class="item-community">
+                    <span class="item-replace-com" data-origin="">富力城B区</span>
+                    <span class="item-exact-com">富力城B区</span>
+                </p>
+                <p class="item-tag-wrap">
+                    <span class="item-tag-subway item-extra" title="距离10号线双井站462米">地铁</span>
+                    <span class="item-tag-school item-extra" title="芳草地国际学校双花园校区">学区</span>
+                    <span class="item-tag-taxfree item-extra" title="">房本满两年</span>
+                </p>
+            </div>
+        </a>
+    </div>
+    <div>
+        <table id="left_house_list"></table>
+    </div>
+</body>
+<script src="../lib/jquery/jquery-1.11.3.js"></script>
+<script src="../lib/bootstrap3.3.5/js/bootstrap.js"></script>
+<script src="../lib/bootstrap-table/dist/bootstrap-table.js"></script>
+<script type="text/javascript" src="../lib/testdata/CommunityData.js"></script>
+<script type="text/javascript" src="../lib/testdata/DistricData.js"></script>
+<script type="text/javascript" src="../lib/testdata/BusinessAreaData.js"></script>
+<script type="text/javascript" src="../lib/testdata/HouseData.js"></script>
+
+<script>
+
+initHoouseList();
+var housedata = house.data.list;
+	$('#left_house_list').bootstrapTable('load',housedata);
+
+    
+    function initHoouseList(){
+   $('#left_house_list').bootstrapTable({
+        height: (document.documentElement.clientHeight || document.body.clientHeight) - 230,
+        classes:"table table-hover table-condensed",
+        striped:true,
+        toolbar:'#rawdata-toolbar',
+        pagination:true,
+		showHeader:false,
+        showColumns: false,
+        showRefresh:false,
+        showToggle:false,
+        pageSize: 10,
+        columns: [ {
+            field: 'house_code',
+            align: 'center',
+            title: '编号',
+         	formatter:function(value, row){
+                    var html='<div class="row"><a class="tableitem" href="/ershoufang/101100781178.html" target="_blank" title="富力城B区&nbsp;3室1厅" data-community="1111027374273"><div class="item-aside"><img src="house.jpg"></div><div class="item-main"><p class="item-tle">富力城B区&nbsp;3室1厅</p><p class="item-des"><span>3室1厅</span><span data-origin="102.8">102平米</span><span>南 北</span><span class="item-side">1050<span>万</span></span></p><p class="item-community"><span class="item-replace-com" data-origin="">富力城B区</span><span class="item-exact-com">富力城B区</span></p><p class="item-tag-wrap"><span class="item-tag-subway item-extra" title="距离10号线双井46铁</span><span class="item-tag-school item-extra" title="芳草地国际学校双花园校区">学区</span><span class="item-tag-taxfree item-extra" title="">房本满两年</span></p></div></a></div>'
+
+return html;
+
+                }
+        }]
+    })
+}
+</script>
+</html>
