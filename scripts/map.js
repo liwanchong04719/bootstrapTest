@@ -1,8 +1,5 @@
 $(document).ready(function(){
  //根据屏幕计算高度
-    var height = document.documentElement.clientHeight;
-    var width = document.documentElement.clientWidth;
-	$('#map').css("height", height);
 	$('select[name="inverse-select"]').select2({dropdownCssClass: 'select-inverse-dropdown'});
 	//初始化左侧列表
 	initHoouseList();
