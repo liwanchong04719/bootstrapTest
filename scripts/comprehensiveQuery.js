@@ -29,6 +29,33 @@ var tree = [
     text: "Parent 3"
   }
 ];
+var treeF = [
+  {
+    text: "Items 1",
+    nodes: [
+      {
+        text: "Child 1",
+        nodes: [
+          {
+            text: "Grandchild 1"
+          },
+          {
+            text: "Grandchild 2"
+          }
+        ]
+      },
+      {
+        text: "Child 2"
+      }
+    ]
+  },
+  {
+    text: "Items 2"
+  },
+  {
+    text: "Items 3"
+  }
+];
 $(function () {
   $('#tree').treeview({ expandIcon: "glyphicon glyphicon-stop",
     levels: 1,
@@ -87,4 +114,23 @@ function treeCallback(event, data) {
   $table.bootstrapTable('refresh',{
     url: '../json/data4.json'
   });
+}
+function changeTreeData(type) {
+  switch (type) {
+    case 1:
+      $('#tree').treeview({ expandIcon: "glyphicon glyphicon-stop",
+        levels: 1,
+        data: tree});
+      $('#tree').on('nodeSelected', treeCallback);
+      break;
+    case 2:
+      $('#tree').treeview({ expandIcon: "glyphicon glyphicon-stop",
+        levels: 1,
+        data: treeF});
+      $('#tree').on('nodeSelected', treeCallback);
+      break;
+    case 3:
+      break;
+
+  }
 }
