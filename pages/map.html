@@ -1,26 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="../lib/Flat-UI-master/dist/css/vendor/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../lib/Flat-UI-master/dist/css/flat-ui.css" />
+    
     <link rel="stylesheet" type="text/css" href="../css/map.css" />
+    <link rel="stylesheet" type="text/css" href="../css/tabstyle.css" />
     <style>
-        .r-content{
+        .r-content {
             padding-left: 0px;
             list-style-type: none;
         }
+        
         .r-content .list-item {
             border-bottom: 1px solid #e4e4e4;
             list-style-type: none;
         }
-
+        
         .r-content .list-item p {
             margin: 0;
             padding: 0;
         }
-
+        
         .r-content .list-item a {
             display: block;
             width: 100%;
@@ -32,11 +36,11 @@
             -webkit-transition: background-color .15s ease-in-out;
             transition: background-color .15s ease-in-out
         }
-
+        
         .r-content .list-item a:hover {
             background-color: #fbfbfb
         }
-
+        
         .r-content .list-item a .item-aside {
             float: left;
             width: 116px;
@@ -44,16 +48,16 @@
             margin-right: 18px;
             border-bottom: 4px solid transparent
         }
-
+        
         .r-content .list-item a .item-aside img {
             width: 100%;
             height: 100%
         }
-
+        
         .r-content .list-item a .item-aside .item-btm {
             height: 22px;
             background-color: #494848;
-            background-color: rgba(0,0,0,0.7);
+            background-color: rgba(0, 0, 0, 0.7);
             color: #fff;
             line-height: 22px;
             overflow: hidden;
@@ -62,7 +66,7 @@
             position: absolute;
             z-index: 2
         }
-
+        
         .r-content .list-item a .item-aside .item-btm .item-img-icon {
             border: 2px solid #fff;
             height: 8px;
@@ -72,7 +76,7 @@
             margin-top: 5px;
             padding: 0
         }
-
+        
         .r-content .list-item a .item-aside .item-btm .item-img-icon .i-icon-arrow {
             display: block;
             width: 0;
@@ -81,7 +85,7 @@
             border-width: 3px 3px 4px 5px;
             border-bottom-color: #fff
         }
-
+        
         .r-content .list-item a .item-aside .item-btm .item-img-icon .i-icon-dot {
             display: block;
             width: 2px;
@@ -90,14 +94,14 @@
             margin-top: -6px;
             margin-left: 1px
         }
-
+        
         .r-content .list-item a .item-aside .item-btm span {
             float: left;
             text-align: center;
             padding-left: 4px;
             padding-right: 4px
         }
-
+        
         .r-content .list-item a .item-aside .item-top {
             position: absolute;
             top: 22px;
@@ -106,7 +110,7 @@
             background-color: #fcb846;
             color: #fff
         }
-
+        
         .r-content .list-item a .item-main .item-tle {
             font-size: 14px;
             color: #262626;
@@ -116,8 +120,9 @@
             text-overflow: ellipsis;
             line-height: 1.36
         }
-
-        .r-content .list-item a .item-main .item-tip_new,.mod-side .detail .r-list .r-main .r-content .list-item a .item-main .item-tip_decrease {
+        
+        .r-content .list-item a .item-main .item-tip_new,
+        .mod-side .detail .r-list .r-main .r-content .list-item a .item-main .item-tip_decrease {
             font-size: 12px;
             color: #fff;
             font-weight: 400;
@@ -126,23 +131,23 @@
             border-radius: 1px;
             padding: 2px
         }
-
+        
         .r-content .list-item a .item-main .item-tip_decrease {
             background-color: #45ac71
         }
-
+        
         .r-content .list-item a .item-main .item-des {
             white-space: nowrap;
             position: relative;
             margin-top: 2px;
             line-height: 1.84
         }
-
+        
         .r-content .list-item a .item-main .item-des span {
             margin-right: 5px;
             font-size: 12px;
         }
-
+        
         .r-content .list-item a .item-main .item-des .item-side {
             margin-right: 0;
             font-size: 16px;
@@ -153,28 +158,28 @@
             font-weight: 800;
             font-family: tahoma
         }
-
+        
         .r-content .list-item a .item-main .item-des .item-side span {
             font-size: 12px;
             font-weight: normal;
             margin-left: 2px;
             margin-right: 0
         }
-
+        
         .r-content .list-item a .item-main .item-community {
             line-height: 1.84;
             min-height: 21px
         }
-
+        
         .r-content .list-item a .item-main .item-community .item-replace-com {
             font-size: 12px;
         }
-
+        
         .r-content .list-item a .item-main .item-tag-wrap {
             margin-top: 3px;
             min-height: 29px
         }
-
+        
         .r-content .list-item a .item-main .item-extra {
             display: inline-block;
             border: 1px solid;
@@ -182,35 +187,35 @@
             padding: 1px 6px 2px;
             margin-top: 6px
         }
-
+        
         .r-content .list-item a .item-main .item-tag-color_1 {
             color: #2973b3
         }
-
+        
         .r-content .list-item a .item-main .item-tag-color_2 {
             color: #ff7800
         }
-
+        
         .r-content .list-item a .item-main .item-tag-color_3 {
             color: #fcb846
         }
-
+        
         .r-content .list-item a .item-main .item-tag-color_4 {
             color: #9ec77d
         }
-
+        
         .r-content .list-item a:hover {
             text-decoration: none
         }
-
+        
         .r-content .list-item a:hover .item-main .item-community .item-exact-com {
             display: none
         }
-
+        
         .r-content .list-item a:hover .item-main .item-community .item-replace-com {
             display: inline
         }
-
+        
         .r-content .list-item-remind {
             font-size: 18px;
             text-align: center;
@@ -218,8 +223,7 @@
             color: #888;
             background: url(img/map/list404.png) no-repeat center 90px
         }
-
-
+        
         .tableitem {
             display: block;
             width: 370px;
@@ -233,126 +237,167 @@
             text-decoration: none;
             outline: none;
         }
+        
         .item-aside img {
             width: 100%;
             height: 100%;
         }
-        .tableitem p{
-            font-size:12px;
-            text-align:left
+        
+        .tableitem p {
+            font-size: 12px;
+            text-align: left
+        }
+        
+        #left_house_list {
+            height: 100%
         }
 
-        #left_house_list{
-            height:100%
-        }
-    </style>
-    <style>
+.pagination a {
+    text-decoration: none;
+	border: 1px solid #AAE;
+	color: #34538b;
+    line-height:1.4;
+    font-size:80%;
+}
+
+.pagination a, .pagination span {
+    display: inline-block;
+    padding: 0.1em 0.4em;
+    margin-right: 5px;
+	margin-bottom: 5px;
+}
+
+.pagination .current {
+    background: #26B;
+    color: #fff;
+	border: 1px solid #AAE;
+}
+
+.pagination .current.prev, .pagination .current.next{
+	color:#999;
+	border-color:#999;
+	background:#fff;
+}
+
+
+
+
 
     </style>
+
 </head>
+
 <body>
-<div class="container-fluid" style="height: 100%;padding-top: 55px;padding-left: 0px;padding-right: 0px" >
-    <nav class="navbar navbar-default" role="navigation"  style="margin-top: -55px">
-        <nav class="navbar navbar-inverse" role="navigation">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-5">
+    <div class="container-fluid" style="height: 100%;padding-top: 55px;padding-left: 0px;padding-right: 0px">
+        <nav class="navbar navbar-default" role="navigation" style="margin-top: -55px">
+            <nav class="navbar navbar-inverse" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-5">
                     <span class="sr-only">Toggle navigation</span>
                 </button>
-                <a class="navbar-brand" href="#">城建</a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar-collapse-5">
-                <ul class="nav navbar-nav">
-                    <li><a href="main.html">首页</a></li>
-                    <li><a href="comprehensiveQuery.html">综合查询</a></li>
-                    <li class="active"><a href="map.html">地图模式</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">消息</a></li>
-                            <li><a href="#">待办事项</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">个人资料</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#"><span class="visible-sm visible-xs">Settings<span class="fui-gear"></span></span><span class="visible-md visible-lg"><span class="fui-gear"></span></span></a></li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
+                    <a class="navbar-brand" href="#">城建</a>
+                </div>
+                <div class="collapse navbar-collapse" id="navbar-collapse-5">
+                    <ul class="nav navbar-nav">
+                        <li><a href="main.html">首页</a></li>
+                        <li><a href="comprehensiveQuery.html">综合查询</a></li>
+                        <li class="active"><a href="map.html">地图模式</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">消息</a></li>
+                                <li><a href="#">待办事项</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">个人资料</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#"><span class="visible-sm visible-xs">Settings<span class="fui-gear"></span></span><span class="visible-md visible-lg"><span class="fui-gear"></span></span></a></li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </nav>
         </nav>
-    </nav>
-    <div class="row"  style="height: 100%;margin-left: 0px;margin-right: 0px">
-        <div class="col-md-4">
-            <ol class="r-content">
-                <li class="list-item">
-                    <a>
-                        <div class="item-aside">
-                            <img alt="示例图片" src="http://image1.ljcdn.com/110000-inspection/8acb6b28-69c1-4828-b6c7-89f78953408e.jpg.116x116.jpg">
+        <div class="row" style="height: 100%;margin-left: 0px;margin-right: 0px">
+            <div class="col-md-4" style="height: 100%;padding-top: 0px;">
+
+                <div class="tabPanel" style="height: 100%; padding-top: 10px; padding-bottom: 10px">
+                    <ul>
+                        <li class="hit">房产</li>
+                        <li>地产</li>
+                    </ul>
+                    <div class="panes" style="height:100%">
+                        <div class="pane" style="height: 100%;display:block;">
+                            <div id="housecontentlist" style="height:100%;overflow:auto">
+                                <ol class="r-content">
+                          
+                            </ol>
+                            </div>
+
+                            <div id="pagination_house" class="pagination"></div>
+            
+
                         </div>
-                        <div class="item-main">
-                            <p class="item-tle">永乐东区&nbsp;2室1厅</p>
-                            <p class="item-des">
-                                <span>2室1厅</span>
-                                <span data-origin="48.53">48平米</span>
-                                <span>南 北</span>
-                                <span class="item-side">4000<span>元/月</span></span>
-                            </p>
-                            <p class="item-community">
-                                <span class="item-replace-com" data-origin="">永乐东区</span>
-                            </p>
+                        <div class="pane">
+                            <h4>Secend tab content</h4>
+                            <p>First tab content</p>
                         </div>
-                    </a>
-                </li>
-            </ol>
-            <table id="left_house_list" style="height: 100%;"></table>
-        </div>
-        <div class="col-md-8" style="height: 100%;padding-top: 55px;">
-            <div class="row" style="text-align: center;margin-top: -45px;margin-right: 0px;margin-left: 0px">
-                <div class="col-md-4">
-                    <select data-toggle="select" name="inverse-select" class="form-control select select-primary select-sm mrs mbm">
+                    </div>
+                </div>
+
+
+
+
+            </div>
+            <div class="col-md-8" style="height: 100%;padding-top: 55px;">
+                <div class="row" style="text-align: center;margin-top: -45px;margin-right: 0px;margin-left: 0px">
+                    <div class="col-md-4">
+                        <select data-toggle="select" name="inverse-select" class="form-control select select-primary select-sm mrs mbm">
                         <option value="0">城建集团</option>
                         <option value="1">城建集团1公司</option>
                         <option value="2">城建集团2公司</option>
                         <option value="3">城建集团3公司</option>
                         <option value="4">城建集团4公司</option>
                     </select>
-                </div>
+                    </div>
 
-                <div class="col-md-4">
-                    <select data-toggle="select" name="inverse-select" class="form-control select select-info select-sm mrs mbm">
+                    <div class="col-md-4">
+                        <select data-toggle="select" name="inverse-select" class="form-control select select-info select-sm mrs mbm">
                         <option value="0">朝阳区</option>
                         <option value="1">西城区</option>
                         <option value="2">东城区</option>
                         <option value="3">海淀区</option>
                         <option value="4">丰台区</option>
                     </select>
-                </div>
+                    </div>
 
-                <div class="col-md-4">
-                    <select style="width: 150px" data-toggle="select" name="inverse-select" class="form-control select select-info select-sm mrs mbm">
+                    <div class="col-md-4">
+                        <select style="width: 150px" data-toggle="select" name="inverse-select" class="form-control select select-info select-sm mrs mbm">
                         <option value="0">自用</option>
                         <option value="1">工业用房</option>
                         <option value="2">商业用房</option>
                         <option value="3">写字楼</option>
                     </select>
+                    </div>
                 </div>
-            </div>
-            <div class="row" style="height: 100%;margin-right: 0px;margin-left: 0px">
-                <div class="col-md-12" style="height: 100%">
-                    <div  id="map" style="width: 100%;height: 100%">
+                <div class="row" style="height: 100%;margin-right: 0px;margin-left: 0px">
+                    <div class="col-md-12" style="height: 100%">
+                        <div id="map" style="width: 100%;height: 100%">
 
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div id="zoomcontainer" style="position:absolute;bottom:5px;right:5px">
+            <label id="zoom"></label>
+        </div>
     </div>
-    <div id="zoomcontainer" style="position:absolute;bottom:5px;right:5px">
-        <label id="zoom"></label>
-    </div>
-</div>
 </body>
 <script src="../lib/Flat-UI-master/dist/js/vendor/jquery.min.js"></script>
 <script src="../lib/Flat-UI-master/dist/js/flat-ui.js"></script>
+<script src="../lib/pagination/jquery.pagination.js"></script>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=AXQ7RGL4oSjsANXUG8OQofPywGmb04QV"></script>
 <script src="../scripts/Application.js"></script>
 <script src="../scripts/Application.Util.js"></script>
@@ -361,4 +406,5 @@
 <script type="text/javascript" src="../lib/testdata/BusinessAreaData.js"></script>
 <script type="text/javascript" src="../lib/testdata/HouseData.js"></script>
 <script src="../scripts/map.js"></script>
+
 </html>
