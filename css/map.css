@@ -77,3 +77,18 @@ html,body{
     background-color: #e4393c;
     background-color: rgba(228,57,60,0.9);
 }
+
+.bubble-3 {
+    height: 28px;
+    line-height: 28px;
+    cursor: pointer;
+    text-align: center;
+
+}
+
+.arrow {
+    border-top-color: #39ac6a;
+    margin-left: -6px;
+    margin-top: -9px;
+    position: relative;
+}
