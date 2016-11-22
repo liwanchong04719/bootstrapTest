@@ -1,150 +1,99 @@
 [
   {
-    "id": 0,
-    "name": "城市 0",
-    "area": "1220",
-    "position": "1111",
+    "id": "01",
+    "name": "城建大厦",
+    "retail":"写字楼",
+    "area":"30000平米" ,
+    "position":"学院路110号",
     "handle":"iiii"
   },
   {
-    "id": 1,
-    "name": "城市 1",
-    "area": "1221",
-    "position": "1111",
+    "id": "02",
+    "name": "一公司房产",
+    "retail": "写字楼",
+    "area": "2000平米",
+    "position":"中关村大街28号",
     "handle":"iiii"
   },
   {
-    "id": 2,
-    "name": "城市 2",
-    "area": "1222",
-    "position": "1111",
+    "id": "03",
+    "name": "二公司房产",
+    "retail": "酒店",
+    "area": "1000平米",
+    "position":"复兴门大街399号",
     "handle":"iiii"
   },
   {
-    "id": 3,
-    "name": "城市 3",
-    "area": "1223",
-    "position": "1111",
+    "id": "04",
+    "name": "开发房产",
+    "retail": "酒店",
+    "area": "4000平米",
+    "position":"地安门大街66号",
     "handle":"iiii"
   },
   {
-    "id": 4,
-    "name": "城市 4",
-    "area": "1224",
-    "position": "1111",
+    "id": "05",
+    "name": "七公司房产",
+    "retail": "写字楼",
+    "area": "2000平米",
+    "position":"复兴门大街399号",
     "handle":"iiii"
   },
   {
-    "id": 5,
-    "name": "城市 5",
-    "area": "1225",
-    "position": "1111",
+    "id": "06",
+    "name": "建设房产",
+    "retail": "酒店",
+    "area": "4000平米",
+    "position":"复兴门大街199号",
     "handle":"iiii"
 
   },
   {
-    "id": 6,
-    "name": "城市 6",
-    "area": "1226",
-    "position": "1111",
+    "id": "07",
+    "name": "置业房产",
+    "retail": "写字楼",
+    "area": "20000平米",
+    "position":"中关村大街58号",
     "handle":"iiii"
   },
   {
-    "id": 7,
-    "name": "城市 7",
-    "area": "1227",
-    "position": "1111",
+    "id": "08",
+    "name": "设计房产",
+    "retail": "酒店",
+    "area": "10000平米",
+    "position":"复兴门大街1939号",
     "handle":"iiii"
   },
   {
-    "id": 8,
-    "name": "城市 8",
-    "area": "1228",
-    "position": "1111",
+    "id": "09",
+    "name": "股份房产",
+    "retail": "写字楼",
+    "area": "100000平米",
+    "position":"中关村大街68号",
     "handle":"iiii"
   },
   {
-    "id": 9,
-    "name": "城市 9",
-    "area": "1229",
-    "position": "1111",
+    "id": "10",
+    "name": "服务房产",
+    "retail":"酒店",
+    "area": "100000平米",
+    "position":"复兴门大街1339号",
     "handle":"iiii"
   },
   {
-    "id": 10,
-    "name": "城市 10",
-    "area": "12210",
-    "position": "1111",
+    "id": "11",
+    "name": "八公司",
+    "retail":"酒店",
+    "area": "100000平米",
+    "position":"中关村大街68号",
     "handle":"iiii"
   },
   {
-    "id": 11,
-    "name": "城市 11",
-    "area": "12211",
-    "position": "1111",
-    "handle":"iiii"
-  },
-  {
-    "id": 12,
-    "name": "城市 12",
-    "area": "12212",
-    "position": "1111",
-    "handle":"iiii"
-  },
-  {
-    "id": 13,
-    "name": "城市 13",
-    "area": "12213",
-    "position": "1111",
-    "handle":"iiii"
-  },
-  {
-    "id": 14,
-    "name": "城市 14",
-    "area": "12214",
-    "position": "1111",
-    "handle":"iiii"
-  },
-  {
-    "id": 15,
-    "name": "城市 15",
-    "area": "12215",
-    "position": "1111",
-    "handle":"iiii"
-  },
-  {
-    "id": 16,
-    "name": "城市 16",
-    "area": "12216",
-    "position": "1111",
-    "handle":"iiii"
-  },
-  {
-    "id": 17,
-    "name": "城市 17",
-    "area": "12217",
-    "position": "1111",
-    "handle":"iiii"
-  },
-  {
-    "id": 18,
-    "name": "城市 18",
-    "area": "12218",
-    "position": "1111",
-    "handle":"iiii"
-  },
-  {
-    "id": 19,
-    "name": "城市 19",
-    "area": "12219",
-    "position": "1111",
-    "handle":"iiii"
-  },
-  {
-    "id": 20,
-    "name": "城市 20",
-    "area": "12220",
-    "position": "1111",
+    "id": "12",
+    "name": "九公司",
+    "retail":"酒店",
+    "area": "100000平米",
+    "position":"复兴门大街1939号",
     "handle":"iiii"
   }
 ]
