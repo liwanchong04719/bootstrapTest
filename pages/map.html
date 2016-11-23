@@ -264,7 +264,6 @@
     display: inline-block;
     padding: 0.1em 0.4em;
     margin-right: 5px;
-	margin-bottom: 5px;
 }
 
 .pagination .current {
@@ -278,11 +277,6 @@
 	border-color:#999;
 	background:#fff;
 }
-
-
-
-
-
     </style>
 
 </head>
@@ -321,23 +315,17 @@
         </nav>
         <div class="row" style="height: 100%;margin-left: 0px;margin-right: 0px">
             <div class="col-md-4" style="height: 100%;padding-top: 0px;">
-
-                <div class="tabPanel" style="height: 100%; padding-top: 10px; padding-bottom: 10px">
-                    <ul>
+                <div class="tabPanel" style="height: 100%; padding-top: 50px; padding-bottom: 10px">
+                    <ul style="margin-top: -23px;margin-bottom: 0px">
                         <li class="hit">房产</li>
                         <li>地产</li>
                     </ul>
                     <div class="panes" style="height:100%">
-                        <div class="pane" style="height: 100%;display:block;">
-                            <div id="housecontentlist" style="height:100%;overflow:auto">
-                                <ol class="r-content">
-                          
-                            </ol>
+                        <div class="pane" style="height: 100%; padding-bottom:30px;display:block;text-align: center">
+                            <div id="housecontentlist" style="height:100%;overflow:auto;border-bottom: 1px solid rgb(228, 228, 228);text-align: left">
+                                <ol class="r-content"></ol>
                             </div>
-
-                            <div id="pagination_house" class="pagination"></div>
-            
-
+                            <div style="padding-left: 5px;padding-top: 2px;padding-bottom: 2px;;margin-bottom: 0px;margin-top: 1px;display: inline-block" id="pagination_house" class="pagination"></div>
                         </div>
                         <div class="pane">
                             <h4>Secend tab content</h4>
@@ -345,10 +333,6 @@
                         </div>
                     </div>
                 </div>
-
-
-
-
             </div>
             <div class="col-md-8" style="height: 100%;padding-top: 55px;">
                 <div class="row" style="text-align: center;margin-top: -45px;margin-right: 0px;margin-left: 0px">
