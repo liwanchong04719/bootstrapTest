@@ -107,10 +107,9 @@
     </div>
     <div class="container-fluid" style="padding-top: 26px">
         <div class="row">
-            <div class="col-md-12" style="padding-left: 0px;padding-right: 0px;">
-                <div style="height: 50px;width: 100%;background-color: #fff;padding:5px 15px;border-radius: 4px;text-align: left">
-                    <label style="color: #1e3657;font-weight: 700;">城建集团资产业态比率</label>
-                    <label style="width: 100px"></label>
+            <div class="col-md-6" style="padding-right: 0px;padding-left: 0px">
+                <div class="bar_title">资产盘点-城建集团资产业态比率</div>
+                <div style="height: 50px;width: 100%;background-color: #fff;padding:5px 15px;border-radius: 4px;text-align: center">
                     <label style="color: #1e3657;font-weight: 700">按公司：</label>
                     <select data-toggle="select" name="inverse-select" class="form-control select select-primary select-sm mrs mbm">
                         <option value="0">城建集团</option>
@@ -128,7 +127,30 @@
                         <option value="4">丰台区</option>
                     </select>
                 </div>
-                <div id="pieChart" style="border-radius:4px; padding-top: 5px;"></div>
+                <div id="pieChart"></div>
+            </div>
+            <div class="col-md-6" style="padding-right: 0px;padding-left: 15px">
+                <div class="bar_title">经营状况-集团资产及业态比例情况</div>
+                <div style="height: 50px;width: 100%;background-color: #fff;padding:5px 15px;border-radius: 4px;text-align: center">
+                    <label style="color: #1e3657;font-weight: 700">按区域：</label>
+                    <select data-toggle="select" name="inverse-select" class="form-control select select-primary select-sm mrs mbm">
+                        <option value="0">城建集团</option>
+                        <option value="1">集团1公司</option>
+                        <option value="2">集团2公司</option>
+                        <option value="3">集团3公司</option>
+                        <option value="4">集团4公司</option>
+                    </select>
+                    <label style="color: #1e3657;font-weight: 700">按业态</label>
+                    <select data-toggle="select" name="inverse-select" class="form-control select select-info select-sm mrs mbm">
+                        <option value="0">自用</option>
+                        <option value="1">工业用房</option>
+                        <option value="2">商业用房</option>
+                        <option value="3">写字楼</option>
+                    </select>
+                </div>
+                <div style="width: 100%;height: 300px">
+                    <div id="pieStatus" style="height: 100%"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -138,33 +160,7 @@
             <div class="titleInfo_bottom">集团资产及业态比例情况</div>
         </div>
         <div class="row">
-            <div class="col-md-4" style="padding-left: 0px;padding-right: 0px">
-                <div style="height: 100px;width: 100%;background-color: #fff;padding:5px 15px;border-radius: 4px;text-align: center">
-                    <div>
-                        <label style="color: #1e3657;font-weight: 700">按区域：</label>
-                        <select style="width: 150px" data-toggle="select" name="inverse-select" class="form-control select select-primary select-sm mrs mbm">
-                            <option value="0">朝阳区</option>
-                            <option value="1">西城区</option>
-                            <option value="2">东城区</option>
-                            <option value="3">海淀区</option>
-                            <option value="4">丰台区</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label style="color: #1e3657;font-weight: 700">按业态：</label>
-                        <select style="width: 150px" data-toggle="select" name="inverse-select" class="form-control select select-info select-sm mrs mbm">
-                            <option value="0">自用</option>
-                            <option value="1">工业用房</option>
-                            <option value="2">商业用房</option>
-                            <option value="3">写字楼</option>
-                        </select>
-                    </div>
-                </div>
-                <div style="width: 100%;height: 250px">
-                    <div id="pieStatus" style="height: 100%"></div>
-                </div>
-            </div>
-            <div class="col-md-8" style="padding-right: 0px;padding-left: 15px">
+            <div class="col-md-12" style="padding-right: 0px;padding-left: 15px">
                 <div style="height: 50px;width: 100%;background-color: #fff;padding:5px 15px;border-radius: 4px;text-align: center">
                     <label style="color: #1e3657;font-weight: 700">区域：</label>
                     <select data-toggle="select" name="inverse-select" class="form-control select select-primary select-sm mrs mbm">

@@ -60,7 +60,7 @@ var zoneTreeData = [
     text: "延庆区"
   }
 ];
-var retailTreeData=[
+var retailTreeData = [
   {
     text: "写字楼",
   },
@@ -79,16 +79,33 @@ var retailTreeData=[
   {
     text: "自用"
   }
-]
+];
+var queryData = [];
 $(function () {
   $('#tree').treeview({ expandIcon: "glyphicon glyphicon-stop",
     levels: 1,
+    showCheckbox: true,
     showBorder: false,
     color: "#428bca",
     backColor: "#f6f7fa",
+    onNodeChecked:addQueryData,
+    onNodeUnchecked: minusQueryData,
     data: agencyTreeData});
-  $('#tree').on('nodeSelected', treeCallback);
 });
+function addQueryData(event,node){
+  queryData.push(node.text);
+  console.log(queryData.toString());
+}
+function minusQueryData(event, node) {
+  queryData.forEach(function (item, index) {
+    if (item === node.text) {
+      console.log(index);
+      queryData.splice(index, 1);
+      return;
+    }
+  });
+  console.log(queryData.toString());
+}
 function positionFormatter(v,row) {
   return [
     '<div class="name">',
@@ -148,6 +165,7 @@ function changeTreeData(type) {
       $('#tree').treeview({ expandIcon: "glyphicon glyphicon-stop",
         levels: 1,
         showBorder: false,
+        showCheckbox: true,
         color: "#428bca",
         backColor: "#f6f7fa",
         data: agencyTreeData});
@@ -157,6 +175,7 @@ function changeTreeData(type) {
       $('#tree').treeview({ expandIcon: "glyphicon glyphicon-stop",
         levels: 1,
         showBorder: false,
+        showCheckbox: true,
         color: "#428bca",
         backColor: "#f6f7fa",
         data: zoneTreeData});
@@ -165,6 +184,7 @@ function changeTreeData(type) {
     case 3:
       $('#tree').treeview({ expandIcon: "glyphicon glyphicon-stop",
         levels: 1,
+        showCheckbox: true,
         showBorder: false,
         color: "#428bca",
         backColor: "#f6f7fa",
@@ -173,4 +193,7 @@ function changeTreeData(type) {
       break;
 
   }
+}
+function queryDataFromTree() {
+  console.log("dddd");
 }
