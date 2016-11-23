@@ -92,6 +92,15 @@ $(document).ready(function () {
 		});
 	};
 
+	Application.Util.ajaxConstruct(Application.serverHost, 'POST',{
+		userid:'1001ZZ10000000018FJF'
+	},'XML',function(){
+		console.log('请求成功！！！')
+	},function(params) {
+		console.log('请求失败')
+	},{'xmlns':'xmlns:chec="http://web.pims.itf.nc/CheckProperty"','xmlnsName':'chec','methodName':'xianyouzichan'})
+
+
 })
 
 //初始化地图， 百度地图API功能

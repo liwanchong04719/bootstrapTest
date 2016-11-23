@@ -4,7 +4,7 @@
  */
 Application = {}
 //服务地址
-Application.serverHost = 'http://localhost:8888/';
+Application.serverHost = 'http://192.168.191.6/uapws/service/nc.itf.pims.web.CheckProperty';
 //地图初始化中心
 Application.initCenter = new BMap.Point(116.404, 39.915);
 //地图初始化级别

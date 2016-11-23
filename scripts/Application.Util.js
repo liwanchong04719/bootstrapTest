@@ -16,29 +16,53 @@ Application.Util = Application.Util || {};
 *  @param dataType       Ajax返回数据类型
 *  @param successFunc    Ajax请求成功回调函数
 *  @param errorFuc       Ajax请求失败回调函数
+    var soapMessage =
+　　'<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"  '         
+   +xmlns
+   +'<soapenv:Header/>'
+   +'<soapenv:Body>'
+   +   '<'+xmlnsName+':'+methodName+' >';
+     
+
+	 if(para){
+	    var arr=para.split(",");// 
+		for(var i=0;i<arr.length;i++){
+		   if(0==i){
+		   soapMessage=soapMessage+"<string>"+arr[0]+"</string>";
+		   }else{
+		   soapMessage=soapMessage+"<string"+i+">"+arr[i]+"</string"+i+">";
+		   }
+		}
+	 }
+     soapMessage=soapMessage+'</'+xmlnsName+':'+methodName+'>'+'</soapenv:Body>' +'</soapenv:Envelope>';
+
+
 */
-Application.Util.ajaxConstruct = function (url, type, data, dataType, successFuc, errorFuc,accepttype,userid) {
+Application.Util.ajaxConstruct = function (url, type, data, dataType, successFuc, errorFuc,ajaxoptions) {
+    var soapMessage =
+        　　'<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"  '
+        + ajaxoptions.xmlns+'>'
+        + '<soapenv:Header/>'
+        + '<soapenv:Body>'
+        + '<' + ajaxoptions.xmlnsName + ':' + ajaxoptions.methodName + ' >';
+
+    soapMessage = soapMessage + "<string>" + JSON.stringify(data) + "</string>";
+    soapMessage = soapMessage + '</' + ajaxoptions.xmlnsName + ':' + ajaxoptions.methodName + '>' + '</soapenv:Body>' + '</soapenv:Envelope>';
     $.support.cors = true;
     /*
      *	get 方式将access_token加到url里面
      *  post 方式将access_token加到 data里面
      */
-    var userid = $.cookie("userid");
-    if(userid == null || userid == undefined){
-        userid =userid;
-    }
 
-    var accept = accepttype?accepttype:'application/json';
+    // if(userid == null || userid == undefined){
+    //     userid =userid;
+    // }
+   
     $.ajax({
-        headers : {
-            'Accept' : 'application/json',
-            'Content-Type' : accept
-        },
-
         url: url,
         type: type,
-        data: data,
-        cache: false,
+        data: soapMessage,
+        contentType: "text/xml;charset=UTF-8",//设置返回值类型xml
         dataType: dataType,
         success: successFuc,
         error: errorFuc
