@@ -39,7 +39,10 @@ $.ajax({
 
 //$.get("test.cgi", function(data){ alert("Data Loaded: " + data); }); //$.get函数形式结构
 
-$.post("http://127.0.0.1:8088/" + new Date().getTime(), {url:'118.144.36.139',path:'/uapws/service/nc.itf.pims.web.Canshu',data:'1001ZZ10000000018FJF',ajaxoptions:{xmlns:'http://web.pims.itf.nc/Canshu',xmlnsName:'can',methodName:'Getpk_org'}}, function(data){ 
+$.post("http://127.0.0.1:8088/" + new Date().getTime(), {url:'118.144.36.139',port:8888,path:'/uapws/service/nc.itf.pims.web.Canshu',data:'1001ZZ10000000018FJF',ajaxoptions:{xmlns:'http://web.pims.itf.nc/Canshu',xmlnsName:'can',methodName:'Getpk_org'}}, function(data){ 
+
+
+
 $("#feeds").html(data);
 var dataObj=eval('('+data+')');//转换为json对象
 $("#id").html("编号："+dataObj.id);

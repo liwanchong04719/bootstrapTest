@@ -32,11 +32,9 @@ function onRequest(request, response) {
         console.log('soapMessage:'+soapMessage)
 
 
-      
-
         var options = {
             hostname: params.url,
-            port: 8888,
+            port: params.port,
             path: params.path,
             method: 'POST',
             headers: {
@@ -49,8 +47,10 @@ function onRequest(request, response) {
             console.log('HEADERS: ' + JSON.stringify(res.headers));
             res.setEncoding('utf8');
             res.on('data', function (chunk) {
-                console.log('BODY: ' + chunk);
-                response.write(chunk);
+                var startindex = chunk.indexOf('[')
+                var endindex = chunk.indexOf(']');
+                console.log('returndata:'+chunk.substring(startindex, endindex) )
+                response.write(chunk.substring(startindex, endindex+1));
                 response.end();
             });
         });

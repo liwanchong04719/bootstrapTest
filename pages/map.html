@@ -6,7 +6,7 @@
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="../lib/Flat-UI-master/dist/css/vendor/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../lib/Flat-UI-master/dist/css/flat-ui.css" />
-    
+
     <link rel="stylesheet" type="text/css" href="../css/map.css" />
     <link rel="stylesheet" type="text/css" href="../css/tabstyle.css" />
     <style>
@@ -251,32 +251,86 @@
         #left_house_list {
             height: 100%
         }
-
-.pagination a {
-    text-decoration: none;
-	border: 1px solid #AAE;
-	color: #34538b;
-    line-height:1.4;
-    font-size:80%;
-}
-
-.pagination a, .pagination span {
-    display: inline-block;
-    padding: 0.1em 0.4em;
-    margin-right: 5px;
-}
-
-.pagination .current {
-    background: #26B;
-    color: #fff;
-	border: 1px solid #AAE;
-}
-
-.pagination .current.prev, .pagination .current.next{
-	color:#999;
-	border-color:#999;
-	background:#fff;
-}
+        
+        .pagination a {
+            text-decoration: none;
+            border: 1px solid #AAE;
+            color: #34538b;
+            line-height: 1.4;
+            font-size: 80%;
+        }
+        
+        .pagination a,
+        .pagination span {
+            display: inline-block;
+            padding: 0.1em 0.4em;
+            margin-right: 5px;
+        }
+        
+        .pagination .current {
+            background: #26B;
+            color: #fff;
+            border: 1px solid #AAE;
+        }
+        
+        .pagination .current.prev,
+        .pagination .current.next {
+            color: #999;
+            border-color: #999;
+            background: #fff;
+        }
+        
+        .foldleft .foldleft-btn > a {
+            display: inline-block;
+            background-color: #2f4154 !important;
+            opacity: 0.95;
+            width: 100%;
+            height: 50px;
+            top: 50%
+        }
+        
+        .foldleft .foldleft-btn {
+            width: 15px;
+            position: absolute;
+            display: inline-block;
+            right: 0px;
+            top: 40%;
+        }
+        
+        .left-tab-container {
+            background-color: black;
+            height: 100%;
+            width: 50px;
+            left: 0px;
+        }
+        
+        .foldleft-btn a.arrow-left {
+            background: url("../images/arrow-right.png") no-repeat center center;
+        }
+        
+        .foldleft-btn a.arrow-right {
+            background: url("../images/arrow-left.png") no-repeat center center;
+        }
+        
+        .left-tab-container li {
+            height: 56px;
+            cursor: pointer;
+            width: 55px;
+            margin-bottom: 2px;
+            font-size: 12px;
+            overflow: hidden;
+            display: list-item;
+            text-align: center;
+        }
+        
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            background-color: #3c96e6;
+            height: 56px;
+            width: 55px;
+            transition: top .15s ease;
+        }
     </style>
 
 </head>
@@ -313,7 +367,7 @@
                 <!-- /.navbar-collapse -->
             </nav>
         </nav>
-        <div class="row" style="height: 100%;margin-left: 0px;margin-right: 0px">
+        <!--<div class="row" style="height: 100%;margin-left: 0px;margin-right: 0px">
             <div class="col-md-4" style="height: 100%;padding-top: 0px;">
                 <div class="tabPanel" style="height: 100%; padding-top: 50px; padding-bottom: 10px">
                     <ul style="margin-top: -23px;margin-bottom: 0px">
@@ -333,9 +387,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-8" style="height: 100%;padding-top: 55px;">
-                <div class="row" style="text-align: center;margin-top: -45px;margin-right: 0px;margin-left: 0px">
+            </div>-->
+        <div class="col-md-12" style="height: 100%;padding-top: 0px;">
+            <!--<div class="row" style="text-align: center;margin-top: -45px;margin-right: 0px;margin-left: 0px">
                     <div class="col-md-4">
                         <select data-toggle="select" name="inverse-select" class="form-control select select-primary select-sm mrs mbm">
                         <option value="0">城建集团</option>
@@ -364,19 +418,115 @@
                         <option value="3">写字楼</option>
                     </select>
                     </div>
-                </div>
-                <div class="row" style="height: 100%;margin-right: 0px;margin-left: 0px">
-                    <div class="col-md-12" style="height: 100%">
-                        <div id="map" style="width: 100%;height: 100%">
+                </div>-->
 
+
+
+
+            <div class="row" style="height: 100%;margin-right: 0px;margin-left: 0px">
+                <div class="col-md-12" style="height: 100%">
+                    <div id="map" style="width: 100%;height: 100%">
+
+                    </div>
+                </div>
+
+                <div class="foldleft row" style="height:100%;position:fixed;width:450px;left:0px;margin-right:0px;margin-left:0px">
+
+                    <!--<div class="fm-foldleft fm-col"  ng-style="{height:'100%',width: '550px',position:'absolute'}">
+                      
+                        <div style="height: 100%;margin-top: 50px"  ng-include src="leftPanelTemp">
                         </div>
+                    </div>-->
+
+                    <!--<div class="left-tab-container">
+                        <div class="slide-bg" style="top: 0px;"></div>
+                        <ol>
+                            <li class="area on" data-type="Area" data-top="0" data-ave="58"><i></i>查询</li>
+
+                            <li class="station" data-type="Station" data-top="58" data-ave="58"><i></i>房产</li>
+
+                            <li class="steam" data-type="Steam" data-top="116" data-ave="58"><i></i>地产</li>
+                        </ol>
+                    </div>-->
+
+                    <div class="container tab_container" style="width :100%;height:100%">
+                        <div class="row" style="height:100%;margin-right: 0px">
+                            <div class="bhoechie-tab-container" style="height:100%">
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 bhoechie-tab-menu" style="height:100%;background-color:#2f4154">
+                                    <div class="list-group">
+                                        <a href="#" class="list-group-item active text-center">
+                  查询
+                </a>
+                                        <a href="#" class="list-group-item text-center">
+                  房产
+                </a>
+                                        <a href="#" class="list-group-item text-center">
+                  地产
+                </a>
+
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 bhoechie-tab">
+                                    <!-- flight section -->
+                                    <div class="bhoechie-tab-content active">
+                                        <center>
+                                            <h1 class="glyphicon glyphicon-plane" style="font-size:14em;color:#55518a"></h1>
+                                            <h2 style="margin-top: 0;color:#55518a">Cooming Soon</h2>
+                                            <h3 style="margin-top: 0;color:#55518a">Flight Reservation</h3>
+                                        </center>
+                                    </div>
+                                    <!-- train section -->
+                                    <div class="bhoechie-tab-content">
+                                       
+                          <div id="housecontentlist" style="height:100%;overflow:auto;border-bottom: 1px solid rgb(228, 228, 228);text-align: left">
+                                <ol class="r-content"></ol>
+                            </div>
+                                       <div style="padding-left: 5px;padding-top: 2px;padding-bottom: 2px;;margin-bottom: 0px;margin-top: 1px;display: inline-block" id="pagination_house" class="pagination"></div>
+                                    </div>
+
+                                    <!-- hotel search -->
+                                    <div class="bhoechie-tab-content">
+                                        <center>
+                                            <h1 class="glyphicon glyphicon-home" style="font-size:12em;color:#55518a"></h1>
+                                            <h2 style="margin-top: 0;color:#55518a">Cooming Soon</h2>
+                                            <h3 style="margin-top: 0;color:#55518a">Hotel Directory</h3>
+                                        </center>
+                                    </div>
+                                    <div class="bhoechie-tab-content">
+                                        <center>
+                                            <h1 class="glyphicon glyphicon-cutlery" style="font-size:12em;color:#55518a"></h1>
+                                            <h2 style="margin-top: 0;color:#55518a">Cooming Soon</h2>
+                                            <h3 style="margin-top: 0;color:#55518a">Restaurant Diirectory</h3>
+                                        </center>
+                                    </div>
+                                    <div class="bhoechie-tab-content">
+                                        <center>
+                                            <h1 class="glyphicon glyphicon-credit-card" style="font-size:12em;color:#55518a"></h1>
+                                            <h2 style="margin-top: 0;color:#55518a">Cooming Soon</h2>
+                                            <h3 style="margin-top: 0;color:#55518a">Credit Card</h3>
+                                        </center>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="foldleft-btn">
+                        <a id="btn_leftfloat" href="javascript:void(0)" class="arrow-right">
+                        </a>
                     </div>
                 </div>
             </div>
+
+
         </div>
-        <div id="zoomcontainer" style="position:absolute;bottom:5px;right:5px">
-            <label id="zoom"></label>
-        </div>
+    </div>
+    <div id="zoomcontainer" style="position:absolute;bottom:5px;right:5px">
+        <label id="zoom"></label>
+    </div>
     </div>
 </body>
 <script src="../lib/Flat-UI-master/dist/js/vendor/jquery.min.js"></script>

@@ -2,10 +2,34 @@ $(document).ready(function () {
 	//根据屏幕计算高度
 	$('select[name="inverse-select"]').select2({ dropdownCssClass: 'select-inverse-dropdown' });
 	//点击tab
-	$('.tabPanel ul li').click(function () {
-		$(this).addClass('hit').siblings().removeClass('hit');
-		$('.panes>div:eq(' + $(this).index() + ')').show().siblings().hide();
-	});
+    $("div.bhoechie-tab-menu>div.list-group>a").click(function(e) {
+        e.preventDefault();
+        $(this).siblings('a.active').removeClass("active");
+        $(this).addClass("active");
+        var index = $(this).index();
+        $("div.bhoechie-tab>div.bhoechie-tab-content").removeClass("active");
+        $("div.bhoechie-tab>div.bhoechie-tab-content").eq(index).addClass("active");
+    });
+	//左侧弹出框
+	var bootOpened = true;
+	$('#btn_leftfloat').click(function(){
+		if(bootOpened){
+				$(this).removeClass('arrow-right');
+			$(this).addClass('arrow-left');
+			$('.foldleft').css('left','-435px');
+			bootOpened = false;
+		}else{
+
+
+					$(this).removeClass('arrow-left');
+			$(this).addClass('arrow-right');
+			$('.foldleft').css('left','0px');
+			bootOpened = true;
+		}
+		
+
+	})
+
 
 	//初始化左侧列表
 	var directdata = ddata.data;
