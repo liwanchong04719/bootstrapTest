@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="../lib/Flat-UI-master/dist/css/flat-ui.css" />
     <link rel="stylesheet" type="text/css" href="../lib/bootstrap-table/dist/bootstrap-table.css" />
     <link rel="stylesheet" type="text/css" href="../lib/bootstrap-treeview-master/dist/bootstrap-treeview.min.css" />
+    <link rel="stylesheet" type="text/css" href="../lib/tabs/bootstrap.vertical-tabs.css" />
     <!--[if lt IE 9]>
     <script src="../lib/Flat-UI-master/dist/js/vendor/html5shiv.js"></script>
     <script src="../lib/Flat-UI-master/dist/js/vendor/respond.min.js"></script>
@@ -56,21 +57,40 @@
     </nav>
     <div id="mainContainer" class="row" style="height: 100%;margin-left: 0px;margin-right: 0px">
         <div class="col-md-2" style="height: 100%;padding-right: 5px">
-            <div style="height: 100%;padding-top: 50px;">
-                <ul id="treeTab" class="nav nav-tabs"  style="border-bottom: none;margin-top: -50px">
-                    <li class="active" >
-                        <a  href="#treeDiv"  onclick="changeTreeData(1)" data-toggle="tab">
-                            机构
-                        </a>
-                    </li>
-                    <li  ><a href="#treeDiv" onclick="changeTreeData(2)" data-toggle="tab">区域</a></li>
-                    <li><a href="#treeDiv" onclick="changeTreeData(3)" data-toggle="tab">业态</a></li>
-                </ul>
-                <div id="treeTabContent" class="tab-content" style="height: 100%">
-                    <div class="tab-pane fade in active" id="treeDiv" style="height: 100%">
-                        <div id="tree" class="treeDiv"></div>
-                    </div>
+            <div style="height: 100%;">
+                <div class="row" style="min-height:600px;">
+                        <div class="col-xs-3"> <!-- required for floating -->
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs tabs-left">
+                                <li  class="active" ><a href="#tree" onclick="changeTreeData(1)" data-toggle="tab">机<br>构</a></li>
+                                <li ><a href="#tree" onclick="changeTreeData(2)" data-toggle="tab">区<br>域</a></li>
+                                <li><a href="#tree" onclick="changeTreeData(3)" data-toggle="tab">业<br>态</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="col-xs-7">
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="tree"></div>
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
                 </div>
+                <!--<ul id="treeTab" class="nav nav-tabs tabs-left"  style="border-bottom: none;margin-top: -50px">-->
+                    <!--<li class="active" >-->
+                        <!--<a  href="#treeDiv"  onclick="changeTreeData(1)" data-toggle="tab">-->
+                            <!--机构-->
+                        <!--</a>-->
+                    <!--</li>-->
+                    <!--<li  ><a href="#treeDiv" onclick="changeTreeData(2)" data-toggle="tab">区域</a></li>-->
+                    <!--<li><a href="#treeDiv" onclick="changeTreeData(3)" data-toggle="tab">业态</a></li>-->
+                <!--</ul>-->
+                <!--<div id="treeTabContent" class="tab-content" style="height: 100%">-->
+                    <!--<div class="tab-pane fade in active" id="treeDiv" style="height: 100%">-->
+                        <!--<div id="tree" class="treeDiv"></div>-->
+                    <!--</div>-->
+                <!--</div>-->
                 <nav class="navbar navbar-default navbar-fixed-bottom" style="width: 16.4%;" role="navigation">
                     <div class="container">
                         <div class="navbar-header">
