@@ -204,7 +204,7 @@ function initBarChart() {
         type: 'line',
         yAxisIndex: 1,
         itemStyle:{
-          normal:{color:'#2EC7C9'}
+          normal:{color:'#C06410'}
         },
         data:[2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
       }
