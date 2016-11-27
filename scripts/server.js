@@ -28,20 +28,7 @@ function onRequest(request, response) {
 
         soapMessage = soapMessage + "<string>" + data + "</string>";
         soapMessage = soapMessage + '</' + params['ajaxoptions[xmlnsName]'] + ':' + params['ajaxoptions[methodName]'] + '>' + '</soapenv:Body>' + '</soapenv:Envelope>';
-      
-    //       var soapMessage =
-    //     　　'<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"  '
-    //     + ajaxoptions.xmlns+'>'
-    //     + '<soapenv:Header/>'
-    //     + '<soapenv:Body>'
-    //     + '<' + ajaxoptions.xmlnsName + ':' + ajaxoptions.methodName + ' >';
-
-    // soapMessage = soapMessage + "<string>" + JSON.stringify(data) + "</string>";
-    // soapMessage = soapMessage + '</' + ajaxoptions.xmlnsName + ':' + ajaxoptions.methodName + '>' + '</soapenv:Body>' + '</soapenv:Envelope>';
-
-
-
-
+    
         console.log('soapMessage:'+soapMessage)
 
 
