@@ -6,6 +6,8 @@
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="../lib/Flat-UI-master/dist/css/vendor/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../lib/Flat-UI-master/dist/css/flat-ui.css" />
+    <link rel="stylesheet" href="../lib/bootstrap-paginator/css/qunit-1.11.0.css">
+     <link rel="stylesheet" href="../lib/bootstrap-paginator/css/bootstrapv3.css">
 
     <link rel="stylesheet" type="text/css" href="../css/map.css" />
     <link rel="stylesheet" type="text/css" href="../css/tabstyle.css" />
@@ -331,6 +333,24 @@
             width: 55px;
             transition: top .15s ease;
         }
+.pagination li {
+    display: inline-block;
+    margin-right: -2px;
+    vertical-align: middle;
+    word-spacing: normal;
+}
+.pagination li > a:hover, .pagination li > span:hover, .pagination li > a:focus, .pagination li > span:focus {
+    background-color: #1abc9c;
+    color: #ffffff;
+}
+
+.pagination > li > a, .pagination > li > span {
+    background-color:#d6dbdf;
+    color: #ffffff;
+  
+    word-spacing: -0.5px;
+}
+
     </style>
 
 </head>
@@ -430,7 +450,7 @@
                     </div>
                 </div>
 
-                <div class="foldleft row" style="height:100%;position:fixed;width:450px;left:0px;margin-right:0px;margin-left:0px">
+                <div class="foldleft row" style="height:100%;position:absolute;width:450px;left:0px;margin-right:0px;margin-left:0px">
 
                     <!--<div class="fm-foldleft fm-col"  ng-style="{height:'100%',width: '550px',position:'absolute'}">
                       
@@ -467,7 +487,7 @@
 
                                     </div>
                                 </div>
-                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 bhoechie-tab">
+                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 bhoechie-tab" style="padding-right: 0px;padding-left:0px">
                                     <!-- flight section -->
                                     <div class="bhoechie-tab-content active">
                                         <center>
@@ -478,11 +498,18 @@
                                     </div>
                                     <!-- train section -->
                                     <div class="bhoechie-tab-content">
-                                       
-                          <div id="housecontentlist" style="height:100%;overflow:auto;border-bottom: 1px solid rgb(228, 228, 228);text-align: left">
-                                <ol class="r-content"></ol>
-                            </div>
-                                       <div style="padding-left: 5px;padding-top: 2px;padding-bottom: 2px;;margin-bottom: 0px;margin-top: 1px;display: inline-block" id="pagination_house" class="pagination"></div>
+                                        
+               <div id="housecontentlist" style="height:100%;overflow:auto;border-bottom: 1px solid rgb(228, 228, 228);text-align: left">
+                                            <ol class="r-content"></ol>
+                                        
+                                        <div>
+    <ul id='bp-3-element-test'></ul>
+</div>
+
+                                        <!--<div style="padding-left: 5px;padding-top: 2px;padding-bottom: 2px;;margin-bottom: 0px;margin-top: 1px;display: inline-block"
+                                            id="pagination_house" class="pagination"></div>
+                                        </div>-->
+                         
                                     </div>
 
                                     <!-- hotel search -->
@@ -531,7 +558,8 @@
 </body>
 <script src="../lib/Flat-UI-master/dist/js/vendor/jquery.min.js"></script>
 <script src="../lib/Flat-UI-master/dist/js/flat-ui.js"></script>
-<script src="../lib/pagination/jquery.pagination.js"></script>
+ <script src="../lib/bootstrap-paginator/lib/bootstrapv3.js" type="text/javascript"></script>
+ <script src="../lib/bootstrap-paginator/src/bootstrap-paginator.js"></script>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=AXQ7RGL4oSjsANXUG8OQofPywGmb04QV"></script>
 <script src="../scripts/Application.js"></script>
 <script src="../scripts/Application.Util.js"></script>

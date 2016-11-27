@@ -2,7 +2,7 @@ $(document).ready(function () {
 	//根据屏幕计算高度
 	$('select[name="inverse-select"]').select2({ dropdownCssClass: 'select-inverse-dropdown' });
 	//点击tab
-    $("div.bhoechie-tab-menu>div.list-group>a").click(function(e) {
+    $("div.bhoechie-tab-menu>div.list-group>a").click(function (e) {
         e.preventDefault();
         $(this).siblings('a.active').removeClass("active");
         $(this).addClass("active");
@@ -12,24 +12,23 @@ $(document).ready(function () {
     });
 	//左侧弹出框
 	var bootOpened = true;
-	$('#btn_leftfloat').click(function(){
-		if(bootOpened){
-				$(this).removeClass('arrow-right');
+	$('#btn_leftfloat').click(function () {
+		if (bootOpened) {
+			$(this).removeClass('arrow-right');
 			$(this).addClass('arrow-left');
-			$('.foldleft').css('left','-435px');
+			$('.foldleft').css('left', '-435px');
 			bootOpened = false;
-		}else{
+		} else {
 
 
-					$(this).removeClass('arrow-left');
+			$(this).removeClass('arrow-left');
 			$(this).addClass('arrow-right');
-			$('.foldleft').css('left','0px');
+			$('.foldleft').css('left', '0px');
 			bootOpened = true;
 		}
-		
+
 
 	})
-
 
 	//初始化左侧列表
 	var directdata = ddata.data;
@@ -40,6 +39,7 @@ $(document).ready(function () {
 	//$('#left_house_list').bootstrapTable('load',housedata);
 	//地图
 	var map = initmap();
+	Application.map = map;
 	//根据地图级别绘制图标
 	$('#zoom').text(map.getZoom())
 	map.addEventListener('tilesloaded', function () {
@@ -60,10 +60,7 @@ $(document).ready(function () {
 						border: 'none'
 					}
 				})
-
 				map.addOverlay(customMarker);
-
-
 			}
 			createLeftContainer(directdata);
 			initPagination();
@@ -83,10 +80,7 @@ $(document).ready(function () {
 						border: 'none'
 					}
 				})
-
 				map.addOverlay(customMarker);
-
-
 			}
 
 			createLeftContainer(housedata);
@@ -96,33 +90,65 @@ $(document).ready(function () {
 
 	//前端分页
 	function initPagination() {
-		//var num_entries = $("#hiddenresult div.result").length;
-		// 创建分页
-		$("#pagination_house").pagination(housedata.length, {
-			num_edge_entries: 1, //边缘页数
-			num_display_entries: 4, //主体页数
-			callback: function (page_index, jq) {
+
+
+		var element = $('#bp-3-element-test');
+
+		var options = {
+			bootstrapMajorVersion: 3,
+			currentPage: 1,
+			numberOfPages: 5,
+			totalPages: 2,
+			itemTexts: function (type, page, current) {
+				switch (type) {
+					case "first":
+						return "首页";
+					case "prev":
+						return "上一页";
+					case "next":
+						return "下一页";
+					case "last":
+						return "末页";
+					case "page":
+						return page;
+				}
+			},
+			onPageClicked: function (e, originalEvent, type, page) {
+                //$('#alert-content').text("Page item clicked, type: "+type+" page: "+page);
 
 				if (map.getZoom() >= Application.province + 1 && map.getZoom() < Application.direct) {
-					pageselectCallback(page_index, directdata, initDirectItem);
+					pageselectCallback(page - 1, directdata, initDirectItem);
 				}
 				else if (map.getZoom() >= Application.direct + 1) {
-					pageselectCallback(page_index, housedata, initLiItem);
+					pageselectCallback(page - 1, housedata, initLiItem);
 				}
 
+            }
+		}
 
-			},
-			items_per_page: 10 //每页显示10项
-		});
+		element.bootstrapPaginator(options);
+
+		var element = $('#bp-3-element-test');
+
+
+		var list = element.children();
+
+		for (var i = 0; i < list.length; i++) {
+			var item = $(list[i]);
+
+		}
+
+
+
 	};
 
-	Application.Util.ajaxConstruct(Application.serverHost, 'POST',{
-		userid:'1001ZZ10000000018FJF'
-	},'XML',function(){
+	Application.Util.ajaxConstruct(Application.serverHost, 'POST', {
+		userid: '1001ZZ10000000018FJF'
+	}, 'XML', function () {
 		console.log('请求成功！！！')
-	},function(params) {
+	}, function (params) {
 		console.log('请求失败')
-	},{'xmlns':'xmlns:chec="http://web.pims.itf.nc/CheckProperty"','xmlnsName':'chec','methodName':'xianyouzichan'})
+	}, { 'xmlns': 'xmlns:chec="http://web.pims.itf.nc/CheckProperty"', 'xmlnsName': 'chec', 'methodName': 'xianyouzichan' })
 
 
 })
@@ -207,7 +233,15 @@ function createLeftContainer(data) {
 	var list = []
 
 	for (var i = 0, len = data.length; i < len; i++) {
-		list = list.concat(initDirectItem(data[i]));
+
+		if (Application.map.getZoom() >= Application.province + 1 && Application.map.getZoom() < Application.direct) {
+			list = list.concat(initDirectItem(data[i]));
+		}
+		else if (Application.map.getZoom() >= Application.direct + 1) {
+			//pageselectCallback(page-1, housedata, initLiItem);
+			list = list.concat(initLiItem(data[i]));
+		}
+		//list = list.concat(initDirectItem(data[i]));
 	}
 
 	$(".r-content").empty().append(list.join(''));
@@ -220,7 +254,7 @@ function initDirectItem(data) {
 	var htmlArr = [];
 
 	htmlArr.push('<li class="list-item">');
-	htmlArr.push('<a href="#" target="_blank">');
+	htmlArr.push('<a href="javascript:void(0);" onclick="showSecondDirect()">');
 
 	htmlArr.push('<p class="item-des">');
 	htmlArr.push('<span>' + data.name + '</span>');
@@ -231,5 +265,10 @@ function initDirectItem(data) {
 	htmlArr.push('</li>');
 
 	return htmlArr;
+
+}
+
+function showSecondDirect() {
+	Application.map.setZoom(16);
 
 }
