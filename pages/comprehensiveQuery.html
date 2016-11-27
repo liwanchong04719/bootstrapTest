@@ -10,9 +10,11 @@
     <link rel="stylesheet" type="text/css" href="../lib/bootstrap-table/dist/bootstrap-table.css" />
     <link rel="stylesheet" type="text/css" href="../lib/bootstrap-treeview-master/dist/bootstrap-treeview.min.css" />
     <link rel="stylesheet" type="text/css" href="../lib/tabs/bootstrap.vertical-tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../css/tabstyle.css" />
     <!--[if lt IE 9]>
     <script src="../lib/Flat-UI-master/dist/js/vendor/html5shiv.js"></script>
     <script src="../lib/Flat-UI-master/dist/js/vendor/respond.min.js"></script>
+
     <![endif]-->
     <link rel="stylesheet" type="text/css" href="../css/comprehensivequery.css">
     <style type="text/css">
@@ -59,38 +61,39 @@
         <div class="col-md-2" style="height: 100%;padding-right: 5px">
             <div style="height: 100%;">
                 <div class="row" style="min-height:600px;">
-                        <div class="col-xs-3"> <!-- required for floating -->
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs tabs-left">
-                                <li  class="active" ><a href="#tree" onclick="changeTreeData(1)" data-toggle="tab">机<br>构</a></li>
-                                <li ><a href="#tree" onclick="changeTreeData(2)" data-toggle="tab">区<br>域</a></li>
-                                <li><a href="#tree" onclick="changeTreeData(3)" data-toggle="tab">业<br>态</a></li>
-                            </ul>
-                        </div>
-
-                        <div class="col-xs-7">
-                            <!-- Tab panes -->
-                            <div class="tab-content">
-                                <div class="tab-pane active" id="tree"></div>
+                    <div class="container tab_container" style="width :100%;height:100%">
+                        <div class="row" style="height:100%;margin-right: 0px">
+                            <div class="bhoechie-tab-container" style="height:100%">
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bhoechie-tab-menu"
+                                     style="height:100%;background-color:#2f4154">
+                                    <div class="list-group">
+                                        <a href="#" onclick="changeTreeData(1)" class="list-group-item active text-center">
+                                            区域
+                                        </a>
+                                        <a href="#" onclick="changeTreeData(2)" class="list-group-item text-center">
+                                            房产
+                                        </a>
+                                        <a href="#" onclick="changeTreeData(3)" class="list-group-item text-center">
+                                            业态
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 bhoechie-tab"
+                                     style="padding-right: 0px;padding-left:0px">
+                                    <div class="bhoechie-tab-content active" style="padding-right: 0px;padding-left:0px;padding-top: 0px">
+                                        <div id="treeOfZOne"></div>
+                                    </div>
+                                    <div class="bhoechie-tab-content" style="padding-right: 0px;padding-left:0px;padding-top: 0px">
+                                        <div id="treeOfHouse"></div>
+                                    </div>
+                                    <div class="bhoechie-tab-content" style="padding-right: 0px;padding-left:0px;padding-top: 0px">
+                                        <div id="treeOfRetail"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
-                        <div class="clearfix"></div>
+                    </div>
                 </div>
-                <!--<ul id="treeTab" class="nav nav-tabs tabs-left"  style="border-bottom: none;margin-top: -50px">-->
-                    <!--<li class="active" >-->
-                        <!--<a  href="#treeDiv"  onclick="changeTreeData(1)" data-toggle="tab">-->
-                            <!--机构-->
-                        <!--</a>-->
-                    <!--</li>-->
-                    <!--<li  ><a href="#treeDiv" onclick="changeTreeData(2)" data-toggle="tab">区域</a></li>-->
-                    <!--<li><a href="#treeDiv" onclick="changeTreeData(3)" data-toggle="tab">业态</a></li>-->
-                <!--</ul>-->
-                <!--<div id="treeTabContent" class="tab-content" style="height: 100%">-->
-                    <!--<div class="tab-pane fade in active" id="treeDiv" style="height: 100%">-->
-                        <!--<div id="tree" class="treeDiv"></div>-->
-                    <!--</div>-->
-                <!--</div>-->
                 <nav class="navbar navbar-default navbar-fixed-bottom" style="width: 16.4%;" role="navigation">
                     <div class="container">
                         <div class="navbar-header">
@@ -125,11 +128,11 @@
                            data-pagination-last-text="最后一页">
                         <thead>
                         <tr>
-                            <th data-field="id">编号</th>
-                            <th data-field="name">名称</th>
+                            <th data-field="rn">编号</th>
+                            <th data-field="fwmc">名称</th>
                             <th data-field="retail">业态</th>
-                            <th data-field="area">面积</th>
-                            <th data-field="position" data-formatter="positionFormatter">地理位置</th>
+                            <th data-field="jzmj">面积</th>
+                            <th data-field="dlwz" data-formatter="positionFormatter">地理位置</th>
                             <th data-field="handle" data-formatter="handleFormatter">操作</th>
                         </tr>
                         </thead>
@@ -143,8 +146,10 @@
 <script src="../lib/Flat-UI-master/dist/js/vendor/jquery.min.js"></script>
 <script src="../lib/Flat-UI-master/dist/js/flat-ui.js"></script>
 <script src="../lib/bootstrap-table/dist/bootstrap-table.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=AXQ7RGL4oSjsANXUG8OQofPywGmb04QV"></script>
 <script src="../lib/bootstrap-table/dist/locale/bootstrap-table-zh-CN.js"></script>
 <script src="../lib/echarts/echarts.js"></script>
 <script src="../lib/bootstrap-treeview-master/dist/bootstrap-treeview.min.js"></script>
+<script src="../scripts/Application.js"></script>
 <script src="../scripts/comprehensiveQuery.js"></script>
 </html>

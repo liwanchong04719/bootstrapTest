@@ -85,7 +85,7 @@ var testParam =
 {
   'location':'',
   'yetai':'',
-  'userid':'1001ZZ10000000018FJF',
+  'userid':Application.userid,
   'gongsi':'',
   'dijiye':'',
   'xianshitiaoshu':'',
@@ -99,7 +99,7 @@ var testParam =
 
 $(function () {
 
-  $('#tree').treeview({ expandIcon: "glyphicon glyphicon-stop",
+  $('#treeOfZOne').treeview({ expandIcon: "glyphicon glyphicon-stop",
     levels: 1,
     showCheckbox: true,
     showBorder: false,
@@ -110,23 +110,36 @@ $(function () {
     data: agencyTreeData});
 
   $.post("http://127.0.0.1:8088/" + new Date().getTime(), {
-    url: '118.144.36.139',
-    port: 8888,
+    url: '192.168.6.4',
+    // port: 8080,
     path: '/uapws/service/nc.itf.pims.web.ZongHeXinXi',
-    data: testParam,
+    data: JSON.stringify(testParam),
     ajaxoptions: {
-      xmlns: 'xmlns:zon=http://web.pims.itf.nc/ZongHeXinXi',
-      xmlnsName: 'can',
+      xmlns: 'xmlns:zon="http://web.pims.itf.nc/ZongHeXinXi"',
+      xmlnsName: 'zon',
       methodName: 'getFcXinXi'
     }
   }, function (data) {
     console.log(data);
   });
-
+//点击tab
+  $("div.bhoechie-tab-menu>div.list-group>a").click(function (e) {
+    e.preventDefault();
+    $(this).siblings('a.active').removeClass("active");
+    $(this).addClass("active");
+    var index = $(this).index();
+    $("div.bhoechie-tab>div.bhoechie-tab-content").removeClass("active");
+    $("div.bhoechie-tab>div.bhoechie-tab-content").eq(index).addClass("active");
+  });
+   //点击页数时获取页数的数据
+  $table.on('page-change.bs.table', function (e, number, size) {
+    getDataFromServer(number, size);
+  });
+  var options = $table.bootstrapTable('getOptions');
+  getDataFromServer(options.pageNumber, options.pageSize);
   });
 function addQueryData(event,node){
   queryData.push(node.text);
-  console.log(queryData.toString());
 }
 function minusQueryData(event, node) {
 
@@ -137,8 +150,8 @@ function minusQueryData(event, node) {
 function positionFormatter(v,row) {
   return [
     '<div class="name">',
-    '<a title="' + row.position + '" href="../pages/map.html">'
-    +row.position,
+    '<a title="' + row.dlwz + '" href="../pages/map.html">'
+    +row.dlwz,
     '<span class="glyphicon glyphicon-map-marker" style="text-align: right;"></span>',
     '</a>',
     '</div>'
@@ -190,38 +203,46 @@ function treeCallback(event, data) {
 function changeTreeData(type) {
   switch (type) {
     case 1:
-      $('#tree').treeview({ expandIcon: "glyphicon glyphicon-stop",
+      $('#treeOfZOne').treeview({ expandIcon: "glyphicon glyphicon-stop",
         levels: 1,
         showBorder: false,
         showCheckbox: true,
         color: "#428bca",
         backColor: "#f6f7fa",
         data: agencyTreeData});
-      $('#tree').on('nodeSelected', treeCallback);
+      $('#treeOfZOne').on('nodeSelected', treeCallback);
       break;
     case 2:
-      $('#tree').treeview({ expandIcon: "glyphicon glyphicon-stop",
+      $('#treeOfHouse').treeview({ expandIcon: "glyphicon glyphicon-stop",
         levels: 1,
         showBorder: false,
         showCheckbox: true,
         color: "#428bca",
         backColor: "#f6f7fa",
         data: zoneTreeData});
-      $('#tree').on('nodeSelected', treeCallback);
+      $('#treeOfHouse').on('nodeSelected', treeCallback);
       break;
     case 3:
-      $('#tree').treeview({ expandIcon: "glyphicon glyphicon-stop",
+      $('#treeOfRetail').treeview({ expandIcon: "glyphicon glyphicon-stop",
         levels: 1,
         showCheckbox: true,
         showBorder: false,
         color: "#428bca",
         backColor: "#f6f7fa",
         data: retailTreeData});
-      $('#tree').on('nodeSelected', treeCallback);
+      $('#treeOfRetail').on('nodeSelected', treeCallback);
       break;
 
   }
 }
 function queryDataFromTree() {
   console.log("dddd");
+}
+function queryParams(params) {
+  console.log(params.pageNumber);
+}
+
+function getDataFromServer(pageNum, pageSize) {
+  console.log(pageNum);
+  console.log(pageSize);
 }
