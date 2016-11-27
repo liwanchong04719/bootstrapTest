@@ -5,7 +5,7 @@ $(function () {
   initPieChart();
   initBarChart();
   initPieStatus();
-  $('select[name="inverse-select"]').select2({dropdownCssClass: 'select-inverse-dropdown'});
+ // $('select[name="inverse-select"]').select2({dropdownCssClass: 'select-inverse-dropdown'});
 })
 
 function initPieStatus(){
