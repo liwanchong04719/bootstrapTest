@@ -81,7 +81,24 @@ var retailTreeData = [
   }
 ];
 var queryData = [];
+var testParam =
+{
+  'location':'',
+  'yetai':'',
+  'userid':'1001ZZ10000000018FJF',
+  'gongsi':'',
+  'dijiye':'',
+  'xianshitiaoshu':'',
+  'xmmc ':'',
+  'fwsyqr ':'',
+  'jzmj ':'',
+  'zzdate ':'',
+  'jzmjpx':'',
+  'zzdatepx':''
+}
+
 $(function () {
+
   $('#tree').treeview({ expandIcon: "glyphicon glyphicon-stop",
     levels: 1,
     showCheckbox: true,
@@ -91,20 +108,31 @@ $(function () {
     onNodeChecked:addQueryData,
     onNodeUnchecked: minusQueryData,
     data: agencyTreeData});
-});
+
+  $.post("http://127.0.0.1:8088/" + new Date().getTime(), {
+    url: '118.144.36.139',
+    port: 8888,
+    path: '/uapws/service/nc.itf.pims.web.ZongHeXinXi',
+    data: testParam,
+    ajaxoptions: {
+      xmlns: 'xmlns:zon=http://web.pims.itf.nc/ZongHeXinXi',
+      xmlnsName: 'can',
+      methodName: 'getFcXinXi'
+    }
+  }, function (data) {
+    console.log(data);
+  });
+
+  });
 function addQueryData(event,node){
   queryData.push(node.text);
   console.log(queryData.toString());
 }
 function minusQueryData(event, node) {
-  queryData.forEach(function (item, index) {
-    if (item === node.text) {
-      console.log(index);
-      queryData.splice(index, 1);
-      return;
-    }
-  });
-  console.log(queryData.toString());
+
+  return queryData.filter(function (item) {
+    return item !== node.text;
+    });
 }
 function positionFormatter(v,row) {
   return [
