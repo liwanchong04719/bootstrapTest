@@ -2,6 +2,7 @@
  * Created by wangtun on 2016/11/17.
  */
 $(function () {
+  $.fn.select2.defaults.set( "theme", "bootstrap" );
   //资产盘点
   // getExistingAssets(Application.userid);
   // getExistingChanges(Application.userid);
@@ -15,6 +16,10 @@ $(function () {
   initPieChart();
   initBarChart();
   initPieStatus();
+  $("#propertyCompanySelect").select2({
+    placeholder: "Select a state",
+    allowClear: true
+  })
 })
 
 function initPieStatus() {
