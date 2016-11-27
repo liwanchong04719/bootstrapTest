@@ -13,12 +13,12 @@ function initPieStatus(){
   var myChart = echarts.init(dom);
   var app = {};
   option = null;
-  app.title = '饼状图';
+  app.title = '';
 
   option = {
     backgroundColor:'#fff',
     title : {
-      text: '出租率',
+      text: '',
       subtext: '',
       x:'center'
     },
@@ -27,8 +27,9 @@ function initPieStatus(){
       formatter: "{a} <br/>{b} : {c} ({d}%)"
     },
     legend: {
-      orient : 'vertical',
-      x : 'left',
+      orient : 'horizontal',
+      x : 'center',
+      y:'bottom',
       data:['已租','未租','自用']
     },
     toolbox: {
@@ -55,10 +56,10 @@ function initPieStatus(){
     calculable : true,
     series : [
       {
-        name:'出租率',
+        name:'',
         type:'pie',
         radius : '55%',
-        center: ['50%', '60%'],
+        center: ['50%', '50%'],
         data:[
           {value:335, name:'已租'},
           {value:310, name:'未租'},
@@ -78,7 +79,7 @@ function initPieChart(){
   var myChart = echarts.init(dom);
   var app = {};
   option = null;
-  app.title = '饼状图';
+  app.title = '';
 
   option = {
     backgroundColor:'#fff',
@@ -92,8 +93,9 @@ function initPieChart(){
       formatter: "{a} <br/>{b} : {c} ({d}%)"
     },
     legend: {
-      orient : 'vertical',
-      x : 'left',
+      orient : 'horizontal',
+      x : 'center',
+      y:'bottom',
       data:['自用','工业用房','商业用房','办公楼']
     },
     toolbox: {
@@ -159,6 +161,9 @@ function  initBarChart() {
     },
     calculable : true,
     legend: {
+      orient : 'horizontal',
+      x : 'center',
+      y:'bottom',
       data:['出租率','单价']
     },
     xAxis : [
