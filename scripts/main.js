@@ -8,7 +8,6 @@ $(function () {
   initPieChart();
   initBarChart();
   initPieStatus();
-  $('select[name="inverse-select"]').select2({ dropdownCssClass: 'select-inverse-dropdown' });
 })
 
 function initPieStatus() {
@@ -16,12 +15,12 @@ function initPieStatus() {
   var myChart = echarts.init(dom);
   var app = {};
   option = null;
-  app.title = '饼状图';
+  app.title = '';
 
   option = {
-    backgroundColor: '#fff',
-    title: {
-      text: '出租率',
+    backgroundColor:'#fff',
+    title : {
+      text: '',
       subtext: '',
       x: 'center'
     },
@@ -30,9 +29,10 @@ function initPieStatus() {
       formatter: "{a} <br/>{b} : {c} ({d}%)"
     },
     legend: {
-      orient: 'vertical',
-      x: 'left',
-      data: ['已租', '未租', '自用']
+      orient : 'horizontal',
+      x : 'center',
+      y:'bottom',
+      data:['已租','未租','自用']
     },
     toolbox: {
       show: true,
@@ -58,14 +58,14 @@ function initPieStatus() {
     calculable: true,
     series: [
       {
-        name: '出租率',
-        type: 'pie',
-        radius: '55%',
-        center: ['50%', '60%'],
-        data: [
-          { value: 335, name: '已租' },
-          { value: 310, name: '未租' },
-          { value: 234, name: '自用' }
+        name:'',
+        type:'pie',
+        radius : '55%',
+        center: ['50%', '50%'],
+        data:[
+          {value:335, name:'已租'},
+          {value:310, name:'未租'},
+          {value:234, name:'自用'}
         ]
       }
     ]
@@ -81,7 +81,7 @@ function initPieChart() {
   var myChart = echarts.init(dom);
   var app = {};
   option = null;
-  app.title = '饼状图';
+  app.title = '';
 
   option = {
     backgroundColor: '#fff',
@@ -95,9 +95,10 @@ function initPieChart() {
       formatter: "{a} <br/>{b} : {c} ({d}%)"
     },
     legend: {
-      orient: 'vertical',
-      x: 'left',
-      data: ['自用', '工业用房', '商业用房', '办公楼']
+      orient : 'horizontal',
+      x : 'center',
+      y:'bottom',
+      data:['自用','工业用房','商业用房','办公楼']
     },
     toolbox: {
       show: true,
@@ -162,7 +163,10 @@ function initBarChart() {
     },
     calculable: true,
     legend: {
-      data: ['出租率', '单价']
+      orient : 'horizontal',
+      x : 'center',
+      y:'bottom',
+      data:['出租率','单价']
     },
     xAxis: [
       {
@@ -186,18 +190,23 @@ function initBarChart() {
         }
       }
     ],
-    series: [
-
+    series : [
       {
-        name: '出租率',
-        type: 'bar',
-        data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 90, 100, 32.6, 20.0, 6.4, 3.3]
+        name:'出租率',
+        type:'bar',
+        itemStyle:{
+          normal:{color:'#0099FF'}
+        },
+        data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 90, 100, 32.6, 20.0, 6.4, 3.3]
       },
       {
         name: '单价',
         type: 'line',
         yAxisIndex: 1,
-        data: [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
+        itemStyle:{
+          normal:{color:'#2EC7C9'}
+        },
+        data:[2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
       }
     ]
   };
