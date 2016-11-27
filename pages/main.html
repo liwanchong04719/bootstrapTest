@@ -179,18 +179,12 @@
         </div>
     </div>
     <div class="container-fluid" style="padding-top: 30px">
-        <div class="row">
-            <div class="title-info" style="font-size: 18px">预警信息及应收款统计</div>
-            <!--<div class="titleInfo_bottom">预警信息及收款统计</div>-->
-        </div>
         <div class="row" style="padding-top: 0px">
             <div class="col-md-6" style="padding-left: 0px;padding-right: 15px;">
-                <div style="border-radius: 4px;background-color: #fff;">
-                    <div>
-                        预警信息
-                    </div>
-                    <div>
-                        <ul style="list-style-type: none">
+                <div class="title-info" style="font-size: 18px">预警信息</div>
+                <div style="border-radius: 4px;background-color: #fff;height: 170px">
+                    <div style="padding: 20px 30px;">
+                        <ul id="information" style="list-style-type: none">
                             <li style="list-style-type: none">
                                 <a href="#">合同单价超限：城建置业房源合同每平方米超过最高限价</a>
                             </li>
@@ -207,43 +201,45 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6" style="padding-left: 0px;padding-right: 5px;border-radius: 4px;background-color: #fff;padding-left: 5px">
-                <div>应收款统计</div>
-                <div>
-                    <label style="color: #1e3657;font-weight: 700">按公司：</label>
-                    <select data-toggle="select" name="inverse-select" class="form-control select select-primary select-sm mrs mbm">
-                        <option value="0">城建集团</option>
-                        <option value="1">城建集团1公司</option>
-                        <option value="2">城建集团2公司</option>
-                        <option value="3">城建集团3公司</option>
-                        <option value="4">城建集团4公司</option>
-                    </select>
-                    <label style="color: #1e3657;font-weight: 700">对应房产：</label>
-                    <select data-toggle="select" name="inverse-select" class="form-control select select-info select-sm mrs mbm">
-                        <option value="0">城建大厦</option>
-                        <option value="1">城建大厦</option>
-                        <option value="2">城建大厦</option>
-                        <option value="3">城建大厦</option>
-                        <option value="4">城建大厦</option>
-                    </select>
-                    <label style="color: #1e3657;font-weight: 700">按业态：</label>
-                    <select data-toggle="select" name="inverse-select" class="form-control select select-info select-sm mrs mbm">
-                        <option value="0">自用</option>
-                        <option value="1">商业用房</option>
-                        <option value="2">工业用房</option>
-                        <option value="3">写字楼</option>
-                    </select>
-                </div>
-                <div>
+            <div class="col-md-6" style="padding-left: 0px;padding-right: 5px;">
+                <div class="title-info" style="font-size: 18px">预警信息</div>
+                <div style="border-radius: 4px;background-color: #fff;padding: 20px 10px">
                     <div>
-                        <label>本月应收：</label> <label>100000元</label>
-                        <label>本月实收：</label> <label>100000元</label>
-                        <label>完成比例：</label> <label>100000元</label>
+                        <label style="color: #1e3657;font-weight: 700">按公司：</label>
+                        <select data-toggle="select" name="inverse-select" class="form-control select select-primary select-sm mrs mbm">
+                            <option value="0">城建集团</option>
+                            <option value="1">城建集团1公司</option>
+                            <option value="2">城建集团2公司</option>
+                            <option value="3">城建集团3公司</option>
+                            <option value="4">城建集团4公司</option>
+                        </select>
+                        <label style="color: #1e3657;font-weight: 700">对应房产：</label>
+                        <select data-toggle="select" name="inverse-select" class="form-control select select-info select-sm mrs mbm">
+                            <option value="0">城建大厦</option>
+                            <option value="1">城建大厦</option>
+                            <option value="2">城建大厦</option>
+                            <option value="3">城建大厦</option>
+                            <option value="4">城建大厦</option>
+                        </select>
+                        <label style="color: #1e3657;font-weight: 700">按业态：</label>
+                        <select data-toggle="select" name="inverse-select" class="form-control select select-info select-sm mrs mbm">
+                            <option value="0">自用</option>
+                            <option value="1">商业用房</option>
+                            <option value="2">工业用房</option>
+                            <option value="3">写字楼</option>
+                        </select>
                     </div>
                     <div>
-                        <label>上月应收：</label> <label>100000元</label>
-                        <label>上月实收：</label> <label>100000元</label>
-                        <label>完成比例：</label> <label>100000元</label>
+                        <div>
+                            <label>本月应收：</label> <label>100000元</label>
+                            <label>本月实收：</label> <label>100000元</label>
+                            <label>完成比例：</label> <label>100000元</label>
+                        </div>
+                        <div>
+                            <label>上月应收：</label> <label>100000元</label>
+                            <label>上月实收：</label> <label>100000元</label>
+                            <label>完成比例：</label> <label>100000元</label>
+                        </div>
                     </div>
                 </div>
             </div>
