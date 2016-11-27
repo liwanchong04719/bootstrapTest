@@ -49,9 +49,10 @@ function onRequest(request, response) {
             res.on('data', function (chunk) {
                 var startindex = chunk.indexOf('<ns1:return>')
                 var endindex = chunk.indexOf('</ns1:return>');
-                console.log('returndata:'+chunk.substring(startindex, endindex) )
-                response.write(chunk.substring(startindex+12, endindex));
-                response.end();
+                //console.log('returndata:'+chunk.substring(startindex, endindex) )
+                chunk = chunk.substring(startindex+12, endindex)
+                response.write(chunk,function() {response.end()});
+                //response.end();
             });
         });
 

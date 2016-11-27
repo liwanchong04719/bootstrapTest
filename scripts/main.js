@@ -3,8 +3,15 @@
  */
 $(function () {
   //资产盘点
-  getExistingAssets(Application.userid);
-  getExistingChanges(Application.userid);
+  // getExistingAssets(Application.userid);
+  // getExistingChanges(Application.userid);
+  //资产盘点环状图
+  //公司、区域数据
+  getOrgAndLocation(Application.userid);
+  //getCircleGraph(Application.userid)
+
+
+
   initPieChart();
   initBarChart();
   initPieStatus();
@@ -253,4 +260,91 @@ function getExistingChanges(userid) {
       $('.departmentcountchange').text(data.fyCount+'套');
      })
 
+}
+
+//资产盘点环状图
+function getOrgAndLocation(userid){
+
+//  $.post("http://127.0.0.1:8088/" + new Date().getTime(),
+//     {
+//       "url": "192.168.3.20",
+//       "port": '8080',
+//       "path": "/uapws/service/nc.itf.pims.web.JingYingZhuangKuang",
+//       "data": JSON.stringify({userid:userid}),
+//       "ajaxoptions": {
+//         "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+//         "xmlnsName": "jin",
+//         "methodName": "getPk_orgAndLocation"
+//       }
+//     },
+//     function (data) {
+//       //data = JSON.parse(data);
+
+
+// })
+      data = [{"firstvalue":"0001A110000000000MM6","location":['朝阳','海淀','东城','西城'],"secondvalue":"董事会秘书部"},{"firstvalue":"0001A110000000000MMX","location":[],"secondvalue":"审计稽查部（监事会办公室）"},{"firstvalue":"0001A110000000000MLR","location":[],"secondvalue":"财务管理部"},{"firstvalue":"0001A110000000000MMC","location":[],"secondvalue":"工会"},{"firstvalue":"0001A110000000000MMI","location":[],"secondvalue":"纪检监察部"},{"firstvalue":"0001A110000000000MMU","location":[],"secondvalue":"人力资源部"},{"firstvalue":"0001A110000000000MNC","location":[],"secondvalue":"测试组织"},{"firstvalue":"0001A110000000000MLL","location":[],"secondvalue":"经营管理部"},{"firstvalue":"0001A110000000000MM0","location":[],"secondvalue":"第三监事会"},{"firstvalue":"0001A110000000000MN6","location":[],"secondvalue":"宣传部"},{"firstvalue":"0001A110000000000ML3","location":[],"secondvalue":"职能部门"},{"firstvalue":"0001A110000000000MLO","location":[],"secondvalue":"安全管理部"},{"firstvalue":"0001A110000000000MM3","location":[],"secondvalue":"第一监事会"},{"firstvalue":"0001A110000000000MMO","location":[],"secondvalue":"经理办公室"},{"firstvalue":"0001A110000000000MLU","location":[],"secondvalue":"党委工作部"},{"firstvalue":"0001A110000000000MLX","location":[],"secondvalue":"第二监事会"},{"firstvalue":"0001A110000000000MML","location":[],"secondvalue":"技术质量管理部"},{"firstvalue":"0001A110000000000MLI","location":[],"secondvalue":"生产管理部"},{"firstvalue":"0001A110000000000MMF","location":[],"secondvalue":"行政保卫部"},{"firstvalue":"0001A110000000000MMR","location":[],"secondvalue":"企业管理部"},{"firstvalue":"0001A110000000000MN9","location":[],"secondvalue":"资本运营部"},{"firstvalue":"0001A110000000000MM9","location":[],"secondvalue":"法律事务部"},{"firstvalue":"0001A110000000000MN0","location":[],"secondvalue":"市场营销部"},{"firstvalue":"0001A110000000000MN3","location":[],"secondvalue":"信访维稳办公室"}]
+      OrgAndLocationOptions(data)
+}
+
+//生成按公司下拉列表
+function OrgAndLocationOptions(data){
+  var optionshtml = '';
+  for(var i=0,len=data.length;i<len;i++){
+     
+    optionshtml+='<option value="'+data[i].firstvalue+'" location ="'+ data[i].location.join('|')+'">'+data[i].secondvalue+'</option>'
+  }
+
+
+  $('#select_Org_circle').empty().append(optionshtml);
+
+
+
+  $("#select_Org_circle option[value="+data[0].firstvalue+"]").attr("selected",true);
+
+  generateRegionOptions()
+
+  //公司绑定change事件
+  $("#select_Org_circle").change(function(e){
+    
+    generateRegionOptions()
+  })
+    //改变区域
+    $("#select_Location_circle").change(function(e){
+      
+  })
+}
+
+function generateRegionOptions(){
+  
+    var location = $("#select_Org_circle").find('option:selected').attr('location');
+    $('#select_Location_circle').empty().append(createregionOptions(location.split('|')));
+    $("#select_Location_circle option[value=0]").attr("selected",true);
+}
+
+//生成区域
+function createregionOptions(data){
+  var optionshtml = '';
+  for(var i=0,len=data.length;i<len;i++){
+    optionshtml+='<option value="'+i+'">'+data[i]+'</option>'
+  }
+  return optionshtml;
+}
+
+//环状图
+function getCircleGraph(userid){
+ $.post("http://127.0.0.1:8088/" + new Date().getTime(),
+    {
+      "url": "192.168.3.20",
+      "port": '8080',
+      "path": "/uapws/service/nc.itf.pims.web.CheckProperty",
+      "data": JSON.stringify({userid:userid}),
+      "ajaxoptions": {
+        "xmlns": 'xmlns:chec="http://web.pims.itf.nc/CheckProperty"',
+        "xmlnsName": "chec",
+        "methodName": "zichanpandianhuanzhuangtu"
+      }
+    },
+    function (data) {
+      data = JSON.parse(data);
+      console.log('-----:'+data);})
 }
