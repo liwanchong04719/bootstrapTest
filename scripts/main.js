@@ -4,7 +4,7 @@
 $(function () {
   //资产盘点
   getExistingAssets(Application.userid);
-
+  getExistingChanges(Application.userid);
   initPieChart();
   initBarChart();
   initPieStatus();
@@ -214,8 +214,8 @@ function getExistingAssets(userid) {
   //部署时需要替换
   $.post("http://127.0.0.1:8088/" + new Date().getTime(),
     {
-      "url": "118.144.36.139",
-      "port": 8888,
+      "url": "192.168.3.20",
+      "port": '8080',
       "path": "/uapws/service/nc.itf.pims.web.CheckProperty",
       "data": JSON.stringify({userid:userid}),
       "ajaxoptions": {
@@ -225,10 +225,32 @@ function getExistingAssets(userid) {
       }
     },
     function (data) {
-      
-      console.log(JSON.stringify(data));
+      data = JSON.parse(data);
+      $('.landcount').text(data.dcCount);
+      $('.housecount').text(data.fcCount);
+      $('.departmentcount').text(data.fyCount);
+     })
 
-
+}
+//固定资产改变情况
+function getExistingChanges(userid) {
+ $.post("http://127.0.0.1:8088/" + new Date().getTime(),
+    {
+      "url": "192.168.3.20",
+      "port": '8080',
+      "path": "/uapws/service/nc.itf.pims.web.CheckProperty",
+      "data": JSON.stringify({userid:userid}),
+      "ajaxoptions": {
+        "xmlns": 'xmlns:chec="http://web.pims.itf.nc/CheckProperty"',
+        "xmlnsName": "chec",
+        "methodName": "benyuexinzeng"
+      }
+    },
+    function (data) {
+      data = JSON.parse(data);
+      $('.landcountchange').text(data.dcCount+'块');
+      $('.housecountchange').text(data.fcCount+'座');
+      $('.departmentcountchange').text(data.fyCount+'套');
      })
 
 }
