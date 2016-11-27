@@ -14,3 +14,5 @@ Application.minZoom =5;
 Application.province = 10;
 //显示区级数据的级别
 Application.direct = 15;
+//登录用户
+Application.userid = '1001ZZ10000000018FJF';
