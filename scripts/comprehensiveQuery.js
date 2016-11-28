@@ -101,9 +101,9 @@ $(function () {
 
   $('#treeOfZOne').treeview({ expandIcon: "glyphicon glyphicon-stop",
     levels: 1,
+    color:'#2a6496',
     showCheckbox: true,
     showBorder: false,
-    color: "#428bca",
     backColor: "#f6f7fa",
     onNodeChecked:addQueryData,
     onNodeUnchecked: minusQueryData,
@@ -210,7 +210,7 @@ function changeTreeData(type) {
         levels: 1,
         showBorder: false,
         showCheckbox: true,
-        color: "#428bca",
+        color: "#cecfe0",
         backColor: "#f6f7fa",
         data: agencyTreeData});
       $('#treeOfZOne').on('nodeSelected', treeCallback);
@@ -220,7 +220,7 @@ function changeTreeData(type) {
         levels: 1,
         showBorder: false,
         showCheckbox: true,
-        color: "#428bca",
+        color: "#cecfe0",
         backColor: "#f6f7fa",
         data: zoneTreeData});
       $('#treeOfHouse').on('nodeSelected', treeCallback);
@@ -230,7 +230,7 @@ function changeTreeData(type) {
         levels: 1,
         showCheckbox: true,
         showBorder: false,
-        color: "#428bca",
+        color: "#cecfe0",
         backColor: "#f6f7fa",
         data: retailTreeData});
       $('#treeOfRetail').on('nodeSelected', treeCallback);
