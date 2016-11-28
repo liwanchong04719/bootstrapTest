@@ -35,7 +35,7 @@ function onRequest(request, response) {
 
         var options = {
             hostname: params.url,
-            port:params.port,
+            // port:params.port,
             path: params.path,
             method: 'POST',
             headers: {
@@ -48,10 +48,10 @@ function onRequest(request, response) {
             console.log('HEADERS: ' + JSON.stringify(res.headers));
             res.setEncoding('utf8');
             res.on('data', function (chunk) {
-                var startindex = chunk.indexOf('<ns1:return>')
-                var endindex = chunk.indexOf('</ns1:return>');
-                console.log('returndata:'+chunk.substring(startindex, endindex) )
-                response.write(chunk.substring(startindex+12, endindex));
+                var startindex = chunk.indexOf('<return>')
+                var endindex = chunk.indexOf('</return>');
+                console.log('returndata:'+chunk.substring(startindex+7, endindex) )
+                response.write(chunk.substring(startindex+7, endindex));
                 response.end();
             });
         });

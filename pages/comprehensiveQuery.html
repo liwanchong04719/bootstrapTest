@@ -106,17 +106,63 @@
         <div class="col-md-10" style="height: 100%;padding-top: 50px">
             <ul id="myTab" class="nav nav-tabs" style="margin-top: -50px;border-bottom: none;">
                 <li class="active" >
-                    <a  href="#realEstate"  onclick="changeData(1)" data-toggle="tab">
+                    <a  href="#laneDiv"  onclick="changeData(1)" data-toggle="tab">
                         地产
                     </a>
                 </li>
-                <li  ><a href="#realEstate" onclick="changeData(2)" data-toggle="tab">房产</a></li>
-                <li><a href="#realEstate" onclick="changeData(3)" data-toggle="tab">楼栋</a></li>
-                <li><a href="#realEstate" onclick="changeData(4)" data-toggle="tab">房源</a></li>
+                <li  ><a href="#houseDiv" onclick="changeData(2)" data-toggle="tab">房产</a></li>
+                <li><a href="#buildingDiv" onclick="changeData(3)" data-toggle="tab">楼栋</a></li>
+                <li><a href="#hugDiv" onclick="changeData(4)" data-toggle="tab">房源</a></li>
             </ul>
             <div id="myTabContent" class="tab-content" style="height: 100%">
-                <div class="tab-pane fade in active" id="realEstate" style="height: 100%">
-                    <table id="table"
+                <div class="tab-pane fade in active" id="laneDiv" style="height: 100%">
+                    <table id="tableOfLane"
+                           data-toggle="table"
+                           data-url="../json/data.json"
+                           data-pagination="true"
+                           data-page-size="10"
+                           data-page-list="[5,8,10]"
+                           data-pagination-first-text="首页"
+                           data-pagination-pre-text="前一页"
+                           data-pagination-next-text="下一页"
+                           data-pagination-last-text="最后一页">
+                        <thead>
+                        <tr>
+                            <th data-field="tdzbh">土地证号</th>
+                            <th data-field="fwmc">土地性质</th>
+                            <th data-field="retail">土地使用权人</th>
+                            <th data-field="dlwz" data-formatter="positionFormatter">座落</th>
+                            <th data-field="jzmj">地类</th>
+                            <th data-field="jzmj">使用权面积</th>
+                            <th data-field="jzmj">终止日期</th>
+                            <th data-field="handle" data-formatter="handleFormatter">详细信息</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="tab-pane fade in active" id="houseDiv" style="height: 100%">
+                    <table id="tableOfHouse"
+                           data-toggle="table"
+                           data-url="../json/data.json"
+                           data-pagination="true"
+                           data-page-size="10"
+                           data-page-list="[5,8,10]"
+                           data-pagination-first-text="首页"
+                           data-pagination-pre-text="前一页"
+                           data-pagination-next-text="下一页"
+                           data-pagination-last-text="最后一页">
+                        <thead>
+                        <tr>
+                            <th data-field="fczbh">楼栋号</th>
+                            <th data-field="fwmc">对应项目名称</th>
+                            <th data-field="tdzbh">最低层</th>
+                            <th data-field="fwsyqr">最高层</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="tab-pane fade in active" id="buildingDiv" style="height: 100%">
+                    <table id="tableOfBuilding"
                            data-toggle="table"
                            data-url="../json/data.json"
                            data-pagination="true"
@@ -134,6 +180,29 @@
                             <th data-field="jzmj">面积</th>
                             <th data-field="dlwz" data-formatter="positionFormatter">地理位置</th>
                             <th data-field="handle" data-formatter="handleFormatter">操作</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="tab-pane fade in active" id="hugDiv" style="height: 100%">
+                    <table id="tableOfHug"
+                           data-toggle="table"
+                           data-url="../json/data.json"
+                           data-pagination="true"
+                           data-page-size="10"
+                           data-page-list="[5,8,10]"
+                           data-pagination-first-text="首页"
+                           data-pagination-pre-text="前一页"
+                           data-pagination-next-text="下一页"
+                           data-pagination-last-text="最后一页">
+                        <thead>
+                        <tr>
+                            <th data-field="rn">房间编号</th>
+                            <th data-field="fwmc">对应楼栋号</th>
+                            <th data-field="retail">楼层</th>
+                            <th data-field="jzmj">业态</th>
+                            <th data-field="dlwz">房间面积</th>
+                            <th data-field="handle">房间朝向</th>
                         </tr>
                         </thead>
                     </table>
