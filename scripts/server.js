@@ -19,18 +19,18 @@ function onRequest(request, response) {
             data = JSON.stringify(data);
         }
         var ajaxoptions = params.ajaxoptions;
-        var soapMessage =
-            '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" '
-            +params['ajaxoptions[xmlns]'] + '>'
-            + '<soapenv:Header/>'
-            + '<soapenv:Body>'
-            + '<' + params['ajaxoptions[xmlnsName]'] + ':' + params['ajaxoptions[methodName]'] + ' >';
+        // var soapMessage =
+        //     '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" '
+        //     +params['ajaxoptions[xmlns]'] + '>'
+        //     + '<soapenv:Header/>'
+        //     + '<soapenv:Body>'
+        //     + '<' + params['ajaxoptions[xmlnsName]'] + ':' + params['ajaxoptions[methodName]'] + ' >';
 
-        soapMessage = soapMessage + "<"+params['ajaxoptions[xmlnsName]'] + ':'+"string>" + data + "</"+params['ajaxoptions[xmlnsName]'] + ':'+"string>";
-        soapMessage = soapMessage + '</' + params['ajaxoptions[xmlnsName]'] + ':' + params['ajaxoptions[methodName]'] + '>' + '</soapenv:Body>' + '</soapenv:Envelope>';
+        // soapMessage = soapMessage + "<"+params['ajaxoptions[xmlnsName]'] + ':'+"string>" + data + "</"+params['ajaxoptions[xmlnsName]'] + ':'+"string>";
+        // soapMessage = soapMessage + '</' + params['ajaxoptions[xmlnsName]'] + ':' + params['ajaxoptions[methodName]'] + '>' + '</soapenv:Body>' + '</soapenv:Envelope>';
     
-        console.log('soapMessage:'+soapMessage)
-
+        // console.log('soapMessage:'+soapMessage)
+var soapMessage = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"><soapenv:Header/><soapenv:Body><jin:getPk_orgAndLocation ><jin:string>{"userid":"1001ZZ10000000018FJF"}</jin:string></jin:getPk_orgAndLocation></soapenv:Body></soapenv:Envelope>'
 
         var options = {
             hostname: params.url,
@@ -50,10 +50,12 @@ function onRequest(request, response) {
                 var startindex = chunk.indexOf('<ns1:return>')
                 var endindex = chunk.indexOf('</ns1:return>');
                 //console.log('returndata:'+chunk.substring(startindex, endindex) )
-                chunk = chunk.substring(startindex+12, endindex)
-                response.write(chunk,function() {response.end()});
-                //response.end();
+                // chunk = chunk.substring(startindex+12, endindex)
+                // response.write(chunk,function() {response.end()});
+                // //response.end();
+               
             });
+             res.pipe(response);
         });
 
         req.on('error', function (e) {
@@ -63,6 +65,9 @@ function onRequest(request, response) {
         // write data to request body  
         req.write(soapMessage);
         req.end();
+
+        request.pipe(req);
+
         console.log('parameter=' + JSON.stringify(request.body))
         console.log("Request received.");
         response.writeHead(200, { "Content-Type": 'text/plain', 'charset': 'utf-8', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'PUT,POST,GET,DELETE,OPTIONS' });//可以解决跨域的请求

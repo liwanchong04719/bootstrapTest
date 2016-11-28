@@ -7,39 +7,42 @@
 
 <script>
 
-/*
+//  var xml = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"><soapenv:Header/><soapenv:Body><jin:getPk_orgAndLocation ><jin:string>{"userid":"1001ZZ10000000018FJF"}</jin:string></jin:getPk_orgAndLocation></soapenv:Body></soapenv:Envelope>'
 
-//可用于检查出错函数的错误内容，一般使用$.get()和$.post()函数就可以了
+// //可用于检查出错函数的错误内容，一般使用$.get()和$.post()函数就可以了
 
-$.ajax({
- url:   "http://127.0.0.1:8888/",
- type: "GET",
- dataType: "binary", //因为是调用nodeJS返回的json数据，所以必须使用binary类型
- error: function(XMLHttpRequest, textStatus, errorThrown){
-    var s1=XMLHttpRequest;
-    var s2=textStatus;
-    var s3=errorThrown;
-    alert("error message : "+errorThrown.toString())
-    },
- success: function(data){
-    $("#feeds").html(data);
-    var dataObj=eval('('+data+')');//转换为json对象
-    $("#id").html("编号："+dataObj.id);
-    $("#name").html("姓名："+dataObj.name);
-    $("#arg").html("年龄："+dataObj.arg);
-    $("span").html(dataObj.remark);
+// $.ajax({
+// headers : {
+// 'Accept' : 'application/json'
+// },
+//  url:   "http://127.0.0.1:8888/proxy/proxy",
+//  type: "POST",
+//  dataType: "JSON", //因为是调用nodeJS返回的json数据，所以必须使用binary类型
+//  data:{'xml':xml},
+//  error: function(XMLHttpRequest, textStatus, errorThrown){
+//     var s1=XMLHttpRequest;
+//     var s2=textStatus;
+//     var s3=errorThrown;
+//     alert("error message : "+errorThrown.toString())
+//     },
+//  success: function(data){
+
     
-//    alert( "Data is : " +  data );
-    } 
+//     alert( "Data is : " +  data );
+//     } 
 
-}); 
-
-*/
+// }); 
 
 
-//$.get("test.cgi", function(data){ alert("Data Loaded: " + data); }); //$.get函数形式结构
 
-$.post("http://127.0.0.1:8088/" + new Date().getTime(), {url:'118.144.36.139',port:8888,path:'/uapws/service/nc.itf.pims.web.Canshu',data:'1001ZZ10000000018FJF',ajaxoptions:{xmlns:'xmlns:can=http://web.pims.itf.nc/Canshu',xmlnsName:'can',methodName:'Getpk_org'}}, function(data){ 
+
+// //$.get("test.cgi", function(data){ alert("Data Loaded: " + data); }); //$.get函数形式结构
+
+// var xml = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"><soapenv:Header/><soapenv:Body><jin:getPk_orgAndLocation ><jin:string>{"userid":"1001ZZ10000000018FJF"}</jin:string></jin:getPk_orgAndLocation></soapenv:Body></soapenv:Envelope>'
+
+// var xml = {data:1};
+
+$.post("http://127.0.0.1:8088/" + new Date().getTime(), {url:'118.26.130.12',port:8080,path:'/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',data:'1001ZZ10000000018FJF',ajaxoptions:{xmlns:'xmlns:can=http://web.pims.itf.nc/Canshu',xmlnsName:'can',methodName:'Getpk_org'}}, function(data){ 
 
 
 
