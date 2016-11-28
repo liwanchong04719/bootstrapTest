@@ -137,6 +137,9 @@ $(function () {
   });
   var options = $table.bootstrapTable('getOptions');
   getDataFromServer(options.pageNumber, options.pageSize);
+
+  initMap();
+
   });
 function addQueryData(event,node){
   queryData.push(node.text);
@@ -150,7 +153,7 @@ function minusQueryData(event, node) {
 function positionFormatter(v,row) {
   return [
     '<div class="name">',
-    '<a title="' + row.dlwz + '" href="../pages/map.html">'
+    '<a onclick="showPoiPosition(116.5,39.9)" title="' + row.dlwz + '" href="javascript:void(0)">'
     +row.dlwz,
     '<span class="glyphicon glyphicon-map-marker" style="text-align: right;"></span>',
     '</a>',
@@ -245,4 +248,29 @@ function queryParams(params) {
 function getDataFromServer(pageNum, pageSize) {
   console.log(pageNum);
   console.log(pageSize);
+}
+
+var map;
+function initMap() {
+  map = new BMap.Map("mapContainer", { minZoom: Application.minZoom, enableHighResolution: true });    // 创建Map实例
+
+  map.centerAndZoom(Application.initCenter, Application.initZoom);  // 初始化地图,设置中心点坐标和地图级别
+  map.addControl(new BMap.MapTypeControl());   //添加地图类型控件
+  map.setCurrentCity("北京");          // 设置地图显示的城市 此项是必须设置的
+  map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+}
+
+function showPoiPosition(lng,lat){
+  $.fancybox.open({
+    href : '#mapContainer',
+    padding : 5,
+    afterShow:function(){
+      if(map){
+        map.clearOverlays();
+        var marker = new BMap.Marker(new BMap.Point(lng,lat));       //创建标注
+        map.addOverlay(marker);
+        map.centerAndZoom(new BMap.Point(lng, lat), 13);
+      }
+    }
+  });
 }
