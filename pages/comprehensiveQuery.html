@@ -131,18 +131,18 @@
                         <thead>
                         <tr>
                             <th data-field="tdzbh">土地证号</th>
-                            <th data-field="fwmc">土地性质</th>
-                            <th data-field="retail">土地使用权人</th>
+                            <th data-field="tdxz">土地性质</th>
+                            <th data-field="tdsyr">土地使用权人</th>
                             <th data-field="dlwz" data-formatter="positionFormatter">座落</th>
-                            <th data-field="jzmj">地类</th>
-                            <th data-field="jzmj">使用权面积</th>
-                            <th data-field="jzmj">终止日期</th>
+                            <th data-field="dl">地类</th>
+                            <th data-field="syqmj">使用权面积</th>
+                            <th data-field="zzdate">终止日期</th>
                             <th data-field="handle" data-formatter="handleFormatter">详细信息</th>
                         </tr>
                         </thead>
                     </table>
                 </div>
-                <div class="tab-pane fade in active" id="houseDiv" style="height: 100%">
+                <div class="tab-pane fade" id="houseDiv" style="height: 100%">
                     <table id="tableOfHouse"
                            data-toggle="table"
                            data-url="../json/data.json"
@@ -155,15 +155,19 @@
                            data-pagination-last-text="最后一页">
                         <thead>
                         <tr>
-                            <th data-field="fczbh">楼栋号</th>
-                            <th data-field="fwmc">对应项目名称</th>
-                            <th data-field="tdzbh">最低层</th>
-                            <th data-field="fwsyqr">最高层</th>
+                            <th data-field="fczbh">房产证号</th>
+                            <th data-field="fwmc">项目名称</th>
+                            <th data-field="tdzbh">对应土地证号</th>
+                            <th data-field="fwsyqr">房屋所有权人</th>
+                            <th data-field="dlwz" data-formatter="positionFormatter">房屋坐落</th>
+                            <th data-field="jzmj">建筑面积</th>
+                            <th data-field="zznx">终止年限</th>
+                            <th data-field="handle" data-formatter="handleFormatter">详细信息</th>
                         </tr>
                         </thead>
                     </table>
                 </div>
-                <div class="tab-pane fade in active" id="buildingDiv" style="height: 100%">
+                <div class="tab-pane fade" id="buildingDiv" style="height: 100%">
                     <table id="tableOfBuilding"
                            data-toggle="table"
                            data-url="../json/data.json"
@@ -176,17 +180,15 @@
                            data-pagination-last-text="最后一页">
                         <thead>
                         <tr>
-                            <th data-field="rn">编号</th>
-                            <th data-field="fwmc">名称</th>
-                            <th data-field="retail">业态</th>
-                            <th data-field="jzmj">面积</th>
-                            <th data-field="dlwz" data-formatter="positionFormatter">地理位置</th>
-                            <th data-field="handle" data-formatter="handleFormatter">操作</th>
+                            <th data-field="ldh">楼栋号</th>
+                            <th data-field="xmmc">对应项目名称</th>
+                            <th data-field="zdc">最低层</th>
+                            <th data-field="zgc">最高层</th>
                         </tr>
                         </thead>
                     </table>
                 </div>
-                <div class="tab-pane fade in active" id="hugDiv" style="height: 100%">
+                <div class="tab-pane fade" id="hugDiv" style="height: 100%">
                     <table id="tableOfHug"
                            data-toggle="table"
                            data-url="../json/data.json"
@@ -199,12 +201,12 @@
                            data-pagination-last-text="最后一页">
                         <thead>
                         <tr>
-                            <th data-field="rn">房间编号</th>
-                            <th data-field="fwmc">对应楼栋号</th>
-                            <th data-field="retail">楼层</th>
-                            <th data-field="jzmj">业态</th>
-                            <th data-field="dlwz">房间面积</th>
-                            <th data-field="handle">房间朝向</th>
+                            <th data-field="fjbh">房间编号</th>
+                            <th data-field="ldh">对应楼栋号</th>
+                            <th data-field="lc">楼层</th>
+                            <th data-field="yetai">业态</th>
+                            <th data-field="fjmj">房间面积</th>
+                            <th data-field="fjcx">房间朝向</th>
                         </tr>
                         </thead>
                     </table>
