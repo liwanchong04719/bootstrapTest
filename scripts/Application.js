@@ -2,7 +2,7 @@
  * Created by zhongxiaoming on 2015/11/5.
  * Class Application
  */
-Application = {}
+Application = {};
 //服务地址
 Application.serverHost = 'http://192.168.191.6/uapws/service/nc.itf.pims.web.CheckProperty';
 //地图初始化中心
