@@ -164,11 +164,11 @@ function handleFormatter(v,row) {
   return [
     '<div class="name">',
     '<a title="' + row.position + '" href="https://github.com/'+ '" target="_blank">',
-     '查看附件',
+     '查看附件 ',
     '</a>',
     '<span style="height:10px; width:1px; border-left:1px #16a085 solid"></span>',
     '<a title="' + row.position + '" href="https://github.com/'+ '" target="_blank">',
-    '查看详情',
+    '&nbsp查看详情',
     '</a>',
     '</div>'
   ].join('');
