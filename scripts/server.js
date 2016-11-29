@@ -26,8 +26,7 @@ function onRequest(request, response) {
             + '<soapenv:Body>'
             + '<' + params['ajaxoptions[xmlnsName]'] + ':' + params['ajaxoptions[methodName]'] + ' >';
 
-        // soapMessage = soapMessage + "<"+params['ajaxoptions[xmlnsName]'] + ':'+"string>" + data + "</"+params['ajaxoptions[xmlnsName]'] + ':'+"string>";
-        soapMessage = soapMessage + "<string>" + data + "</string>";
+        soapMessage = soapMessage + "<"+params['ajaxoptions[xmlnsName]'] + ':'+"string>" + data + "</"+params['ajaxoptions[xmlnsName]'] + ':'+"string>";
         soapMessage = soapMessage + '</' + params['ajaxoptions[xmlnsName]'] + ':' + params['ajaxoptions[methodName]'] + '>' + '</soapenv:Body>' + '</soapenv:Envelope>';
     
         console.log('soapMessage:'+soapMessage)
@@ -35,7 +34,7 @@ function onRequest(request, response) {
 
         var options = {
             hostname: params.url,
-            // port:params.port,
+            port:params.port,
             path: params.path,
             method: 'POST',
             headers: {

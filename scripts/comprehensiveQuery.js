@@ -110,8 +110,8 @@ $(function () {
     data: agencyTreeData});
 
   $.post("http://127.0.0.1:8088/" + new Date().getTime(), {
-    url: '192.168.6.4',
-    // port: 8080,
+    url: '118.26.130.12',
+    port: 8080,
     path: '/uapws/service/nc.itf.pims.web.ZongHeXinXi',
     data: JSON.stringify(testParam),
     ajaxoptions: {
