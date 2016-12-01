@@ -23,7 +23,7 @@ function onRequest(request, response) {
             + '<' + params['ajaxoptions[xmlnsName]'] + ':' + params['ajaxoptions[methodName]'] + ' >';
         soapMessage = soapMessage + "<"+params['ajaxoptions[xmlnsName]'] + ':'+"string>" + data + "</"+params['ajaxoptions[xmlnsName]'] + ':'+"string>";
         soapMessage = soapMessage + '</' + params['ajaxoptions[xmlnsName]'] + ':' + params['ajaxoptions[methodName]'] + '>' + '</soapenv:Body>' + '</soapenv:Envelope>';
-        console.log('soapMessage参数:'+soapMessage)
+        console.log('soapMessage参数:' + soapMessage);
         var options = {
             hostname: params.url,
             port:params.port,
