@@ -1,0 +1,143 @@
+/*
+ * Developer: Alireza Eskandarpour Shoferi
+ * Designer: Nevide (codecanyon.net/user/Nevide)
+ *
+ * Distributed under the terms of the MIT license
+ * http://opensource.org/licenses/MIT
+ */
+
+ul.fields{
+  list-style-type: none;
+  margin-top: 15px;
+  border: 1px solid #e8e8e8;
+  margin-left: 0px;
+  padding: 5px 20px;
+}
+
+ul.fields>li>label:first-child{
+  display: inline-block;
+  width: 100px;
+  font-size: 0.875em;
+  text-align: left;
+  font-weight: 600;
+  color:#646464;
+}
+
+ul.fields>li>label:nth-child(2){
+  display: inline-block;
+  width: 240px;
+  font-size: 0.875em;
+  text-align: left;
+  font-weight: 600;
+  color:#646464;
+}
+
+.wrapper  ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+.wrapper a {
+  color: #646464;
+  text-decoration: none;
+}
+.wrapper {
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 4px 10px #7A9BAC;
+  font-size: 0.875em;
+}
+.items {
+  padding: 18px 0;
+  border: 1px solid #e8e8e8;
+}
+
+.items > li:not(:last-child){
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.items > li > a {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  text-indent: 18px;
+  line-height: 39px;
+}
+.items > li > a > i{
+  float: right;
+  margin-right: 5px;
+  margin-top: 12px;
+}
+
+.itemHover {
+  color: #fff;
+  font-weight: 600;
+  -webkit-transition: background-color 0.4s ease-in-out;
+  transition: background-color 0.4s ease-in-out;
+}
+.items > li > a:hover {
+  background-color: #8ee8f1;
+  color: #fff;
+  font-weight: 600;
+  -webkit-transition: background-color 0.4s ease-in-out;
+  transition: background-color 0.4s ease-in-out;
+}
+.items > li > a.expanded {
+  background-color: #64d7e2;
+  color: #fff;
+  font-weight: 600;
+  -webkit-transition: background-color 0.4s ease-in-out;
+  transition: background-color 0.4s ease-in-out;
+}
+.sub-items > li:first-child > a {
+  margin-top: 17px;
+  height: 34px;
+}
+.sub-items > li:last-child > a {
+  margin-bottom: 17px;
+  height: 34px;
+}
+.sub-items a {
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  width: 95%;
+  text-indent: 24px;
+  line-height: 39px;
+}
+.sub-items a {
+  border-left: 2px solid #64d7e2;
+}
+.sub-items>li{
+  padding:5px 15px;
+}
+
+#info .items>li .sub-items>li>div {
+  border-left: 2px solid #64d7e2;
+}
+
+#houseInfo .items>li:not(:first-child) .sub-items>li>div {
+  border-left: 2px solid #64d7e2;
+}
+
+.sub-items>li>div>div{
+  padding: 3px 0px;
+}
+
+.sub-items>li>div>div:not(:first-child)>span {
+  color:#999999;
+}
+
+.sub-items .current {
+  position: relative;
+  color: #64d7e2;
+  border-color: white;
+}
+.sub-items > li:hover > a {
+  color: #64d7e2;
+  -webkit-transition: color 0.4s ease-in-out;
+  transition: color 0.4s ease-in-out;
+}
+.sub-items {
+  display: none;
+}

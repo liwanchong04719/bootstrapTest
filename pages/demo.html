@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" type="text/css"
+          href="../lib/Flat-UI-master/dist/css/vendor/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../lib/Flat-UI-master/dist/css/flat-ui.css"/>
+    <link rel="stylesheet" href="../lib/bootstrap-paginator/css/qunit-1.11.0.css">
+    <link rel="stylesheet" href="../lib/bootstrap-paginator/css/bootstrapv3.css">
+    <link rel="stylesheet" href="../lib/accordion-multi-menu/css/style.css">
+
+
+    <link rel="stylesheet" type="text/css" href="../css/map.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/tabstyle.css"/>
+    <style type="text/css">
+        body, html {width: 100%;height: 100%;margin:0;font-family:"微软雅黑";}
+        #allmap{width:100%;height:500px;}
+        p{margin-left:5px; font-size:14px;}
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=AXQ7RGL4oSjsANXUG8OQofPywGmb04QV"></script>
+    <title>添加复杂内容的信息窗口</title>
+</head>
+<body onload="initMap()">
+<div id="allmap"></div>
+<p>点击标注点，可查看由文本，图片构成的复杂型信息窗口</p>
+
+<div id="info" style="height: 300px;width: 400px;overflow: auto;display: none;">
+    <h6 style="text-align: center;padding-bottom:3px;margin-top: 5px;margin-bottom: 10px;border-bottom: 1px solid #e8e8e8">地产信息</h6>
+    <img  style="width: 100%;height: 200px" src="http://images0.cnblogs.com/blog2015/738809/201508/021428493299472.png" />
+    <ul class="fields" style="">
+        <li><label>土地证书编号：</label><label>---</label></li>
+        <li><label>使用权人：</label><label>---</label></li>
+        <li><label>座落：</label><label>---</label></li>
+        <li><label>地类：</label><label>---</label></li>
+        <li><label>使用面积：</label><label>---</label></li>
+        <li><label>终止日期：</label><label>---</label></li>
+    </ul>
+    <div class='wrapper'>
+        <ul class='items'>
+            <li>
+                <a href='#'>对方房产信息<i class="glyphicon glyphicon-chevron-right"></i></a>
+                <ul class='sub-items'>
+                    <li>
+                        <div style="width: 100%;padding: 10px 20px">
+                            <div><span>北京城建大厦</span></div>
+                            <div><span>业主单位:北京城建大厦</span></div>
+                            <div><span>建筑面积：23444平方米</span></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div style="width: 100%;padding: 10px 20px">
+                            <div><span>北京城建大厦</span></div>
+                            <div><span>业主单位:北京城建大厦</span></div>
+                            <div><span>建筑面积：23444平方米</span></div>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div id="houseInfo" style="height: 300px;width: 400px;overflow: auto;display: none;">
+    <h6 style="text-align: center;padding-bottom:3px;margin-top: 5px;margin-bottom: 10px;border-bottom: 1px solid #e8e8e8">房产信息</h6>
+    <img  style="width: 100%;height: 200px" src="http://images0.cnblogs.com/blog2015/738809/201508/021428493299472.png" />
+    <ul class="fields" style="">
+        <li><label>业主：</label><label>---</label></li>
+        <li><label>建筑面积：</label><label>---</label></li>
+        <li><label>业态：</label><label>---</label></li>
+        <li><label>座落：</label><label>---</label></li>
+        <li><label>出租率：</label><label>---</label></li>
+        <li><label>现平均单价：</label><label>---</label></li>
+    </ul>
+    <div class='wrapper'>
+        <ul class='items'>
+            <li>
+                <a href='#'>出租率及平均单价趋势 <i class="glyphicon glyphicon-chevron-right"></i></a>
+                <ul class='sub-items'>
+                    <li>
+                        <div id="barChart" style="height: 250px;width: 350px">
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href='#'>对方地产信息<i class="glyphicon glyphicon-chevron-right"></i></a>
+                <ul class='sub-items'>
+                    <li>
+                        <ul class="fields" style="padding-left: 0px;border: none">
+                            <li><label>土地证书编号：</label><label>---</label></li>
+                            <li><label>使用权人：</label><label>---</label></li>
+                            <li><label>座落：</label><label>---</label></li>
+                            <li><label>地类：</label><label>---</label></li>
+                            <li><label>使用面积：</label><label>---</label></li>
+                            <li><label>终止日期：</label><label>---</label></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+</div>
+</body>
+<script src="../lib/Flat-UI-master/dist/js/vendor/jquery.min.js"></script>
+<script src="../lib/select2-master/dist/js/select2.full.min.js"></script>
+<script src="../lib/echarts/echarts.js"></script>
+</html>
+<script type="text/javascript">
+    function initMap() {
+        var infoDiv = document.getElementById('houseInfo');
+        var map = new BMap.Map("allmap");
+        var point = new BMap.Point(116.404, 39.915);
+        var marker = new BMap.Marker(point);
+        var infoWindow = new BMap.InfoWindow(infoDiv);  // 创建信息窗口对象
+        // 百度地图API功能
+        map.centerAndZoom(point, 15);
+        map.addOverlay(marker);
+        marker.addEventListener("click", function(){
+            infoDiv.style.display = 'block';
+            initBarChart("barChart");
+            initAccordion();
+            this.openInfoWindow(infoWindow);
+            //图片加载完毕重绘infowindow
+            document.getElementById('imgDemo').onload = function (){
+                infoWindow.redraw();   //防止在网速较慢，图片未加载时，生成的信息框高度比图片的总高度小，导致图片部分被隐藏
+            }
+        });
+    }
+
+    function initAccordion(){
+        $(".items > li > a").click(function(e) {
+            e.preventDefault();
+            var $this = $(this);
+            if ($this.hasClass("expanded")) {
+                $this.removeClass("expanded");
+                $this.find('i').addClass("glyphicon-chevron-right").removeClass("glyphicon-chevron-down");
+            } else {
+                $(".items a.expanded>i").addClass("glyphicon-chevron-right").removeClass("glyphicon-chevron-down");
+                $(".items a.expanded").removeClass("expanded");
+                $this.addClass("expanded");
+                $this.find("i").addClass("glyphicon-chevron-down").removeClass("glyphicon-chevron-right");
+                $(".sub-items").filter(":visible").slideUp("normal");
+            }
+            $this.parent().children("ul").stop(true, true).slideToggle("normal");
+        });
+
+        $(".sub-items a").click(function() {
+            $(".sub-items a").removeClass("current");
+            $(this).addClass("current");
+        });
+    }
+
+    function initBarChart(id) {
+        var dom = document.getElementById(id);
+        var myChart = echarts.init(dom);
+        var app = {};
+        option = {
+            backgroundColor: '#fff',
+            tooltip: {
+                trigger: 'axis'
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    mark: { show: false },
+                    dataView: { show: false, readOnly: false },
+                    magicType: { show: false, type: ['line', 'bar'] },
+                    restore: { show: false },
+                    saveAsImage: { show: true }
+                }
+            },
+            calculable: true,
+            legend: {
+                orient : 'horizontal',
+                x : 'center',
+                y:'bottom',
+                data:['出租率','单价']
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: ['北京城建集团投资有限公司', '城建置业', '3公司', '4公司', '5公司', '6公司', '7公司', '8公司', '9公司', '10公司', '11公司', '12公司']
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    name: '100%',
+                    axisLabel: {
+                        formatter: '{value}'
+                    }
+                },
+                {
+                    type: 'value',
+                    name: '单价',
+                    axisLabel: {
+                        formatter: '{value}元'
+                    }
+                }
+            ],
+            series : [
+                {
+                    name:'出租率',
+                    type:'bar',
+                    itemStyle:{
+                        normal:{color:'#0099FF'}
+                    },
+                    data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 90, 100, 32.6, 20.0, 6.4, 3.3]
+                },
+                {
+                    name: '单价',
+                    type: 'line',
+                    yAxisIndex: 1,
+                    itemStyle:{
+                        normal:{color:'#C06410'}
+                    },
+                    data:[2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
+                }
+            ]
+        };
+
+        if (option && typeof option === "object") {
+            myChart.setOption(option, true);
+        }
+    }
+</script>
