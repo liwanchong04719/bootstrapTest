@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css"
           href="../lib/Flat-UI-master/dist/css/vendor/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="../lib/Flat-UI-master/dist/css/flat-ui.css"/>
+    <link rel="stylesheet" type="text/css" href="../lib/bootstrap-treeview-master/dist/bootstrap-treeview.css" />
     <link rel="stylesheet" href="../lib/bootstrap-paginator/css/qunit-1.11.0.css">
     <link rel="stylesheet" href="../lib/bootstrap-paginator/css/bootstrapv3.css">
 
@@ -423,16 +424,36 @@
                                  style="padding-right: 0px;padding-left:0px">
                                 <!-- flight section -->
                                 <div class="bhoechie-tab-content active" style="height: 100%;background-color: #fff">
+                                    <ul id="myTab" class="nav nav-tabs" style="border-bottom: none;">
+                                        <li class="active" >
+                                            <a  href="#companyDiv"   data-toggle="tab">
+                                                公司
+                                            </a>
+                                        </li>
+                                        <li  ><a href="#zoneDiv"  data-toggle="tab">区域</a></li>
+                                        <li><a href="#retailDiv" data-toggle="tab">业态</a></li>
+                                    </ul>
+                                    <div id="myTabContent" class="tab-content" style="height: 100%">
+                                        <div class="tab-pane fade in active" id="companyDiv" style="height: 100%">
+                                           <div id="treeOfCompany"></div>
+                                        </div>
+                                        <div class="tab-pane fade" id="zoneDiv" style="height: 100%">
+                                            <div id="treeOfZone"></div>
+                                        </div>
+                                        <div class="tab-pane fade" id="retailDiv" style="height: 100%">
+                                            <div id="treeOfRetail"></div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!-- train section -->
                                 <div class="bhoechie-tab-content"  style="height: 100%;background-color: #fff">
                                     <div id="housecontentlist"
                                          style="height:100%;overflow:auto;border-bottom: 1px solid rgb(228, 228, 228);text-align: left">
-                                        <ol class="r-content"></ol>
+                                        <ol class="r-content" id="houseDataDiv"></ol>
 
-                                        <div>
-                                            <ul id='bp-3-element-test'></ul>
-                                        </div>
+                                        <!--<div>-->
+                                            <!--<ul id='bp-3-element-test'></ul>-->
+                                        <!--</div>-->
 
                                         <!--<div style="padding-left: 5px;padding-top: 2px;padding-bottom: 2px;;margin-bottom: 0px;margin-top: 1px;display: inline-block"
                                             id="pagination_house" class="pagination"></div>
@@ -442,12 +463,26 @@
 
                                     <!-- hotel search -->
                                     <div class="bhoechie-tab-content"  style="height: 100%;background-color: #fff">
+
                                     </div>
                                     <div class="bhoechie-tab-content" style="height: 100%;background-color: #fff">
                                     </div>
                                 </div>
 
                                 <div class="bhoechie-tab-content active" style="height: 100%;background-color: #fff">
+                                    <div id="lanecontentlist"
+                                         style="height:100%;overflow:auto;border-bottom: 1px solid rgb(228, 228, 228);text-align: left">
+                                        <ol class="r-content" id="laneDataDiv"></ol>
+
+                                        <!--<div>-->
+                                        <!--<ul id='bp-3-element-test'></ul>-->
+                                        <!--</div>-->
+
+                                        <!--<div style="padding-left: 5px;padding-top: 2px;padding-bottom: 2px;;margin-bottom: 0px;margin-top: 1px;display: inline-block"
+                                            id="pagination_house" class="pagination"></div>
+                                        </div>-->
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -470,6 +505,7 @@
 <script src="../lib/bootstrap-paginator/lib/bootstrapv3.js" type="text/javascript"></script>
 <script src="../lib/bootstrap-paginator/src/bootstrap-paginator.js"></script>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=AXQ7RGL4oSjsANXUG8OQofPywGmb04QV"></script>
+<script src="../lib/bootstrap-treeview-master/dist/bootstrap-treeview.js"></script>
 <script src="../scripts/Application.js"></script>
 <script src="../scripts/Application.Util.js"></script>
 <script type="text/javascript" src="../lib/testdata/CommunityData.js"></script>

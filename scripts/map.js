@@ -7,6 +7,15 @@ $(document).ready(function () {
         $(this).siblings('a.active').removeClass("active");
         $(this).addClass("active");
         var index = $(this).index();
+			  if(index === 1) {
+					houseDataParam.yetai = queryRetailData.toString();
+					houseDataParam.gongsi = queryCompanyData.toString();
+					houseDataParam.location = queryZoneData.toString();
+					setHouseData(Application.map);
+				} else if (index === 2) {
+					setLaneData(Application.map);
+				}
+
         $("div.bhoechie-tab>div.bhoechie-tab-content").removeClass("active");
         $("div.bhoechie-tab>div.bhoechie-tab-content").eq(index).addClass("active");
     });
@@ -29,7 +38,10 @@ $(document).ready(function () {
 
 
 	})
-
+  //初始化树
+	initTreeOfCompany();
+	initTreeOfZone();
+	initTreeOfRetail();
 	//初始化左侧列表
 	var directdata = ddata.data;
 	//initHoouseList();
@@ -44,113 +56,9 @@ $(document).ready(function () {
 	$('#zoom').text(map.getZoom())
 	map.addEventListener('tilesloaded', function () {
 		$('#zoom').text(map.getZoom());
+		setHouseData(map);
 
-		if (map.getZoom() == Application.province + 1 || map.getZoom() == Application.direct) {
-			map.clearOverlays();
-			for (var i in ddata.data) {
-				var customMarker = createMarker({
-					point: new BMap.Point(ddata.data[i].longitude, ddata.data[i].latitude),
-					html: "<div class='bubble'><p class='name'>" + ddata.data[i].name + "</p><p class='number'>" + ddata.data[i].house_count + "</p></div>",
-					style: {
-						color: 'white',
-						fontSize: "12px",
-						height: "20px",
-						lineHeight: "20px",
-						fontFamily: "微软雅黑",
-						border: 'none'
-					}
-				})
-				map.addOverlay(customMarker);
-			}
-			createLeftContainer(directdata);
-			initPagination();
-		}
-		else if (map.getZoom() == Application.direct + 1) {
-			map.clearOverlays();
-			for (var j in cdata) {
-				var customMarker = createMarker({
-					point: new BMap.Point(cdata[j].longitude, cdata[j].latitude),
-					html: '<p class="bubble-3 bubble" ><i class="num">&nbsp;程庄南里&nbsp;</i><span class="name"><i class="name-des"><a href="/xiaoqu/1111027376714/" target="_blank">3.9万&nbsp;&nbsp;2套</a></i></span><i class="arrow-up"><i class="arrow"></i><i></i></i></p>',
-					style: {
-						color: 'white',
-						fontSize: "12px",
-						height: "20px",
-						lineHeight: "20px",
-						fontFamily: "微软雅黑",
-						border: 'none'
-					}
-				})
-				map.addOverlay(customMarker);
-			}
-
-			createLeftContainer(housedata);
-			initPagination();
-		}
 	});
-
-	//前端分页
-	function initPagination() {
-
-
-		var element = $('#bp-3-element-test');
-
-		var options = {
-			bootstrapMajorVersion: 3,
-			currentPage: 1,
-			numberOfPages: 5,
-			totalPages: 2,
-			itemTexts: function (type, page, current) {
-				switch (type) {
-					case "first":
-						return "首页";
-					case "prev":
-						return "上一页";
-					case "next":
-						return "下一页";
-					case "last":
-						return "末页";
-					case "page":
-						return page;
-				}
-			},
-			onPageClicked: function (e, originalEvent, type, page) {
-                //$('#alert-content').text("Page item clicked, type: "+type+" page: "+page);
-
-				if (map.getZoom() >= Application.province + 1 && map.getZoom() < Application.direct) {
-					pageselectCallback(page - 1, directdata, initDirectItem);
-				}
-				else if (map.getZoom() >= Application.direct + 1) {
-					pageselectCallback(page - 1, housedata, initLiItem);
-				}
-
-            }
-		}
-
-		element.bootstrapPaginator(options);
-
-		var element = $('#bp-3-element-test');
-
-
-		var list = element.children();
-
-		for (var i = 0; i < list.length; i++) {
-			var item = $(list[i]);
-
-		}
-
-
-
-	};
-
-	Application.Util.ajaxConstruct(Application.serverHost, 'POST', {
-		userid: '1001ZZ10000000018FJF'
-	}, 'XML', function () {
-		console.log('请求成功！！！')
-	}, function (params) {
-		console.log('请求失败')
-	}, { 'xmlns': 'xmlns:chec="http://web.pims.itf.nc/CheckProperty"', 'xmlnsName': 'chec', 'methodName': 'xianyouzichan' })
-
-
 })
 
 //初始化地图， 百度地图API功能
@@ -170,14 +78,20 @@ function initmap() {
 function createMarker(options) {
 	var opts = {
 		position: options.point   // 指定文本标注所在的地理位置
-	}
-
+	};
 	var label = new BMap.Label("", opts);
 	label.setContent(options.html);
-	label.setStyle(options.style);
+	label.setStyle( {
+		color: 'white',
+		fontSize: "12px",
+		height: "20px",
+		lineHeight: "20px",
+		fontFamily: "微软雅黑",
+		border: 'none'
+	});
 	label.addEventListener('mouseover', function (event) {
 		event.target.setZIndex(1000)
-	})
+	});
 	return label;
 }
 
@@ -190,32 +104,31 @@ function pageselectCallback(page_index, data, createfunc, jq) {
 	for (var i = 0, len = contentList.length; i < len; i++) {
 		list = list.concat(createfunc(contentList[i]));
 	}
-	$(".r-content").empty().append(list.join(''));
+	$("#houseDataDiv").empty().append(list.join(''));
 	return false;
 }
 
 /***
- * 生成大于11级的侧边栏
+ * 生成大于11级的侧边栏房产
  */
-function initLiItem(data) {
+function initLiItemOfHose(data) {
 
 	var htmlArr = [];
 
 	htmlArr.push('<li class="list-item">');
 	htmlArr.push('<a href="#" target="_blank">');
 	htmlArr.push('<div class="item-aside">');
-	htmlArr.push('<img alt="示例图片" src="' + data.list_picture_url + '">');
+	htmlArr.push('<img alt="示例图片" src="' + data.img + '">');
 	htmlArr.push('</div>');
 	htmlArr.push('<div class="item-main">');
-	htmlArr.push('<p class="item-tle">' + data.community_name + '</p>');
+	htmlArr.push('<p class="item-tle">' + data.xmmc + '</p>');
 	htmlArr.push('<p class="item-des">');
-	htmlArr.push('<span>' + data.frame_bedroom_num + '室' + data.frame_hall_num + '厅' + '</span>');
-	htmlArr.push('<span data-origin="' + data.house_area + '">' + data.house_area + '平米' + '</span>');
-	htmlArr.push('<span>' + data.frame_orientation + '</span>');
-	htmlArr.push('<span class="item-side">' + data.price_total + '<span>万元' + '</span></span>');
+	htmlArr.push('<span>' + data.jzmj + '平米' + '</span>');
+	htmlArr.push('<p class="item-community">');
+	htmlArr.push('<span class="item-replace-com" data-origin="">' + data.fwzl + '</span>');
 	htmlArr.push('</p>');
 	htmlArr.push('<p class="item-community">');
-	htmlArr.push('<span class="item-replace-com" data-origin="">' + data.community_name + '</span>');
+	htmlArr.push('<span class="item-replace-com" data-origin="">' + data.fwsyqr + '</span>');
 	htmlArr.push('</p>');
 
 	htmlArr.push('</div>');
@@ -225,41 +138,192 @@ function initLiItem(data) {
 	return htmlArr;
 
 }
-
-/**
- * 生成小于11级时地图左侧栏展示内容
+/***
+ * 生成大于11级的侧边栏地产
  */
-function createLeftContainer(data) {
+function initLiItemOfLane(data) {
+
+	var htmlArr = [];
+
+	htmlArr.push('<li class="list-item">');
+	htmlArr.push('<a href="#" target="_blank">');
+	htmlArr.push('<div class="item-aside">');
+	htmlArr.push('<img alt="示例图片" src="' + data.img + '">');
+	htmlArr.push('</div>');
+	htmlArr.push('<div class="item-main">');
+	htmlArr.push('<p class="item-tle">' + data.xmmc + '</p>');
+	htmlArr.push('<p class="item-des">');
+	htmlArr.push('<span>' + data.jzmj + '平米' + '</span>');
+	htmlArr.push('<p class="item-community">');
+	htmlArr.push('<span class="item-replace-com" data-origin="">' + data.fwzl + '</span>');
+	htmlArr.push('</p>');
+	htmlArr.push('<p class="item-community">');
+	htmlArr.push('<span class="item-replace-com" data-origin="">' + data.fwsyqr + '</span>');
+	htmlArr.push('</p>');
+
+	htmlArr.push('</div>');
+	htmlArr.push('</a>');
+	htmlArr.push('</li>');
+
+	return htmlArr;
+
+}
+/**
+ * 获取房产数据
+ */
+function setHouseData(map) {
+	if (map.getZoom() == Application.province + 1 || map.getZoom() == Application.direct) {
+		map.clearOverlays();
+		getHouseOrLaneData(
+			houseDataParam,
+			'getFcTongJiXinxi_map',
+			function (data) {
+				for (var i in data) {
+					var customMarker = createMarker({
+						point: new BMap.Point(data[i].lng, data[i].lat),
+						html: "<div class='bubble'><p class='name'>" + data[i].city + "</p><p class='number'>" + data[i].fccount + "</p></div>"
+					})
+					map.addOverlay(customMarker);
+					createHouseContainer(data);
+					// initPagination();
+				}
+
+			}
+		)
+
+	}
+	else if (map.getZoom() == Application.direct + 1) {
+		map.clearOverlays();
+		getHouseOrLaneData(
+			houseDataSmallParam,
+			'getFcXinxi_map',
+			function (data) {
+				for (var j in data) {
+					var customMarker = createMarker({
+						point: new BMap.Point(data[j].longitude, data[j].latitude),
+						html: '<p class="bubble-3 bubble" ><i class="num">&nbsp;程庄南里&nbsp;</i><span class="name"><i class="name-des"><a href="/xiaoqu/1111027376714/" target="_blank">3.9万&nbsp;&nbsp;2套</a></i></span><i class="arrow-up"><i class="arrow"></i><i></i></i></p>'
+					})
+					map.addOverlay(customMarker);
+				}
+
+				createHouseContainer(data);
+			}
+		);
+
+	}
+}/**
+ * 获取地产数据
+ */
+function setLaneData(map) {
+	if (map.getZoom() == Application.province + 1 || map.getZoom() == Application.direct) {
+		map.clearOverlays();
+		getHouseOrLaneData(
+			houseDataParam,
+			'getDcTongJiXinxi_map',
+			function (data) {
+				for (var i in data) {
+					var customMarker = createMarker({
+						point: new BMap.Point(data[i].lng, data[i].lat),
+						html: "<div class='bubble'><p class='name'>" + data[i].city + "</p><p class='number'>" + data[i].dccount + "</p></div>"
+					})
+					map.addOverlay(customMarker);
+					createLaneContainer(data);
+					// initPagination();
+				}
+
+			}
+		)
+
+	}
+	else if (map.getZoom() == Application.direct + 1) {
+		map.clearOverlays();
+		getHouseOrLaneData(
+			houseDataSmallParam,
+			'getDcXinxi_map',
+			function (data) {
+				for (var j in data) {
+					var customMarker = createMarker({
+						point: new BMap.Point(data[j].longitude, data[j].latitude),
+						html: '<p class="bubble-3 bubble" ><i class="num">&nbsp;程庄南里&nbsp;</i><span class="name"><i class="name-des"><a href="/xiaoqu/1111027376714/" target="_blank">3.9万&nbsp;&nbsp;2套</a></i></span><i class="arrow-up"><i class="arrow"></i><i></i></i></p>'
+					})
+					map.addOverlay(customMarker);
+				}
+
+				createLaneContainer(data);
+			}
+		);
+
+	}
+}
+/**
+ * 生成小于11级时地图左侧栏展示内容房产
+ */
+function createHouseContainer(data) {
 	var list = []
 
 	for (var i = 0, len = data.length; i < len; i++) {
 
 		if (Application.map.getZoom() >= Application.province + 1 && Application.map.getZoom() < Application.direct) {
-			list = list.concat(initDirectItem(data[i]));
+			list = list.concat(initDirectOfHouse(data[i]));
 		}
 		else if (Application.map.getZoom() >= Application.direct + 1) {
-			//pageselectCallback(page-1, housedata, initLiItem);
-			list = list.concat(initLiItem(data[i]));
+			list = list.concat(initLiItemOfHose(data[i]));
 		}
-		//list = list.concat(initDirectItem(data[i]));
 	}
 
-	$(".r-content").empty().append(list.join(''));
+	$("#houseDataDiv").empty().append(list.join(''));
+}/**
+ * 生成小于11级时地图左侧栏展示内容地产
+ */
+function createLaneContainer(data) {
+	var list = []
+
+	for (var i = 0, len = data.length; i < len; i++) {
+
+		if (Application.map.getZoom() >= Application.province + 1 && Application.map.getZoom() < Application.direct) {
+			list = list.concat(initDirectOfLane(data[i]));
+		}
+		else if (Application.map.getZoom() >= Application.direct + 1) {
+			list = list.concat(initLiItemOfLane(data[i]));
+		}
+	}
+
+	$("#laneDataDiv").empty().append(list.join(''));
 }
 
 /**
- * 生成小于11级时地图左侧栏展示项
+ * 生成小于11级时地图左侧栏展示项房产
  */
-function initDirectItem(data) {
+function initDirectOfHouse(data) {
 	var htmlArr = [];
 
 	htmlArr.push('<li class="list-item">');
 	htmlArr.push('<a href="javascript:void(0);" onclick="showSecondDirect()">');
 
 	htmlArr.push('<p class="item-des">');
-	htmlArr.push('<span>' + data.name + '</span>');
+	htmlArr.push('<span>' + data.city + '</span>');
 
-	htmlArr.push('<span class="item-side">' + data.house_count + '<span>套' + '</span></span>');
+	htmlArr.push('<span class="item-side">' + data.fccount + '<span>套' + '</span></span>');
+	htmlArr.push('</p>');
+	htmlArr.push('</a>');
+	htmlArr.push('</li>');
+
+	return htmlArr;
+
+}
+/**
+ * 生成小于11级时地图左侧栏展示项地产
+ */
+function initDirectOfLane(data) {
+	var htmlArr = [];
+
+	htmlArr.push('<li class="list-item">');
+	htmlArr.push('<a href="javascript:void(0);" onclick="showSecondDirect()">');
+
+	htmlArr.push('<p class="item-des">');
+	htmlArr.push('<span>' + data.city + '</span>');
+
+	htmlArr.push('<span class="item-side">' + data.dccount + '<span>套' + '</span></span>');
 	htmlArr.push('</p>');
 	htmlArr.push('</a>');
 	htmlArr.push('</li>');
@@ -268,7 +332,169 @@ function initDirectItem(data) {
 
 }
 
+
 function showSecondDirect() {
 	Application.map.setZoom(16);
 
+}
+
+function initTreeOfZone() {
+	$.post("http://127.0.0.1:8088/" + new Date().getTime(),
+		setParam(
+			'/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
+			{'userid':Application.userid},
+			'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+			'getHierarchyOrg'
+		), function (data) {
+			var startindex = data.indexOf('<ns1:return>');
+			var endindex = data.indexOf('</ns1:return>');
+			data = data.substring(startindex+12,endindex)
+			var treeData = JSON.parse(data);
+			$('#treeOfZone').treeview({ expandIcon: "glyphicon glyphicon-stop",
+				levels: 1,
+				color:'#2a6496',
+				showCheckbox: true,
+				showBorder: false,
+				backColor: "#f6f7fa",
+				onNodeChecked:addZoneQueryData,
+				onNodeUnchecked: minusZoneQueryData,
+				data: treeData});
+		});
+}
+function initTreeOfCompany() {
+	$.post("http://127.0.0.1:8088/" + new Date().getTime(),
+		setParam(
+			'/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
+			{'userid':Application.userid},
+			'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+			'getLocationByCurrentUser'
+		), function (data) {
+			var startindex = data.indexOf('<ns1:return>');
+			var endindex = data.indexOf('</ns1:return>');
+			data = data.substring(startindex+12,endindex)
+			var treeData = JSON.parse(data);
+			$('#treeOfCompany').treeview({ expandIcon: "glyphicon glyphicon-stop",
+				levels: 1,
+				color:'#2a6496',
+				showCheckbox: true,
+				showBorder: false,
+				backColor: "#f6f7fa",
+				onNodeChecked:addCompanyQueryData,
+				onNodeUnchecked: minusCompanyQueryData,
+				data: changeZoneData(treeData)});
+		});
+}
+function initTreeOfRetail() {
+	$.post("http://127.0.0.1:8088/" + new Date().getTime(),
+		setParam(
+			'/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
+			{'userid':Application.userid},
+			'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+			'getYeTaiByCurrentUser'
+		), function (data) {
+			var startindex = data.indexOf('<ns1:return>');
+			var endindex = data.indexOf('</ns1:return>');
+			data = data.substring(startindex+12,endindex)
+			var treeData = JSON.parse(data);
+			$('#treeOfRetail').treeview({ expandIcon: "glyphicon glyphicon-stop",
+				levels: 1,
+				color:'#2a6496',
+				showCheckbox: true,
+				showBorder: false,
+				backColor: "#f6f7fa",
+				onNodeChecked:addRetailQueryData,
+				onNodeUnchecked: minusRetailQueryData,
+				data: changeRetailData(treeData)});
+		});
+}
+
+function setParam(path, param, xmlns, methodName) {
+	return {
+		"url": '118.26.130.12',
+		"port": 8080,
+		"path": path,
+		"data": JSON.stringify(param),
+		ajaxoptions: {
+			"xmlns": xmlns,
+			"xmlnsName": 'jin',
+			"methodName": methodName
+		}
+	}
+}
+var queryZoneData = [];
+var queryCompanyData = [];
+var queryRetailData = [];
+function addZoneQueryData(event,node){
+	queryZoneData.push(node.id);
+}
+function minusZoneQueryData(event, node) {
+
+	queryZoneData = queryZoneData.filter(function (item) {
+		return item !== node.id;
+	});
+	return queryZoneData;
+}function addCompanyQueryData(event,node){
+	queryCompanyData.push(node.id);
+}
+function minusCompanyQueryData(event, node) {
+	queryCompanyData = queryCompanyData.filter(function (item) {
+		return item !== node.id;
+	});
+	return queryCompanyData;
+}function addRetailQueryData(event,node){
+	queryRetailData.push(node.id);
+}
+function minusRetailQueryData(event, node) {
+
+	queryRetailData = queryRetailData.filter(function (item) {
+		return item !== node.id;
+	});
+	return queryRetailData;
+}
+function changeZoneData(data) {
+	var zoneData = [];
+	for (var i = 0, len = data.length; i < len; i++) {
+		var obj = {};
+		obj.text = data[i].secondvalue;
+		obj.id = data[i].firstvalue;
+		zoneData.push(obj);
+	}
+	return zoneData;
+}
+function changeRetailData(data){
+	var retailData = [];
+	for (var i = 0, len = data.length; i < len; i++) {
+		var obj = {};
+		obj.text = data[i].secondvalue;
+		obj.id = data[i].firstvalue;
+		retailData.push(obj);
+	}
+	return retailData;
+}
+var houseDataParam = {
+	'location': '',
+	'yetai': '',
+	'userid': Application.userid,
+	'gongsi': '',
+	' locationType': ''
+};
+var houseDataSmallParam = {
+	'location': '',
+	'yetai': '',
+	'userid': Application.userid,
+	'gongsi': ''
+};
+function getHouseOrLaneData(param, type, callback) {
+	$.post("http://127.0.0.1:8088/" + new Date().getTime(),
+		setParam(
+			'/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
+			param,
+			'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+			type
+		), function(data){
+			var startindex = data.indexOf('<ns1:return>');
+			var endindex = data.indexOf('</ns1:return>');
+			data = data.substring(startindex+12,endindex)
+			callback(JSON.parse(data));
+		});
 }

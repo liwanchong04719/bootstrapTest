@@ -136,7 +136,7 @@ function initTreeOfZone() {
   $.post("http://127.0.0.1:8088/" + new Date().getTime(),
     setParam(
       '/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
-      {'userid':'1001ZZ10000000018FJF'},
+      {'userid':Application.userid},
       'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
       'getHierarchyOrg'
     ), function (data) {
@@ -159,7 +159,7 @@ function initTreeOfCompany() {
   $.post("http://127.0.0.1:8088/" + new Date().getTime(),
     setParam(
       '/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
-      {'userid':'1001ZZ10000000018FJF'},
+      {'userid':Application.userid},
       'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
       'getLocationByCurrentUser'
     ), function (data) {
@@ -182,7 +182,7 @@ function initTreeOfRetail() {
   $.post("http://127.0.0.1:8088/" + new Date().getTime(),
     setParam(
       '/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
-      {'userid':'1001ZZ10000000018FJF'},
+      {'userid':Application.userid},
       'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
       'getYeTaiByCurrentUser'
     ), function (data) {
