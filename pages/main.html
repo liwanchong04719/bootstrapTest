@@ -172,19 +172,12 @@
                 <div class="row" style="margin-left: 0px;margin-right: 0px;background-color: #fff;padding-top: 5px;text-align: center">
                     <form class="form-inline">
                         <label style="color: #1e3657;font-weight: 700">区域：</label>
-                        <select data-toggle="select" name="inverse-select" class="form-control"  style="width: 200px">
-                            <option value="0">朝阳区</option>
-                            <option value="1">西城区</option>
-                            <option value="2">东城区</option>
-                            <option value="3">海淀区</option>
-                            <option value="4">丰台区</option>
+                        <select id="managementsituationregionselect" data-toggle="select" name="inverse-select" class="form-control"  style="width: 200px">
+
                         </select>
-                        <label style="color: #1e3657;font-weight: 700">按业态：</label>
-                        <select data-toggle="select" name="inverse-select" class="form-control" style="width: 200px">
-                            <option value="0">自用</option>
-                            <option value="1">工业用房</option>
-                            <option value="2">商业用房</option>
-                            <option value="3">写字楼</option>
+                        <label   style="color: #1e3657;font-weight: 700">按业态：</label>
+                        <select id="managementsituationretailselect" data-toggle="select" name="inverse-select" class="form-control" style="width: 200px">
+                            
                         </select>
                     </form>
                 </div>
@@ -227,41 +220,30 @@
                 <div class="row" style="border-radius: 4px;background-color: #fff;margin-right: 0px;margin-left: 0px;padding-top: 5px">
                     <form class="form-inline" style="text-align: center">
                         <label style="color: #1e3657;font-weight: 700">按公司：</label>
-                        <select data-toggle="select" name="inverse-select" class="form-control">
-                            <option value="0">城建集团</option>
-                            <option value="1">城建集团1公司</option>
-                            <option value="2">城建集团2公司</option>
-                            <option value="3">城建集团3公司</option>
-                            <option value="4">城建集团4公司</option>
+                        <select id="statisticscompany" data-toggle="select" name="inverse-select" class="form-control">
+                  
                         </select>
                         <label style="color: #1e3657;font-weight: 700">对应房产：</label>
-                        <select data-toggle="select" name="inverse-select" class="form-control">
-                            <option value="0">城建大厦</option>
-                            <option value="1">城建大厦</option>
-                            <option value="2">城建大厦</option>
-                            <option value="3">城建大厦</option>
-                            <option value="4">城建大厦</option>
+                        <select id="statisticshouse" data-toggle="select" name="inverse-select" class="form-control">
+
                         </select>
                         <label style="color: #1e3657;font-weight: 700">按业态：</label>
-                        <select data-toggle="select" name="inverse-select" class="form-control">
-                            <option value="0">自用</option>
-                            <option value="1">商业用房</option>
-                            <option value="2">工业用房</option>
-                            <option value="3">写字楼</option>
+                        <select id="statisticsretail" data-toggle="select" name="inverse-select" class="form-control">
+       
                         </select>
                     </form>
                 </div>
                 <div class="row" style="margin-left: 0px;margin-right: 0px">
                     <div style="border-radius: 4px;background-color: #fff;padding: 20px 10px">
                         <div style="text-align: center">
-                            <label>本月应收：</label> <label>100000元</label>
-                            <label>本月实收：</label> <label>100000元</label>
-                            <label>完成比例：</label> <label>100000元</label>
+                            <label>本月应收：</label> <label><span id="thisMonthReceivable">1</span></label>
+                            <label>本月实收：</label> <label><span id="thisMonthReceived">1</span></label>
+                            <label>完成比例：</label> <label><span id="thisMonthRatio">1</span></label>
                         </div>
                         <div style="text-align: center">
-                            <label>上月应收：</label> <label>100000元</label>
-                            <label>上月实收：</label> <label>100000元</label>
-                            <label>完成比例：</label> <label>100000元</label>
+                            <label>上月应收：</label> <label><span id="lastMonthReceivable">1</span></label>
+                            <label>上月实收：</label> <label><span id="lastMonthReceived">1</span></label>
+                            <label>完成比例：</label> <label><span id="lastMonthRatio">1</span></label>
                         </div>
                     </div>
                 </div>
