@@ -4,8 +4,8 @@
 $(function () {
   $.fn.select2.defaults.set("theme", "bootstrap");
   //资产盘点
-  //getExistingAssets(Application.userid);
-  //getExistingChanges(Application.userid);
+  getExistingAssets(Application.userid);
+  getExistingChanges(Application.userid);
   //资产盘点环状图
   //公司、区域数据
   getOrgAndLocation(Application.userid);
@@ -255,37 +255,67 @@ function getExistingAssets(userid) {
     {
       "url": "118.26.130.12",
       "port": '8080',
-      "path": "/uapws/service/nc.itf.pims.web.CheckProperty",
+      "path": "/uapws/service/nc.itf.pims.web.JingYingZhuangKuang",
       "data": JSON.stringify({ userid: userid }),
       "ajaxoptions": {
-        "xmlns": 'xmlns:chec="http://web.pims.itf.nc/CheckProperty"',
-        "xmlnsName": "chec",
+        "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+        "xmlnsName": "jin",
         "methodName": "xianyouzichan"
       }
     },
     function (data) {
+       var startindex = data.indexOf('<ns1:return>');
+      var endindex = data.indexOf('</ns1:return>');
+      data = data.substring(startindex + 12, endindex)
       data = JSON.parse(data);
       $('.landcount').text(data.dcCount);
       $('.housecount').text(data.fcCount);
       $('.departmentcount').text(data.fyCount);
     })
 
+
+// Application.Util.ajaxConstruct(Application.serverHost,'POST',{ userid: userid },'text/xml;charset=UTF-8',function (data) {
+//        var startindex = data.indexOf('<ns1:return>');
+//       var endindex = data.indexOf('</ns1:return>');
+//       data = data.substring(startindex + 12, endindex)
+//       data = JSON.parse(data);
+//       $('.landcount').text(data.dcCount);
+//       $('.housecount').text(data.fcCount);
+//       $('.departmentcount').text(data.fyCount);
+//     },function name(params) {
+//       console.log('error')
+//     },
+//     {
+//         "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+//         "xmlnsName": "jin",
+//         "methodName": "xianyouzichan"
+//       }
+//     )
+
+
 }
+
+
+
+
 //固定资产改变情况
 function getExistingChanges(userid) {
   $.post("http://127.0.0.1:8088/" + new Date().getTime(),
     {
       "url": "118.26.130.12",
       "port": '8080',
-      "path": "/uapws/service/nc.itf.pims.web.CheckProperty",
+      "path": "/uapws/service/nc.itf.pims.web.JingYingZhuangKuang",
       "data": JSON.stringify({ userid: userid }),
       "ajaxoptions": {
-        "xmlns": 'xmlns:chec="http://web.pims.itf.nc/CheckProperty"',
-        "xmlnsName": "chec",
+        "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+        "xmlnsName": "jin",
         "methodName": "benyuexinzeng"
       }
     },
     function (data) {
+       var startindex = data.indexOf('<ns1:return>');
+      var endindex = data.indexOf('</ns1:return>');
+      data = data.substring(startindex + 12, endindex)
       data = JSON.parse(data);
       $('.landcountchange').text(data.dcCount + '块');
       $('.housecountchange').text(data.fcCount + '座');

@@ -39,15 +39,27 @@ Application.Util = Application.Util || {};
 
 */
 Application.Util.ajaxConstruct = function (url, type, data, dataType, successFuc, errorFuc,ajaxoptions) {
-    var soapMessage =
-        　　'<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"  '
-        + ajaxoptions.xmlns+'>'
-        + '<soapenv:Header/>'
-        + '<soapenv:Body>'
-        + '<' + ajaxoptions.xmlnsName + ':' + ajaxoptions.methodName + ' >';
+    // var soapMessage =
+    //     　　'<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"  '
+    //     + ajaxoptions.xmlns+'>'
+    //     + '<soapenv:Header/>'
+    //     + '<soapenv:Body>'
+    //     + '<' + ajaxoptions.xmlnsName + ':' + ajaxoptions.methodName + ' >';
 
-    soapMessage = soapMessage + "<string>" + JSON.stringify(data) + "</string>";
-    soapMessage = soapMessage + '</' + ajaxoptions.xmlnsName + ':' + ajaxoptions.methodName + '>' + '</soapenv:Body>' + '</soapenv:Envelope>';
+    // soapMessage = soapMessage + "<string>" + JSON.stringify(data) + "</string>";
+    // soapMessage = soapMessage + '</' + ajaxoptions.xmlnsName + ':' + ajaxoptions.methodName + '>' + '</soapenv:Body>' + '</soapenv:Envelope>';
+
+    var soapMessage =
+            '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" '
+            +ajaxoptions['xmlns'] + '>'
+            + '<soapenv:Header/>'
+            + '<soapenv:Body>'
+            + '<' + ajaxoptions['xmlnsName'] + ':' + ajaxoptions['methodName'] + ' >';
+        soapMessage = soapMessage + "<"+ajaxoptions['xmlnsName'] + ':'+"string>" + JSON.stringify(data) + "</"+ajaxoptions['xmlnsName'] + ':'+"string>";
+        soapMessage = soapMessage + '</' + ajaxoptions['xmlnsName'] + ':' + ajaxoptions['methodName'] + '>' + '</soapenv:Body>' + '</soapenv:Envelope>';
+        console.log('soapMessage参数:' + soapMessage);
+
+
     $.support.cors = true;
     /*
      *	get 方式将access_token加到url里面
