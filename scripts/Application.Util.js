@@ -47,7 +47,8 @@ Application.Util.ajaxConstruct = function (url, type, data, dataType, successFuc
     //     + '<' + ajaxoptions.xmlnsName + ':' + ajaxoptions.methodName + ' >';
 
     // soapMessage = soapMessage + "<string>" + JSON.stringify(data) + "</string>";
-    // soapMessage = soapMessage + '</' + ajaxoptions.xmlnsName + ':' + ajaxoptions.methodName + '>' + '</soapenv:Body>' + '</soapenv:Envelope>';
+    // soapMessage = soapMessage + '</' + ajaxoptions.xmlnsName + ':' + ajaxoptions.methodName + '>' +
+    // '</soapenv:Body>' + '</soapenv:Envelope>';
 
     var soapMessage =
             '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" '
@@ -69,6 +70,15 @@ Application.Util.ajaxConstruct = function (url, type, data, dataType, successFuc
     // if(userid == null || userid == undefined){
     //     userid =userid;
     // }
+
+
+  function callback(data) {
+    var startindex = data.indexOf('<ns1:return>');
+    var endindex = data.indexOf('</ns1:return>');
+    data = data.substring(startindex + 12, endindex)
+    data = JSON.parse(data);
+    successFuc (data)
+  }
    
     $.ajax({
         url: url,
@@ -76,7 +86,7 @@ Application.Util.ajaxConstruct = function (url, type, data, dataType, successFuc
         data: soapMessage,
         contentType: "text/xml;charset=UTF-8",//设置返回值类型xml
         dataType: dataType,
-        success: successFuc,
+        success: callback,
         error: errorFuc
     });
 };

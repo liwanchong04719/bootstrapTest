@@ -2,6 +2,19 @@
  * Created by wangtun on 2016/11/17.
  */
 $(function () {
+
+
+  function GetQueryString(name)
+  {
+    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if(r!=null)return  unescape(r[2]); return null;
+  }
+
+  Application.userid = GetQueryString('cuserid');
+
+
+
   $.fn.select2.defaults.set("theme", "bootstrap");
   //资产盘点
   getExistingAssets(Application.userid);
@@ -251,46 +264,43 @@ function initBarChart(data) {
 
 function getExistingAssets(userid) {
   //部署时需要替换
-  $.post("http://127.0.0.1:8088/" + new Date().getTime(),
+  // $.post("http://127.0.0.1:8088/" + new Date().getTime(),
+  //   {
+  //     "url": "118.26.130.12",
+  //     "port": '8080',
+  //     "path": "/uapws/service/nc.itf.pims.web.JingYingZhuangKuang",
+  //     "data": JSON.stringify({ userid: userid }),
+  //     "ajaxoptions": {
+  //       "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+  //       "xmlnsName": "jin",
+  //       "methodName": "xianyouzichan"
+  //     }
+  //   },
+  //   function (data) {
+  //      var startindex = data.indexOf('<ns1:return>');
+  //     var endindex = data.indexOf('</ns1:return>');
+  //     data = data.substring(startindex + 12, endindex)
+  //     data = JSON.parse(data);
+  //     $('.landcount').text(data.dcCount);
+  //     $('.housecount').text(data.fcCount);
+  //     $('.departmentcount').text(data.fyCount);
+  //   })
+
+
+Application.Util.ajaxConstruct(Application.serverHost,'POST',{ userid: userid },'text/xml;charset=UTF-8',function (data) {
+     
+      $('.landcount').text(data.dcCount);
+      $('.housecount').text(data.fcCount);
+      $('.departmentcount').text(data.fyCount);
+    },function name(params) {
+      console.log('error')
+    },
     {
-      "url": "118.26.130.12",
-      "port": '8080',
-      "path": "/uapws/service/nc.itf.pims.web.JingYingZhuangKuang",
-      "data": JSON.stringify({ userid: userid }),
-      "ajaxoptions": {
         "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
         "xmlnsName": "jin",
         "methodName": "xianyouzichan"
       }
-    },
-    function (data) {
-       var startindex = data.indexOf('<ns1:return>');
-      var endindex = data.indexOf('</ns1:return>');
-      data = data.substring(startindex + 12, endindex)
-      data = JSON.parse(data);
-      $('.landcount').text(data.dcCount);
-      $('.housecount').text(data.fcCount);
-      $('.departmentcount').text(data.fyCount);
-    })
-
-
-// Application.Util.ajaxConstruct(Application.serverHost,'POST',{ userid: userid },'text/xml;charset=UTF-8',function (data) {
-//        var startindex = data.indexOf('<ns1:return>');
-//       var endindex = data.indexOf('</ns1:return>');
-//       data = data.substring(startindex + 12, endindex)
-//       data = JSON.parse(data);
-//       $('.landcount').text(data.dcCount);
-//       $('.housecount').text(data.fcCount);
-//       $('.departmentcount').text(data.fyCount);
-//     },function name(params) {
-//       console.log('error')
-//     },
-//     {
-//         "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
-//         "xmlnsName": "jin",
-//         "methodName": "xianyouzichan"
-//       }
-//     )
+    )
 
 
 }
