@@ -251,7 +251,7 @@ function initBarChart(data) {
 
 function getExistingAssets(userid) {
   //部署时需要替换
-  $.post("http://127.0.0.1:8088/" + new Date().getTime(),
+  $.post("http://123.57.155.91:8088/" + new Date().getTime(),
     {
       "url": "118.26.130.12",
       "port": '8080',
@@ -273,7 +273,7 @@ function getExistingAssets(userid) {
 }
 //固定资产改变情况
 function getExistingChanges(userid) {
-  $.post("http://127.0.0.1:8088/" + new Date().getTime(),
+  $.post("http://123.57.155.91:8088/" + new Date().getTime(),
     {
       "url": "118.26.130.12",
       "port": '8080',
@@ -297,7 +297,7 @@ function getExistingChanges(userid) {
 //资产盘点环状图
 function getOrgAndLocation(userid) {
 
-  //  $.post("http://127.0.0.1:8088/" + new Date().getTime(),
+  //  $.post("http://123.57.155.91:8088/" + new Date().getTime(),
   //     {
   //       "url": "118.26.130.12",
   //       "port": '8080',
@@ -358,7 +358,7 @@ function OrgAndLocationOptions(data) {
 }
 
 function getCircleGraphData(company, area) {
-  $.post("http://127.0.0.1:8088/" + new Date().getTime(),
+  $.post("http://123.57.155.91:8088/" + new Date().getTime(),
     {
       "url": "118.26.130.12",
       "port": '8080',
@@ -388,7 +388,7 @@ function getCircleGraphData(company, area) {
 
 //环状图
 // function getCircleGraph(userid) {
-//   $.post("http://127.0.0.1:8088/" + new Date().getTime(),
+//   $.post("http://123.57.155.91:8088/" + new Date().getTime(),
 //     {
 //       "url": "118.26.130.12",
 //       "port": '8080',
@@ -410,7 +410,7 @@ function getCircleGraphData(company, area) {
 
 function getManagementSituation() {
 
-  //  $.post("http://127.0.0.1:8088/" + new Date().getTime(),
+  //  $.post("http://123.57.155.91:8088/" + new Date().getTime(),
   //     {
   //       "url": "118.26.130.12",
   //       "port": '8080',
@@ -475,7 +475,7 @@ function getCompanyAndHouse(data) {
 
 
 function getPieGraphData(company, house) {
-  $.post("http://127.0.0.1:8088/" + new Date().getTime(),
+  $.post("http://123.57.155.91:8088/" + new Date().getTime(),
     {
       "url": "118.26.130.12",
       "port": '8080',
@@ -542,7 +542,7 @@ function receivablesAndstatistics(data) {
 
 //统计数据
 function getStatisticData(company, house, retail) {
-  $.post("http://127.0.0.1:8088/" + new Date().getTime(),
+  $.post("http://123.57.155.91:8088/" + new Date().getTime(),
     {
       "url": "118.26.130.12",
       "port": '8080',
@@ -574,7 +574,7 @@ function getStatisticData(company, house, retail) {
 }
 //区域业态查询
 function getLocationAndYetai(userid) {
-  //  $.post("http://127.0.0.1:8088/" + new Date().getTime(),
+  //  $.post("http://123.57.155.91:8088/" + new Date().getTime(),
   //   {
   //     "url": "118.26.130.12",
   //     "port": '8080',
@@ -666,7 +666,7 @@ function getBarData(location, retail) {
   if (location == "全部") {
     location = "";
   }
-  $.post("http://127.0.0.1:8088/" + new Date().getTime(),
+  $.post("http://123.57.155.91:8088/" + new Date().getTime(),
     {
       "url": "118.26.130.12",
       "port": '8080',
@@ -692,7 +692,7 @@ function getBarData(location, retail) {
  * 查询业态
  */
 function initOfRetail(fun) {
-  $.post("http://127.0.0.1:8088/" + new Date().getTime(),
+  $.post("http://123.57.155.91:8088/" + new Date().getTime(),
     setParam(
       '/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
       { 'userid': '1001ZZ10000000018FJF' },

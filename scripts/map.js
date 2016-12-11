@@ -1,3 +1,4 @@
+var showIndex = 1;
 $(document).ready(function () {
 	//根据屏幕计算高度
 	$('select[name="inverse-select"]').select2({ dropdownCssClass: 'select-inverse-dropdown' });
@@ -13,6 +14,10 @@ $(document).ready(function () {
 					houseDataParam.location = queryZoneData.toString();
 					setHouseData(Application.map);
 				} else if (index === 2) {
+					showIndex = index
+          laneDataParam.yetai = queryRetailData.toString();
+          laneDataParam.gongsi = queryCompanyData.toString();
+          laneDataParam.location = queryZoneData.toString();
 					setLaneData(Application.map);
 				}
 
@@ -56,8 +61,11 @@ $(document).ready(function () {
 	$('#zoom').text(map.getZoom())
 	map.addEventListener('tilesloaded', function () {
 		$('#zoom').text(map.getZoom());
-		setHouseData(map);
-
+     if(showIndex === 2) {
+			 setLaneData(map);
+		 } else {
+			 setHouseData(map);
+		 }
 	});
 })
 
@@ -182,7 +190,7 @@ function setHouseData(map) {
 					var customMarker = createMarker({
 						point: new BMap.Point(data[i].lng, data[i].lat),
 						html: "<div class='bubble'><p class='name'>" + data[i].city + "</p><p class='number'>" + data[i].fccount + "</p></div>"
-					})
+					});
 					map.addOverlay(customMarker);
 					createHouseContainer(data);
 					// initPagination();
@@ -218,7 +226,7 @@ function setLaneData(map) {
 	if (map.getZoom() == Application.province + 1 || map.getZoom() == Application.direct) {
 		map.clearOverlays();
 		getHouseOrLaneData(
-			houseDataParam,
+			laneDataParam,
 			'getDcTongJiXinxi_map',
 			function (data) {
 				for (var i in data) {
@@ -238,13 +246,14 @@ function setLaneData(map) {
 	else if (map.getZoom() == Application.direct + 1) {
 		map.clearOverlays();
 		getHouseOrLaneData(
-			houseDataSmallParam,
+			laneDataSmallParam,
 			'getDcXinxi_map',
 			function (data) {
 				for (var j in data) {
 					var customMarker = createMarker({
-						point: new BMap.Point(data[j].longitude, data[j].latitude),
-						html: '<p class="bubble-3 bubble" ><i class="num">&nbsp;程庄南里&nbsp;</i><span class="name"><i class="name-des"><a href="/xiaoqu/1111027376714/" target="_blank">3.9万&nbsp;&nbsp;2套</a></i></span><i class="arrow-up"><i class="arrow"></i><i></i></i></p>'
+						point: new BMap.Point(data[j].lng, data[j].lat),
+						html: "<div class='bubble'><p class='name'>" + data[i].tdsyr
+            + "</p><p class='number'>" + data[i].syqmj + "</p></div>",
 					})
 					map.addOverlay(customMarker);
 				}
@@ -290,11 +299,12 @@ function createLaneContainer(data) {
 
 	$("#laneDataDiv").empty().append(list.join(''));
 }
-
+var houseMapData;
 /**
  * 生成小于11级时地图左侧栏展示项房产
  */
 function initDirectOfHouse(data) {
+	houseMapData = data;
 	var htmlArr = [];
 
 	htmlArr.push('<li class="list-item">');
@@ -334,7 +344,25 @@ function initDirectOfLane(data) {
 
 
 function showSecondDirect() {
-	Application.map.setZoom(16);
+
+	var point = new BMap.Point(116.404, 39.915);
+	var marker = new BMap.Marker(point);
+	// 百度地图API功能
+	Application.map.centerAndZoom(point, 14);
+	Application.map.addOverlay(marker);
+	marker.addEventListener("click", function(){
+		var infoDiv = document.getElementById('houseInfo');
+		var infoWindow = new BMap.InfoWindow(infoDiv);  // 创建信息窗口对象
+		infoDiv.style.display = 'block';
+		initBarChart("barChart");
+		initAccordion();
+		this.openInfoWindow(infoWindow);
+		//图片加载完毕重绘infowindow
+		// document.getElementById('imgDemo').onload = function (){
+		// 	infoWindow.redraw();   //防止在网速较慢，图片未加载时，生成的信息框高度比图片的总高度小，导致图片部分被隐藏
+		// }
+	});
+	// Application.map.setZoom(16);
 
 }
 
@@ -344,7 +372,7 @@ function initTreeOfZone() {
 			'/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
 			{'userid':Application.userid},
 			'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
-			'getHierarchyOrg'
+			'getLocationByCurrentUser'
 		), function (data) {
 			var startindex = data.indexOf('<ns1:return>');
 			var endindex = data.indexOf('</ns1:return>');
@@ -357,8 +385,9 @@ function initTreeOfZone() {
 				showBorder: false,
 				backColor: "#f6f7fa",
 				onNodeChecked:addZoneQueryData,
+				onNodeSelected:showMapCenter,
 				onNodeUnchecked: minusZoneQueryData,
-				data: treeData});
+				data: changeZoneData(treeData)});
 		});
 }
 function initTreeOfCompany() {
@@ -367,7 +396,7 @@ function initTreeOfCompany() {
 			'/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
 			{'userid':Application.userid},
 			'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
-			'getLocationByCurrentUser'
+			'getHierarchyOrg'
 		), function (data) {
 			var startindex = data.indexOf('<ns1:return>');
 			var endindex = data.indexOf('</ns1:return>');
@@ -381,7 +410,7 @@ function initTreeOfCompany() {
 				backColor: "#f6f7fa",
 				onNodeChecked:addCompanyQueryData,
 				onNodeUnchecked: minusCompanyQueryData,
-				data: changeZoneData(treeData)});
+				data: treeData});
 		});
 }
 function initTreeOfRetail() {
@@ -410,7 +439,7 @@ function initTreeOfRetail() {
 
 function setParam(path, param, xmlns, methodName) {
 	return {
-		"url": '118.26.130.12',
+		"url": '192.168.3.20',
 		"port": 8080,
 		"path": path,
 		"data": JSON.stringify(param),
@@ -476,7 +505,7 @@ var houseDataParam = {
 	'yetai': '',
 	'userid': Application.userid,
 	'gongsi': '',
-	' locationType': ''
+	'locationType': ''
 };
 var houseDataSmallParam = {
 	'location': '',
@@ -484,6 +513,20 @@ var houseDataSmallParam = {
 	'userid': Application.userid,
 	'gongsi': ''
 };
+var laneDataParam = {
+    'location': '',
+    'yetai': '',
+    'userid': Application.userid,
+    'gongsi': '',
+    'locationType': ''
+};
+var laneDataSmallParam = {
+    'location': '',
+    'yetai': '',
+    'userid': Application.userid,
+    'gongsi': ''
+};
+
 function getHouseOrLaneData(param, type, callback) {
 	$.post("http://127.0.0.1:8088/" + new Date().getTime(),
 		setParam(
@@ -497,4 +540,103 @@ function getHouseOrLaneData(param, type, callback) {
 			data = data.substring(startindex+12,endindex)
 			callback(JSON.parse(data));
 		});
+}
+function showMapCenter(event, node) {
+	console.log(node);
+}
+function initAccordion(){
+	$(".items > li > a").click(function(e) {
+		e.preventDefault();
+		var $this = $(this);
+		if ($this.hasClass("expanded")) {
+			$this.removeClass("expanded");
+			$this.find('i').addClass("glyphicon-chevron-right").removeClass("glyphicon-chevron-down");
+		} else {
+			$(".items a.expanded>i").addClass("glyphicon-chevron-right").removeClass("glyphicon-chevron-down");
+			$(".items a.expanded").removeClass("expanded");
+			$this.addClass("expanded");
+			$this.find("i").addClass("glyphicon-chevron-down").removeClass("glyphicon-chevron-right");
+			$(".sub-items").filter(":visible").slideUp("normal");
+		}
+		$this.parent().children("ul").stop(true, true).slideToggle("normal");
+	});
+
+	$(".sub-items a").click(function() {
+		$(".sub-items a").removeClass("current");
+		$(this).addClass("current");
+	});
+}
+
+function initBarChart(id) {
+	var dom = document.getElementById(id);
+	var myChart = echarts.init(dom);
+	var app = {};
+	option = {
+		backgroundColor: '#fff',
+		tooltip: {
+			trigger: 'axis'
+		},
+		toolbox: {
+			show: true,
+			feature: {
+				mark: { show: false },
+				dataView: { show: false, readOnly: false },
+				magicType: { show: false, type: ['line', 'bar'] },
+				restore: { show: false },
+				saveAsImage: { show: true }
+			}
+		},
+		calculable: true,
+		legend: {
+			orient : 'horizontal',
+			x : 'center',
+			y:'bottom',
+			data:['出租率','单价']
+		},
+		xAxis: [
+			{
+				type: 'category',
+				data: ['北京城建集团投资有限公司', '城建置业', '3公司', '4公司', '5公司', '6公司', '7公司', '8公司', '9公司', '10公司', '11公司', '12公司']
+			}
+		],
+		yAxis: [
+			{
+				type: 'value',
+				name: '100%',
+				axisLabel: {
+					formatter: '{value}'
+				}
+			},
+			{
+				type: 'value',
+				name: '单价',
+				axisLabel: {
+					formatter: '{value}元'
+				}
+			}
+		],
+		series : [
+			{
+				name:'出租率',
+				type:'bar',
+				itemStyle:{
+					normal:{color:'#0099FF'}
+				},
+				data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 90, 100, 32.6, 20.0, 6.4, 3.3]
+			},
+			{
+				name: '单价',
+				type: 'line',
+				yAxisIndex: 1,
+				itemStyle:{
+					normal:{color:'#C06410'}
+				},
+				data:[2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
+			}
+		]
+	};
+
+	if (option && typeof option === "object") {
+		myChart.setOption(option, true);
+	}
 }
