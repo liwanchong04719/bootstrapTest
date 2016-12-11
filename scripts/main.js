@@ -262,20 +262,20 @@ function initBarChart(data) {
 
 function getExistingAssets(userid) {
 
-Application.Util.ajaxConstruct(Application.serverHost,'POST',{ userid: userid },'text/xml;charset=UTF-8',function (data) {
-     
+  Application.Util.ajaxConstruct(Application.serverHost, 'POST', { userid: userid }, 'text/xml;charset=UTF-8', function (data) {
+
       $('.landcount').text(data.dcCount);
       $('.housecount').text(data.fcCount);
       $('.departmentcount').text(data.fyCount);
-    },function name(params) {
+    }, function name(params) {
       console.log('error')
     },
     {
-        "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
-        "xmlnsName": "jin",
-        "methodName": "xianyouzichan"
-      }
-    )
+      "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+      "xmlnsName": "jin",
+      "methodName": "xianyouzichan"
+    }
+  );
 
 
 }

@@ -8,8 +8,6 @@
           href="../lib/Flat-UI-master/dist/css/vendor/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="../lib/Flat-UI-master/dist/css/flat-ui.css"/>
     <link rel="stylesheet" type="text/css" href="../lib/bootstrap-treeview-master/dist/bootstrap-treeview.css" />
-    <link rel="stylesheet" href="../lib/bootstrap-paginator/css/qunit-1.11.0.css">
-    <link rel="stylesheet" href="../lib/bootstrap-paginator/css/bootstrapv3.css">
 
     <link rel="stylesheet" type="text/css" href="../css/map.css"/>
     <link rel="stylesheet" type="text/css" href="../css/tabstyle.css"/>
@@ -498,12 +496,50 @@
     <div id="zoomcontainer" style="position:absolute;bottom:5px;right:5px">
         <label id="zoom"></label>
     </div>
+    <div id="houseInfo" style="height: 300px;width: 400px;overflow: auto;display: none;">
+        <h6 style="text-align: center;padding-bottom:3px;margin-top: 5px;margin-bottom: 10px;border-bottom: 1px solid #e8e8e8">房产信息</h6>
+        <img  style="width: 100%;height: 200px" src="http://images0.cnblogs.com/blog2015/738809/201508/021428493299472.png" />
+        <ul class="fields" style="">
+            <li><label>业主：</label><label id="yezhu">---</label></li>
+            <li><label>建筑面积：</label><label id="jzmj">---</label></li>
+            <li><label>业态：</label><label id="yetai">---</label></li>
+            <li><label>座落：</label><label id="zuoluo">---</label></li>
+            <li><label>出租率：</label><label id="czl">---</label></li>
+            <li><label>现平均单价：</label><label id="xpjdj">---</label></li>
+        </ul>
+        <div class='wrapper'>
+            <ul class='items'>
+                <li>
+                    <a href='#'>出租率及平均单价趋势 <i class="glyphicon glyphicon-chevron-right"></i></a>
+                    <ul class='sub-items'>
+                        <li>
+                            <div id="barChart" style="height: 250px;width: 350px">
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href='#'>对方地产信息<i class="glyphicon glyphicon-chevron-right"></i></a>
+                    <ul class='sub-items'>
+                        <li>
+                            <ul class="fields" style="padding-left: 0px;border: none">
+                                <li><label>土地证书编号：</label><label id="tdzsbh">---</label></li>
+                                <li><label>使用权人：</label><label id="syqr">---</label></li>
+                                <li><label>座落：</label><label id="zl">---</label></li>
+                                <li><label>地类：</label><label id="dilei">---</label></li>
+                                <li><label>使用面积：</label><label id="symj">---</label></li>
+                                <li><label>终止日期：</label><label id="zzrq">---</label></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
 </body>
 <script src="../lib/Flat-UI-master/dist/js/vendor/jquery.min.js"></script>
 <script src="../lib/Flat-UI-master/dist/js/flat-ui.js"></script>
-<script src="../lib/bootstrap-paginator/lib/bootstrapv3.js" type="text/javascript"></script>
-<script src="../lib/bootstrap-paginator/src/bootstrap-paginator.js"></script>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=AXQ7RGL4oSjsANXUG8OQofPywGmb04QV"></script>
 <script src="../lib/bootstrap-treeview-master/dist/bootstrap-treeview.js"></script>
 <script src="../scripts/Application.js"></script>
@@ -512,6 +548,7 @@
 <script type="text/javascript" src="../lib/testdata/DistricData.js"></script>
 <script type="text/javascript" src="../lib/testdata/BusinessAreaData.js"></script>
 <script type="text/javascript" src="../lib/testdata/HouseData.js"></script>
+<script type="text/javascript" src="../lib/echarts/echarts.js"></script>
 <script src="../scripts/map.js"></script>
 
 </html>
