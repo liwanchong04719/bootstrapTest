@@ -79,7 +79,7 @@ Application.Util.ajaxConstruct = function (url, type, data, dataType, successFuc
     data = JSON.parse(data);
     successFuc (data)
   }
-   
+
     $.ajax({
         url: url,
         type: type,
