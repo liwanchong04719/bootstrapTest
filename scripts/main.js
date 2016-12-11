@@ -2,10 +2,23 @@
  * Created by wangtun on 2016/11/17.
  */
 $(function () {
+
+
+  function GetQueryString(name)
+  {
+    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if(r!=null)return  unescape(r[2]); return null;
+  }
+
+  Application.userid = GetQueryString('cuserid');
+
+
+
   $.fn.select2.defaults.set("theme", "bootstrap");
   //资产盘点
-  //getExistingAssets(Application.userid);
-  //getExistingChanges(Application.userid);
+  getExistingAssets(Application.userid);
+  getExistingChanges(Application.userid);
   //资产盘点环状图
   //公司、区域数据
   getOrgAndLocation(Application.userid);
@@ -251,41 +264,68 @@ function initBarChart(data) {
 
 function getExistingAssets(userid) {
   //部署时需要替换
-  $.post("http://123.57.155.91:8088/" + new Date().getTime(),
-    {
-      "url": "118.26.130.12",
-      "port": '8080',
-      "path": "/uapws/service/nc.itf.pims.web.CheckProperty",
-      "data": JSON.stringify({ userid: userid }),
-      "ajaxoptions": {
-        "xmlns": 'xmlns:chec="http://web.pims.itf.nc/CheckProperty"',
-        "xmlnsName": "chec",
-        "methodName": "xianyouzichan"
-      }
-    },
-    function (data) {
-      data = JSON.parse(data);
+  // $.post("http://127.0.0.1:8088/" + new Date().getTime(),
+  //   {
+  //     "url": "118.26.130.12",
+  //     "port": '8080',
+  //     "path": "/uapws/service/nc.itf.pims.web.JingYingZhuangKuang",
+  //     "data": JSON.stringify({ userid: userid }),
+  //     "ajaxoptions": {
+  //       "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+  //       "xmlnsName": "jin",
+  //       "methodName": "xianyouzichan"
+  //     }
+  //   },
+  //   function (data) {
+  //      var startindex = data.indexOf('<ns1:return>');
+  //     var endindex = data.indexOf('</ns1:return>');
+  //     data = data.substring(startindex + 12, endindex)
+  //     data = JSON.parse(data);
+  //     $('.landcount').text(data.dcCount);
+  //     $('.housecount').text(data.fcCount);
+  //     $('.departmentcount').text(data.fyCount);
+  //   })
+
+
+  Application.Util.ajaxConstruct(Application.serverHost, 'POST', { userid: userid }, 'text/xml;charset=UTF-8', function (data) {
+
       $('.landcount').text(data.dcCount);
       $('.housecount').text(data.fcCount);
       $('.departmentcount').text(data.fyCount);
-    })
+    }, function name(params) {
+      console.log('error')
+    },
+    {
+      "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+      "xmlnsName": "jin",
+      "methodName": "xianyouzichan"
+    }
+  );
+
 
 }
+
+
+
+
 //固定资产改变情况
 function getExistingChanges(userid) {
-  $.post("http://123.57.155.91:8088/" + new Date().getTime(),
+  $.post("http://127.0.0.1:8088/" + new Date().getTime(),
     {
       "url": "118.26.130.12",
       "port": '8080',
-      "path": "/uapws/service/nc.itf.pims.web.CheckProperty",
+      "path": "/uapws/service/nc.itf.pims.web.JingYingZhuangKuang",
       "data": JSON.stringify({ userid: userid }),
       "ajaxoptions": {
-        "xmlns": 'xmlns:chec="http://web.pims.itf.nc/CheckProperty"',
-        "xmlnsName": "chec",
+        "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+        "xmlnsName": "jin",
         "methodName": "benyuexinzeng"
       }
     },
     function (data) {
+       var startindex = data.indexOf('<ns1:return>');
+      var endindex = data.indexOf('</ns1:return>');
+      data = data.substring(startindex + 12, endindex)
       data = JSON.parse(data);
       $('.landcountchange').text(data.dcCount + '块');
       $('.housecountchange').text(data.fcCount + '座');
@@ -297,7 +337,7 @@ function getExistingChanges(userid) {
 //资产盘点环状图
 function getOrgAndLocation(userid) {
 
-  //  $.post("http://123.57.155.91:8088/" + new Date().getTime(),
+  //  $.post("http://127.0.0.1:8088/" + new Date().getTime(),
   //     {
   //       "url": "118.26.130.12",
   //       "port": '8080',
@@ -358,7 +398,7 @@ function OrgAndLocationOptions(data) {
 }
 
 function getCircleGraphData(company, area) {
-  $.post("http://123.57.155.91:8088/" + new Date().getTime(),
+  $.post("http://127.0.0.1:8088/" + new Date().getTime(),
     {
       "url": "118.26.130.12",
       "port": '8080',
@@ -388,7 +428,7 @@ function getCircleGraphData(company, area) {
 
 //环状图
 // function getCircleGraph(userid) {
-//   $.post("http://123.57.155.91:8088/" + new Date().getTime(),
+//   $.post("http://127.0.0.1:8088/" + new Date().getTime(),
 //     {
 //       "url": "118.26.130.12",
 //       "port": '8080',
@@ -410,7 +450,7 @@ function getCircleGraphData(company, area) {
 
 function getManagementSituation() {
 
-  //  $.post("http://123.57.155.91:8088/" + new Date().getTime(),
+  //  $.post("http://127.0.0.1:8088/" + new Date().getTime(),
   //     {
   //       "url": "118.26.130.12",
   //       "port": '8080',
@@ -475,7 +515,7 @@ function getCompanyAndHouse(data) {
 
 
 function getPieGraphData(company, house) {
-  $.post("http://123.57.155.91:8088/" + new Date().getTime(),
+  $.post("http://127.0.0.1:8088/" + new Date().getTime(),
     {
       "url": "118.26.130.12",
       "port": '8080',
@@ -542,7 +582,7 @@ function receivablesAndstatistics(data) {
 
 //统计数据
 function getStatisticData(company, house, retail) {
-  $.post("http://123.57.155.91:8088/" + new Date().getTime(),
+  $.post("http://127.0.0.1:8088/" + new Date().getTime(),
     {
       "url": "118.26.130.12",
       "port": '8080',
@@ -574,7 +614,7 @@ function getStatisticData(company, house, retail) {
 }
 //区域业态查询
 function getLocationAndYetai(userid) {
-  //  $.post("http://123.57.155.91:8088/" + new Date().getTime(),
+  //  $.post("http://127.0.0.1:8088/" + new Date().getTime(),
   //   {
   //     "url": "118.26.130.12",
   //     "port": '8080',
@@ -666,7 +706,7 @@ function getBarData(location, retail) {
   if (location == "全部") {
     location = "";
   }
-  $.post("http://123.57.155.91:8088/" + new Date().getTime(),
+  $.post("http://127.0.0.1:8088/" + new Date().getTime(),
     {
       "url": "118.26.130.12",
       "port": '8080',
@@ -692,7 +732,7 @@ function getBarData(location, retail) {
  * 查询业态
  */
 function initOfRetail(fun) {
-  $.post("http://123.57.155.91:8088/" + new Date().getTime(),
+  $.post("http://127.0.0.1:8088/" + new Date().getTime(),
     setParam(
       '/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
       { 'userid': '1001ZZ10000000018FJF' },
