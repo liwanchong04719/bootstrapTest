@@ -52,8 +52,8 @@ $(function () {
           });
 
         })
-
-
+    // 初始化预警信息
+    initWarningInfo();
 
 
 })
@@ -760,4 +760,33 @@ function setParam(path, param, xmlns, methodName) {
       "methodName": methodName
     }
   }
+}
+
+function initWarningInfo() {
+    $.post("http://127.0.0.1:8088/" + new Date().getTime(),
+      setParam(
+        '/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
+        { 'userid': '1001ZZ10000000018FJF' },
+        'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+        'yujingxinxi'
+      ), function (data) {
+          var startindex = data.indexOf('<ns1:return>');
+          var endindex = data.indexOf('</ns1:return>');
+          data = data.substring(startindex + 12, endindex)
+          var waringData = JSON.parse(data);
+          var ul = document.getElementById("information");
+          $("#information").empty();
+          for (var i = 0, len = waringData.length; i < len; i++) {
+              var li = document.createElement("li");
+              var a = document.createElement('a');
+
+              a.appendChild(document.createTextNode(waringData[i].message));
+              a.setAttribute("onclick", function () {
+                  alert(waringData.id);
+              });
+              li.appendChild(a);
+              ul.appendChild(li);
+          }
+
+      });
 }

@@ -268,7 +268,7 @@ function setLaneData(map) {
  * 生成小于11级时地图左侧栏展示内容房产
  */
 function createHouseContainer(data) {
-	var list = []
+	var list = [];
 
 	for (var i = 0, len = data.length; i < len; i++) {
 
@@ -328,7 +328,7 @@ function initDirectOfLane(data) {
 	var htmlArr = [];
 
 	htmlArr.push('<li class="list-item">');
-	htmlArr.push('<a href="javascript:void(0);" onclick="showSecondDirect()">');
+	htmlArr.push('<a href="javascript:void(0);" onclick="showSecondDirect("'+data+'")">');
 
 	htmlArr.push('<p class="item-des">');
 	htmlArr.push('<span>' + data.city + '</span>');
@@ -344,7 +344,7 @@ function initDirectOfLane(data) {
 
 
 function showSecondDirect() {
-
+	console.log(houseMapData);
 	var point = new BMap.Point(116.404, 39.915);
 	var marker = new BMap.Marker(point);
 	// 百度地图API功能
@@ -354,9 +354,12 @@ function showSecondDirect() {
 		var infoDiv = document.getElementById('houseInfo');
 		var infoWindow = new BMap.InfoWindow(infoDiv);  // 创建信息窗口对象
 		infoDiv.style.display = 'block';
-		initBarChart("barChart");
-		initAccordion();
-		this.openInfoWindow(infoWindow);
+		initFCPanel(id,function (data) {
+			initBarChart("barChart");
+			initAccordion();
+			this.openInfoWindow(infoWindow);
+		})
+
 		//图片加载完毕重绘infowindow
 		// document.getElementById('imgDemo').onload = function (){
 		// 	infoWindow.redraw();   //防止在网速较慢，图片未加载时，生成的信息框高度比图片的总高度小，导致图片部分被隐藏
@@ -367,138 +370,138 @@ function showSecondDirect() {
 }
 
 function initTreeOfZone() {
-// 	$.post("http://127.0.0.1:8088/" + new Date().getTime(),
-// 		setParam(
-// 			'/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
-// 			{'userid':Application.userid},
-// 			'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
-// 			'getLocationByCurrentUser'
-// 		), function (data) {
-// 			var startindex = data.indexOf('<ns1:return>');
-// 			var endindex = data.indexOf('</ns1:return>');
-// 			data = data.substring(startindex+12,endindex)
-// 			var treeData = JSON.parse(data);
-// 			$('#treeOfZone').treeview({ expandIcon: "glyphicon glyphicon-stop",
-// 				levels: 1,
-// 				color:'#2a6496',
-// 				showCheckbox: true,
-// 				showBorder: false,
-// 				backColor: "#f6f7fa",
-// 				onNodeChecked:addZoneQueryData,
-// 				onNodeSelected:showMapCenter,
-// 				onNodeUnchecked: minusZoneQueryData,
-// 				data: changeZoneData(treeData)});
-// 		});
+	$.post("http://127.0.0.1:8088/" + new Date().getTime(),
+		setParam(
+			'/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
+			{'userid':Application.userid},
+			'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+			'getLocationByCurrentUser'
+		), function (data) {
+			var startindex = data.indexOf('<ns1:return>');
+			var endindex = data.indexOf('</ns1:return>');
+			data = data.substring(startindex+12,endindex)
+			var treeData = JSON.parse(data);
+			$('#treeOfZone').treeview({ expandIcon: "glyphicon glyphicon-stop",
+				levels: 1,
+				color:'#2a6496',
+				showCheckbox: true,
+				showBorder: false,
+				backColor: "#f6f7fa",
+				onNodeChecked:addZoneQueryData,
+				onNodeSelected:showMapCenter,
+				onNodeUnchecked: minusZoneQueryData,
+				data: changeZoneData(treeData)});
+		});
 
-	Application.Util.ajaxConstruct(Application.serverHost, 'POST', 	{'userid':Application.userid}, 'text/xml;charset=UTF-8', function (data) {
-		$('#treeOfZone').treeview({ expandIcon: "glyphicon glyphicon-stop",
-			levels: 1,
-			color:'#2a6496',
-			showCheckbox: true,
-			showBorder: false,
-			backColor: "#f6f7fa",
-			onNodeChecked:addZoneQueryData,
-			onNodeSelected:showMapCenter,
-			onNodeUnchecked: minusZoneQueryData,
-			data: changeZoneData(data)});
-	}, function name(params) {
-		console.log('error')
-	},
-	{
-		"xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
-		"xmlnsName": "jin",
-		"methodName": "getLocationByCurrentUser"
-	});
+// 	Application.Util.ajaxConstruct(Application.serverHost, 'POST', 	{'userid':Application.userid}, 'text/xml;charset=UTF-8', function (data) {
+// 		$('#treeOfZone').treeview({ expandIcon: "glyphicon glyphicon-stop",
+// 			levels: 1,
+// 			color:'#2a6496',
+// 			showCheckbox: true,
+// 			showBorder: false,
+// 			backColor: "#f6f7fa",
+// 			onNodeChecked:addZoneQueryData,
+// 			onNodeSelected:showMapCenter,
+// 			onNodeUnchecked: minusZoneQueryData,
+// 			data: changeZoneData(data)});
+// 	}, function name(params) {
+// 		console.log('error')
+// 	},
+// 	{
+// 		"xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+// 		"xmlnsName": "jin",
+// 		"methodName": "getLocationByCurrentUser"
+// 	});
 }
 function initTreeOfCompany() {
-// 	$.post("http://127.0.0.1:8088/" + new Date().getTime(),
-// 		setParam(
-// 			'/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
-// 			{'userid':Application.userid},
-// 			'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
-// 			'getHierarchyOrg'
-// 		), function (data) {
-// 			var startindex = data.indexOf('<ns1:return>');
-// 			var endindex = data.indexOf('</ns1:return>');
-// 			data = data.substring(startindex+12,endindex)
-// 			var treeData = JSON.parse(data);
-// 			$('#treeOfCompany').treeview({ expandIcon: "glyphicon glyphicon-stop",
-// 				levels: 1,
-// 				color:'#2a6496',
-// 				showCheckbox: true,
-// 				showBorder: false,
-// 				backColor: "#f6f7fa",
-// 				onNodeChecked:addCompanyQueryData,
-// 				onNodeUnchecked: minusCompanyQueryData,
-// 				data: treeData});
-// 		});
+	$.post("http://127.0.0.1:8088/" + new Date().getTime(),
+		setParam(
+			'/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
+			{'userid':Application.userid},
+			'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+			'getHierarchyOrg'
+		), function (data) {
+			var startindex = data.indexOf('<ns1:return>');
+			var endindex = data.indexOf('</ns1:return>');
+			data = data.substring(startindex+12,endindex)
+			var treeData = JSON.parse(data);
+			$('#treeOfCompany').treeview({ expandIcon: "glyphicon glyphicon-stop",
+				levels: 1,
+				color:'#2a6496',
+				showCheckbox: true,
+				showBorder: false,
+				backColor: "#f6f7fa",
+				onNodeChecked:addCompanyQueryData,
+				onNodeUnchecked: minusCompanyQueryData,
+				data: treeData});
+		});
 
-	Application.Util.ajaxConstruct(Application.serverHost, 'POST', 	{'userid':Application.userid}, 'text/xml;charset=UTF-8', function (data) {
-		$('#treeOfCompany').treeview({ expandIcon: "glyphicon glyphicon-stop",
-			levels: 1,
-			color:'#2a6496',
-			showCheckbox: true,
-			showBorder: false,
-			backColor: "#f6f7fa",
-			onNodeChecked:addCompanyQueryData,
-			onNodeUnchecked: minusCompanyQueryData,
-			data: data});
-	}, function name(params) {
-		console.log('error')
-	},
-	{
-		"xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
-		"xmlnsName": "jin",
-		"methodName": "getHierarchyOrg"
-	});
+// 	Application.Util.ajaxConstruct(Application.serverHost, 'POST', 	{'userid':Application.userid}, 'text/xml;charset=UTF-8', function (data) {
+// 		$('#treeOfCompany').treeview({ expandIcon: "glyphicon glyphicon-stop",
+// 			levels: 1,
+// 			color:'#2a6496',
+// 			showCheckbox: true,
+// 			showBorder: false,
+// 			backColor: "#f6f7fa",
+// 			onNodeChecked:addCompanyQueryData,
+// 			onNodeUnchecked: minusCompanyQueryData,
+// 			data: data});
+// 	}, function name(params) {
+// 		console.log('error')
+// 	},
+// 	{
+// 		"xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+// 		"xmlnsName": "jin",
+// 		"methodName": "getHierarchyOrg"
+// 	});
 }
 function initTreeOfRetail() {
-// 	$.post("http://127.0.0.1:8088/" + new Date().getTime(),
-// 		setParam(
-// 			'/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
-// 			{'userid':Application.userid},
-// 			'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
-// 			'getYeTaiByCurrentUser'
-// 		), function (data) {
-// 			var startindex = data.indexOf('<ns1:return>');
-// 			var endindex = data.indexOf('</ns1:return>');
-// 			data = data.substring(startindex+12,endindex)
-// 			var treeData = JSON.parse(data);
-// 			$('#treeOfRetail').treeview({ expandIcon: "glyphicon glyphicon-stop",
-// 				levels: 1,
-// 				color:'#2a6496',
-// 				showCheckbox: true,
-// 				showBorder: false,
-// 				backColor: "#f6f7fa",
-// 				onNodeChecked:addRetailQueryData,
-// 				onNodeUnchecked: minusRetailQueryData,
-// 				data: changeRetailData(treeData)});
-// 		});
+	$.post("http://127.0.0.1:8088/" + new Date().getTime(),
+		setParam(
+			'/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
+			{'userid':Application.userid},
+			'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+			'getYeTaiByCurrentUser'
+		), function (data) {
+			var startindex = data.indexOf('<ns1:return>');
+			var endindex = data.indexOf('</ns1:return>');
+			data = data.substring(startindex+12,endindex)
+			var treeData = JSON.parse(data);
+			$('#treeOfRetail').treeview({ expandIcon: "glyphicon glyphicon-stop",
+				levels: 1,
+				color:'#2a6496',
+				showCheckbox: true,
+				showBorder: false,
+				backColor: "#f6f7fa",
+				onNodeChecked:addRetailQueryData,
+				onNodeUnchecked: minusRetailQueryData,
+				data: changeRetailData(treeData)});
+		});
 
-
-	Application.Util.ajaxConstruct(Application.serverHost, 'POST', 	{'userid':Application.userid}, 'text/xml;charset=UTF-8', function (data) {
-		$('#treeOfRetail').treeview({ expandIcon: "glyphicon glyphicon-stop",
-			levels: 1,
-			color:'#2a6496',
-			showCheckbox: true,
-			showBorder: false,
-			backColor: "#f6f7fa",
-			onNodeChecked:addRetailQueryData,
-			onNodeUnchecked: minusRetailQueryData,
-			data: changeRetailData(data)});
-	}, function name(params) {
-		console.log('error')
-	},
-	{
-		"xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
-		"xmlnsName": "jin",
-		"methodName": "getYeTaiByCurrentUser"
-	});
+//
+// 	Application.Util.ajaxConstruct(Application.serverHost, 'POST', 	{'userid':Application.userid}, 'text/xml;charset=UTF-8', function (data) {
+// 		$('#treeOfRetail').treeview({ expandIcon: "glyphicon glyphicon-stop",
+// 			levels: 1,
+// 			color:'#2a6496',
+// 			showCheckbox: true,
+// 			showBorder: false,
+// 			backColor: "#f6f7fa",
+// 			onNodeChecked:addRetailQueryData,
+// 			onNodeUnchecked: minusRetailQueryData,
+// 			data: changeRetailData(data)});
+// 	}, function name(params) {
+// 		console.log('error')
+// 	},
+// 	{
+// 		"xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+// 		"xmlnsName": "jin",
+// 		"methodName": "getYeTaiByCurrentUser"
+// 	});
 }
 
 function setParam(path, param, xmlns, methodName) {
 	return {
-		"url": '192.168.3.20',
+		"url": '118.26.130.12',
 		"port": 8080,
 		"path": path,
 		"data": JSON.stringify(param),
@@ -545,6 +548,8 @@ function changeZoneData(data) {
 		var obj = {};
 		obj.text = data[i].secondvalue;
 		obj.id = data[i].firstvalue;
+		obj.lng = data[i].lng;
+		obj.lat = data[i].lat;
 		zoneData.push(obj);
 	}
 	return zoneData;
@@ -587,32 +592,34 @@ var laneDataSmallParam = {
 };
 
 function getHouseOrLaneData(param, type, callback) {
-// 	$.post("http://127.0.0.1:8088/" + new Date().getTime(),
-// 		setParam(
-// 			'/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
-// 			param,
-// 			'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
-// 			type
-// 		), function(data){
-// 			var startindex = data.indexOf('<ns1:return>');
-// 			var endindex = data.indexOf('</ns1:return>');
-// 			data = data.substring(startindex+12,endindex)
-// 			callback(JSON.parse(data));
-// 		});
+	$.post("http://127.0.0.1:8088/" + new Date().getTime(),
+		setParam(
+			'/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
+			param,
+			'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+			type
+		), function(data){
+			var startindex = data.indexOf('<ns1:return>');
+			var endindex = data.indexOf('</ns1:return>');
+			data = data.substring(startindex+12,endindex)
+			callback(JSON.parse(data));
+		});
 
-	Application.Util.ajaxConstruct(Application.serverHost, 'POST', param, 'text/xml;charset=UTF-8', function (data) {
-		callback(data);
-	}, function name(params) {
-		console.log('error')
-	},
-	{
-		"xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
-		"xmlnsName": "jin",
-		"methodName": type
-	});
+// 	Application.Util.ajaxConstruct(Application.serverHost, 'POST', param, 'text/xml;charset=UTF-8', function (data) {
+// 		callback(data);
+// 	}, function name(params) {
+// 		console.log('error')
+// 	},
+// 	{
+// 		"xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+// 		"xmlnsName": "jin",
+// 		"methodName": type
+// 	});
 }
 function showMapCenter(event, node) {
-	console.log(node);
+	var point = new BMap.Point(node.lng, node.lat);
+	// 百度地图API功能
+	Application.map.centerAndZoom(point, 13);
 }
 function initAccordion(){
 	$(".items > li > a").click(function(e) {
@@ -709,4 +716,20 @@ function initBarChart(id) {
 	if (option && typeof option === "object") {
 		myChart.setOption(option, true);
 	}
+}
+
+function initFCPanel(id, callback) {
+	$.post("http://127.0.0.1:8088/" + new Date().getTime(),
+	setParam(
+	'/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
+	{'fczbh': id, userid: Application.userid},
+	'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+	"getFangChanPanel"
+	), function(data){
+		var startindex = data.indexOf('<ns1:return>');
+		var endindex = data.indexOf('</ns1:return>');
+		data = data.substring(startindex+12,endindex)
+		callback(JSON.parse(data));
+	});
+
 }
