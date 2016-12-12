@@ -262,7 +262,7 @@ function initBarChart(data) {
 
 function getExistingAssets(userid) {
 
-  Application.Util.ajaxConstruct(Application.serverHost, 'POST', { userid: userid }, 'text/xml;charset=UTF-8', function (data) {
+  Application.Util.ajaxConstruct(Application.serverHost, 'POST', { userid: Application.userid }, 'text/xml;charset=UTF-8', function (data) {
 
       $('.landcount').text(data.dcCount);
       $('.housecount').text(data.fcCount);
@@ -308,7 +308,7 @@ function getExistingChanges(userid) {
   //   })
 
 
-  Application.Util.ajaxConstruct(Application.serverHost,'POST',{ userid: userid },'text/xml;charset=UTF-8',function (data) {
+  Application.Util.ajaxConstruct(Application.serverHost,'POST',{ userid: Application.userid },'text/xml;charset=UTF-8',function (data) {
       $('.landcountchange').text(data.dcCount + '块');
       $('.housecountchange').text(data.fcCount + '座');
       $('.departmentcountchange').text(data.fyCount + '套');
@@ -348,7 +348,7 @@ function getOrgAndLocation(userid) {
   // OrgAndLocationOptions(data)
   //
   // })
-  Application.Util.ajaxConstruct(Application.serverHost,'POST',{ userid: userid },'text/xml;charset=UTF-8',function (data) {
+  Application.Util.ajaxConstruct(Application.serverHost,'POST',{ userid: Application.userid },'text/xml;charset=UTF-8',function (data) {
       OrgAndLocationOptions(data);
     },function name(params) {
       console.log('error')
@@ -498,7 +498,7 @@ function getManagementSituation() {
   // })
 
 
-  Application.Util.ajaxConstruct(Application.serverHost,'POST',{ userid: userid },'text/xml;charset=UTF-8',function (data) {
+  Application.Util.ajaxConstruct(Application.serverHost,'POST',{ userid: Application.userid },'text/xml;charset=UTF-8',function (data) {
       getCompanyAndHouse(data);
       receivablesAndstatistics(data);
     },function name(params) {
@@ -539,7 +539,7 @@ function getCompanyAndHouse(data) {
     var areaArr = [];
     areaArr.push({ id: '', text: '全部' });
     for (var i = 0, len = locationObj[e.params.data.id].length; i < len; i++) {
-      areaArr.push({ id: 0, text: locationObj[e.params.data.id][i] })
+      areaArr.push({ id: locationObj[e.params.data.id][i].firstvalue, text: locationObj[e.params.data.id][i].secondvalue })
     }
     $('#managementsituationhouseselect').empty();
     $('#managementsituationhouseselect').select2({
@@ -623,7 +623,8 @@ function receivablesAndstatistics(data) {
     getStatisticData(e.params.data.text,$('#statisticshouse').find("option:selected").text(),$('#statisticsretail').find("option:selected").text())
 
     for (var i = 0, len = locationObj[e.params.data.id].length; i < len; i++) {
-      areaArr.push({ id: 0, text: locationObj[e.params.data.id][i] })
+
+      areaArr.push({ id: locationObj[e.params.data.id][i].firstvalue, text: locationObj[e.params.data.id][i].secondvalue })
     }
     $('#statisticshouse').empty();
     $('#statisticshouse').select2({
