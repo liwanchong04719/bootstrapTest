@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <link rel="stylesheet" type="text/css"
+          href="../lib/Flat-UI-master/dist/css/vendor/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../lib/Flat-UI-master/dist/css/flat-ui.css"/>
+    <link rel="stylesheet" href="../lib/accordion-multi-menu/css/style.css">
+
+
+    <link rel="stylesheet" type="text/css" href="../css/map.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/tabstyle.css"/>
+    <style type="text/css">
+        body, html {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            font-family: "微软雅黑";
+        }
+
+        p {
+            margin-left: 5px;
+            font-size: 14px;
+        }
+    </style>
+    <title>添加复杂内容的信息窗口</title>
+</head>
+<body>
+<div id="houseInfo"
+     style="width: 100%;;overflow: auto;padding: 0px 300px">
+    <div>
+        <h6 style="text-align: center;padding-bottom:3px;margin-top: 5px;margin-bottom: 10px;border-bottom: 1px solid #e8e8e8">
+            房产信息</h6>
+    </div>
+    <div>
+        <img style="width: 100%;height: 200px" src="../lib/FlexSlider/demo/images/kitchen_adventurer_donut.jpg"/>
+    </div>
+    <div>
+        <ul class="fields" style="">
+            <li><label>业主：</label><label id="yezhu">---</label></li>
+            <li><label>建筑面积：</label><label id="jzmj">---</label></li>
+            <li><label>业态：</label><label id="yetai">---</label></li>
+            <li><label>座落：</label><label id="zuoluo">---</label></li>
+            <li><label>出租率：</label><label id="czl">---</label></li>
+            <li><label>现平均单价：</label><label id="xpjdj">---</label></li>
+        </ul>
+    </div>
+    <div class='wrapper'>
+        <ul class='items'>
+            <li>
+                <a href='#'>出租率及平均单价趋势 <i class="glyphicon glyphicon-chevron-right"></i></a>
+                <ul class='sub-items'>
+                    <li>
+                        <div id="barChart" style="height: 250px;width: 350px">
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href='#'>对方房产信息<i class="glyphicon glyphicon-chevron-right"></i></a>
+                <ul class='sub-items'>
+                    <li>
+                        <div style="width: 100%;padding: 10px 20px">
+                            <div><span>北京城建大厦</span></div>
+                            <div><span>业主单位:北京城建大厦</span></div>
+                            <div><span>建筑面积：23444平方米</span></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div style="width: 100%;padding: 10px 20px">
+                            <div><span>北京城建大厦</span></div>
+                            <div><span>业主单位:北京城建大厦</span></div>
+                            <div><span>建筑面积：23444平方米</span></div>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+<script src="../lib/Flat-UI-master/dist/js/vendor/jquery.min.js"></script>
+<script src="../lib/select2-master/dist/js/select2.full.min.js"></script>
+<script src="../lib/echarts/echarts.js"></script>
+<script src="../scripts/Application.js"></script>
+<script src="../scripts/Application.Util.js"></script>
+<script src="../scripts/housePanel.js"></script>
+</html>
