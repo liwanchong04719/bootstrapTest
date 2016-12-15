@@ -46,7 +46,7 @@ $(function () {
           $('#statisticsretail').select2({
             data: retails
           }).on('select2:select', function (event) {
-             getStatisticData($("#statisticscompany").find("option:selected").text(),$("#statisticshouse").find("option:selected").text(),event.params.data.text)
+             getStatisticData($("#statisticscompany").select2('val'),$("#statisticshouse").select2('val'),event.params.data.id)
           });
 
         })
@@ -386,7 +386,7 @@ function OrgAndLocationOptions(data) {
     var areaArr = [];
     areaArr.push({ id: '', text: '全部' });
     for (var i = 0, len = locationObj[e.params.data.id].length; i < len; i++) {
-      areaArr.push({ id: 0, text: locationObj[e.params.data.id][i] })
+      areaArr.push({ id:  locationObj[e.params.data.id].firstvalue, text: locationObj[e.params.data.id].secondvalue })
     }
     $('#propertyAreaSelect').empty();
     $('#propertyAreaSelect').select2({
@@ -620,7 +620,7 @@ function receivablesAndstatistics(data) {
     var areaArr = [];
     areaArr.push({ id: '', text: '全部' });
 
-    getStatisticData(e.params.data.text,$('#statisticshouse').find("option:selected").text(),$('#statisticsretail').find("option:selected").text())
+    getStatisticData(e.params.data.id,$('#statisticshouse').select2('val'),$('#statisticsretail').select2('val'))
 
     for (var i = 0, len = locationObj[e.params.data.id].length; i < len; i++) {
 
@@ -631,7 +631,7 @@ function receivablesAndstatistics(data) {
       data: areaArr
     }).on('select2:select', function (event) {
       //getPieGraphData(e.params.data.id, event.params.data.text);
-      getStatisticData($('#statisticscompany').find("option:selected").text(),event.params.data.text,$('#statisticsretail').find("option:selected").text())
+      getStatisticData($('#statisticscompany').select2('val'),event.params.data.id,$('#statisticsretail').select2('val'))
     });
 
   });
@@ -775,25 +775,27 @@ function getRegionAndRetail(data) {
         $('#managementsituationretailselect').select2({
           data: retailArr
         }).on('select2:select', function (event) {
-          getBarData(e.params.data.text, event.params.data.text);
+          getBarData(e.params.data.text, event.params.data.id);
         });
-      } else {
-        //
-        initOfRetail(function (data) {
-          var retails = [];
-          retails.push({ id: "", text: "全部" });
-          for (var i = 0, len = data.length; i < len; i++) {
-            retails.push({ id: data[i].fristvalue, text: data[i].secondvalue });
-          }
-          $('#managementsituationretailselect').empty();
-          $('#managementsituationretailselect').select2({
-            data: retails
-          }).on('select2:select', function (event) {
-            getBarData(e.params.data.text, event.params.data.text);
-          });
-
-        })
       }
+
+      // else {
+      //   //
+      //   initOfRetail(function (data) {
+      //     var retails = [];
+      //     retails.push({ id: "", text: "全部" });
+      //     for (var i = 0, len = data.length; i < len; i++) {
+      //       retails.push({ id: data[i].fristvalue, text: data[i].secondvalue });
+      //     }
+      //     $('#managementsituationretailselect').empty();
+      //     $('#managementsituationretailselect').select2({
+      //       data: retails
+      //     }).on('select2:select', function (event) {
+      //       getBarData(e.params.data.text, event.params.data.text);
+      //     });
+      //
+      //   })
+      // }
 
 
     });
