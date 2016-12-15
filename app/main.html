@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=9" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <title>Map查询界面</title>
+    <link rel="stylesheet" type="text/css"
+          href="../lib/Flat-UI-master/dist/css/vendor/bootstrap/css/bootstrap.min.css"/>
+    <link href="../lib/select2-master/dist/css/select2.css" rel="stylesheet">
+    <link href="../lib/select2-master/dist/css/select2-bootstrap-theme.css" rel="stylesheet">
+    <link rel="stylesheet" href="../lib/accordion-multi-menu/css/style.css">
+    <style>
+        html,body{
+            font-family: 'Microsoft YaHei', '微软雅黑', '黑体', Arial, 'Times New Roman', sans-serif;
+        }
+
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <div class="items" style="line-height: 39px;padding: 0px 18px;font-weight: 700;border: 0;border-bottom: 1px solid #e8e8e8">
+        资产盘点
+    </div>
+    <div class="items" style="line-height: 30px;padding: 0px 18px;background-color: #F8F8F7;color: #81CEF5;font-weight: 700;border: 0">
+        现有资产
+    </div>
+    <div class="items" style="padding: 5px 18px;border: 0;color: #C5C2BC" >
+        <div style="width: 100%">
+            <div style="display: inline-block;width: 33%;margin-right: -3px;text-align: center">
+                <div style="line-height: 18px">
+                    <span>地产（块）</span>
+                </div>
+                <div style="line-height: 30px">
+                    <span style="color: #FF904F;font-size: 20px">
+                        100
+                    </span>
+                </div>
+            </div>
+            <div style="display: inline-block;width: 33%;margin-right: -3px;text-align: center">
+                <div style="line-height: 18px">
+                    <span>房产（座）</span>
+                </div>
+                <div style="line-height: 30px">
+                <span style="color: #FF904F;font-size: 20px">
+                    230
+                </span>
+                </div>
+            </div>
+            <div style="display: inline-block;width: 33%;margin-right: -3px;text-align: center">
+                <div style="line-height: 18px">
+                    <span>房源（套）</span>
+                </div>
+                <div style="line-height: 30px">
+                    <span style="color: #FF904F;font-size: 20px">
+                        23413
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="items" style="line-height: 30px;padding: 0px 18px;background-color: #F8F8F7;color: #81CEF5;font-weight: 700;border: 0">
+        本月新增
+    </div>
+    <div class="items" style="padding: 5px 18px;border: 0;color: #C5C2BC" >
+        <div style="width: 100%">
+            <div style="display: inline-block;width: 33%;margin-right: -3px;text-align: center">
+                <div style="line-height: 18px">
+                    <span>地产（块）</span>
+                </div>
+                <div style="line-height: 30px">
+                    <span style="color: #FF904F;font-size: 20px">
+                        2
+                    </span>
+                </div>
+            </div>
+            <div style="display: inline-block;width: 33%;margin-right: -3px;text-align: center">
+                <div style="line-height: 18px">
+                    <span>房产（座）</span>
+                </div>
+                <div style="line-height: 30px">
+                <span style="color: #FF904F;font-size: 20px">
+                    11
+                </span>
+                </div>
+            </div>
+            <div style="display: inline-block;width: 33%;margin-right: -3px;text-align: center">
+                <div style="line-height: 18px">
+                    <span>房源（套）</span>
+                </div>
+                <div style="line-height: 30px">
+                    <span style="color: #FF904F;font-size: 20px">
+                        324
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="items" style="line-height: 30px;padding: 0px 18px;color: #81CEF5;font-weight: 700;border:0;border-top:1px solid #e8e8e8;border-bottom:1px solid #e8e8e8">
+        业态比率
+    </div>
+    <div class="items" style="height:220px;padding: 0px 18px;background-color: #F8F8F7;border: 0;padding-top: 30px;padding-bottom: 10px">
+        <div style="margin-top: -29px">
+            <form class="form-inline">
+                <label for="propertyCompanySelect" style="color: #1e3657;font-weight: 700">按公司：</label>
+                <select id="propertyCompanySelect" data-toggle="select" name="inverse-select" style="min-width: 100px" >
+
+                </select>
+                <label for="propertyAreaSelect" style="color: #1e3657;font-weight: 700">按区域：</label>
+                <select id="propertyAreaSelect" data-toggle="select" name="inverse-select" style="min-width: 100px">
+
+                </select>
+            </form>
+        </div>
+        <div id="pieChart" style="width: 100%;height: 100%;"></div>
+    </div>
+</div>
+<div class='wrapper'>
+    <div class="items" style="line-height: 39px;padding: 0px 18px;font-weight: 700;border: 0;border-bottom: 1px solid #e8e8e8">
+         经营状况
+    </div>
+    <div>
+        <div style="width: 100%;padding: 10px 20px;padding-top: 30px">
+            <div style="margin-top: -29px">
+                <form class="form-inline">
+                    <label style="color: #1e3657;font-weight: 700">区域：</label>
+                    <select id="managementsituationregionselect" data-toggle="select" name="inverse-select" style="min-width: 100px">
+
+                    </select>
+                    <label   style="color: #1e3657;font-weight: 700">按业态：</label>
+                    <select id="managementsituationretailselect" data-toggle="select" name="inverse-select" style="min-width: 100px">
+
+                    </select>
+                </form>
+            </div>
+        </div>
+        <div style="width: 100%;padding: 10px 20px;height: 100px">
+            <div style="float: left;height: 80px;background-color: #E7F0FF;width: 49%;border-radius: 4px;">
+                <div style="width: 100%;height: 100%;padding: 10px 20px;color: #00AEF5">
+                    <div style="font-size: 18px">出租率</div>
+                    <table cellpadding="0" cellspacing="0" border="none" style="width: 100%;border: none">
+                        <tr>
+                            <td>已租</td>
+                            <td>未租</td>
+                            <td>自用</td>
+                        </tr>
+                        <tr>
+                            <td>86%</td>
+                            <td>12%</td>
+                            <td>2%</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div style="float:right;height: 80px;background-color:#FFECF0;width: 49%;border-radius: 4px">
+                <div style="width: 100%;height: 100%;padding: 10px 20px;color: #FF6890">
+                    <div style="font-size: 18px"> 平均单价</div>
+                    <table cellpadding="0" cellspacing="0" border="none" style="width: 100%;border: none">
+                        <tr>
+                            <td>本月</td>
+                            <td>6.7</td>
+                            <td>平方米/月</td>
+                        </tr>
+                        <tr>
+                            <td>上月</td>
+                            <td>6.02</td>
+                            <td>平方米/月</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div style="width: 100%;padding: 10px 20px;">
+            <div id="barChart" style="width: 100%;height: 200px"></div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="../lib/Flat-UI-master/dist/js/vendor/jquery.min.js"></script>
+<script src="../lib/select2-master/dist/js/select2.full.min.js"></script>
+<script src="../lib/echarts/echarts.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $.fn.select2.defaults.set("theme", "bootstrap");
+        initPieChart([
+            {value:335, name:'自用'},
+            {value:310, name:'工业用房'},
+            {value:234, name:'商业用房'},
+            {value:135, name:'办公楼'}
+        ]);
+
+        $('#propertyCompanySelect').select2({
+            data: [{ id: '', text: "全部" }]
+        })
+        $('#propertyAreaSelect').select2({
+            data: [{ id: '', text: "全部" }]
+        })
+
+        initBarChart();
+        $('#managementsituationregionselect').select2({
+            data: [{ id: '', text: "全部" }]
+        })
+        $('#managementsituationretailselect').select2({
+            data: [{ id: '', text: "全部" }]
+        })
+
+    })
+
+    function initPieChart(data) {
+        var dom = document.getElementById("pieChart");
+        var myChart = echarts.init(dom);
+        var app = {};
+        option = null;
+        app.title = '';
+
+        option = {
+            backgroundColor: '#F8F8F7',
+            title: {
+                text: '',
+                subtext: '',
+                x: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    mark: { show: true },
+                    dataView: { show: false, readOnly: false },
+                    magicType: {
+                        show: true,
+                        type: ['pie', 'funnel'],
+                        option: {
+                            funnel: {
+                                x: '25%',
+                                width: '50%',
+                                funnelAlign: 'left',
+                                max: 1548
+                            }
+                        }
+                    },
+                    restore: { show: false },
+                    saveAsImage: { show: false }
+                }
+            },
+            calculable: true,
+            series: [
+                {
+                    name: '业态比率',
+                    type: 'pie',
+                    radius: ['50%', '70%'],
+                    data: data
+                }
+            ]
+        };
+        if (option && typeof option === "object") {
+            myChart.setOption(option, true);
+        }
+    }
+
+    function initBarChart(data) {
+        var dom = document.getElementById("barChart");
+        var myChart = echarts.init(dom);
+        var app = {};
+        option = {
+            backgroundColor: '#fff',
+            calculable: true,
+            xAxis: [
+                {
+                    type: 'category',
+                    data: ['北京公司', '城建置业', '3公司', '4公司', '5公司', '6公司', '7公司', '8公司', '9公司', '10公司', '11公司', '12公司']
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    name: '100%',
+                    axisLabel: {
+                        formatter: '{value}'
+                    }
+                },
+                {
+                    type: 'value',
+                    name: '单价',
+                    axisLabel: {
+                        formatter: '{value}元'
+                    }
+                }
+            ],
+            series: [
+                {
+                    name: '出租率',
+                    type: 'bar',
+                    itemStyle: {
+                        normal: { color: '#0099FF' }
+                    },
+                    data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 90, 100, 32.6, 20.0, 6.4, 3.3]
+                },
+                {
+                    name: '单价',
+                    type: 'line',
+                    yAxisIndex: 1,
+                    itemStyle: {
+                        normal: { color: '#C06410' }
+                    },
+                    data: [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
+                }
+            ]
+        };
+
+        if (option && typeof option === "object") {
+            myChart.setOption(option, true);
+        }
+    }
+</script>
+</html>
