@@ -457,46 +457,46 @@ function initTreeOfZone() {
 	});
 }
 function initTreeOfCompany() {
-	$.post("http://127.0.0.1:8088/" + new Date().getTime(),
-		setParam(
-			'/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
-			{'userid':Application.userid},
-			'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
-			'getHierarchyOrg'
-		), function (data) {
-			var startindex = data.indexOf('<ns1:return>');
-			var endindex = data.indexOf('</ns1:return>');
-			data = data.substring(startindex+12,endindex)
-			var treeData = JSON.parse(data);
-			$('#treeOfCompany').treeview({ expandIcon: "glyphicon glyphicon-stop",
-				levels: 1,
-				color:'#2a6496',
-				showCheckbox: true,
-				showBorder: false,
-				backColor: "#f6f7fa",
-				onNodeChecked:addCompanyQueryData,
-				onNodeUnchecked: minusCompanyQueryData,
-				data: treeData});
-		});
+// 	$.post("http://127.0.0.1:8088/" + new Date().getTime(),
+// 		setParam(
+// 			'/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
+// 			{'userid':Application.userid},
+// 			'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+// 			'getHierarchyOrg'
+// 		), function (data) {
+// 			var startindex = data.indexOf('<ns1:return>');
+// 			var endindex = data.indexOf('</ns1:return>');
+// 			data = data.substring(startindex+12,endindex)
+// 			var treeData = JSON.parse(data);
+// 			$('#treeOfCompany').treeview({ expandIcon: "glyphicon glyphicon-stop",
+// 				levels: 1,
+// 				color:'#2a6496',
+// 				showCheckbox: true,
+// 				showBorder: false,
+// 				backColor: "#f6f7fa",
+// 				onNodeChecked:addCompanyQueryData,
+// 				onNodeUnchecked: minusCompanyQueryData,
+// 				data: treeData});
+// 		});
 
-// 	Application.Util.ajaxConstruct(Application.serverHost, 'POST', 	{'userid':Application.userid}, 'text/xml;charset=UTF-8', function (data) {
-// 		$('#treeOfCompany').treeview({ expandIcon: "glyphicon glyphicon-stop",
-// 			levels: 1,
-// 			color:'#2a6496',
-// 			showCheckbox: true,
-// 			showBorder: false,
-// 			backColor: "#f6f7fa",
-// 			onNodeChecked:addCompanyQueryData,
-// 			onNodeUnchecked: minusCompanyQueryData,
-// 			data: data});
-// 	}, function name(params) {
-// 		console.log('error')
-// 	},
-// 	{
-// 		"xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
-// 		"xmlnsName": "jin",
-// 		"methodName": "getHierarchyOrg"
-// 	});
+	Application.Util.ajaxConstruct(Application.serverHost, 'POST', 	{'userid':Application.userid}, 'text/xml;charset=UTF-8', function (data) {
+		$('#treeOfCompany').treeview({ expandIcon: "glyphicon glyphicon-stop",
+			levels: 1,
+			color:'#2a6496',
+			showCheckbox: true,
+			showBorder: false,
+			backColor: "#f6f7fa",
+			onNodeChecked:addCompanyQueryData,
+			onNodeUnchecked: minusCompanyQueryData,
+			data: data});
+	}, function name(params) {
+		console.log('error')
+	},
+	{
+		"xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+		"xmlnsName": "jin",
+		"methodName": "getHierarchyOrg"
+	});
 }
 function initTreeOfRetail() {
 // 	$.post("http://127.0.0.1:8088/" + new Date().getTime(),
