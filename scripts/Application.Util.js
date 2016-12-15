@@ -72,13 +72,7 @@ Application.Util.ajaxConstruct = function (url, type, data, dataType, successFuc
     // }
 
 
-  function callback(data) {
-    var startindex = data.indexOf('<ns1:return>');
-    var endindex = data.indexOf('</ns1:return>');
-    data = data.substring(startindex + 12, endindex)
-    data = JSON.parse(data);
-    successFuc (data)
-  }
+
 
     $.ajax({
         url: url,
@@ -86,8 +80,15 @@ Application.Util.ajaxConstruct = function (url, type, data, dataType, successFuc
         data: soapMessage,
         contentType: "text/xml;charset=UTF-8",//设置返回值类型xml
         dataType: dataType,
-        success: callback,
-        error: errorFuc
+      error: function (data) {
+          data =data['responseText'] || data;
+          var startindex = data.indexOf('<ns1:return>');
+          var endindex = data.indexOf('</ns1:return>');
+          data = data.substring(startindex + 12, endindex)
+          data = JSON.parse(data);
+          successFuc (data)
+        },
+  success: errorFuc
     });
 };
 
