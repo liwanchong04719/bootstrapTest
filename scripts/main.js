@@ -545,7 +545,7 @@ function getCompanyAndHouse(data) {
     $('#managementsituationhouseselect').select2({
       data: areaArr
     }).on('select2:select', function (event) {
-      getPieGraphData(e.params.data.id, event.params.data.text);
+      getPieGraphData(e.params.data.id, event.params.data.id);
     });
 
   });
