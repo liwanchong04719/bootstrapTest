@@ -1,7 +1,8 @@
 /**
- * Created by liwanchong on 2016/11/22.
+ * Created by liwanchong on 2016/12/14.
  */
-var test =
+var info =
+  '<div id="houseInfo" style="height: 200px;width: 400px;overflow: auto;">' +
   '<h6 style="text-align: center;padding-bottom:3px;margin-top: 5px;margin-bottom: 10px;border-bottom: 1px solid #e8e8e8">房产信息</h6>' +
   '  <img style="width: 100%;height: 200px" src="../lib/FlexSlider/demo/images/kitchen_adventurer_donut.jpg"/>' +
   '<ul class="fields" style="">' +
@@ -22,8 +23,9 @@ var test =
   '</div></li></ul> </li>' +
   '<li>' +
   '<a href="#">对方房产信息<i class="glyphicon glyphicon-chevron-right"></i></a>' +
-  '<ul class="sub-items">' +
+  '<ul class="sub-items" id="dyfcxx">' +
   '</ul>' +
   '</li>' +
   ' </ul>' +
-  '</div>';
+  '</div>'+
+  '</div>'
