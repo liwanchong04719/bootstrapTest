@@ -187,6 +187,19 @@ function initBarChart(data) {
   var dom = document.getElementById("barChart");
   var myChart = echarts.init(dom);
   var app = {};
+
+
+
+  var xAxis= [];
+  var chuzulv = [];
+  var pingjundanjia = [];
+
+  for (var item in data){
+    xAxis.push(data[item].name);
+    chuzulv.push(data[item].chuzulv*100);
+    pingjundanjia.push(data[item].pingjundanjia)
+  }
+
   option = {
     backgroundColor: '#fff',
     tooltip: {
@@ -212,7 +225,16 @@ function initBarChart(data) {
     xAxis: [
       {
         type: 'category',
-        data: ['北京城建集团投资有限公司', '城建置业', '3公司', '4公司', '5公司', '6公司', '7公司', '8公司', '9公司', '10公司', '11公司', '12公司']
+        //data: ['北京城建集团投资有限公司', '城建置业', '3公司', '4公司', '5公司', '6公司', '7公司', '8公司', '9公司', '10公司', '11公司', '12公司']
+        data:xAxis,
+        axisLabel:{
+        interval:0,
+        rotate:45,
+        margin:2,
+        textStyle:{
+          color:"#222"
+        }
+      },
       }
     ],
     yAxis: [
@@ -238,7 +260,8 @@ function initBarChart(data) {
         itemStyle: {
           normal: { color: '#0099FF' }
         },
-        data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 90, 100, 32.6, 20.0, 6.4, 3.3]
+        //data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 90, 100, 32.6, 20.0, 6.4, 3.3]
+        data:chuzulv
       },
       {
         name: '单价',
@@ -247,7 +270,8 @@ function initBarChart(data) {
         itemStyle: {
           normal: { color: '#C06410' }
         },
-        data: [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
+        //data: [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
+        data:pingjundanjia
       }
     ]
   };
