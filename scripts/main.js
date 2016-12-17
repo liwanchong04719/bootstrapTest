@@ -410,7 +410,7 @@ function OrgAndLocationOptions(data) {
     var areaArr = [];
     areaArr.push({ id: '', text: '全部' });
     for (var i = 0, len = locationObj[e.params.data.id].length; i < len; i++) {
-      areaArr.push({ id:  locationObj[e.params.data.id].firstvalue, text: locationObj[e.params.data.id].secondvalue })
+      areaArr.push({ id:  locationObj[e.params.data.id][i].firstvalue, text: locationObj[e.params.data.id][i].secondvalue })
     }
     $('#propertyAreaSelect').empty();
     $('#propertyAreaSelect').select2({

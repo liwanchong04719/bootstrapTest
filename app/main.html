@@ -33,7 +33,7 @@
                     <span>地产（块）</span>
                 </div>
                 <div style="line-height: 30px">
-                    <span style="color: #FF904F;font-size: 20px">
+                    <span class="landcount" style="color: #FF904F;font-size: 20px">
                         100
                     </span>
                 </div>
@@ -43,7 +43,7 @@
                     <span>房产（座）</span>
                 </div>
                 <div style="line-height: 30px">
-                <span style="color: #FF904F;font-size: 20px">
+                <span class="housecount" style="color: #FF904F;font-size: 20px">
                     230
                 </span>
                 </div>
@@ -53,7 +53,7 @@
                     <span>房源（套）</span>
                 </div>
                 <div style="line-height: 30px">
-                    <span style="color: #FF904F;font-size: 20px">
+                    <span class="departmentcount" style="color: #FF904F;font-size: 20px">
                         23413
                     </span>
                 </div>
@@ -70,7 +70,7 @@
                     <span>地产（块）</span>
                 </div>
                 <div style="line-height: 30px">
-                    <span style="color: #FF904F;font-size: 20px">
+                    <span class="landcountchange" style="color: #FF904F;font-size: 20px">
                         2
                     </span>
                 </div>
@@ -80,7 +80,7 @@
                     <span>房产（座）</span>
                 </div>
                 <div style="line-height: 30px">
-                <span style="color: #FF904F;font-size: 20px">
+                <span class="housecountchange" style="color: #FF904F;font-size: 20px">
                     11
                 </span>
                 </div>
@@ -90,7 +90,7 @@
                     <span>房源（套）</span>
                 </div>
                 <div style="line-height: 30px">
-                    <span style="color: #FF904F;font-size: 20px">
+                    <span class="departmentcountchange"  style="color: #FF904F;font-size: 20px">
                         324
                     </span>
                 </div>
@@ -180,30 +180,37 @@
 <script src="../lib/Flat-UI-master/dist/js/vendor/jquery.min.js"></script>
 <script src="../lib/select2-master/dist/js/select2.full.min.js"></script>
 <script src="../lib/echarts/echarts.js"></script>
+<script src="../scripts/Application.js"></script>
+<script src="../scripts/Application.Util.js"></script>
 <script type="text/javascript">
     $(function () {
+
+        getExistingAssets(Application.userid);
+        getExistingChanges(Application.userid);
+        getOrgAndLocation(Application.userid);
+        getLocationAndYetai(Application.userid);
         $.fn.select2.defaults.set("theme", "bootstrap");
-        initPieChart([
-            {value:335, name:'自用'},
-            {value:310, name:'工业用房'},
-            {value:234, name:'商业用房'},
-            {value:135, name:'办公楼'}
-        ]);
+//        initPieChart([
+//            {value:335, name:'自用'},
+//            {value:310, name:'工业用房'},
+//            {value:234, name:'商业用房'},
+//            {value:135, name:'办公楼'}
+//        ]);
 
-        $('#propertyCompanySelect').select2({
-            data: [{ id: '', text: "全部" }]
-        })
-        $('#propertyAreaSelect').select2({
-            data: [{ id: '', text: "全部" }]
-        })
-
-        initBarChart();
-        $('#managementsituationregionselect').select2({
-            data: [{ id: '', text: "全部" }]
-        })
-        $('#managementsituationretailselect').select2({
-            data: [{ id: '', text: "全部" }]
-        })
+//        $('#propertyCompanySelect').select2({
+//            data: [{ id: '', text: "全部" }]
+//        })
+//        $('#propertyAreaSelect').select2({
+//            data: [{ id: '', text: "全部" }]
+//        })
+//
+//        initBarChart();
+//        $('#managementsituationregionselect').select2({
+//            data: [{ id: '', text: "全部" }]
+//        })
+//        $('#managementsituationretailselect').select2({
+//            data: [{ id: '', text: "全部" }]
+//        })
 
     })
 
@@ -215,7 +222,7 @@
         app.title = '';
 
         option = {
-            backgroundColor: '#F8F8F7',
+            backgroundColor: '#fff',
             title: {
                 text: '',
                 subtext: '',
@@ -224,6 +231,12 @@
             tooltip: {
                 trigger: 'item',
                 formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            legend: {
+                orient: 'horizontal',
+                x: 'center',
+                y: 'bottom',
+                data: ['自用', '工业用房', '商业用房', '办公楼']
             },
             toolbox: {
                 show: true,
@@ -243,13 +256,13 @@
                         }
                     },
                     restore: { show: false },
-                    saveAsImage: { show: false }
+                    saveAsImage: { show: true }
                 }
             },
             calculable: true,
             series: [
                 {
-                    name: '业态比率',
+                    name: '访问来源',
                     type: 'pie',
                     radius: ['50%', '70%'],
                     data: data
@@ -315,5 +328,314 @@
             myChart.setOption(option, true);
         }
     }
+
+
+    //资产盘点/现有资产
+
+    function getExistingAssets(userid) {
+
+//        Application.Util.ajaxConstruct(Application.serverHost, 'POST', { userid: Application.userid }, 'text/xml;charset=UTF-8', function (data) {
+//
+//                    $('.landcount').text(data.dcCount);
+//                    $('.housecount').text(data.fcCount);
+//                    $('.departmentcount').text(data.fyCount);
+//                }, function name(params) {
+//                    console.log('error')
+//                },
+//                {
+//                    "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+//                    "xmlnsName": "jin",
+//                    "methodName": "xianyouzichan"
+//                }
+//        );
+
+        $.post("http://127.0.0.1:8088/" + new Date().getTime(),
+                {
+                    "url": "118.26.130.12",
+                    "port": '8080',
+                    "path": "/uapws/service/nc.itf.pims.web.JingYingZhuangKuang",
+                    "data": JSON.stringify({ userid: userid }),
+                    "ajaxoptions": {
+                        "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+                        "xmlnsName": "jin",
+                        "methodName": "xianyouzichan"
+                    }
+                },
+                function (data) {
+                    var startindex = data.indexOf('<ns1:return>');
+                    var endindex = data.indexOf('</ns1:return>');
+                    data = data.substring(startindex + 12, endindex)
+                    data = JSON.parse(data);
+                    $('.landcount').text(data.dcCount);
+                    $('.housecount').text(data.fcCount);
+                    $('.departmentcount').text(data.fyCount);
+                })
+
+
+    }
+
+
+    /**
+     * 资产改变情况
+     * @param userid
+     */
+    function getExistingChanges(userid) {
+        $.post("http://127.0.0.1:8088/" + new Date().getTime(),
+                {
+                    "url": "118.26.130.12",
+                    "port": '8080',
+                    "path": "/uapws/service/nc.itf.pims.web.JingYingZhuangKuang",
+                    "data": JSON.stringify({ userid: userid }),
+                    "ajaxoptions": {
+                        "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+                        "xmlnsName": "jin",
+                        "methodName": "benyuexinzeng"
+                    }
+                },
+                function (data) {
+                    var startindex = data.indexOf('<ns1:return>');
+                    var endindex = data.indexOf('</ns1:return>');
+                    data = data.substring(startindex + 12, endindex)
+                    data = JSON.parse(data);
+                    $('.landcountchange').text(data.dcCount);
+                    $('.housecountchange').text(data.fcCount);
+                    $('.departmentcountchange').text(data.fyCount);
+                })
+    }
+
+
+    //资产盘点环状图
+    function getOrgAndLocation(userid) {
+
+          $.post("http://127.0.0.1:8088/" + new Date().getTime(),
+             {
+               "url": "118.26.130.12",
+               "port": '8080',
+               "path": "/uapws/service/nc.itf.pims.web.JingYingZhuangKuang",
+               "data": JSON.stringify({userid:userid}),
+               "ajaxoptions": {
+                 "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+                 "xmlnsName": "jin",
+                 "methodName": "getPk_orgAndLocation"
+               }
+             },
+             function (data) {
+                 var startindex = data.indexOf('<ns1:return>');
+                 var endindex = data.indexOf('</ns1:return>');
+                 data = data.substring(startindex + 12, endindex)
+               data = JSON.parse(data);
+               console.log(data)
+         OrgAndLocationOptions(data)
+
+         })
+//        Application.Util.ajaxConstruct(Application.serverHost,'POST',{ userid: Application.userid },'text/xml;charset=UTF-8',function (data) {
+//                    OrgAndLocationOptions(data);
+//                },function name(params) {
+//                    console.log('error')
+//                },
+//                {
+//                    "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+//                    "xmlnsName": "jin",
+//                    "methodName": "getPk_orgAndLocation"
+//                }
+//        )
+
+    }
+
+    //生成按公司下拉列表
+    function OrgAndLocationOptions(data) {
+        var companyarr = [{ id: '', text: "全部" }]
+        var locationObj = {};
+        for (var i = 0, len = data.length; i < len; i++) {
+            companyarr.push({ id: data[i].firstvalue, text: data[i].secondvalue, location: data[i].location });
+            locationObj[data[i].firstvalue] = data[i].location;
+        }
+
+        $('#propertyCompanySelect').select2(
+                {
+                    data: companyarr
+                }
+        ).on('select2:select', function (e) {
+
+            getCircleGraphData(e.params.data.id, "");
+            var areaArr = [];
+            areaArr.push({ id: 'gggggg', text: '全部' });
+            for (var i = 0, len = locationObj[e.params.data.id].length; i < len; i++) {
+                areaArr.push({ id:  locationObj[e.params.data.id][i].firstvalue, text: locationObj[e.params.data.id][i].secondvalue })
+            }
+            $('#propertyAreaSelect').empty();
+            $('#propertyAreaSelect').select2({
+                data: areaArr
+            }).on('select2:select', function (event) {
+                //getCircleGraphData(e.params.data.id, event.params.data.text);
+            });
+
+        });
+
+        $('#propertyAreaSelect').select2({
+            data: [{ id: '', text: "全部" }]
+        })
+
+        getCircleGraphData('', '');
+
+    }
+
+
+    //业态比率环状图
+    function getCircleGraphData(company, area) {
+         $.post("http://127.0.0.1:8088/" + new Date().getTime(),
+           {
+             "url": "118.26.130.12",
+             "port": '8080',
+             "path": "/uapws/service/nc.itf.pims.web.JingYingZhuangKuang",
+             "data": JSON.stringify({ 'gongsi': company, 'location': area, 'userid': '1001ZZ10000000018FJF' }),
+             "ajaxoptions": {
+               "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+               "xmlnsName": "jin",
+               "methodName": "zichanpandianhuanzhuangtu"
+             }
+           },
+           function (data) {
+             var startindex = data.indexOf('<ns1:return>');
+             var endindex = data.indexOf('</ns1:return>');
+             data = data.substring(startindex + 12, endindex)
+             data = JSON.parse(data);
+             var pieData = [];
+             for (var i = 0, len = data.length; i < len; i++) {
+               pieData.push({ name: data[i].fristvalue, value: data[i].secondvalue });
+             }
+
+             initPieChart(pieData);
+           })
+
+
+//        Application.Util.ajaxConstruct(Application.serverHost,'POST',{ 'gongsi': company, 'location': area, 'userid': Application.userid },'text/xml;charset=UTF-8',function (data) {
+//                    var pieData = [];
+//                    for (var i = 0, len = data.length; i < len; i++) {
+//                        pieData.push({ name: data[i].fristvalue, value: data[i].secondvalue });
+//                    }
+//
+//                    initPieChart(pieData);
+//                },function name(params) {
+//                    console.log('error')
+//                },
+//                {
+//                    "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+//                    "xmlnsName": "jin",
+//                    "methodName": "zichanpandianhuanzhuangtu"
+//                }
+//        )
+
+
+    }
+
+
+
+    //区域业态查询
+    function getLocationAndYetai(userid) {
+          $.post("http://127.0.0.1:8088/" + new Date().getTime(),
+           {
+             "url": "118.26.130.12",
+             "port": '8080',
+             "path": "/uapws/service/nc.itf.pims.web.JingYingZhuangKuang",
+             "data": JSON.stringify({userid:userid}),
+             "ajaxoptions": {
+               "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+               "xmlnsName": "jin",
+               "methodName": "getLocationAndYetai"
+             }
+           },
+           function (data) {
+               var startindex = data.indexOf('<ns1:return>');
+               var endindex = data.indexOf('</ns1:return>');
+               data = data.substring(startindex + 12, endindex)
+             data = JSON.parse(data);
+             console.log(data)
+
+             getRegionAndRetail(data);
+         })
+
+//        Application.Util.ajaxConstruct(Application.serverHost,'POST',{userid:userid},'text/xml;charset=UTF-8',function (data) {
+//                    getRegionAndRetail(data);
+//
+//                },function name(params) {
+//                    console.log('error')
+//                },
+//                {
+//                    "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+//                    "xmlnsName": "jin",
+//                    "methodName": "getLocationAndYetai"
+//                }
+//        )
+
+    }
+
+
+
+    function getRegionAndRetail(data) {
+        var regionarr = [{ id: '', text: '全部' }]
+        var retailObj = {};
+        var locationObj = {};
+        for (var i = 0, len = data.length; i < len; i++) {
+            regionarr.push({ id: data[i].firstvalue, text: data[i].secondvalue, retail: data[i].yetai });
+
+        }
+
+        $('#managementsituationregionselect').select2(
+                {
+                    data: regionarr
+                }
+        )
+
+                .on('select2:select', function (e) {
+
+                    //getBarData(e.params.data.text, "");
+
+
+
+                    if (e.params.data.retail) {
+                        var retailArr = [];
+                        retailArr.push({ id: '', text: '全部' });
+                        for (var i = 0, len = e.params.data.retail.length; i < len; i++) {
+                            retailArr.push({ id: e.params.data.retail[i].firstvalue, text: e.params.data.retail[i].secondvalue })
+                        }
+                        $('#managementsituationretailselect').empty();
+                        $('#managementsituationretailselect').select2({
+                            data: retailArr
+                        }).on('select2:select', function (event) {
+                            getBarData(e.params.data.text, event.params.data.id);
+                        });
+                    }
+
+                    // else {
+                    //   //
+                    //   initOfRetail(function (data) {
+                    //     var retails = [];
+                    //     retails.push({ id: "", text: "全部" });
+                    //     for (var i = 0, len = data.length; i < len; i++) {
+                    //       retails.push({ id: data[i].fristvalue, text: data[i].secondvalue });
+                    //     }
+                    //     $('#managementsituationretailselect').empty();
+                    //     $('#managementsituationretailselect').select2({
+                    //       data: retails
+                    //     }).on('select2:select', function (event) {
+                    //       getBarData(e.params.data.text, event.params.data.text);
+                    //     });
+                    //
+                    //   })
+                    // }
+
+
+                });
+
+        $('#managementsituationretailselect').select2({
+            data: [{ id: '', text: "全部" }]
+        })
+        //初始化
+        //getBarData("", "");
+
+    }
+
+
 </script>
 </html>

@@ -6,7 +6,7 @@ Application = {};
 //服务地址
 Application.serverHost = 'http://192.168.3.20:8080/uapws/service/nc.itf.pims.web.JingYingZhuangKuang';
 //地图初始化中心
-Application.initCenter = new BMap.Point(116.404, 39.915);
+Application.initCenter = [116.404, 39.915];
 //地图初始化级别
 Application.initZoom =11;
 Application.minZoom =5;
