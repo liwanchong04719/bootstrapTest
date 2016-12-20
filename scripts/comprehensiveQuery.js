@@ -125,7 +125,7 @@ function initTableOfHouse() {
     {
       "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
       "xmlnsName": "jin",
-      "methodName": "getDcXinXi"
+      "methodName": "getFcXinXi"
     }
   );
 
@@ -881,4 +881,20 @@ function otherInfo(data) {
   htmlArr.push('</div> </li>');
   return htmlArr;
 
+}
+
+// 页面跳转
+function setParam(type) {
+  switch (type) {
+    case 1:
+      window.location = 'main.html?cuserid=' + Application.userid;
+      break;
+    case 2:
+      window.location = 'comprehensiveQuery.html?cuserid=' + Application.userid;
+      break;
+    case 3:
+      window.location = 'map.html?cuserid=' + Application.userid;
+      break;
+
+  }
 }

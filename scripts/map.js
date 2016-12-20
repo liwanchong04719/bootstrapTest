@@ -810,3 +810,19 @@ function otherInfo(data) {
 	return htmlArr;
 
 }
+
+// 页面跳转
+function setParam(type) {
+	switch (type) {
+		case 1:
+			window.location = 'main.html?cuserid=' + Application.userid;
+			break;
+		case 2:
+			window.location = 'comprehensiveQuery.html?cuserid=' + Application.userid;
+			break;
+		case 3:
+			window.location = 'map.html?cuserid=' + Application.userid;
+			break;
+
+	}
+}
