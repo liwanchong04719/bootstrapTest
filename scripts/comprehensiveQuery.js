@@ -10,8 +10,8 @@ var laneParam = {
   'yetai': '',
   'userid': Application.userid,
   'gongsi': '',
-  'dijiye': '',
-  'xianshitiaoshu': '',
+  'dijiye': 1,
+  'xianshitiaoshu': 3,
   'tdsyr ': '',
   'dl': '',
   'tdxz': '',
@@ -73,32 +73,64 @@ function setParam(path, param, xmlns, methodName) {
   }
 }
 function initTableOfLane() {
-  // $.post("http://127.0.0.1:8088/" + new Date().getTime(),
-  //   setParam(
-  //     '/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
-  //     laneParam,
-  //     'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
-  //     'getDcXinXi'
-  //   ), function (data) {
-  //     var startindex = data.indexOf('<ns1:return>');
-  //     var endindex = data.indexOf('</ns1:return>');
-  //     data = data.substring(startindex+12,endindex)
-  //     var dataTable = JSON.parse(data);
-  //     $tableOfLane.bootstrapTable('load',dataTable.rows);
-  //   });
+  $.post("http://127.0.0.1:8088/" + new Date().getTime(),
+    setParam(
+      '/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
+      laneParam,
+      'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+      'getDcXinXi'
+    ), function (data) {
+      var startindex = data.indexOf('<ns1:return>');
+      var endindex = data.indexOf('</ns1:return>');
+      data = data.substring(startindex+12,endindex)
+      var dataTable = JSON.parse(data);
+      $tableOfLane.bootstrapTable('load',dataTable.rows);
+    });
 
-  Application.Util.ajaxConstruct(Application.serverHost, 'POST', laneParam, 'text/xml;charset=UTF-8', function (data) {
+  // Application.Util.ajaxConstruct(Application.serverHost, 'POST', laneParam, 'text/xml;charset=UTF-8', function (data) {
+  //
+  //     $tableOfLane.bootstrapTable('load',data.rows);
+  //   }, function name(params) {
+  //     console.log('error')
+  //   },
+  //   {
+  //     "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+  //     "xmlnsName": "jin",
+  //     "methodName": "getDcXinXi"
+  //   }
+  // );
 
-      $tableOfLane.bootstrapTable('load',data.rows);
-    }, function name(params) {
-      console.log('error')
-    },
-    {
-      "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
-      "xmlnsName": "jin",
-      "methodName": "getDcXinXi"
-    }
-  );
+}
+
+// 地产分页
+function queryLaneDataByPage(params) {
+  laneParam.dijiye = params.pageNumber;
+  $.post("http://127.0.0.1:8088/" + new Date().getTime(),
+    setParam(
+      '/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
+      laneParam,
+      'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+      'getDcXinXi'
+    ), function (data) {
+      var startindex = data.indexOf('<ns1:return>');
+      var endindex = data.indexOf('</ns1:return>');
+      data = data.substring(startindex+12,endindex)
+      var dataTable = JSON.parse(data);
+      $tableOfLane.bootstrapTable('load',dataTable.rows);
+    });
+
+  // Application.Util.ajaxConstruct(Application.serverHost, 'POST', laneParam, 'text/xml;charset=UTF-8', function (data) {
+  //
+  //     $tableOfLane.bootstrapTable('load',data.rows);
+  //   }, function name(params) {
+  //     console.log('error')
+  //   },
+  //   {
+  //     "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+  //     "xmlnsName": "jin",
+  //     "methodName": "getDcXinXi"
+  //   }
+  // );
 
 }
 function initTableOfHouse() {
@@ -607,10 +639,10 @@ function showDCAttachment(pk) {
         href : '#attachment',
         padding : 5,
         afterShow:function(){
-          for (var i = 0, len = imgData.length; i < len; i++) {
+          for (var i = 0, len = data.length; i < len; i++) {
             var imgDiv = document.createElement("div");
             imgDiv.setAttribute("class", "section");
-            imgDiv.style.background = "url("+imgData[i].accessory_id+")";
+            imgDiv.style.background = "url("+data[i].accessory_id+")";
             $('#attachment').append(imgDiv);
           }
           // $('#attachmentImg').src(imgData)
@@ -884,7 +916,7 @@ function otherInfo(data) {
 }
 
 // 页面跳转
-function setParam(type) {
+function setLocationParam(type) {
   switch (type) {
     case 1:
       window.location = 'main.html?cuserid=' + Application.userid;

@@ -812,7 +812,7 @@ function otherInfo(data) {
 }
 
 // 页面跳转
-function setParam(type) {
+function setLocationParam(type) {
 	switch (type) {
 		case 1:
 			window.location = 'main.html?cuserid=' + Application.userid;
