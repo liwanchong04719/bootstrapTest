@@ -1,7 +1,5 @@
 var showIndex = 1;
 $(document).ready(function () {
-	//根据屏幕计算高度
-	$('select[name="inverse-select"]').select2({ dropdownCssClass: 'select-inverse-dropdown' });
 	//点击tab
     $("div.bhoechie-tab-menu>div.list-group>a").click(function (e) {
         e.preventDefault();
