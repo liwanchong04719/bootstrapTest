@@ -21,3 +21,22 @@ html,body{
     border-right: 1px solid lightgray;
     border-top: 1px solid lightgray;
 }
+.sections,.section {
+    height:100%;
+}
+#attachment,.sections {
+    position: relative;
+}
+.section {
+    background-color: #000;
+    background-size: cover;
+    background-position: 50% 50%;
+    text-align: center;
+    color: white;
+}
+#section0 {
+    background-image: url('../images/banner/banner1.png');
+}
+#section1 {
+    background-image: url('../images/banner/banner1.png');
+}

@@ -131,19 +131,19 @@ function initTableOfHouse() {
 
 }
 function initTableOfBuilding() {
-  $.post("http://127.0.0.1:8088/" + new Date().getTime(),
-    setParam(
-      '/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
-      buildingParam,
-      'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
-      'getLdXinXi'
-    ), function (data) {
-      var startindex = data.indexOf('<ns1:return>');
-      var endindex = data.indexOf('</ns1:return>');
-      data = data.substring(startindex+12,endindex)
-      var dataTable = JSON.parse(data);
-      $tableOfBuilding.bootstrapTable('load',dataTable.rows);
-    });
+  // $.post("http://127.0.0.1:8088/" + new Date().getTime(),
+  //   setParam(
+  //     '/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
+  //     buildingParam,
+  //     'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+  //     'getLdXinXi'
+  //   ), function (data) {
+  //     var startindex = data.indexOf('<ns1:return>');
+  //     var endindex = data.indexOf('</ns1:return>');
+  //     data = data.substring(startindex+12,endindex)
+  //     var dataTable = JSON.parse(data);
+  //     $tableOfBuilding.bootstrapTable('load',dataTable.rows);
+  //   });
 
   Application.Util.ajaxConstruct(Application.serverHost, 'POST', buildingParam, 'text/xml;charset=UTF-8', function (data) {
 
@@ -188,7 +188,7 @@ function initTableOfHug() {
     }
   );
 }
-function initTreeOfZone() {
+function initTreeOfCompany() {
   // $.post("http://127.0.0.1:8088/" + new Date().getTime(),
   //   setParam(
   //     '/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
@@ -201,14 +201,13 @@ function initTreeOfZone() {
   //     data = data.substring(startindex+12,endindex)
   //     var treeData = JSON.parse(data);
   //     $('#treeOfZone').treeview({ expandIcon: "glyphicon glyphicon-stop",
-  //       levels: 1,
   //       color:'#2a6496',
   //       showCheckbox: true,
   //       showBorder: false,
   //       backColor: "#f6f7fa",
-  //       onNodeChecked:addZoneQueryData,
-  //       onNodeUnchecked: minusZoneQueryData,
-  //       data: treeData});
+  //       onNodeChecked:addCompanyQueryData,
+  //       onNodeUnchecked: minusCompanyQueryData,
+  //       data: changeCompanyData(treeData)});
   //   });
 
   Application.Util.ajaxConstruct(Application.serverHost, 'POST',   {'userid':Application.userid}, 'text/xml;charset=UTF-8', function (data) {
@@ -219,9 +218,9 @@ function initTreeOfZone() {
         showCheckbox: true,
         showBorder: false,
         backColor: "#f6f7fa",
-        onNodeChecked:addZoneQueryData,
-        onNodeUnchecked: minusZoneQueryData,
-        data: data});
+        onNodeChecked:addCompanyQueryData,
+        onNodeUnchecked: minusCompanyQueryData,
+        data:  changeCompanyData(data)});
     }, function name(params) {
       console.log('error')
     },
@@ -232,7 +231,7 @@ function initTreeOfZone() {
     }
   );
 }
-function initTreeOfCompany() {
+function initTreeOfZone() {
   // $.post("http://127.0.0.1:8088/" + new Date().getTime(),
   //   setParam(
   //     '/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
@@ -263,8 +262,8 @@ function initTreeOfCompany() {
         showCheckbox: true,
         showBorder: false,
         backColor: "#f6f7fa",
-        onNodeChecked:addCompanyQueryData,
-        onNodeUnchecked: minusCompanyQueryData,
+        onNodeChecked:addZoneQueryData,
+        onNodeUnchecked: minusZoneQueryData,
         data: changeZoneData(data)});
     }, function name(params) {
       console.log('error')
@@ -351,7 +350,13 @@ $(function () {
   // });
   // var options = $tableOfLane.bootstrapTable('getOptions');
   // getDataFromServer(options.pageNumber, options.pageSize);
-
+  $("#attachment").PageSwitch({
+      direction:'horizontal',
+      easing:'ease-in',
+      duration:10000,
+      autoPlay:true,
+      loop:'false'
+  });
   initMap();
 
   });
@@ -392,17 +397,34 @@ function positionFormatter(v,row) {
     '</div>'
   ].join('');
 }
-function handleFormatter(v,row) {
+// 房产
+function handleFormatterFC(v,row) {
+  var pk = row.zhujian;
   return [
-    '<div class="name">',
-    '<a title="' + row.position + '" href="https://github.com/'+ '" target="_blank">',
-     '查看附件 ',
-    '</a>',
-    '<span style="height:10px; width:1px; border-left:1px #16a085 solid"></span>',
-    '<a title="' + row.position + '" href="https://github.com/'+ '" target="_blank">',
-    '&nbsp查看详情',
-    '</a>',
-    '</div>'
+    "<div class='name'>",
+    "<a  onclick='showFCAttachment(&quot;"+pk+"&quot;)' href='javascript:void(0)'>",
+     "查看附件 ",
+    "</a>",
+    "<span style='height:10px; width:1px; border-left:1px #16a085 solid'></span>",
+    "<a onclick='showFCDetails(&quot;"+pk+"&quot;)' href='javascript:void(0)'>",
+    "&nbsp查看详情",
+    "</a>",
+    "</div>"
+  ].join('');
+}
+// 地产
+function handleFormatterDC(v,row) {
+  var pk = row.zhujian;
+  return [
+    "<div class='name'>",
+    "<a  onclick='showDCAttachment(&quot;"+pk+"&quot;)' href='javascript:void(0)'>",
+     "查看附件 ",
+    "</a>",
+    "<span style='height:10px; width:1px; border-left:1px #16a085 solid'></span>",
+    "<a onclick='showDCDetails(&quot;"+pk+"&quot;)' href='javascript:void(0)'>",
+    "&nbsp查看详情",
+    "</a>",
+    "</div>"
   ].join('');
 }
 function changeData(type) {
@@ -494,7 +516,171 @@ function showPoiPosition(lng,lat){
     }
   });
 }
+// 房产附件
+function showFCAttachment(pk) {
+  // $.post("http://127.0.0.1:8088/" + new Date().getTime(),
+  //   setParam(
+  //     '/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
+  //     {pk:pk},
+  //     'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+  //     'getImgsOrFiles'
+  //   ), function (data) {
+  //     var startindex = data.indexOf('<ns1:return>');
+  //     var endindex = data.indexOf('</ns1:return>');
+  //     data = data.substring(startindex+12,endindex)
+  //     var imgData = JSON.parse(data);
+  //     $('#attachment').empty();
+  //     $.fancybox.open({
+  //       href : '#attachment',
+  //       padding : 5,
+  //       afterShow:function(){
+  //         for (var i = 0, len = imgData.length; i < len; i++) {
+  //           var imgDiv = document.createElement("div");
+  //           imgDiv.setAttribute("class", "section");
+  //           imgDiv.style.background = "url("+imgData[i].accessory_id+")";
+  //           $('#attachment').append(imgDiv);
+  //         }
+  //         // $('#attachmentImg').src(imgData)
+  //       }
+  //     });
+  //   });
 
+  Application.Util.ajaxConstruct(Application.serverHost, 'POST',    {pk:pk}, 'text/xml;charset=UTF-8', function (data) {
+
+      $('#attachment').empty();
+      $.fancybox.open({
+        href : '#attachment',
+        padding : 5,
+        afterShow:function(){
+          for (var i = 0, len = imgData.length; i < len; i++) {
+            var imgDiv = document.createElement("div");
+            imgDiv.setAttribute("class", "section");
+            imgDiv.style.background = "url("+imgData[i].accessory_id+")";
+            $('#attachment').append(imgDiv);
+          }
+          // $('#attachmentImg').src(imgData)
+        }
+      });
+    }, function name(params) {
+      console.log('error')
+    },
+    {
+      "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+      "xmlnsName": "jin",
+      "methodName": "getImgsOrFiles"
+    }
+  );
+}
+//地产附件
+function showDCAttachment(pk) {
+  // $.post("http://127.0.0.1:8088/" + new Date().getTime(),
+  //   setParam(
+  //     '/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
+  //     {pk:pk},
+  //     'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+  //     'getImgsOrFiles'
+  //   ), function (data) {
+  //     var startindex = data.indexOf('<ns1:return>');
+  //     var endindex = data.indexOf('</ns1:return>');
+  //     data = data.substring(startindex+12,endindex)
+  //     var imgData = JSON.parse(data);
+  //     $('#attachment').empty();
+  //     $.fancybox.open({
+  //       href : '#attachment',
+  //       padding : 5,
+  //       afterShow:function(){
+  //         for (var i = 0, len = imgData.length; i < len; i++) {
+  //           var imgDiv = document.createElement("div");
+  //           imgDiv.setAttribute("class", "section");
+  //           imgDiv.style.background = "url("+imgData[i].accessory_id+")";
+  //           $('#attachment').append(imgDiv);
+  //         }
+  //         // $('#attachmentImg').src(imgData)
+  //       }
+  //     });
+  //   });
+
+  Application.Util.ajaxConstruct(Application.serverHost, 'POST',    {pk:pk}, 'text/xml;charset=UTF-8', function (data) {
+
+      $('#attachment').empty();
+      $.fancybox.open({
+        href : '#attachment',
+        padding : 5,
+        afterShow:function(){
+          for (var i = 0, len = imgData.length; i < len; i++) {
+            var imgDiv = document.createElement("div");
+            imgDiv.setAttribute("class", "section");
+            imgDiv.style.background = "url("+imgData[i].accessory_id+")";
+            $('#attachment').append(imgDiv);
+          }
+          // $('#attachmentImg').src(imgData)
+        }
+      });
+    }, function name(params) {
+      console.log('error')
+    },
+    {
+      "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+      "xmlnsName": "jin",
+      "methodName": "getImgsOrFiles"
+    }
+  );
+}
+//房产详细信息
+function showFCDetails(id) {
+  $('#details').empty();
+  $.fancybox.open({
+    href : '#details',
+    padding : 5,
+    afterShow:function(){
+      $("#details").append(info);
+      initFCPanel(id, function (data) {
+        var dataFc= data.fangChanPanelXinxi;
+        $('#yezhu').text(dataFc.yezhu);
+        $('#jzmj').text(dataFc.jzmj);
+        $('#yetai').text(dataFc.yetai);
+        $('#zuoluo').text(dataFc.zuoluo);
+        $('#czl').text(dataFc.chuzulv);
+        $('#xpjdj').text(dataFc.punjundanjia);
+        initBarChart("barChart");
+        initAccordion();
+        var dataOhter = data.fangChanPanelDuiyingDiChanXinxi;
+        for (var i = 0, len =dataOhter.length; i < len ; i++) {
+          var list = otherInfo(dataOhter[i]);
+          $("#dyfcxx").append(list.join(''));
+        }
+      })
+      // $('#details').append(test);
+    }
+  });
+}
+//地产详细信息
+function showDCDetails(id) {
+  $('#details').empty();
+  $.fancybox.open({
+    href : '#details',
+    padding : 5,
+    afterShow:function(){
+      $("#details").append(dcInfo);
+      initDCPanel(id, function (data) {
+        var dataDc= data.diChanPanelXinxi;
+        $('#tdsyr').text(dataDc.tdsyr);
+        $('#symj').text(dataDc.symj);
+        $('#zuoluo').text(dataDc.zuoluo);
+        $('#tdzbh').text(dataDc.tdzbh);
+        $('#zzdate').text(dataDc.zzdate);
+        initBarChart("barChart");
+        initAccordion();
+        var dataOhter = data.diChanPanelDuiyingFangChanXinxi;
+        for (var i = 0, len =dataOhter.length; i < len ; i++) {
+          var list = otherInfoDc(dataOhter[i]);
+          $("#dydcxx").append(list.join(''));
+        }
+      })
+      // $('#details').append(test);
+    }
+  });
+}
 function changeZoneData(data) {
   var zoneData = [];
   for (var i = 0, len = data.length; i < len; i++) {
@@ -505,7 +691,15 @@ function changeZoneData(data) {
   }
   return zoneData;
 }
-
+function changeCompanyData(data) {
+  var commpanyData = [];
+  for(var i = 0, len = data.length; i < len; i++) {
+    var obj = data[i];
+    obj.nodes = data[i].children;
+    commpanyData.push(obj);
+  }
+  return commpanyData;
+}
 function changeRetailData(data){
   var retailData = [];
   for (var i = 0, len = data.length; i < len; i++) {
@@ -515,4 +709,176 @@ function changeRetailData(data){
     retailData.push(obj);
   }
   return retailData;
+}
+function initDCPanel(id, callback) {
+  // $.post("http://127.0.0.1:8088/" + new Date().getTime(),
+  //   setParam(
+  //     '/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
+  //     {'tdzbh': id, userid: Application.userid},
+  //     'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+  //     "getDiChanPanel"
+  //   ), function(data){
+  //     var startindex = data.indexOf('<ns1:return>');
+  //     var endindex = data.indexOf('</ns1:return>');
+  //     callback(JSON.parse(data.substring(startindex + 12, endindex)))
+  //   });
+
+
+		Application.Util.ajaxConstruct(Application.serverHost, 'POST', {'fczbh': id, userid: Application.userid}, 'text/xml;charset=UTF-8', function (data) {
+		callback(data);
+	}, function name(params) {
+		console.log('error')
+	},
+	{
+		"xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+		"xmlnsName": "jin",
+		"methodName": 'getDiChanPanel'
+	});
+}
+function initFCPanel(id, callback) {
+  // $.post("http://127.0.0.1:8088/" + new Date().getTime(),
+  //   setParam(
+  //     '/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
+  //     {'fczbh': id, userid: Application.userid},
+  //     'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+  //     "getFangChanPanel"
+  //   ), function(data){
+  //     var startindex = data.indexOf('<ns1:return>');
+  //     var endindex = data.indexOf('</ns1:return>');
+  //     callback(JSON.parse(data.substring(startindex + 12, endindex)))
+  //   });
+
+
+		Application.Util.ajaxConstruct(Application.serverHost, 'POST', {'fczbh': id, userid: Application.userid}, 'text/xml;charset=UTF-8', function (data) {
+		callback(data);
+	}, function name(params) {
+		console.log('error')
+	},
+	{
+		"xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+		"xmlnsName": "jin",
+		"methodName": 'getFangChanPanel'
+	});
+}
+function initBarChart(id) {
+  var dom = document.getElementById(id);
+  var myChart = echarts.init(dom);
+  var app = {};
+  option = {
+    backgroundColor: '#fff',
+    tooltip: {
+      trigger: 'axis'
+    },
+    toolbox: {
+      show: true,
+      feature: {
+        mark: { show: false },
+        dataView: { show: false, readOnly: false },
+        magicType: { show: false, type: ['line', 'bar'] },
+        restore: { show: false },
+        saveAsImage: { show: true }
+      }
+    },
+    calculable: true,
+    legend: {
+      orient : 'horizontal',
+      x : 'center',
+      y:'bottom',
+      data:['出租率','单价']
+    },
+    xAxis: [
+      {
+        type: 'category',
+        data: ['北京城建集团投资有限公司', '城建置业', '3公司', '4公司', '5公司', '6公司', '7公司', '8公司', '9公司', '10公司', '11公司', '12公司']
+      }
+    ],
+    yAxis: [
+      {
+        type: 'value',
+        name: '100%',
+        axisLabel: {
+          formatter: '{value}'
+        }
+      },
+      {
+        type: 'value',
+        name: '单价',
+        axisLabel: {
+          formatter: '{value}元'
+        }
+      }
+    ],
+    series : [
+      {
+        name:'出租率',
+        type:'bar',
+        itemStyle:{
+          normal:{color:'#0099FF'}
+        },
+        data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 90, 100, 32.6, 20.0, 6.4, 3.3]
+      },
+      {
+        name: '单价',
+        type: 'line',
+        yAxisIndex: 1,
+        itemStyle:{
+          normal:{color:'#C06410'}
+        },
+        data:[2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
+      }
+    ]
+  };
+
+  if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+  }
+}
+function initAccordion(){
+  $(".items > li > a").click(function(e) {
+    e.preventDefault();
+    var $this = $(this);
+    if ($this.hasClass("expanded")) {
+      $this.removeClass("expanded");
+      $this.find('i').addClass("glyphicon-chevron-right").removeClass("glyphicon-chevron-down");
+    } else {
+      $(".items a.expanded>i").addClass("glyphicon-chevron-right").removeClass("glyphicon-chevron-down");
+      $(".items a.expanded").removeClass("expanded");
+      $this.addClass("expanded");
+      $this.find("i").addClass("glyphicon-chevron-down").removeClass("glyphicon-chevron-right");
+      $(".sub-items").filter(":visible").slideUp("normal");
+    }
+    $this.parent().children("ul").stop(true, true).slideToggle("normal");
+  });
+
+  $(".sub-items a").click(function() {
+    $(".sub-items a").removeClass("current");
+    $(this).addClass("current");
+  });
+}
+
+function otherInfoDc(data) {
+  var htmlArr = [];
+
+  htmlArr.push('<li class="list-item">');
+  htmlArr.push('<div style="width: 100%;padding: 10px 20px">');
+
+  htmlArr.push('<div><span>'+data.fwmc+'</span></div>');
+  htmlArr.push('<div><span>'+data.fwsyqr+'</span></div>');
+
+  htmlArr.push('</div> </li>');
+  return htmlArr;
+
+}
+function otherInfo(data) {
+  var htmlArr = [];
+
+  htmlArr.push('<li class="list-item">');
+  htmlArr.push('<div style="width: 100%;padding: 10px 20px">');
+
+  htmlArr.push('<div><span>'+data.tdsyr+'</span></div>');
+  htmlArr.push('<div><span>'+data.zuoluo+'</span></div>');
+
+  htmlArr.push('</div> </li>');
+  return htmlArr;
+
 }

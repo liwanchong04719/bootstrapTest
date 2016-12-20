@@ -27,12 +27,12 @@
     <h6 style="text-align: center;padding-bottom:3px;margin-top: 5px;margin-bottom: 10px;border-bottom: 1px solid #e8e8e8">房产信息</h6>
     <img  style="width: 100%;height: 200px" src="http://images0.cnblogs.com/blog2015/738809/201508/021428493299472.png" />
     <ul class="fields" style="">
-        <li><label>业主：</label><label>---</label></li>
-        <li><label>建筑面积：</label><label>---</label></li>
-        <li><label>业态：</label><label>---</label></li>
-        <li><label>座落：</label><label>---</label></li>
-        <li><label>出租率：</label><label>---</label></li>
-        <li><label>现平均单价：</label><label>---</label></li>
+        <li><label>业主：</label><label id="yezhu">---</label></li>
+        <li><label>建筑面积：</label><label id="jzmj">---</label></li>
+        <li><label>业态：</label><label id="yetai">---</label></li>
+        <li><label>座落：</label><label id="zuoluo">---</label></li>
+        <li><label>出租率：</label><label id="czl">---</label></li>
+        <li><label>现平均单价：</label><label id="xpjdj">---</label></li>
     </ul>
     <div class='wrapper'>
         <ul class='items'>
@@ -68,7 +68,7 @@
 <script src="../lib/echarts/echarts.js"></script>
 <script type="text/javascript">
     $(function () {
-        initAccordion();
+        initFCPanel();
     })
     function initAccordion(){
         $(".items > li > a").click(function(e) {
@@ -168,6 +168,58 @@
         if (option && typeof option === "object") {
             myChart.setOption(option, true);
         }
+    }
+    function setParam(path, param, xmlns, methodName) {
+        return {
+            "url": '192.168.3.20',
+            "port": 8080,
+            "path": path,
+            "data": JSON.stringify(param),
+            ajaxoptions: {
+                "xmlns": xmlns,
+                "xmlnsName": 'jin',
+                "methodName": methodName
+            }
+        }
+    }
+    function initFCPanel(id, callback) {
+        $.post("http://127.0.0.1:8088/" + new Date().getTime(),
+                setParam(
+                        '/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
+                        {'fczbh': id, userid: Application.userid},
+                        'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+                        "getFangChanPanel"
+                ), function(data){
+                    var startindex = data.indexOf('<ns1:return>');
+                    var endindex = data.indexOf('</ns1:return>');
+                    data = JSON.parse(data.substring(startindex + 12, endindex));
+                    var dataFc= data.fangChanPanelXinxi;
+                    $('#yezhu').text(dataFc.yezhu);
+                    $('#jzmj').text(dataFc.jzmj);
+                    $('#yetai').text(dataFc.yetai);
+                    $('#zuoluo').text(dataFc.zuoluo);
+                    $('#czl').text(dataFc.chuzulv);
+                    $('#xpjdj').text(dataFc.punjundanjia);
+                    initBarChart("barChart");
+                    initAccordion();
+                    var dataOhter = data.fangChanPanelDuiyingDiChanXinxi;
+                    for (var i = 0, len =dataOhter.length; i < len ; i++) {
+                        var list = otherInfo(dataOhter[i]);
+                        $("#dyfcxx").append(list.join(''));
+                    }
+                });
+
+
+// 		Application.Util.ajaxConstruct(Application.serverHost, 'POST', {'fczbh': id, userid: Application.userid}, 'text/xml;charset=UTF-8', function (data) {
+// 		callback(data);
+// 	}, function name(params) {
+// 		console.log('error')
+// 	},
+// 	{
+// 		"xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+// 		"xmlnsName": "jin",
+// 		"methodName": 'getFangChanPanel'
+// 	});
     }
 </script>
 </html>

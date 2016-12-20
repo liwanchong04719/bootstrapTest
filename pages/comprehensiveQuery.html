@@ -11,6 +11,8 @@
     <link rel="stylesheet" type="text/css" href="../lib/bootstrap-treeview-master/dist/bootstrap-treeview.css" />
     <link rel="stylesheet" type="text/css" href="../lib/tabs/bootstrap.vertical-tabs.css" />
     <link rel="stylesheet" type="text/css" href="../lib/fancyBox/source/jquery.fancybox.css" />
+    <link rel="stylesheet" type="text/css" href="../lib/switch/pageSwitch.min.css" />
+    <link rel="stylesheet" href="../lib/accordion-multi-menu/css/style.css">
     <link rel="stylesheet" type="text/css" href="../css/tabstyle.css" />
     <!--[if lt IE 9]>
     <script src="../lib/Flat-UI-master/dist/js/vendor/html5shiv.js"></script>
@@ -142,7 +144,7 @@
                             <th data-field="dl">地类</th>
                             <th data-field="syqmj">使用权面积</th>
                             <th data-field="zzdate">终止日期</th>
-                            <th data-field="handle" data-formatter="handleFormatter">详细信息</th>
+                            <th data-field="handle" data-formatter="handleFormatterDC">详细信息</th>
                         </tr>
                         </thead>
                     </table>
@@ -166,7 +168,7 @@
                             <th data-field="dlwz" data-formatter="positionFormatter">房屋坐落</th>
                             <th data-field="jzmj">建筑面积</th>
                             <th data-field="zznx">终止年限</th>
-                            <th data-field="handle" data-formatter="handleFormatter">详细信息</th>
+                            <th data-field="handle" data-formatter="handleFormatterFC">详细信息</th>
                         </tr>
                         </thead>
                     </table>
@@ -215,6 +217,12 @@
                 </div>
             </div>
             <div id="mapContainer" style="width: 700px;height: 400px;display: none"></div>
+            <div id="attachment"  class="sections" style="width: 700px;height: 400px;display: none">
+                <!--<div class="section" id="section0"></div>-->
+                <!--<div class="section" id="section1"></div>-->
+            </div>
+            <div id="details" style="width: 450px;height: 400px;display: none">
+            </div>
         </div>
     </div>
 </div>
@@ -226,8 +234,11 @@
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=AXQ7RGL4oSjsANXUG8OQofPywGmb04QV"></script>
 <script src="../lib/bootstrap-table/dist/locale/bootstrap-table-zh-CN.js"></script>
 <script src="../lib/echarts/echarts.js"></script>
+<script src="../lib/switch/pageSwitch.min.js"></script>
 <script src="../lib/bootstrap-treeview-master/dist/bootstrap-treeview.js"></script>
 <script src="../scripts/Application.js"></script>
+<script src="../scripts/panelJs.js"></script>
+<script src="../scripts/dcPanel.js"></script>
 <script src="../scripts/Application.Util.js"></script>
 <script src="../scripts/comprehensiveQuery.js"></script>
 </html>

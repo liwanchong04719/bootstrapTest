@@ -15,4 +15,11 @@ Application.province = 10;
 //显示区级数据的级别
 Application.direct = 15;
 //登录用户
-Application.userid = '1001ZZ10000000018FJF';
+Application.userid = getQueryString('cuserid')||'1001ZZ10000000018FJF';
+
+function getQueryString(name)
+{
+    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if(r!=null)return  unescape(r[2]); return null;
+}
