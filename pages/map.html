@@ -360,7 +360,7 @@
 
 <body>
 <div class="container-fluid" style="height: 100%;padding-top: 55px;padding-left: 0px;padding-right: 0px">
-    <nav class="navbar navbar-default" role="navigation" style="margin-top: -55px">
+    <nav class="navbar navbar-default" role="navigation" style="margin-top: -55px;z-index: 10">
         <nav class="navbar navbar-inverse" role="navigation">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-5">
@@ -392,108 +392,85 @@
             <!-- /.navbar-collapse -->
         </nav>
     </nav>
-    <div class="col-md-12" style="height: 100%;padding-top: 0px;">
-        <div class="row" style="height: 100%;margin-right: 0px;margin-left: 0px">
-            <div class="col-md-12" style="height: 100%">
-                <div id="map" style="width: 100%;height: 100%">
-
-                </div>
-            </div>
-
-            <div class="foldleft row"
-                 style="height:100%;position:absolute;width:450px;left:0px;margin-right:0px;margin-left:0px">
-                <div class="container tab_container" style="width :100%;height:100%">
-                    <div class="row" style="height:100%;margin-right: 0px">
-                        <div class="bhoechie-tab-container" style="height:100%">
-                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 bhoechie-tab-menu"
-                                 style="height:100%;background-color:#2f4154">
-                                <div class="list-group">
-                                    <a href="#" class="list-group-item active text-center">
-                                        查询
-                                    </a>
-                                    <a href="#" class="list-group-item text-center">
-                                        房产
-                                    </a>
-                                    <a href="#" class="list-group-item text-center">
-                                        地产
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 bhoechie-tab"
-                                 style="padding-right: 0px;padding-left:0px">
-                                <!-- flight section -->
-                                <div class="bhoechie-tab-content active" style="height: 100%;background-color: #fff">
-                                    <ul id="myTab" class="nav nav-tabs" style="border-bottom: none;">
-                                        <li class="active" >
-                                            <a  href="#companyDiv"   data-toggle="tab">
-                                                公司
-                                            </a>
-                                        </li>
-                                        <li  ><a href="#zoneDiv"  data-toggle="tab">区域</a></li>
-                                        <li><a href="#retailDiv" data-toggle="tab">业态</a></li>
-                                    </ul>
-                                    <div id="myTabContent" class="tab-content" style="height: 100%">
-                                        <div class="tab-pane fade in active" id="companyDiv" style="height: 100%">
-                                           <div id="treeOfCompany"></div>
-                                        </div>
-                                        <div class="tab-pane fade" id="zoneDiv" style="height: 100%">
-                                            <div id="treeOfZone"></div>
-                                        </div>
-                                        <div class="tab-pane fade" id="retailDiv" style="height: 100%">
-                                            <div id="treeOfRetail"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- train section -->
-                                <div class="bhoechie-tab-content"  style="height: 100%;background-color: #fff">
-                                    <div id="housecontentlist"
-                                         style="height:100%;overflow:auto;border-bottom: 1px solid rgb(228, 228, 228);text-align: left">
-                                        <ol class="r-content" id="houseDataDiv"></ol>
-
-                                        <!--<div>-->
-                                            <!--<ul id='bp-3-element-test'></ul>-->
-                                        <!--</div>-->
-
-                                        <!--<div style="padding-left: 5px;padding-top: 2px;padding-bottom: 2px;;margin-bottom: 0px;margin-top: 1px;display: inline-block"
-                                            id="pagination_house" class="pagination"></div>
-                                        </div>-->
-
-                                    </div>
-
-                                    <!-- hotel search -->
-                                    <div class="bhoechie-tab-content"  style="height: 100%;background-color: #fff">
-
-                                    </div>
-                                    <div class="bhoechie-tab-content" style="height: 100%;background-color: #fff">
-                                    </div>
-                                </div>
-
-                                <div class="bhoechie-tab-content active" style="height: 100%;background-color: #fff">
-                                    <div id="lanecontentlist"
-                                         style="height:100%;overflow:auto;border-bottom: 1px solid rgb(228, 228, 228);text-align: left">
-                                        <ol class="r-content" id="laneDataDiv"></ol>
-
-                                        <!--<div>-->
-                                        <!--<ul id='bp-3-element-test'></ul>-->
-                                        <!--</div>-->
-
-                                        <!--<div style="padding-left: 5px;padding-top: 2px;padding-bottom: 2px;;margin-bottom: 0px;margin-top: 1px;display: inline-block"
-                                            id="pagination_house" class="pagination"></div>
-                                        </div>-->
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="foldleft-btn">
-                        <a id="btn_leftfloat" href="javascript:void(0)" class="arrow-right">
-                        </a>
+    <div class="row" style="margin-left: 0px;margin-right: 0px;height: 100%;">
+        <div class="col-md-12" style="height: 100%;padding-top: 0px;">
+            <div class="row" style="height: 100%;margin-right: 0px;margin-left: 0px">
+                <div class="col-md-12" style="height: 100%">
+                    <div id="map" style="width: 100%;height: 100%">
                     </div>
                 </div>
             </div>
         </div>
+        <div class="foldleft" style="height:100%;position:absolute;width:450px;left:0px;top:0px;margin-right:0px;margin-left:0px;padding-top: 53px">
+            <div class="tab_container" style="width :100%;height:100%">
+                <div style="height:100%;margin-right: 0px">
+                    <div class="bhoechie-tab-container" style="height:100%;border: 0;box-shadow: none;">
+                        <div class="bhoechie-tab-menu" style="height:100%;width: 100px;background-color:#2f4154;float: left">
+                            <div class="list-group">
+                                <a href="#" class="list-group-item active text-center">
+                                    查询
+                                </a>
+                                <a href="#" class="list-group-item text-center">
+                                    房产
+                                </a>
+                                <a href="#" class="list-group-item text-center">
+                                    地产
+                                </a>
+                            </div>
+                        </div>
+                        <div class="bhoechie-tab" style="padding-right: 0px;padding-left:0px;float: left;width: 334px;">
+                            <div class="bhoechie-tab-content active" style="height: 100%;background-color: #fff;padding-top: 45px">
+                                <ul id="myTab" class="nav nav-tabs" style="border-bottom: none;margin-top: -42px">
+                                    <li class="active" >
+                                        <a  href="#companyDiv"   data-toggle="tab">
+                                            公司
+                                        </a>
+                                    </li>
+                                    <li  ><a href="#zoneDiv"  data-toggle="tab">区域</a></li>
+                                    <li><a href="#retailDiv" data-toggle="tab">业态</a></li>
+                                </ul>
+                                <div id="myTabContent" class="tab-content" style="height: 100%">
+                                    <div class="tab-pane fade in active" id="companyDiv" style="height: 100%">
+                                        <div id="treeOfCompany"></div>
+                                    </div>
+                                    <div class="tab-pane fade" id="zoneDiv" style="height: 100%">
+                                        <div id="treeOfZone"></div>
+                                    </div>
+                                    <div class="tab-pane fade" id="retailDiv" style="height: 100%">
+                                        <div id="treeOfRetail"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- train section -->
+                            <div class="bhoechie-tab-content"  style="height: 100%;background-color: #fff">
+                                <div id="housecontentlist"
+                                     style="height:100%;overflow:auto;border-bottom: 1px solid rgb(228, 228, 228);text-align: left">
+                                    <ol class="r-content" id="houseDataDiv"></ol>
+                                </div>
+                                <div class="bhoechie-tab-content"  style="height: 100%;background-color: #fff">
+
+                                </div>
+                                <div class="bhoechie-tab-content" style="height: 100%;background-color: #fff">
+                                </div>
+                            </div>
+
+                            <div class="bhoechie-tab-content" style="height: 100%;background-color: #fff">
+                                <div id="lanecontentlist"
+                                     style="height:100%;overflow:auto;border-bottom: 1px solid rgb(228, 228, 228);text-align: left">
+                                    <ol class="r-content" id="laneDataDiv"></ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="foldleft-btn">
+                    <a id="btn_leftfloat" href="javascript:void(0)" class="arrow-right">
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
+
     <div id="zoomcontainer" style="position:absolute;bottom:5px;right:5px">
         <label id="zoom"></label>
     </div>
