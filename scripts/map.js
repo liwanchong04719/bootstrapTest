@@ -184,7 +184,7 @@ function setHouseData(map) {
 				for (var i in data) {
 					var customMarker = createMarker({
 						point: new BMap.Point(data[i].lat, data[i].lng),
-						html: "<div class='bubble'><p class='name'>" + data[i].city + "</p><p class='number'>" + data[i].fccount + "</p></div>",
+						html: "<div class='bubble'><p class='name' style='margin-bottom: 5px;'>" + data[i].city + "</p><p class='number'>" + data[i].fccount + "</p></div>",
 						style: {
 							color: 'white',
 							fontSize: "12px",
