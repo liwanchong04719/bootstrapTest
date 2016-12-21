@@ -37,8 +37,9 @@ html,body{
     /*padding-top: 22px;*/
 }
 .bubble{
-    width: 132px;
+    width: 92px;
     height: 92px;
+    padding-top: 10px;
     line-height: 20px;
     font-size: 12px;
     border: 1px solid transparent;

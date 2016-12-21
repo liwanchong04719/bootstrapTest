@@ -3,16 +3,13 @@
  */
 $(function () {
 
-
   function GetQueryString(name)
   {
     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
     var r = window.location.search.substr(1).match(reg);
     if(r!=null)return  unescape(r[2]); return null;
   }
-
   Application.userid = GetQueryString('cuserid')?GetQueryString('cuserid'):Application.userid;
-
   $.fn.select2.defaults.set("theme", "bootstrap");
   //资产盘点
   getExistingAssets(Application.userid);
@@ -170,7 +167,7 @@ function initPieChart(data) {
     calculable: true,
     series: [
       {
-        name: '访问来源',
+        name: '',
         type: 'pie',
         radius: ['50%', '70%'],
         data: data
@@ -287,12 +284,12 @@ function initBarChart(data) {
 function getExistingAssets(userid) {
 
   Application.Util.ajaxConstruct(Application.serverHost, 'POST', { userid: Application.userid }, 'text/xml;charset=UTF-8', function (data) {
-
+       
       $('.landcount').text(data.dcCount);
       $('.housecount').text(data.fcCount);
       $('.departmentcount').text(data.fyCount);
     }, function name(params) {
-      console.log('error')
+      console.log('error');
     },
     {
       "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
@@ -691,24 +688,7 @@ function getStatisticData(company, house, retail) {
   if(retail =='test'){
     retail = "";
   }
-  // $.post("http://127.0.0.1:8088/" + new Date().getTime(),
-  //   {
-  //     "url": "118.26.130.12",
-  //     "port": '8080',
-  //     "path": "/uapws/service/nc.itf.pims.web.JingYingZhuangKuang",
-  //     "data": JSON.stringify({ 'yetai': retail, 'userid': Application.userid, 'fangchan': house, 'gongsi': company }),
-  //     "ajaxoptions": {
-  //       "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
-  //       "xmlnsName": "jin",
-  //       "methodName": "yingshoukuan"
-  //     }
-  //   },
-  //   function (data) {
-  //     //data = JSON.parse(data);
-  //     //console.log(data)
-  //     var startindex = data.indexOf('<ns1:return>');
-  //     var endindex = data.indexOf('</ns1:return>');
-  //     data = JSON.parse(data.substring(startindex + 12, endindex));
+
   //
   //     //统计数据
   //     $('#thisMonthReceivable').text(data[0].benyueyingshou);
@@ -747,10 +727,18 @@ function getStatisticData(company, house, retail) {
   //         $('#lastMonthReceivable').text(data[0].shangyueyingshou);
   //         $('#lastMonthReceived').text(data[0].shangyueshishou);
   //         $('#lastMonthRatio').text(data[0].shangyuewanchengbili);
+
   //
+  //     //统计数据
+  //     $('#thisMonthReceivable').text(data[0].benyueyingshou);
+  //     $("#thisMonthReceived").text(data[0].shangyueshishou);
+  //     $('#thisMonthRatio').text(data[0].benyuewanchengbili);
   //
+  //     $('#lastMonthReceivable').text(data[0].shangyueyingshou);
+  //     $('#lastMonthReceived').text(data[0].shangyueshishou);
+  //     $('#lastMonthRatio').text(data[0].shangyuewanchengbili);
   //
-  //   },function name(params) {
+  //   }, function name(params) {
   //     console.log('error')
   //   },
   //   {
@@ -758,7 +746,32 @@ function getStatisticData(company, house, retail) {
   //     "xmlnsName": "jin",
   //     "methodName": "yingshoukuan"
   //   }
-  // )
+  // );
+
+  Application.Util.ajaxConstruct(Application.serverHost,'POST',{ 'yetai': retail, 'userid': Application.userid, 'fangchan': house, 'gongsi': company },'text/xml;charset=UTF-8',function (data) {
+
+          //data = JSON.parse(data);
+          //console.log(data)
+            //统计数据
+          $('#thisMonthReceivable').text(data[0].benyueyingshou);
+          $("#thisMonthReceived").text(data[0].shangyueshishou);
+          $('#thisMonthRatio').text(data[0].benyuewanchengbili);
+
+          $('#lastMonthReceivable').text(data[0].shangyueyingshou);
+          $('#lastMonthReceived').text(data[0].shangyueshishou);
+          $('#lastMonthRatio').text(data[0].shangyuewanchengbili);
+
+
+
+    },function name(params) {
+      console.log('error')
+    },
+    {
+      "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+      "xmlnsName": "jin",
+      "methodName": "yingshoukuan"
+    }
+  )
 
 
 }
@@ -1015,4 +1028,20 @@ function initWarningInfo() {
       }
     )
 
+}
+
+// 页面跳转
+function setLocationParam(type) {
+  switch (type) {
+    case 1:
+      window.location = 'main.html?cuserid=' + Application.userid;
+      break;
+    case 2:
+      window.location = 'comprehensiveQuery.html?cuserid=' + Application.userid;
+      break;
+    case 3:
+      window.location = 'map.html?cuserid=' + Application.userid;
+      break;
+
+  }
 }

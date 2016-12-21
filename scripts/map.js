@@ -1,7 +1,5 @@
 var showIndex = 1;
 $(document).ready(function () {
-	//根据屏幕计算高度
-	$('select[name="inverse-select"]').select2({ dropdownCssClass: 'select-inverse-dropdown' });
 	//点击tab
     $("div.bhoechie-tab-menu>div.list-group>a").click(function (e) {
         e.preventDefault();
@@ -186,7 +184,7 @@ function setHouseData(map) {
 				for (var i in data) {
 					var customMarker = createMarker({
 						point: new BMap.Point(data[i].lat, data[i].lng),
-						html: "<div class='bubble'><p class='name'>" + data[i].city + "</p><p class='number'>" + data[i].fccount + "</p></div>",
+						html: "<div class='bubble'><p class='name' style='margin-bottom: 5px;'>" + data[i].city + "</p><p class='number'>" + data[i].fccount + "</p></div>",
 						style: {
 							color: 'white',
 							fontSize: "12px",
@@ -809,4 +807,20 @@ function otherInfo(data) {
 	htmlArr.push('</div> </li>');
 	return htmlArr;
 
+}
+
+// 页面跳转
+function setLocationParam(type) {
+	switch (type) {
+		case 1:
+			window.location = 'main.html?cuserid=' + Application.userid;
+			break;
+		case 2:
+			window.location = 'comprehensiveQuery.html?cuserid=' + Application.userid;
+			break;
+		case 3:
+			window.location = 'map.html?cuserid=' + Application.userid;
+			break;
+
+	}
 }

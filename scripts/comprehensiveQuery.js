@@ -10,8 +10,8 @@ var laneParam = {
   'yetai': '',
   'userid': Application.userid,
   'gongsi': '',
-  'dijiye': '',
-  'xianshitiaoshu': '',
+  'dijiye': 1,
+  'xianshitiaoshu': 3,
   'tdsyr ': '',
   'dl': '',
   'tdxz': '',
@@ -84,12 +84,13 @@ function initTableOfLane() {
   //     var endindex = data.indexOf('</ns1:return>');
   //     data = data.substring(startindex+12,endindex)
   //     var dataTable = JSON.parse(data);
-  //     $tableOfLane.bootstrapTable('load',dataTable.rows);
+  //     dataTable.total = 100;
+  //     $tableOfLane.bootstrapTable('load',dataTable);
   //   });
 
   Application.Util.ajaxConstruct(Application.serverHost, 'POST', laneParam, 'text/xml;charset=UTF-8', function (data) {
-
-      $tableOfLane.bootstrapTable('load',data.rows);
+   data.total = 100;
+      $tableOfLane.bootstrapTable('load',data);
     }, function name(params) {
       console.log('error')
     },
@@ -101,31 +102,33 @@ function initTableOfLane() {
   );
 
 }
+
 function initTableOfHouse() {
   // $.post("http://127.0.0.1:8088/" + new Date().getTime(),
   //   setParam(
   //     '/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
   //     houseParam,
   //     'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
-  //     'getDcXinXi'
+  //     'getFcXinXi'
   //   ), function (data) {
   //     var startindex = data.indexOf('<ns1:return>');
   //     var endindex = data.indexOf('</ns1:return>');
   //     data = data.substring(startindex+12,endindex)
   //     var dataTable = JSON.parse(data);
-  //     $tableOfHouse.bootstrapTable('load',dataTable.rows);
+  //     dataTable.total = 100;
+  //     $tableOfHouse.bootstrapTable('load',dataTable);
   //   });
 
   Application.Util.ajaxConstruct(Application.serverHost, 'POST', houseParam, 'text/xml;charset=UTF-8', function (data) {
-
-      $tableOfHouse.bootstrapTable('load',data.rows);
+      data.total = 100;
+      $tableOfHouse.bootstrapTable('load',data);
     }, function name(params) {
       console.log('error')
     },
     {
       "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
       "xmlnsName": "jin",
-      "methodName": "getDcXinXi"
+      "methodName": "getFcXinXi"
     }
   );
 
@@ -146,8 +149,8 @@ function initTableOfBuilding() {
   //   });
 
   Application.Util.ajaxConstruct(Application.serverHost, 'POST', buildingParam, 'text/xml;charset=UTF-8', function (data) {
-
-      $tableOfBuilding.bootstrapTable('load',data.rows);
+      data.total = 100;
+      $tableOfBuilding.bootstrapTable('load',data);
     }, function name(params) {
       console.log('error')
     },
@@ -176,8 +179,8 @@ function initTableOfHug() {
 
 
   Application.Util.ajaxConstruct(Application.serverHost, 'POST', buildingParam, 'text/xml;charset=UTF-8', function (data) {
-
-      $tableOfHug.bootstrapTable('load',data.rows);
+      data.total = 100;
+      $tableOfHug.bootstrapTable('load',data);
     }, function name(params) {
       console.log('error')
     },
@@ -327,10 +330,6 @@ $(function () {
   initTreeOfCompany();
   // 业态
   initTreeOfRetail();
-   // 地产
-  initTableOfLane();
-  //房产
-  initTableOfHouse();
   //楼栋
   initTableOfBuilding();
   // 房源
@@ -344,12 +343,24 @@ $(function () {
     $("div.bhoechie-tab>div.bhoechie-tab-content").removeClass("active");
     $("div.bhoechie-tab>div.bhoechie-tab-content").eq(index).addClass("active");
   });
-  //  //点击页数时获取页数的数据
-  // $tableOfLane.on('page-change.bs.table', function (e, number, size) {
-  //   getDataFromServer(number, size);
-  // });
-  // var options = $tableOfLane.bootstrapTable('getOptions');
-  // getDataFromServer(options.pageNumber, options.pageSize);
+   //点击页数时获取地产页数的数据
+  $tableOfLane.on('page-change.bs.table', function (e, number, size) {
+    getLaneTabDataFromServer(number, size);
+  });
+  var laneTabOptions = $tableOfLane.bootstrapTable('getOptions');
+  getLaneTabDataFromServer(laneTabOptions.pageNumber, laneTabOptions.pageSize);
+  //点击页数时获取房产页数的数据
+  $tableOfHouse.on('page-change.bs.table', function (e, number, size) {
+    getHouseTabDataFromServer(number, size);
+  });
+  //点击页数时获取房产页数的数据
+  $tableOfBuilding.on('page-change.bs.table', function (e, number, size) {
+    getBuildingTabDataFromServer(number, size);
+  });
+  //点击页数时获取房产页数的数据
+  $tableOfHug.on('page-change.bs.table', function (e, number, size) {
+    getHugTabDataFromServer(number, size);
+  });
   $("#attachment").PageSwitch({
       direction:'horizontal',
       easing:'ease-in',
@@ -457,24 +468,32 @@ function queryDataFromTree() {
 
   switch (tableType) {
     case "lane" :
+      laneParam.dijiye = 0;
+      laneParam.xianshitiaoshu = 10;
       laneParam.gongsi = queryCompanyData.toString();
       laneParam.yetai = queryRetailData.toString();
       laneParam.location = queryZoneData.toString();
       initTableOfLane();
       break;
     case 'house' :
+      houseParam.dijiye = 0;
+      houseParam.xianshitiaoshu = 10;
       houseParam.gongsi = queryCompanyData.toString();
       houseParam.yetai = queryRetailData.toString();
       houseParam.location = queryZoneData.toString();
       initTableOfHouse();
       break;
     case 'building':
+      buildingParam.dijiye = 0;
+      buildingParam.xianshitiaoshu = 10;
       buildingParam.gongsi = queryCompanyData.toString();
       buildingParam.yetai = queryRetailData.toString();
       buildingParam.location = queryZoneData.toString();
       initTableOfBuilding();
       break;
     case 'hug':
+      hugParam.dijiye = 0;
+      hugParam.xianshitiaoshu = 10;
       hugParam.gongsi = queryCompanyData.toString();
       hugParam.yetai = queryRetailData.toString();
       hugParam.location = queryZoneData.toString();
@@ -486,12 +505,31 @@ function queryDataFromTree() {
 function queryParams(params) {
   console.log(params.pageNumber);
 }
-
-function getDataFromServer(pageNum, pageSize) {
-  console.log(pageNum);
-  console.log(pageSize);
+// 地产分页
+function getLaneTabDataFromServer(pageNum, pageSize) {
+  laneParam.dijiye = pageNum;
+  laneParam.xianshitiaoshu = pageSize;
+  initTableOfLane();
 }
 
+// 房产分页
+function getHouseTabDataFromServer(pageNum, pageSize) {
+  houseParam.dijiye = pageNum;
+  houseParam.xianshitiaoshu = pageSize;
+  initTableOfHouse();
+}
+// 楼栋分页
+function getBuildingTabDataFromServer(pageNum, pageSize) {
+  buildingParam.dijiye = pageNum;
+  buildingParam.xianshitiaoshu = pageSize;
+  initTableOfBuilding();
+}
+// 房源分页
+function getHugTabDataFromServer(pageNum, pageSize) {
+  hugParam.dijiye = pageNum;
+  hugParam.xianshitiaoshu = pageSize;
+  initTableOfHug();
+}
 var map;
 function initMap() {
   map = new BMap.Map("mapContainer", { minZoom: Application.minZoom, enableHighResolution: true });    // 创建Map实例
@@ -607,10 +645,10 @@ function showDCAttachment(pk) {
         href : '#attachment',
         padding : 5,
         afterShow:function(){
-          for (var i = 0, len = imgData.length; i < len; i++) {
+          for (var i = 0, len = data.length; i < len; i++) {
             var imgDiv = document.createElement("div");
             imgDiv.setAttribute("class", "section");
-            imgDiv.style.background = "url("+imgData[i].accessory_id+")";
+            imgDiv.style.background = "url("+data[i].accessory_id+")";
             $('#attachment').append(imgDiv);
           }
           // $('#attachmentImg').src(imgData)
@@ -881,4 +919,20 @@ function otherInfo(data) {
   htmlArr.push('</div> </li>');
   return htmlArr;
 
+}
+
+// 页面跳转
+function setLocationParam(type) {
+  switch (type) {
+    case 1:
+      window.location = 'main.html?cuserid=' + Application.userid;
+      break;
+    case 2:
+      window.location = 'comprehensiveQuery.html?cuserid=' + Application.userid;
+      break;
+    case 3:
+      window.location = 'map.html?cuserid=' + Application.userid;
+      break;
+
+  }
 }
