@@ -85,3 +85,8 @@ html,body{
     font-size: 18px;
     font-family: 'Microsoft YaHei', '微软雅黑', '黑体', Arial, 'Times New Roman', sans-serif;
 }
+#yjxxDiv>ul {counter-reset:sectioncounter;}
+#yjxxDiv>ul li:before {
+    content:counter(sectioncounter) "、";
+    counter-increment:sectioncounter;
+}

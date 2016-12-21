@@ -215,7 +215,7 @@ function setHouseData(map) {
 						var customMarker = createMarker({
 							point: new BMap.Point(data[j].lng, data[j].lat),
 							html:'<p class="bubble-3 bubble" >' +
-							'<i class="num">&nbsp;'+data[j].xmmc+'&nbsp;</i>' +
+							'<i class="num">&nbsp;'+data[j].xmmc.substring(0,3)+'&nbsp;</i>' +
 							'<span class="name"><i class="name-des">' +
 							'<a href=javascript:void(0);" onclick="showSecondDirect('+data[j].lng+','+data[j].lat+')"'+
 							' >' +
@@ -281,7 +281,7 @@ function setLaneData(map) {
 				for (var j in data) {
 					var customMarker = createMarker({
 						point: new BMap.Point(data[j].lat, data[j].lng),
-						html: "<div class='bubble'><p class='name'>" + data[i].tdsyr
+						html: "<div class='bubble'><p class='name'>" + data[j].tdsyr
             + "</p><p class='number'>" + data[i].syqmj + "</p></div>",
 						style: {
 							color: 'white',
@@ -488,7 +488,7 @@ function initTreeOfCompany() {
 			backColor: "#f6f7fa",
 			onNodeChecked:addCompanyQueryData,
 			onNodeUnchecked: minusCompanyQueryData,
-			data: data});
+			data: changeCompanyData(data)});
 	}, function name(params) {
 		console.log('error')
 	},
@@ -544,7 +544,7 @@ function initTreeOfRetail() {
 
 function setParam(path, param, xmlns, methodName) {
 	return {
-		"url": '118.26.130.12',
+		"url": '192.168.3.20',
 		"port": 8080,
 		"path": path,
 		"data": JSON.stringify(param),
@@ -606,6 +606,15 @@ function changeRetailData(data){
 		retailData.push(obj);
 	}
 	return retailData;
+}
+function changeCompanyData(data) {
+	var commpanyData = [];
+	for(var i = 0, len = data.length; i < len; i++) {
+		var obj = data[i];
+		obj.nodes = data[i].children;
+		commpanyData.push(obj);
+	}
+	return commpanyData;
 }
 var houseDataParam = {
 	'location': '',

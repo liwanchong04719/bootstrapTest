@@ -577,9 +577,11 @@ function getCompanyAndHouse(data) {
 
   });
 
+
   $('#managementsituationhouseselect').select2({
     data: [{ id: 'test', text: "全部" }]
   })
+
   //初始化
   getPieGraphData("", "");
 
@@ -679,6 +681,7 @@ function receivablesAndstatistics(data) {
 
 //统计数据
 function getStatisticData(company, house, retail) {
+
   if(company =='test'){
     company = "";
   }
@@ -720,28 +723,42 @@ function getStatisticData(company, house, retail) {
 
   Application.Util.ajaxConstruct(Application.serverHost,'POST',{ 'yetai': retail, 'userid': Application.userid, 'fangchan': house, 'gongsi': company },'text/xml;charset=UTF-8',function (data) {
 
-          //data = JSON.parse(data);
-          //console.log(data)
-            //统计数据
-          $('#thisMonthReceivable').text(data[0].benyueyingshou);
-          $("#thisMonthReceived").text(data[0].shangyueshishou);
-          $('#thisMonthRatio').text(data[0].benyuewanchengbili);
 
-          $('#lastMonthReceivable').text(data[0].shangyueyingshou);
-          $('#lastMonthReceived').text(data[0].shangyueshishou);
-          $('#lastMonthRatio').text(data[0].shangyuewanchengbili);
+      //统计数据
+      $('#thisMonthReceivable').text(data[0].benyueyingshou);
+      $("#thisMonthReceived").text(data[0].shangyueshishou);
+      $('#thisMonthRatio').text(data[0].benyuewanchengbili);
 
+      $('#lastMonthReceivable').text(data[0].shangyueyingshou);
+      $('#lastMonthReceived').text(data[0].shangyueshishou);
+      $('#lastMonthRatio').text(data[0].shangyuewanchengbili);
 
+    })
 
-    },function name(params) {
-      console.log('error')
-    },
-    {
-      "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
-      "xmlnsName": "jin",
-      "methodName": "yingshoukuan"
-    }
-  )
+  // Application.Util.ajaxConstruct(Application.serverHost,'POST',{ 'yetai': retail, 'userid': Application.userid, 'fangchan': house, 'gongsi': company },'text/xml;charset=UTF-8',function (data) {
+  //
+  //         //data = JSON.parse(data);
+  //         //console.log(data)
+  //           //统计数据
+  //         $('#thisMonthReceivable').text(data[0].benyueyingshou);
+  //         $("#thisMonthReceived").text(data[0].shangyueshishou);
+  //         $('#thisMonthRatio').text(data[0].benyuewanchengbili);
+  //
+  //         $('#lastMonthReceivable').text(data[0].shangyueyingshou);
+  //         $('#lastMonthReceived').text(data[0].shangyueshishou);
+  //         $('#lastMonthRatio').text(data[0].shangyuewanchengbili);
+  //
+  //
+  //
+  //   },function name(params) {
+  //     console.log('error')
+  //   },
+  //   {
+  //     "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+  //     "xmlnsName": "jin",
+  //     "methodName": "yingshoukuan"
+  //   }
+  // )
 
 
 }
@@ -934,7 +951,7 @@ function initOfRetail(fun) {
 
 function setParam(path, param, xmlns, methodName) {
   return {
-    "url": '118.26.130.12',
+    "url": '192.168.3.20',
     "port": 8080,
     "path": path,
     "data": JSON.stringify(param),
@@ -950,7 +967,7 @@ function initWarningInfo() {
     // $.post("http://127.0.0.1:8088/" + new Date().getTime(),
     //   setParam(
     //     '/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
-    //     { 'userid': '1001ZZ10000000018FJF' },
+    //     { 'userid': Application.userid },
     //     'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
     //     'yujingxinxi'
     //   ), function (data) {
