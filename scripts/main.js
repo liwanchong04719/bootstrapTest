@@ -3,16 +3,13 @@
  */
 $(function () {
 
-
   function GetQueryString(name)
   {
     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
     var r = window.location.search.substr(1).match(reg);
     if(r!=null)return  unescape(r[2]); return null;
   }
-
   Application.userid = GetQueryString('cuserid')?GetQueryString('cuserid'):Application.userid;
-
   $.fn.select2.defaults.set("theme", "bootstrap");
   //资产盘点
   getExistingAssets(Application.userid);
@@ -170,7 +167,7 @@ function initPieChart(data) {
     calculable: true,
     series: [
       {
-        name: '访问来源',
+        name: '',
         type: 'pie',
         radius: ['50%', '70%'],
         data: data
@@ -287,12 +284,12 @@ function initBarChart(data) {
 function getExistingAssets(userid) {
 
   Application.Util.ajaxConstruct(Application.serverHost, 'POST', { userid: Application.userid }, 'text/xml;charset=UTF-8', function (data) {
-
+       
       $('.landcount').text(data.dcCount);
       $('.housecount').text(data.fcCount);
       $('.departmentcount').text(data.fyCount);
     }, function name(params) {
-      console.log('error')
+      console.log('error');
     },
     {
       "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',

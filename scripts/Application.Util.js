@@ -57,9 +57,7 @@ Application.Util.ajaxConstruct = function (url, type, data, dataType, successFuc
             + '<soapenv:Body>'
             + '<' + ajaxoptions['xmlnsName'] + ':' + ajaxoptions['methodName'] + ' >';
         soapMessage = soapMessage + "<"+ajaxoptions['xmlnsName'] + ':'+"string>" + JSON.stringify(data) + "</"+ajaxoptions['xmlnsName'] + ':'+"string>";
-        soapMessage = soapMessage + '</' + ajaxoptions['xmlnsName'] + ':' + ajaxoptions['methodName'] + '>' + '</soapenv:Body>' + '</soapenv:Envelope>';
-        console.log('soapMessage参数:' + soapMessage);
-
+    soapMessage = soapMessage + '</' + ajaxoptions['xmlnsName'] + ':' + ajaxoptions['methodName'] + '>' + '</soapenv:Body>' + '</soapenv:Envelope>';
 
     $.support.cors = true;
     /*
@@ -72,8 +70,6 @@ Application.Util.ajaxConstruct = function (url, type, data, dataType, successFuc
     // }
 
 
-
-
     $.ajax({
         url: url,
         type: type,
@@ -84,7 +80,7 @@ Application.Util.ajaxConstruct = function (url, type, data, dataType, successFuc
           data =data['responseText'] || data;
           var startindex = data.indexOf('<ns1:return>');
           var endindex = data.indexOf('</ns1:return>');
-          data = data.substring(startindex + 12, endindex)
+          data = data.substring(startindex + 12, endindex);
           data = JSON.parse(data);
           successFuc (data)
         },
