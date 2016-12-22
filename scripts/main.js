@@ -669,6 +669,16 @@ function receivablesAndstatistics(data) {
 
 //统计数据
 function getStatisticData(company, house, retail) {
+  if(company === '全部') {
+    company = '';
+  }
+  if(house === '全部') {
+    house = '';
+  }
+  if(retail === '全部') {
+    retail = '';
+  }
+
   // $.post("http://127.0.0.1:8088/" + new Date().getTime(),
   //   {
   //     "url": "118.26.130.12",

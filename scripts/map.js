@@ -557,12 +557,12 @@ var queryZoneData = [];
 var queryCompanyData = [];
 var queryRetailData = [];
 function addZoneQueryData(event,node){
-	queryZoneData.push(node.id);
+	queryZoneData.push(node.text);
 }
 function minusZoneQueryData(event, node) {
 
 	queryZoneData = queryZoneData.filter(function (item) {
-		return item !== node.id;
+		return item !== node.text;
 	});
 	return queryZoneData;
 }function addCompanyQueryData(event,node){
@@ -574,12 +574,12 @@ function minusCompanyQueryData(event, node) {
 	});
 	return queryCompanyData;
 }function addRetailQueryData(event,node){
-	queryRetailData.push(node.id);
+	queryRetailData.push(node.nodeId);
 }
 function minusRetailQueryData(event, node) {
 
 	queryRetailData = queryRetailData.filter(function (item) {
-		return item !== node.id;
+		return item !== node.nodeId;
 	});
 	return queryRetailData;
 }

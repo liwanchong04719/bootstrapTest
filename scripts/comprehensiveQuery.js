@@ -89,7 +89,6 @@ function initTableOfLane() {
   //   });
 
   Application.Util.ajaxConstruct(Application.serverHost, 'POST', laneParam, 'text/xml;charset=UTF-8', function (data) {
-   data.total = 100;
       $tableOfLane.bootstrapTable('load',data);
     }, function name(params) {
       console.log('error')
@@ -120,7 +119,6 @@ function initTableOfHouse() {
   //   });
 
   Application.Util.ajaxConstruct(Application.serverHost, 'POST', houseParam, 'text/xml;charset=UTF-8', function (data) {
-      data.total = 100;
       $tableOfHouse.bootstrapTable('load',data);
     }, function name(params) {
       console.log('error')
@@ -149,7 +147,6 @@ function initTableOfBuilding() {
   //   });
 
   Application.Util.ajaxConstruct(Application.serverHost, 'POST', buildingParam, 'text/xml;charset=UTF-8', function (data) {
-      data.total = 100;
       $tableOfBuilding.bootstrapTable('load',data);
     }, function name(params) {
       console.log('error')
@@ -179,7 +176,6 @@ function initTableOfHug() {
 
 
   Application.Util.ajaxConstruct(Application.serverHost, 'POST', buildingParam, 'text/xml;charset=UTF-8', function (data) {
-      data.total = 100;
       $tableOfHug.bootstrapTable('load',data);
     }, function name(params) {
       console.log('error')
@@ -223,7 +219,7 @@ function initTreeOfCompany() {
         backColor: "#f6f7fa",
         onNodeChecked:addCompanyQueryData,
         onNodeUnchecked: minusCompanyQueryData,
-        data:  changeCompanyData(data)});
+        data:  data});
     }, function name(params) {
       console.log('error')
     },
@@ -372,12 +368,12 @@ $(function () {
 
   });
 function addZoneQueryData(event,node){
-  queryZoneData.push(node.id);
+  queryZoneData.push(node.text);
 }
 function minusZoneQueryData(event, node) {
 
   queryZoneData = queryZoneData.filter(function (item) {
-    return item !== node.id;
+    return item !== node.text;
     });
   return queryZoneData;
 }function addCompanyQueryData(event,node){
@@ -389,12 +385,12 @@ function minusCompanyQueryData(event, node) {
     });
   return queryCompanyData;
 }function addRetailQueryData(event,node){
-  queryRetailData.push(node.id);
+  queryRetailData.push(node.nodeId);
 }
 function minusRetailQueryData(event, node) {
 
   queryRetailData = queryRetailData.filter(function (item) {
-    return item !== node.id;
+    return item !== node.nodeId;
     });
   return queryRetailData;
 }
