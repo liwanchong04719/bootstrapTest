@@ -701,19 +701,19 @@ function getStatisticData(company, house, retail) {
   //
   //   })
 
-  Application.Util.ajaxConstruct(Application.serverHost,'POST',{ 'yetai': retail, 'userid': Application.userid, 'fangchan': house, 'gongsi': company },'text/xml;charset=UTF-8',function (data) {
-
-
-      //统计数据
-      $('#thisMonthReceivable').text(data[0].benyueyingshou);
-      $("#thisMonthReceived").text(data[0].shangyueshishou);
-      $('#thisMonthRatio').text(data[0].benyuewanchengbili);
-
-      $('#lastMonthReceivable').text(data[0].shangyueyingshou);
-      $('#lastMonthReceived').text(data[0].shangyueshishou);
-      $('#lastMonthRatio').text(data[0].shangyuewanchengbili);
-
-    })
+  // Application.Util.ajaxConstruct(Application.serverHost,'POST',{ 'yetai': retail, 'userid': Application.userid, 'fangchan': house, 'gongsi': company },'text/xml;charset=UTF-8',function (data) {
+  //
+  //
+  //     //统计数据
+  //     $('#thisMonthReceivable').text(data[0].benyueyingshou);
+  //     $("#thisMonthReceived").text(data[0].shangyueshishou);
+  //     $('#thisMonthRatio').text(data[0].benyuewanchengbili);
+  //
+  //     $('#lastMonthReceivable').text(data[0].shangyueyingshou);
+  //     $('#lastMonthReceived').text(data[0].shangyueshishou);
+  //     $('#lastMonthRatio').text(data[0].shangyuewanchengbili);
+  //
+  //   })
 
   // Application.Util.ajaxConstruct(Application.serverHost,'POST',{ 'yetai': retail, 'userid': Application.userid, 'fangchan': house, 'gongsi': company },'text/xml;charset=UTF-8',function (data) {
   //
