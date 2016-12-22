@@ -3,16 +3,13 @@
  */
 $(function () {
 
-
   function GetQueryString(name)
   {
     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
     var r = window.location.search.substr(1).match(reg);
     if(r!=null)return  unescape(r[2]); return null;
   }
-
   Application.userid = GetQueryString('cuserid')?GetQueryString('cuserid'):Application.userid;
-
   $.fn.select2.defaults.set("theme", "bootstrap");
   //资产盘点
   getExistingAssets(Application.userid);
@@ -38,7 +35,7 @@ $(function () {
 
      initOfRetail(function (data) {
           var retails = [];
-          retails.push({ id: "", text: "全部" });
+          retails.push({ id: "test", text: "全部" });
           for (var i = 0, len = data.length; i < len; i++) {
             retails.push({ id: data[i].fristvalue, text: data[i].secondvalue });
           }
@@ -170,7 +167,7 @@ function initPieChart(data) {
     calculable: true,
     series: [
       {
-        name: '访问来源',
+        name: '',
         type: 'pie',
         radius: ['50%', '70%'],
         data: data
@@ -287,12 +284,12 @@ function initBarChart(data) {
 function getExistingAssets(userid) {
 
   Application.Util.ajaxConstruct(Application.serverHost, 'POST', { userid: Application.userid }, 'text/xml;charset=UTF-8', function (data) {
-
+       
       $('.landcount').text(data.dcCount);
       $('.housecount').text(data.fcCount);
       $('.departmentcount').text(data.fyCount);
     }, function name(params) {
-      console.log('error')
+      console.log('error');
     },
     {
       "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
@@ -393,7 +390,7 @@ function getOrgAndLocation(userid) {
 
 //生成按公司下拉列表
 function OrgAndLocationOptions(data) {
-  var companyarr = [{ id: '', text: '全部' }]
+  var companyarr = [{ id: 'test', text: '全部' }]
   var locationObj = {};
   for (var i = 0, len = data.length; i < len; i++) {
     companyarr.push({ id: data[i].firstvalue, text: data[i].secondvalue, location: data[i].location });
@@ -408,7 +405,7 @@ function OrgAndLocationOptions(data) {
 
     getCircleGraphData(e.params.data.id, "");
     var areaArr = [];
-    areaArr.push({ id: '', text: '全部' });
+    areaArr.push({ id: 'test', text: '全部' });
     for (var i = 0, len = locationObj[e.params.data.id].length; i < len; i++) {
       areaArr.push({ id:  locationObj[e.params.data.id][i].firstvalue, text: locationObj[e.params.data.id][i].secondvalue })
     }
@@ -422,7 +419,7 @@ function OrgAndLocationOptions(data) {
   });
 
   $('#propertyAreaSelect').select2({
-    data: [{ id: '', text: "全部" }]
+    data: [{ id: 'test', text: "全部" }]
   })
 
   getCircleGraphData('', '');
@@ -430,6 +427,9 @@ function OrgAndLocationOptions(data) {
 }
 
 function getCircleGraphData(company, area) {
+  if(company =='test'){
+    company = "";
+  }
   // $.post("http://127.0.0.1:8088/" + new Date().getTime(),
   //   {
   //     "url": "118.26.130.12",
@@ -546,7 +546,7 @@ function getManagementSituation() {
 
 
 function getCompanyAndHouse(data) {
-  var companyarr = [{ id: '', text: '全部' }]
+  var companyarr = [{ id: 'test', text: '全部' ,fangchan:[{id:'test',text:"全部"}]}]
   var locationObj = {};
   for (var i = 0, len = data.length; i < len; i++) {
     companyarr.push({ id: data[i].firstvalue, text: data[i].secondvalue, location: data[i].fangchan });
@@ -561,7 +561,7 @@ function getCompanyAndHouse(data) {
 
     getPieGraphData(e.params.data.id, "");
     var areaArr = [];
-    areaArr.push({ id: '', text: '全部' });
+    areaArr.push({ id: 'test', text: '全部' });
     for (var i = 0, len = locationObj[e.params.data.id].length; i < len; i++) {
       areaArr.push({ id: locationObj[e.params.data.id][i].firstvalue, text: locationObj[e.params.data.id][i].secondvalue })
     }
@@ -574,9 +574,11 @@ function getCompanyAndHouse(data) {
 
   });
 
-  // $('#managementsituationhouseselect').select2({
-  //   data: [{ id: '', text: "全部" }]
-  // })
+
+  $('#managementsituationhouseselect').select2({
+    data: [{ id: 'test', text: "全部" }]
+  })
+
   //初始化
   getPieGraphData("", "");
 
@@ -584,6 +586,13 @@ function getCompanyAndHouse(data) {
 
 
 function getPieGraphData(company, house) {
+  if(company == 'test'){
+    company = "";
+  }
+
+  if(house == 'test'){
+    house = "";
+  }
   // $.post("http://127.0.0.1:8088/" + new Date().getTime(),
   //   {
   //     "url": "118.26.130.12",
@@ -627,7 +636,7 @@ function getPieGraphData(company, house) {
 }
 //应收款统计
 function receivablesAndstatistics(data) {
-  var companyarr = [{ id: '', text: '全部' }]
+  var companyarr = [{ id: 'test', text: '全部' }]
   var locationObj = {};
   for (var i = 0, len = data.length; i < len; i++) {
     companyarr.push({ id: data[i].firstvalue, text: data[i].secondvalue, location: data[i].fangchan });
@@ -642,7 +651,7 @@ function receivablesAndstatistics(data) {
 
     //getPieGraphData(e.params.data.id, "");
     var areaArr = [];
-    areaArr.push({ id: '', text: '全部' });
+    areaArr.push({ id: 'test', text: '全部' });
 
     getStatisticData(e.params.data.id,$('#statisticshouse').select2('val'),$('#statisticsretail').select2('val'))
 
@@ -661,7 +670,7 @@ function receivablesAndstatistics(data) {
   });
 
   $('#statisticshouse').select2({
-    data: [{ id: '', text: "全部" }]
+    data: [{ id: 'test', text: "全部" }]
   })
   //初始化
   getStatisticData("", "","");
@@ -697,6 +706,16 @@ function getStatisticData(company, house, retail) {
   //     var startindex = data.indexOf('<ns1:return>');
   //     var endindex = data.indexOf('</ns1:return>');
   //     data = JSON.parse(data.substring(startindex + 12, endindex));
+  if(company =='test'){
+    company = "";
+  }
+  if(house =='test'){
+    house = "";
+  }
+  if(retail =='test'){
+    retail = "";
+  }
+
   //
   //     //统计数据
   //     $('#thisMonthReceivable').text(data[0].benyueyingshou);
@@ -787,7 +806,7 @@ function getLocationAndYetai(userid) {
 
 
 function getRegionAndRetail(data) {
-  var regionarr = [{ id: '', text: '全部' }]
+  var regionarr = [{ id: 'test', text: '全部' }]
   var retailObj = {};
   var locationObj = {};
   for (var i = 0, len = data.length; i < len; i++) {
@@ -809,7 +828,7 @@ function getRegionAndRetail(data) {
 
       if (e.params.data.retail) {
         var retailArr = [];
-        retailArr.push({ id: '', text: '全部' });
+        retailArr.push({ id: 'test', text: '全部' });
         for (var i = 0, len = e.params.data.retail.length; i < len; i++) {
           retailArr.push({ id: e.params.data.retail[i].firstvalue, text: e.params.data.retail[i].secondvalue })
         }
@@ -843,7 +862,7 @@ function getRegionAndRetail(data) {
     });
 
   $('#managementsituationretailselect').select2({
-    data: [{ id: '', text: "全部" }]
+    data: [{ id: 'test', text: "全部" }]
   })
   //初始化
   getBarData("", "");
@@ -854,6 +873,9 @@ function getRegionAndRetail(data) {
 function getBarData(location, retail) {
   if (location == "全部") {
     location = "";
+  }
+  if(retail == 'test'){
+    retail = "";
   }
   // $.post("http://127.0.0.1:8088/" + new Date().getTime(),
   //   {

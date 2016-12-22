@@ -444,7 +444,7 @@
 
     //生成按公司下拉列表
     function OrgAndLocationOptions(data) {
-        var companyarr = [{ id: '', text: "全部" }]
+        var companyarr = [{ id: 'test', text: "全部" }]
         var locationObj = {};
         for (var i = 0, len = data.length; i < len; i++) {
             companyarr.push({ id: data[i].firstvalue, text: data[i].secondvalue, location: data[i].location });
@@ -459,7 +459,7 @@
 
             getCircleGraphData(e.params.data.id, "");
             var areaArr = [];
-            areaArr.push({ id: 'gggggg', text: '全部' });
+            areaArr.push({ id: 'test', text: '全部' });
             for (var i = 0, len = locationObj[e.params.data.id].length; i < len; i++) {
                 areaArr.push({ id:  locationObj[e.params.data.id][i].firstvalue, text: locationObj[e.params.data.id][i].secondvalue })
             }
@@ -467,13 +467,13 @@
             $('#propertyAreaSelect').select2({
                 data: areaArr
             }).on('select2:select', function (event) {
-                //getCircleGraphData(e.params.data.id, event.params.data.text);
+                getCircleGraphData(e.params.data.id, event.params.data.text);
             });
 
         });
 
         $('#propertyAreaSelect').select2({
-            data: [{ id: '', text: "全部" }]
+            data: [{ id: 'test', text: "全部" }]
         })
 
         getCircleGraphData('', '');
@@ -483,6 +483,12 @@
 
     //业态比率环状图
     function getCircleGraphData(company, area) {
+        if(company =='test'){
+            company ="";
+        }
+        if(area == 'test'){
+            area ='test';
+        }
          $.post("http://127.0.0.1:8088/" + new Date().getTime(),
            {
              "url": "118.26.130.12",
@@ -573,7 +579,7 @@
 
 
     function getRegionAndRetail(data) {
-        var regionarr = [{ id: '', text: '全部' }]
+        var regionarr = [{ id: 'test', text: '全部' }]
         var retailObj = {};
         var locationObj = {};
         for (var i = 0, len = data.length; i < len; i++) {
@@ -595,7 +601,7 @@
 
                     if (e.params.data.retail) {
                         var retailArr = [];
-                        retailArr.push({ id: '', text: '全部' });
+                        retailArr.push({ id: 'test', text: '全部' });
                         for (var i = 0, len = e.params.data.retail.length; i < len; i++) {
                             retailArr.push({ id: e.params.data.retail[i].firstvalue, text: e.params.data.retail[i].secondvalue })
                         }
@@ -629,7 +635,7 @@
                 });
 
         $('#managementsituationretailselect').select2({
-            data: [{ id: '', text: "全部" }]
+            data: [{ id: 'test', text: "全部" }]
         })
         //初始化
         //getBarData("", "");
