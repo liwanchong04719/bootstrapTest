@@ -14,14 +14,14 @@ var dcInfo =
   '</ul>' +
   '<div class="wrapper">' +
   '<ul class="items">' +
-  '<li>' +
+  '<li style="display: none">' +
   '<a href="#">出租率及平均单价趋势 <i class="glyphicon glyphicon-chevron-right"></i></a>' +
   '<ul class="sub-items">' +
   '<li>' +
   '<div id="barChart" style="height: 250px;width: 350px">' +
   '</div></li></ul> </li>' +
   '<li>' +
-  '<a href="#">对方地产信息<i class="glyphicon glyphicon-chevron-right"></i></a>' +
+  '<a href="#">对方房产信息<i class="glyphicon glyphicon-chevron-right"></i></a>' +
   '<ul class="sub-items" id="dydcxx">' +
   '</ul>' +
   '</li>' +

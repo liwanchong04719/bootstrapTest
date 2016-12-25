@@ -61,8 +61,8 @@ var queryRetailData = [];
 var tableType = 'lane';
 function setParam(path, param, xmlns, methodName) {
   return {
-    "url": '118.26.130.12',
-    "port": 8080,
+    "url": 'i.bucg.com',
+    // "port": 8080,
     "path": path,
     "data": JSON.stringify(param),
     ajaxoptions: {
@@ -159,33 +159,33 @@ function initTableOfBuilding() {
   );
 }
 function initTableOfHug() {
-  // $.post("http://127.0.0.1:8088/" + new Date().getTime(),
-  //   setParam(
-  //     '/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
-  //     hugParam,
-  //     'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
-  //     'getFyXinXi'
-  //   ), function (data) {
-  //     var startindex = data.indexOf('<ns1:return>');
-  //     var endindex = data.indexOf('</ns1:return>');
-  //     data = data.substring(startindex+12,endindex)
-  //     var dataTable = JSON.parse(data);
-  //     $tableOfHug.bootstrapTable('load',dataTable.rows);
-  //   });
+  $.post("http://127.0.0.1:8088/" + new Date().getTime(),
+    setParam(
+      '/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
+      hugParam,
+      'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+      'getFyXinXi'
+    ), function (data) {
+      var startindex = data.indexOf('<ns1:return>');
+      var endindex = data.indexOf('</ns1:return>');
+      data = data.substring(startindex+12,endindex)
+      var dataTable = JSON.parse(data);
+      $tableOfHug.bootstrapTable('load',dataTable);
+    });
 
 
 
-  Application.Util.ajaxConstruct(Application.serverHost, 'POST', buildingParam, 'text/xml;charset=UTF-8', function (data) {
-      $tableOfHug.bootstrapTable('load',data);
-    }, function name(params) {
-      console.log('error')
-    },
-    {
-      "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
-      "xmlnsName": "jin",
-      "methodName": "getFyXinXi"
-    }
-  );
+  // Application.Util.ajaxConstruct(Application.serverHost, 'POST', buildingParam, 'text/xml;charset=UTF-8', function (data) {
+  //     $tableOfHug.bootstrapTable('load',data);
+  //   }, function name(params) {
+  //     console.log('error')
+  //   },
+  //   {
+  //     "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+  //     "xmlnsName": "jin",
+  //     "methodName": "getFyXinXi"
+  //   }
+  // );
 }
 function initTreeOfCompany() {
   // $.post("http://127.0.0.1:8088/" + new Date().getTime(),
@@ -326,10 +326,6 @@ $(function () {
   initTreeOfCompany();
   // 业态
   initTreeOfRetail();
-  //楼栋
-  initTableOfBuilding();
-  // 房源
-  initTableOfHug();
 //点击tab
   $("div.bhoechie-tab-menu>div.list-group>a").click(function (e) {
     e.preventDefault();
@@ -349,11 +345,11 @@ $(function () {
   $tableOfHouse.on('page-change.bs.table', function (e, number, size) {
     getHouseTabDataFromServer(number, size);
   });
-  //点击页数时获取房产页数的数据
+  //点击页数时楼栋房产页数的数据
   $tableOfBuilding.on('page-change.bs.table', function (e, number, size) {
     getBuildingTabDataFromServer(number, size);
   });
-  //点击页数时获取房产页数的数据
+  //点击页数时获取房源页数的数据
   $tableOfHug.on('page-change.bs.table', function (e, number, size) {
     getHugTabDataFromServer(number, size);
   });
@@ -758,7 +754,7 @@ function initDCPanel(id, callback) {
   //   });
 
 
-		Application.Util.ajaxConstruct(Application.serverHost, 'POST', {'fczbh': id, userid: Application.userid}, 'text/xml;charset=UTF-8', function (data) {
+		Application.Util.ajaxConstruct(Application.serverHost, 'POST', {'tdzbh': id, userid: Application.userid}, 'text/xml;charset=UTF-8', function (data) {
 		callback(data);
 	}, function name(params) {
 		console.log('error')
