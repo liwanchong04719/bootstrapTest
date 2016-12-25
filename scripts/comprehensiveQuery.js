@@ -210,7 +210,7 @@ function initTreeOfCompany() {
 
   Application.Util.ajaxConstruct(Application.serverHost, 'POST',   {'userid':Application.userid}, 'text/xml;charset=UTF-8', function (data) {
 
-      $('#treeOfZone').treeview({ expandIcon: "glyphicon glyphicon-stop",
+      $('#treeOfZone').treeview({ expandIcon: "glyphicon glyphicon-plus",
         levels: 1,
         color:'#2a6496',
         showCheckbox: true,
@@ -254,7 +254,7 @@ function initTreeOfZone() {
 
   Application.Util.ajaxConstruct(Application.serverHost, 'POST',   {'userid':Application.userid}, 'text/xml;charset=UTF-8', function (data) {
 
-      $('#treeOfCompany').treeview({ expandIcon: "glyphicon glyphicon-stop",
+      $('#treeOfCompany').treeview({ expandIcon: "glyphicon glyphicon-plus",
         levels: 1,
         color:'#2a6496',
         showCheckbox: true,
@@ -299,7 +299,7 @@ function initTreeOfRetail() {
 
   Application.Util.ajaxConstruct(Application.serverHost, 'POST',   {'userid':Application.userid}, 'text/xml;charset=UTF-8', function (data) {
 
-      $('#treeOfRetail').treeview({ expandIcon: "glyphicon glyphicon-stop",
+      $('#treeOfRetail').treeview({ expandIcon: "glyphicon glyphicon-plus",
         levels: 1,
         color:'#2a6496',
         showCheckbox: true,
