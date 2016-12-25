@@ -174,7 +174,7 @@ function initTableOfHug() {
 
 
 
-  Application.Util.ajaxConstruct(Application.serverHost, 'POST', buildingParam, 'text/xml;charset=UTF-8', function (data) {
+  Application.Util.ajaxConstruct(Application.serverHost, 'POST', hugParam, 'text/xml;charset=UTF-8', function (data) {
       $tableOfHug.bootstrapTable('load',data);
     }, function name(params) {
       console.log('error')
@@ -574,10 +574,10 @@ function showFCAttachment(pk) {
         href : '#attachment',
         padding : 5,
         afterShow:function(){
-          for (var i = 0, len = imgData.length; i < len; i++) {
+          for (var i = 0, len = data.length; i < len; i++) {
             var imgDiv = document.createElement("div");
             imgDiv.setAttribute("class", "section");
-            imgDiv.style.background = "url("+imgData[i].accessory_id+")";
+            imgDiv.style.background = "url("+data[i].accessory_id+")";
             $('.sections').append(imgDiv);
           }
           $("#attachment").PageSwitch({
@@ -643,10 +643,10 @@ function showDCAttachment(pk) {
         href : '#attachment',
         padding : 5,
         afterShow:function(){
-          for (var i = 0, len = imgData.length; i < len; i++) {
+          for (var i = 0, len = data.length; i < len; i++) {
             var imgDiv = document.createElement("div");
             imgDiv.setAttribute("class", "section");
-            imgDiv.style.background = "url("+imgData[i].accessory_id+")";
+            imgDiv.style.background = "url("+data[i].accessory_id+")";
             $('.sections').append(imgDiv);
           }
           $("#attachment").PageSwitch({

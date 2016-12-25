@@ -39,53 +39,59 @@ Application.Util = Application.Util || {};
 
 */
 Application.Util.ajaxConstruct = function (url, type, data, dataType, successFuc, errorFuc,ajaxoptions) {
-    // var soapMessage =
-    //     　　'<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"  '
-    //     + ajaxoptions.xmlns+'>'
-    //     + '<soapenv:Header/>'
-    //     + '<soapenv:Body>'
-    //     + '<' + ajaxoptions.xmlnsName + ':' + ajaxoptions.methodName + ' >';
+   if(Application.isproxy){
+      $.post("http://127.0.0.1:8088/" + new Date().getTime(),
+       {
 
-    // soapMessage = soapMessage + "<string>" + JSON.stringify(data) + "</string>";
-    // soapMessage = soapMessage + '</' + ajaxoptions.xmlnsName + ':' + ajaxoptions.methodName + '>' +
-    // '</soapenv:Body>' + '</soapenv:Envelope>';
+         "data": JSON.stringify(data),
+         "ajaxoptions": ajaxoptions
+       },
+       function (data) {
+         var startindex = data.indexOf('<ns1:return>');
+             var endindex = data.indexOf('</ns1:return>');
+             data = JSON.parse(data.substring(startindex + 12, endindex));
+         successFuc (data);
+     })
+   }else{
+     var soapMessage =
+       '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" '
+       +ajaxoptions['xmlns'] + '>'
+       + '<soapenv:Header/>'
+       + '<soapenv:Body>'
+       + '<' + ajaxoptions['xmlnsName'] + ':' + ajaxoptions['methodName'] + ' >';
+     soapMessage = soapMessage + "<"+ajaxoptions['xmlnsName'] + ':'+"string>" + JSON.stringify(data) + "</"+ajaxoptions['xmlnsName'] + ':'+"string>";
+     soapMessage = soapMessage + '</' + ajaxoptions['xmlnsName'] + ':' + ajaxoptions['methodName'] + '>' + '</soapenv:Body>' + '</soapenv:Envelope>';
 
-    var soapMessage =
-            '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" '
-            +ajaxoptions['xmlns'] + '>'
-            + '<soapenv:Header/>'
-            + '<soapenv:Body>'
-            + '<' + ajaxoptions['xmlnsName'] + ':' + ajaxoptions['methodName'] + ' >';
-        soapMessage = soapMessage + "<"+ajaxoptions['xmlnsName'] + ':'+"string>" + JSON.stringify(data) + "</"+ajaxoptions['xmlnsName'] + ':'+"string>";
-    soapMessage = soapMessage + '</' + ajaxoptions['xmlnsName'] + ':' + ajaxoptions['methodName'] + '>' + '</soapenv:Body>' + '</soapenv:Envelope>';
+     $.support.cors = true;
+     /*
+      *	get 方式将access_token加到url里面
+      *  post 方式将access_token加到 data里面
+      */
 
-    $.support.cors = true;
-    /*
-     *	get 方式将access_token加到url里面
-     *  post 方式将access_token加到 data里面
-     */
-
-    // if(userid == null || userid == undefined){
-    //     userid =userid;
-    // }
+     // if(userid == null || userid == undefined){
+     //     userid =userid;
+     // }
 
 
-    $.ajax({
-        url: url,
-        type: type,
-        data: soapMessage,
-        contentType: "text/xml;charset=UTF-8",//设置返回值类型xml
-        dataType: dataType,
-      error: function (data) {
-          data =data['responseText'] || data;
-          var startindex = data.indexOf('<ns1:return>');
-          var endindex = data.indexOf('</ns1:return>');
-          data = data.substring(startindex + 12, endindex);
-          data = JSON.parse(data);
-          successFuc (data)
-        },
-  success: errorFuc
-    });
+     $.ajax({
+       url: url,
+       type: type,
+       data: soapMessage,
+       contentType: "text/xml;charset=UTF-8",//设置返回值类型xml
+       dataType: dataType,
+       error: function (data) {
+         data =data['responseText'] || data;
+         var startindex = data.indexOf('<ns1:return>');
+         var endindex = data.indexOf('</ns1:return>');
+         data = data.substring(startindex + 12, endindex);
+         data = JSON.parse(data);
+         successFuc (data)
+       },
+       success: errorFuc
+     });
+   }
+
+
 };
 
 // 对Date的扩展，将 Date 转化为指定格式的String
