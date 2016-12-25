@@ -44,11 +44,7 @@ Application.Util.ajaxConstruct = function (url, type, data, dataType, successFuc
        {
 
          "data": JSON.stringify(data),
-         "ajaxoptions": {
-           "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
-           "xmlnsName": "jin",
-           "methodName": "getLocationAndYetai"
-         }
+         "ajaxoptions": ajaxoptions
        },
        function (data) {
          var startindex = data.indexOf('<ns1:return>');
