@@ -59,11 +59,11 @@ $(document).ready(function () {
 	$('#zoom').text(map.getZoom())
 	map.addEventListener('tilesloaded', function () {
 		$('#zoom').text(map.getZoom());
-     // if(showIndex === 2) {
-			 // setLaneData(map);
-		 // } else {
-			 // setHouseData(map);
-		 // }
+     if(showIndex === 2) {
+			 setLaneData(map);
+		 } else {
+			 setHouseData(map);
+		 }
 	});
 })
 
