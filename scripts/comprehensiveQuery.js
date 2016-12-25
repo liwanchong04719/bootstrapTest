@@ -174,7 +174,7 @@ function initTableOfHug() {
 
 
 
-  Application.Util.ajaxConstruct(Application.serverHost, 'POST', buildingParam, 'text/xml;charset=UTF-8', function (data) {
+  Application.Util.ajaxConstruct(Application.serverHost, 'POST', hugParam, 'text/xml;charset=UTF-8', function (data) {
       $tableOfHug.bootstrapTable('load',data);
     }, function name(params) {
       console.log('error')
