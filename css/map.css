@@ -77,10 +77,26 @@ html,body{
 }
 
 .bubble-3 {
-    height: 28px;
-    line-height: 28px;
+    width: 92px;
+    height: 92px;
+    padding-top: 10px;
+    line-height: 20px;
+    font-size: 12px;
+    border: 1px solid transparent;
+    background-color: rgba(57,172,106,0.9);
+    border-radius: 50%;
+    overflow: hidden;
     cursor: pointer;
-    text-align: center;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    box-shadow: 0 2px 2px rgba(0,0,0,0.2);
+    -webkit-transition: background-color .15s ease-in-out;
+    -moz-transition: background-color .15s ease-in-out;
+    -o-transition: background-color .15s ease-in-out;
+    transition: background-color .15s ease-in-out;
 
 }
 

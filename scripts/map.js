@@ -184,7 +184,7 @@ function setHouseData(map) {
 				for (var i in data) {
 					var customMarker = createMarker({
 						point: new BMap.Point(data[i].lat, data[i].lng),
-						html: "<div class='bubble'><p class='name' style='margin-bottom: 5px;'>" + data[i].city + "</p><p class='number'>" + data[i].fccount + "</p></div>",
+						html: "<div class='bubble'><p class='name' style='margin-bottom: 5px;'><a href=javascript:void(0); onclick='showhouse("+data[i].lng+","+data[i].lat+")' >" + data[i].city + "</a></p><p class='number'>" + data[i].fccount + "</p></div>",
 						style: {
 							color: 'white',
 							fontSize: "12px",
@@ -212,14 +212,15 @@ function setHouseData(map) {
 						var href = "../pages/housePanel.html?fczbh=" + data[j].xmmc;
 						var customMarker = createMarker({
 							point: new BMap.Point(data[j].lng, data[j].lat),
-							html:'<p class="bubble-3 bubble" >' +
-							'<i class="num">&nbsp;'+data[j].xmmc.substring(0,3)+'&nbsp;</i>' +
-							'<span class="name"><i class="name-des">' +
-							'<a href=javascript:void(0);" onclick="showSecondDirect('+data[j].lng+','+data[j].lat+')"'+
-							' >' +
-							'3.9万&nbsp;&nbsp;2套' +
-							'</a></i></span><i class="arrow-up">' +
-							'<i class="arrow"></i><i></i></i></p>',
+							// html:'<p class="bubble-3 bubble" >' +
+							// '<i class="num">&nbsp;'+data[j].xmmc.substring(0,3)+'&nbsp;</i>' +
+							// '<span class="name"><i class="name-des">' +
+							// '<a href=javascript:void(0);" onclick="showSecondDirect('+data[j].lng+','+data[j].lat+')"'+
+							// ' >' +
+							// data[j].xmmc +
+							// '</a></i></span><i class="arrow-up">' +
+							// '<i class="arrow"></i><i></i></i></p>',
+							 html:"<div class='bubble-3 bubble'><p class='name' style='margin-bottom: 5px;'> <a href=javascript:void(0); onclick='showSecondDirect("+data[j].lng+","+data[j].lat+")' >" + data[j].xmmc + "</a></p><p class='number'>" + data[i].fccount + "</p></div>",
 							style: {
 								color: 'white',
 								fontSize: "12px",
@@ -237,6 +238,11 @@ function setHouseData(map) {
 			}
 		);
 
+	}
+
+
+	function showhouse() {
+		Application.map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
 	}
 }/**
  * 获取地产数据
@@ -542,8 +548,8 @@ function initTreeOfRetail() {
 
 function setParam(path, param, xmlns, methodName) {
 	return {
-		"url": '192.168.3.20',
-		"port": 8080,
+		"url": 'i.bucg.com',
+		"port": '',
 		"path": path,
 		"data": JSON.stringify(param),
 		ajaxoptions: {
@@ -642,18 +648,18 @@ var laneDataSmallParam = {
 };
 
 function getHouseOrLaneData(param, type, callback) {
-// 	$.post("http://127.0.0.1:8088/" + new Date().getTime(),
-// 		setParam(
-// 			'/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
-// 			param,
-// 			'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
-// 			type
-// 		), function(data){
-// 			var startindex = data.indexOf('<ns1:return>');
-// 			var endindex = data.indexOf('</ns1:return>');
-// 			data = data.substring(startindex+12,endindex)
-// 			callback(JSON.parse(data));
-// 		});
+	// $.post("http://127.0.0.1:8088/" + new Date().getTime(),
+	// 	setParam(
+	// 		'/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
+	// 		param,
+	// 		'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+	// 		type
+	// 	), function(data){
+	// 		var startindex = data.indexOf('<ns1:return>');
+	// 		var endindex = data.indexOf('</ns1:return>');
+	// 		data = data.substring(startindex+12,endindex)
+	// 		callback(JSON.parse(data));
+	// 	});
 
 	Application.Util.ajaxConstruct(Application.serverHost, 'POST', param, 'text/xml;charset=UTF-8', function (data) {
 		callback(data);
