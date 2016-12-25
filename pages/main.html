@@ -33,7 +33,7 @@
                 <li><a href="javascript:void(0)" onclick="setLocationParam(2)">综合查询</a></li>
                 <li><a href="javascript:void(0)" onclick="setLocationParam(3)">地图模式</a></li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right"  style="display: none;">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -114,11 +114,11 @@
                 <div class="row" style="margin-right: 0px;margin-left: 0px;background-color: #fff;padding-top:5px;padding-left: 5px">
                     <form class="form-inline">
                         <label for="propertyCompanySelect" style="color: #1e3657;font-weight: 700">按公司：</label>
-                        <select id="propertyCompanySelect" data-toggle="select" name="inverse-select"  class="form-control">
+                        <select id="propertyCompanySelect" data-toggle="select" name="inverse-select"  class="form-control"  style="max-width: 150px">
                       
                         </select>
                         <label for="propertyAreaSelect" style="color: #1e3657;font-weight: 700">按区域：</label>
-                        <select id="propertyAreaSelect" data-toggle="select" name="inverse-select" class="form-control">
+                        <select id="propertyAreaSelect" data-toggle="select" name="inverse-select" class="form-control"  style="max-width: 150px">
                    
                         </select>
                     </form>
@@ -134,11 +134,11 @@
                 <div class="row" style="margin-left: 0px;margin-right: 0px;background-color: #fff;padding-top: 5px;padding-right:5px;text-align: right">
                     <form class="form-inline">
                         <label for="managementsituationcompanyselect" style="color: #1e3657;font-weight: 700">按公司：</label>
-                        <select id="managementsituationcompanyselect" data-toggle="select" name="inverse-select" class="form-control">
+                        <select id="managementsituationcompanyselect" data-toggle="select" name="inverse-select" class="form-control" style="max-width: 150px">
             
                         </select>
                         <label for="managementsituationhouseselect" style="color: #1e3657;font-weight: 700">持有房产：</label>
-                        <select id="managementsituationhouseselect" data-toggle="select" name="inverse-select" class="form-control">
+                        <select id="managementsituationhouseselect" data-toggle="select" name="inverse-select" class="form-control"  style="max-width: 150px">
                         
                         </select>
                     </form>
@@ -186,18 +186,6 @@
                 <div style="border-radius: 4px;background-color: #fff;height: 129px">
                     <div style="padding: 20px 30px; height: 150px; overflow-y:auto" id="yjxxDiv">
                         <ul id="information" style="list-style-type: none; ">
-                            <li style="list-style-type: none">
-                                <a href="#">合同单价超限：城建置业房源合同每平方米超过最高限价</a>
-                            </li>
-                            <li style="list-style-type: none">
-                                <a href="#">合同单价超限：城建置业房源合同每平方米超过最高限价</a>
-                            </li>
-                            <li style="list-style-type: none">
-                                <a href="#">合同单价超限：城建置业房源合同每平方米超过最高限价</a>
-                            </li>
-                            <li style="list-style-type: none">
-                                <a href="#">合同单价超限：城建置业房源合同每平方米超过最高限价</a>
-                            </li>
                         </ul>
                     </div>
                 </div>
@@ -209,15 +197,15 @@
                 <div class="row" style="border-radius: 4px;background-color: #fff;margin-right: 0px;margin-left: 0px;padding-top: 5px">
                     <form class="form-inline" style="text-align: center">
                         <label style="color: #1e3657;font-weight: 700">按公司：</label>
-                        <select id="statisticscompany" data-toggle="select" name="inverse-select" class="form-control">
+                        <select id="statisticscompany" data-toggle="select" name="inverse-select" class="form-control" style="max-width:100px">
                   
                         </select>
                         <label style="color: #1e3657;font-weight: 700">对应房产：</label>
-                        <select id="statisticshouse" data-toggle="select" name="inverse-select" class="form-control">
+                        <select id="statisticshouse" data-toggle="select" name="inverse-select" class="form-control"  style="max-width:100px">
 
                         </select>
                         <label style="color: #1e3657;font-weight: 700">按业态：</label>
-                        <select id="statisticsretail" data-toggle="select" name="inverse-select" class="form-control">
+                        <select id="statisticsretail" data-toggle="select" name="inverse-select" class="form-control"  style="max-width:100px">
        
                         </select>
                     </form>

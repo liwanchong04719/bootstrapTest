@@ -61,8 +61,8 @@ var queryRetailData = [];
 var tableType = 'lane';
 function setParam(path, param, xmlns, methodName) {
   return {
-    "url": '118.26.130.12',
-    "port": 8080,
+    "url": 'i.bucg.com',
+    // "port": 8080,
     "path": path,
     "data": JSON.stringify(param),
     ajaxoptions: {
@@ -84,7 +84,6 @@ function initTableOfLane() {
   //     var endindex = data.indexOf('</ns1:return>');
   //     data = data.substring(startindex+12,endindex)
   //     var dataTable = JSON.parse(data);
-  //     dataTable.total = 100;
   //     $tableOfLane.bootstrapTable('load',dataTable);
   //   });
 
@@ -170,7 +169,7 @@ function initTableOfHug() {
   //     var endindex = data.indexOf('</ns1:return>');
   //     data = data.substring(startindex+12,endindex)
   //     var dataTable = JSON.parse(data);
-  //     $tableOfHug.bootstrapTable('load',dataTable.rows);
+  //     $tableOfHug.bootstrapTable('load',dataTable);
   //   });
 
 
@@ -211,7 +210,7 @@ function initTreeOfCompany() {
 
   Application.Util.ajaxConstruct(Application.serverHost, 'POST',   {'userid':Application.userid}, 'text/xml;charset=UTF-8', function (data) {
 
-      $('#treeOfZone').treeview({ expandIcon: "glyphicon glyphicon-stop",
+      $('#treeOfZone').treeview({ expandIcon: "glyphicon glyphicon-plus",
         levels: 1,
         color:'#2a6496',
         showCheckbox: true,
@@ -255,7 +254,7 @@ function initTreeOfZone() {
 
   Application.Util.ajaxConstruct(Application.serverHost, 'POST',   {'userid':Application.userid}, 'text/xml;charset=UTF-8', function (data) {
 
-      $('#treeOfCompany').treeview({ expandIcon: "glyphicon glyphicon-stop",
+      $('#treeOfCompany').treeview({ expandIcon: "glyphicon glyphicon-plus",
         levels: 1,
         color:'#2a6496',
         showCheckbox: true,
@@ -300,7 +299,7 @@ function initTreeOfRetail() {
 
   Application.Util.ajaxConstruct(Application.serverHost, 'POST',   {'userid':Application.userid}, 'text/xml;charset=UTF-8', function (data) {
 
-      $('#treeOfRetail').treeview({ expandIcon: "glyphicon glyphicon-stop",
+      $('#treeOfRetail').treeview({ expandIcon: "glyphicon glyphicon-plus",
         levels: 1,
         color:'#2a6496',
         showCheckbox: true,
@@ -326,10 +325,6 @@ $(function () {
   initTreeOfCompany();
   // 业态
   initTreeOfRetail();
-  //楼栋
-  initTableOfBuilding();
-  // 房源
-  initTableOfHug();
 //点击tab
   $("div.bhoechie-tab-menu>div.list-group>a").click(function (e) {
     e.preventDefault();
@@ -349,18 +344,19 @@ $(function () {
   $tableOfHouse.on('page-change.bs.table', function (e, number, size) {
     getHouseTabDataFromServer(number, size);
   });
-  //点击页数时获取房产页数的数据
+  //点击页数时楼栋房产页数的数据
   $tableOfBuilding.on('page-change.bs.table', function (e, number, size) {
     getBuildingTabDataFromServer(number, size);
   });
-  //点击页数时获取房产页数的数据
+  //点击页数时获取房源页数的数据
   $tableOfHug.on('page-change.bs.table', function (e, number, size) {
     getHugTabDataFromServer(number, size);
   });
   $("#attachment").PageSwitch({
       direction:'horizontal',
       easing:'ease-in',
-      duration:10000,
+      duration:0,
+      interval: 3000,
       autoPlay:true,
       loop:'false'
   });
@@ -627,9 +623,8 @@ function showDCAttachment(pk) {
   //           var imgDiv = document.createElement("div");
   //           imgDiv.setAttribute("class", "section");
   //           imgDiv.style.background = "url("+imgData[i].accessory_id+")";
-  //           $('#attachment').append(imgDiv);
+  //           $('.sections').append(imgDiv);
   //         }
-  //         // $('#attachmentImg').src(imgData)
   //       }
   //     });
   //   });
@@ -645,7 +640,7 @@ function showDCAttachment(pk) {
             var imgDiv = document.createElement("div");
             imgDiv.setAttribute("class", "section");
             imgDiv.style.background = "url("+data[i].accessory_id+")";
-            $('#attachment').append(imgDiv);
+            $('.sections').append(imgDiv);
           }
           // $('#attachmentImg').src(imgData)
         }
@@ -758,7 +753,7 @@ function initDCPanel(id, callback) {
   //   });
 
 
-		Application.Util.ajaxConstruct(Application.serverHost, 'POST', {'fczbh': id, userid: Application.userid}, 'text/xml;charset=UTF-8', function (data) {
+		Application.Util.ajaxConstruct(Application.serverHost, 'POST', {'tdzbh': id, userid: Application.userid}, 'text/xml;charset=UTF-8', function (data) {
 		callback(data);
 	}, function name(params) {
 		console.log('error')
