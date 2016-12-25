@@ -59,11 +59,11 @@ $(document).ready(function () {
 	$('#zoom').text(map.getZoom())
 	map.addEventListener('tilesloaded', function () {
 		$('#zoom').text(map.getZoom());
-     if(showIndex === 2) {
-			 setLaneData(map);
-		 } else {
-			 setHouseData(map);
-		 }
+     // if(showIndex === 2) {
+			 // setLaneData(map);
+		 // } else {
+			 // setHouseData(map);
+		 // }
 	});
 })
 
@@ -648,19 +648,6 @@ var laneDataSmallParam = {
 };
 
 function getHouseOrLaneData(param, type, callback) {
-	// $.post("http://127.0.0.1:8088/" + new Date().getTime(),
-	// 	setParam(
-	// 		'/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
-	// 		param,
-	// 		'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
-	// 		type
-	// 	), function(data){
-	// 		var startindex = data.indexOf('<ns1:return>');
-	// 		var endindex = data.indexOf('</ns1:return>');
-	// 		data = data.substring(startindex+12,endindex)
-	// 		callback(JSON.parse(data));
-	// 	});
-
 	Application.Util.ajaxConstruct(Application.serverHost, 'POST', param, 'text/xml;charset=UTF-8', function (data) {
 		callback(data);
 	}, function name(params) {
@@ -775,20 +762,6 @@ function initBarChart(id) {
 }
 
 function initFCPanel(id, callback) {
-// 	$.post("http://127.0.0.1:8088/" + new Date().getTime(),
-// 	setParam(
-// 	'/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
-// 	{'fczbh': id, userid: Application.userid},
-// 	'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
-// 	"getFangChanPanel"
-// 	), function(data){
-// 		var startindex = data.indexOf('<ns1:return>');
-// 		var endindex = data.indexOf('</ns1:return>');
-// 		data = data.substring(startindex+12,endindex)
-// 		callback(JSON.parse(data));
-// 	});
-
-
 		Application.Util.ajaxConstruct(Application.serverHost, 'POST', {'fczbh': id, userid: Application.userid}, 'text/xml;charset=UTF-8', function (data) {
 		callback(data);
 	}, function name(params) {
