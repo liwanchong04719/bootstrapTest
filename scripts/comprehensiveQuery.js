@@ -84,7 +84,6 @@ function initTableOfLane() {
   //     var endindex = data.indexOf('</ns1:return>');
   //     data = data.substring(startindex+12,endindex)
   //     var dataTable = JSON.parse(data);
-  //     dataTable.total = 100;
   //     $tableOfLane.bootstrapTable('load',dataTable);
   //   });
 
@@ -159,33 +158,33 @@ function initTableOfBuilding() {
   );
 }
 function initTableOfHug() {
-  $.post("http://127.0.0.1:8088/" + new Date().getTime(),
-    setParam(
-      '/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
-      hugParam,
-      'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
-      'getFyXinXi'
-    ), function (data) {
-      var startindex = data.indexOf('<ns1:return>');
-      var endindex = data.indexOf('</ns1:return>');
-      data = data.substring(startindex+12,endindex)
-      var dataTable = JSON.parse(data);
-      $tableOfHug.bootstrapTable('load',dataTable);
-    });
+  // $.post("http://127.0.0.1:8088/" + new Date().getTime(),
+  //   setParam(
+  //     '/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
+  //     hugParam,
+  //     'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+  //     'getFyXinXi'
+  //   ), function (data) {
+  //     var startindex = data.indexOf('<ns1:return>');
+  //     var endindex = data.indexOf('</ns1:return>');
+  //     data = data.substring(startindex+12,endindex)
+  //     var dataTable = JSON.parse(data);
+  //     $tableOfHug.bootstrapTable('load',dataTable);
+  //   });
 
 
 
-  // Application.Util.ajaxConstruct(Application.serverHost, 'POST', buildingParam, 'text/xml;charset=UTF-8', function (data) {
-  //     $tableOfHug.bootstrapTable('load',data);
-  //   }, function name(params) {
-  //     console.log('error')
-  //   },
-  //   {
-  //     "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
-  //     "xmlnsName": "jin",
-  //     "methodName": "getFyXinXi"
-  //   }
-  // );
+  Application.Util.ajaxConstruct(Application.serverHost, 'POST', buildingParam, 'text/xml;charset=UTF-8', function (data) {
+      $tableOfHug.bootstrapTable('load',data);
+    }, function name(params) {
+      console.log('error')
+    },
+    {
+      "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+      "xmlnsName": "jin",
+      "methodName": "getFyXinXi"
+    }
+  );
 }
 function initTreeOfCompany() {
   // $.post("http://127.0.0.1:8088/" + new Date().getTime(),
@@ -356,7 +355,8 @@ $(function () {
   $("#attachment").PageSwitch({
       direction:'horizontal',
       easing:'ease-in',
-      duration:10000,
+      duration:0,
+      interval: 3000,
       autoPlay:true,
       loop:'false'
   });
@@ -623,9 +623,8 @@ function showDCAttachment(pk) {
   //           var imgDiv = document.createElement("div");
   //           imgDiv.setAttribute("class", "section");
   //           imgDiv.style.background = "url("+imgData[i].accessory_id+")";
-  //           $('#attachment').append(imgDiv);
+  //           $('.sections').append(imgDiv);
   //         }
-  //         // $('#attachmentImg').src(imgData)
   //       }
   //     });
   //   });
@@ -641,7 +640,7 @@ function showDCAttachment(pk) {
             var imgDiv = document.createElement("div");
             imgDiv.setAttribute("class", "section");
             imgDiv.style.background = "url("+data[i].accessory_id+")";
-            $('#attachment').append(imgDiv);
+            $('.sections').append(imgDiv);
           }
           // $('#attachmentImg').src(imgData)
         }
