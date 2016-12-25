@@ -224,7 +224,7 @@
         <div id="map"></div>
         <div id="searchList">
             <ul>
-                <li type="land">
+                <li type="land" data-id="1001A110000000012L64">
                     <div class="media">
                         <div class="media-left" href="#" style="">
                             <img src="../images/bussiness.png" alt="" style="">
@@ -237,7 +237,7 @@
                         </div>
                     </div>
                 </li>
-                <li type="house">
+                <li type="house" data-id="1001A11000000000XILG">
                     <div class="media">
                         <div class="media-left" href="#" style="">
                             <img src="../images/bussiness.png" alt="" style="">
@@ -266,7 +266,7 @@
             </ul>
         </div>
     </div>
-    <div id="conditionContainer">
+    <div id="conditionContainer" style="display: none">
         <div class="wrapper" style="box-shadow:none;background-color: #00b3ee">
             <div class="items" style="line-height: 30px;padding: 0px 15px;font-weight: 700;border: 0;text-align: center;color: #fff">
                 <span id="conditionBack" style="float: left;color:#fff">返回</span>
@@ -432,12 +432,12 @@
         </div>
         <img  style="width: 100%;height: 200px" src="../images/house.jpg" />
         <ul class="fields" style="">
-            <li><label>业主：</label><label>---</label></li>
-            <li><label>建筑面积：</label><label>---</label></li>
-            <li><label>业态：</label><label>---</label></li>
-            <li><label>座落：</label><label>---</label></li>
-            <li><label>出租率：</label><label>---</label></li>
-            <li><label>现平均单价：</label><label>---</label></li>
+            <li><label>业主：</label><label id="yezhu">---</label></li>
+            <li><label>建筑面积：</label><label id="jzmj">---</label></li>
+            <li><label>业态：</label><label id="yetai">---</label></li>
+            <li><label>座落：</label><label id="zuoluo">---</label></li>
+            <li><label>出租率：</label><label id="czl">---</label></li>
+            <li><label>现平均单价：</label><label id="xpjdj">---</label></li>
         </ul>
         <div class='wrapper'>
             <ul class='items'>
@@ -515,6 +515,23 @@
                 $("#info").show();
             }
             else{
+                var fczbh=$(this).attr("data-id");
+                initFCPanel(fczbh,function (data) {
+                    var dataFc = data.fangChanPanelXinxi;
+                    $('#yezhu').text(dataFc.yezhu);
+                    $('#jzmj').text(dataFc.jzmj);
+                    $('#yetai').text(dataFc.yetai);
+                    $('#zuoluo').text(dataFc.zuoluo);
+                    $('#czl').text(dataFc.chuzulv);
+                    $('#xpjdj').text(dataFc.punjundanjia);
+                    initBarChart("barChart");
+                    initAccordion();
+                    var dataOhter = data.fangChanPanelDuiyingDiChanXinxi;
+                    for (var i = 0, len = dataOhter.length; i < len; i++) {
+                        var list = otherInfo(dataOhter[i]);
+                        $("#dyfcxx").append(list.join(''));
+                    }
+                });
                 $("#houseInfo").show();
             }
 
@@ -524,6 +541,7 @@
         $("#info div.wrapper ul.sub-items>li").click(function(){
             $("#container>div").hide();
             $("#houseInfo").show();
+
             lastContainer="info";
         });
 
@@ -679,6 +697,19 @@
         if (option && typeof option === "object") {
             myChart.setOption(option, true);
         }
+    }
+
+    function initFCPanel(id, callback) {
+        Application.Util.ajaxConstruct(Application.serverHost, 'POST', {'fczbh': id, userid: Application.userid}, 'text/xml;charset=UTF-8', function (data) {
+            callback(data);
+        }, function name(params) {
+            console.log('error')
+        },
+        {
+            "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+            "xmlnsName": "jin",
+            "methodName": 'getFangChanPanel'
+        });
     }
 </script>
 </html>
