@@ -4,7 +4,7 @@
 var info =
   '<div id="houseInfo" style="height: 400px;width: 450px;overflow: auto;">' +
   '<h6 style="text-align: center;padding-bottom:3px;margin-top: 5px;margin-bottom: 10px;border-bottom: 1px solid #e8e8e8">房产信息</h6>' +
-  '  <img style="width: 100%;height: 200px" src="../lib/FlexSlider/demo/images/kitchen_adventurer_donut.jpg"/>' +
+  '  <img style="width: 100%;height: 200px" src=""/>' +
   '<ul class="fields" style="">' +
   '<li><label>业主：</label><label id="yezhu">---</label></li>' +
   '<li><label>建筑面积：</label><label id="jzmj">---</label></li>' +

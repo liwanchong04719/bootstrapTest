@@ -25,9 +25,9 @@ function onRequest(request, response) {
         soapMessage = soapMessage + '</' + params['ajaxoptions[xmlnsName]'] + ':' + params['ajaxoptions[methodName]'] + '>' + '</soapenv:Body>' + '</soapenv:Envelope>';
         console.log('soapMessage参数:' + soapMessage);
         var options = {
-            hostname: params.url,
-            port:params.port,
-            path: params.path,
+            hostname: 'i.bucg.com',
+            port:'80',
+            path: '/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
             method: 'POST',
             headers: {
                 'Content-Type': 'text/xml;charset=UTF-8'

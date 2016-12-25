@@ -111,6 +111,10 @@ function locationFc(lng, lat) {
 	var point = new BMap.Point(lng, lat);
 	Application.map.centerAndZoom(point, 16);
 }
+function locationDc(lng, lat) {
+	var point = new BMap.Point(lng, lat);
+	Application.map.centerAndZoom(point, 16);
+}
 /***
  * 生成大于11级的侧边栏房产
  */
@@ -124,14 +128,14 @@ function initLiItemOfHose(data) {
 	htmlArr.push('<img alt="示例图片" src="' + data.img + '">');
 	htmlArr.push('</div>');
 	htmlArr.push('<div class="item-main">');
-	htmlArr.push('<p class="item-tle">' + data.xmmc + '</p>');
+	htmlArr.push('<p class="item-tle">' + data.tdsyr + '</p>');
 	htmlArr.push('<p class="item-des">');
-	htmlArr.push('<span>' + data.jzmj + '平米' + '</span>');
+	htmlArr.push('<span>' + data.syqmj + '平米' + '</span>');
 	htmlArr.push('<p class="item-community">');
-	htmlArr.push('<span class="item-replace-com" data-origin="">' + data.fwzl + '</span>');
+	htmlArr.push('<span class="item-replace-com" data-origin="">' + data.zl + '</span>');
 	htmlArr.push('</p>');
 	htmlArr.push('<p class="item-community">');
-	htmlArr.push('<span class="item-replace-com" data-origin="">' + data.fwsyqr + '</span>');
+	//htmlArr.push('<span class="item-replace-com" data-origin="">' + data.fwsyqr + '</span>');
 	htmlArr.push('</p>');
 
 	htmlArr.push('</div>');
@@ -148,7 +152,7 @@ function initLiItemOfLane(data) {
 
 	var htmlArr = [];
 
-	htmlArr.push('<li class="list-item">');
+	htmlArr.push('<li class="list-item onclick="locationDc('+data.lng+','+data.lat+')">');
 	htmlArr.push('<a href="#" target="_blank">');
 	htmlArr.push('<div class="item-aside">');
 	htmlArr.push('<img alt="示例图片" src="' + data.img + '">');
@@ -184,7 +188,7 @@ function setHouseData(map) {
 				for (var i in data) {
 					var customMarker = createMarker({
 						point: new BMap.Point(data[i].lat, data[i].lng),
-						html: "<div class='bubble'><p class='name' style='margin-bottom: 5px;'><a href=javascript:void(0); onclick='showhouse("+data[i].lng+","+data[i].lat+")' >" + data[i].city + "</a></p><p class='number'>" + data[i].fccount + "</p></div>",
+						html: "<div class='bubble'><p class='name' style='margin-bottom: 5px'><a style='color: white' href=javascript:void(0); onclick='showhouse("+data[i].lng+","+data[i].lat+")' >" + data[i].city + "</a></p><p class='number'>" + data[i].fccount + "</p></div>",
 						style: {
 							color: 'white',
 							fontSize: "12px",
@@ -212,15 +216,8 @@ function setHouseData(map) {
 						var href = "../pages/housePanel.html?fczbh=" + data[j].xmmc;
 						var customMarker = createMarker({
 							point: new BMap.Point(data[j].lng, data[j].lat),
-							// html:'<p class="bubble-3 bubble" >' +
-							// '<i class="num">&nbsp;'+data[j].xmmc.substring(0,3)+'&nbsp;</i>' +
-							// '<span class="name"><i class="name-des">' +
-							// '<a href=javascript:void(0);" onclick="showSecondDirect('+data[j].lng+','+data[j].lat+')"'+
-							// ' >' +
-							// data[j].xmmc +
-							// '</a></i></span><i class="arrow-up">' +
-							// '<i class="arrow"></i><i></i></i></p>',
-							 html:"<div class='bubble-3 bubble'><p class='name' style='margin-bottom: 5px;'> <a href=javascript:void(0); onclick='showSecondDirect("+data[j].lng+","+data[j].lat+")' >" + data[j].xmmc + "</a></p><p class='number'>" + data[i].fccount + "</p></div>",
+
+							 html:"<div class='bubble-3 bubble'><p class='name' style='margin-bottom: 5px;font-size: 14px'> <a style='color: white'  href=javascript:void(0); onclick='showSecondDirect("+data[j].lng+","+data[j].lat+")' >" + data[j].xmmc + "</a></p><p class='number' style='color: white;font-size: 14px'>" + data[j].jzmj + "</p></div>",
 							style: {
 								color: 'white',
 								fontSize: "12px",
@@ -240,11 +237,14 @@ function setHouseData(map) {
 
 	}
 
+}
 
-	function showhouse() {
-		Application.map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
-	}
-}/**
+
+function showhouse(lng,lat) {
+	Application.map.centerAndZoom(new BMap.Point(lat, lng), 16);
+}
+
+/**
  * 获取地产数据
  */
 function setLaneData(map) {
@@ -286,7 +286,7 @@ function setLaneData(map) {
 					var customMarker = createMarker({
 						point: new BMap.Point(data[j].lat, data[j].lng),
 						html: "<div class='bubble'><p class='name'>" + data[j].tdsyr
-            + "</p><p class='number'>" + data[i].syqmj + "</p></div>",
+            + "</p><p class='number'>" + data[j].syqmj + "</p></div>",
 						style: {
 							color: 'white',
 							fontSize: "12px",
@@ -348,7 +348,7 @@ function initDirectOfHouse(data) {
 	houseMapData = data;
 	var htmlArr = [];
 
-	htmlArr.push('<li class="list-item">');
+	htmlArr.push('<li onclick="showhouse('+data.lat+','+data.lng+')" class="list-item">');
 	htmlArr.push('<a href="javascript:void(0);" >');
 
 	htmlArr.push('<p class="item-des">');
@@ -368,7 +368,7 @@ function initDirectOfHouse(data) {
 function initDirectOfLane(data) {
 	var htmlArr = [];
 
-	htmlArr.push('<li class="list-item">');
+	htmlArr.push('<li onclick="showhouse('+data.lat+','+data.lng+')" class="list-item">');
 	htmlArr.push('<a href="javascript:void(0);">');
 
 	htmlArr.push('<p class="item-des">');

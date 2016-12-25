@@ -3,6 +3,7 @@
  * Class Application
  */
 Application = {};
+Application.isproxy = true;
 //服务地址
 Application.serverHost = 'http://192.168.3.20:8080/uapws/service/nc.itf.pims.web.JingYingZhuangKuang';
 //地图初始化中心
