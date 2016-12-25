@@ -174,7 +174,7 @@ function initTableOfHug() {
 
 
 
-  Application.Util.ajaxConstruct(Application.serverHost, 'POST', buildingParam, 'text/xml;charset=UTF-8', function (data) {
+  Application.Util.ajaxConstruct(Application.serverHost, 'POST', hugParam, 'text/xml;charset=UTF-8', function (data) {
       $tableOfHug.bootstrapTable('load',data);
     }, function name(params) {
       console.log('error')
@@ -351,14 +351,6 @@ $(function () {
   //点击页数时获取房源页数的数据
   $tableOfHug.on('page-change.bs.table', function (e, number, size) {
     getHugTabDataFromServer(number, size);
-  });
-  $("#attachment").PageSwitch({
-      direction:'horizontal',
-      easing:'ease-in',
-      duration:0,
-      interval: 3000,
-      autoPlay:true,
-      loop:'false'
   });
   initMap();
 
@@ -577,18 +569,25 @@ function showFCAttachment(pk) {
 
   Application.Util.ajaxConstruct(Application.serverHost, 'POST',    {pk:pk}, 'text/xml;charset=UTF-8', function (data) {
 
-      $('#attachment').empty();
+      $('.sections').empty();
       $.fancybox.open({
         href : '#attachment',
         padding : 5,
         afterShow:function(){
-          for (var i = 0, len = imgData.length; i < len; i++) {
+          for (var i = 0, len = data.length; i < len; i++) {
             var imgDiv = document.createElement("div");
             imgDiv.setAttribute("class", "section");
-            imgDiv.style.background = "url("+imgData[i].accessory_id+")";
-            $('#attachment').append(imgDiv);
+            imgDiv.style.background = "url("+data[i].accessory_id+")";
+            $('.sections').append(imgDiv);
           }
-          // $('#attachmentImg').src(imgData)
+          $("#attachment").PageSwitch({
+            direction:'horizontal',
+            easing:'ease-in',
+            duration:0,
+            interval: 3000,
+            autoPlay:true,
+            loop:'false'
+          });
         }
       });
     }, function name(params) {
@@ -614,7 +613,7 @@ function showDCAttachment(pk) {
   //     var endindex = data.indexOf('</ns1:return>');
   //     data = data.substring(startindex+12,endindex)
   //     var imgData = JSON.parse(data);
-  //     $('#attachment').empty();
+  //     $('.sections').empty();
   //     $.fancybox.open({
   //       href : '#attachment',
   //       padding : 5,
@@ -625,13 +624,21 @@ function showDCAttachment(pk) {
   //           imgDiv.style.background = "url("+imgData[i].accessory_id+")";
   //           $('.sections').append(imgDiv);
   //         }
+  //         $("#attachment").PageSwitch({
+  //           direction:'horizontal',
+  //           easing:'ease-in',
+  //           duration:0,
+  //           interval: 3000,
+  //           autoPlay:true,
+  //           loop:'false'
+  //         });
   //       }
   //     });
   //   });
 
   Application.Util.ajaxConstruct(Application.serverHost, 'POST',    {pk:pk}, 'text/xml;charset=UTF-8', function (data) {
 
-      $('#attachment').empty();
+      $('.sections').empty();
       $.fancybox.open({
         href : '#attachment',
         padding : 5,
@@ -642,7 +649,14 @@ function showDCAttachment(pk) {
             imgDiv.style.background = "url("+data[i].accessory_id+")";
             $('.sections').append(imgDiv);
           }
-          // $('#attachmentImg').src(imgData)
+          $("#attachment").PageSwitch({
+            direction:'horizontal',
+            easing:'ease-in',
+            duration:0,
+            interval: 3000,
+            autoPlay:true,
+            loop:'false'
+          });
         }
       });
     }, function name(params) {
