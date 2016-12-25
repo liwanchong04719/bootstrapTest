@@ -998,7 +998,6 @@ function initWarningInfo() {
               var li = document.createElement("li");
               var a = document.createElement('a');
               a.href = 'command://' + encodeURIComponent("CONTRACT_LINK_QUEEY")+"&"+encodeURIComponent(data[i].htpk);
-
               a.appendChild(document.createTextNode(data[i].message));
               // a.setAttribute("onclick", function () {
               //     alert(waringData.id);
