@@ -492,7 +492,7 @@ function initTreeOfCompany() {
 			backColor: "#f6f7fa",
 			onNodeChecked:addCompanyQueryData,
 			onNodeUnchecked: minusCompanyQueryData,
-			data: changeCompanyData(data)});
+			data: data});
 	}, function name(params) {
 		console.log('error')
 	},
