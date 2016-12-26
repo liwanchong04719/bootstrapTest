@@ -1,4 +1,5 @@
 var showIndex = 1;
+var clickFlag = false;
 $(document).ready(function () {
 	//点击tab
     $("div.bhoechie-tab-menu>div.list-group>a").click(function (e) {
@@ -7,6 +8,7 @@ $(document).ready(function () {
         $(this).addClass("active");
         var index = $(this).index();
 			  if(index === 1) {
+					showIndex = index
 					houseDataParam.yetai = queryRetailData.toString();
 					houseDataParam.gongsi = queryCompanyData.toString();
 					houseDataParam.location = queryZoneData.toString();
@@ -59,11 +61,21 @@ $(document).ready(function () {
 	$('#zoom').text(map.getZoom())
 	map.addEventListener('tilesloaded', function () {
 		$('#zoom').text(map.getZoom());
-     if(showIndex === 2) {
-			 setLaneData(map);
-		 } else {
-			 setHouseData(map);
-		 }
+		if(clickFlag){
+			if(showIndex === 2) {
+				setLaneData(map);
+			} else {
+				setHouseData(map);
+			}
+			clickFlag = false;
+		}else{
+			if(showIndex === 2) {
+				setLaneData(map);
+			} else {
+				setHouseData(map);
+			}
+		}
+
 	});
 })
 
@@ -108,10 +120,12 @@ function pageselectCallback(page_index, data, createfunc, jq) {
 }
 var locationFcData;
 function locationFc(lng, lat) {
+	clickFlag = true;
 	var point = new BMap.Point(lng, lat);
 	Application.map.centerAndZoom(point, 16);
 }
 function locationDc(lng, lat) {
+	clickFlag = true;
 	var point = new BMap.Point(lng, lat);
 	Application.map.centerAndZoom(point, 16);
 }
@@ -217,7 +231,7 @@ function setHouseData(map) {
 						var customMarker = createMarker({
 							point: new BMap.Point(data[j].lng, data[j].lat),
 
-							 html:"<div class='bubble-3 bubble'><p class='name' style='margin-bottom: 5px;font-size: 14px'> <a style='color: white'  href=javascript:void(0); onclick='showSecondDirect("+data[j].lng+","+data[j].lat+")' >" + data[j].xmmc + "</a></p><p class='number' style='color: white;font-size: 14px'>" + data[j].jzmj + "</p></div>",
+							 html:"<div class='bubble-3 bubble'><p class='name' style='margin-bottom: 5px;font-size: 14px'> <a style='color: white'  href=javascript:void(0); onclick='showSecondDirect("+data[j].lng+","+data[j].lat+","+"\""+data[j].pk+"\""+")' >" + data[j].xmmc + "</a></p><p class='number' style='color: white;font-size: 14px'>" + data[j].jzmj + "</p></div>",
 							style: {
 								color: 'white',
 								fontSize: "12px",
@@ -321,9 +335,6 @@ function createHouseContainer(data) {
 		}
 	}
 
-	if(Application.map.getZoom() >= Application.direct + 1){
-		Application.map.panTo(new BMap.Point(data[0].lng, data[0].lat));
-	}
 
 	$("#houseDataDiv").empty().append(list.join(''));
 }/**
@@ -342,11 +353,6 @@ function createLaneContainer(data) {
 		}
 	}
 
-	if(Application.map.getZoom() >= Application.direct + 1){
-		Application.map.panTo(new BMap.Point(data[0].lng, data[0].lat));
-	}
-
-	//Application.map.centerAndZoom(new BMap.Point(data[0].lng, data[0].lat), 16);
 	$("#laneDataDiv").empty().append(list.join(''));
 }
 var houseMapData;
@@ -393,13 +399,15 @@ function initDirectOfLane(data) {
 }
 
 
-function showSecondDirect(lng, lat) {
+function showSecondDirect(lng, lat,id) {
 	 var point = new BMap.Point(lng, lat);
 
 		var infoWindow = new BMap.InfoWindow(info);  // 创建信息窗口对象
-		var fczbh = '1001C11000000001JUT0';
+		var fczbh = id;
 		var self = this;
 	  Application.map.openInfoWindow(infoWindow, point);
+	infoWindow.disableAutoPan();
+	infoWindow.disableCloseOnClick();
 		initFCPanel(fczbh,function (data) {
 			var dataFc= data.fangChanPanelXinxi;
 			$('#yezhu').text(dataFc.yezhu);
@@ -430,6 +438,7 @@ function showSecondDC(lng, lat, id) {
 	var point = new BMap.Point(lng, lat);
 	var infoWindow = new BMap.InfoWindow(dcInfo);  // 创建信息窗口对象
 	infoWindow.disableAutoPan();
+	infoWindow.disableCloseOnClick();
 	Application.map.openInfoWindow(infoWindow, point);
 	showDCDetails(id)
 }
