@@ -1,4 +1,5 @@
 var showIndex = 1;
+var clickFlag = false;
 $(document).ready(function () {
 	//点击tab
     $("div.bhoechie-tab-menu>div.list-group>a").click(function (e) {
@@ -7,6 +8,7 @@ $(document).ready(function () {
         $(this).addClass("active");
         var index = $(this).index();
 			  if(index === 1) {
+					showIndex = index
 					houseDataParam.yetai = queryRetailData.toString();
 					houseDataParam.gongsi = queryCompanyData.toString();
 					houseDataParam.location = queryZoneData.toString();
@@ -59,11 +61,21 @@ $(document).ready(function () {
 	$('#zoom').text(map.getZoom())
 	map.addEventListener('tilesloaded', function () {
 		$('#zoom').text(map.getZoom());
-     if(showIndex === 2) {
-			 setLaneData(map);
-		 } else {
-			 setHouseData(map);
-		 }
+		if(clickFlag){
+			if(showIndex === 2) {
+				setLaneData(map);
+			} else {
+				setHouseData(map);
+			}
+			clickFlag = false;
+		}else{
+			if(showIndex === 2) {
+				setLaneData(map);
+			} else {
+				setHouseData(map);
+			}
+		}
+
 	});
 })
 
@@ -108,10 +120,12 @@ function pageselectCallback(page_index, data, createfunc, jq) {
 }
 var locationFcData;
 function locationFc(lng, lat) {
+	clickFlag = true;
 	var point = new BMap.Point(lng, lat);
 	Application.map.centerAndZoom(point, 16);
 }
 function locationDc(lng, lat) {
+	clickFlag = true;
 	var point = new BMap.Point(lng, lat);
 	Application.map.centerAndZoom(point, 16);
 }
@@ -128,14 +142,14 @@ function initLiItemOfHose(data) {
 	htmlArr.push('<img alt="示例图片" src="' + data.img + '">');
 	htmlArr.push('</div>');
 	htmlArr.push('<div class="item-main">');
-	htmlArr.push('<p class="item-tle">' + data.tdsyr + '</p>');
+	htmlArr.push('<p class="item-tle">' + data.xmmc + '</p>');
 	htmlArr.push('<p class="item-des">');
-	htmlArr.push('<span>' + data.syqmj + '平米' + '</span>');
+	htmlArr.push('<span>' + data.jzmj + '平米' + '</span>');
 	htmlArr.push('<p class="item-community">');
-	htmlArr.push('<span class="item-replace-com" data-origin="">' + data.zl + '</span>');
+	htmlArr.push('<span class="item-replace-com" data-origin="">' + data.fwzl + '</span>');
 	htmlArr.push('</p>');
 	htmlArr.push('<p class="item-community">');
-	//htmlArr.push('<span class="item-replace-com" data-origin="">' + data.fwsyqr + '</span>');
+	htmlArr.push('<span class="item-replace-com" data-origin="">' + data.fwsyqr + '</span>');
 	htmlArr.push('</p>');
 
 	htmlArr.push('</div>');
@@ -152,20 +166,20 @@ function initLiItemOfLane(data) {
 
 	var htmlArr = [];
 
-	htmlArr.push('<li class="list-item onclick="locationDc('+data.lng+','+data.lat+')">');
-	htmlArr.push('<a href="#" target="_blank">');
+	htmlArr.push('<li class="list-item" onclick="locationDc('+data.lng+','+data.lat+')">');
+	htmlArr.push('<a href=javascript:void(0) target="_blank">');
 	htmlArr.push('<div class="item-aside">');
 	htmlArr.push('<img alt="示例图片" src="' + data.img + '">');
 	htmlArr.push('</div>');
 	htmlArr.push('<div class="item-main">');
-	htmlArr.push('<p class="item-tle">' + data.xmmc + '</p>');
+	htmlArr.push('<p class="item-tle">' + data.tdsyr + '</p>');
 	htmlArr.push('<p class="item-des">');
-	htmlArr.push('<span>' + data.jzmj + '平米' + '</span>');
+	htmlArr.push('<span>' + data.syqmj + '平米' + '</span>');
 	htmlArr.push('<p class="item-community">');
-	htmlArr.push('<span class="item-replace-com" data-origin="">' + data.fwzl + '</span>');
+	htmlArr.push('<span class="item-replace-com" data-origin="">' + data.tdsyr + '</span>');
 	htmlArr.push('</p>');
 	htmlArr.push('<p class="item-community">');
-	htmlArr.push('<span class="item-replace-com" data-origin="">' + data.fwsyqr + '</span>');
+	htmlArr.push('<span class="item-replace-com" data-origin="">' + data.zl + '</span>');
 	htmlArr.push('</p>');
 
 	htmlArr.push('</div>');
@@ -188,7 +202,7 @@ function setHouseData(map) {
 				for (var i in data) {
 					var customMarker = createMarker({
 						point: new BMap.Point(data[i].lat, data[i].lng),
-						html: "<div class='bubble'><p class='name' style='margin-bottom: 5px'><a style='color: white' href=javascript:void(0); onclick='showhouse("+data[i].lng+","+data[i].lat+")' >" + data[i].city + "</a></p><p class='number'>" + data[i].fccount + "</p></div>",
+						html: "<div class='bubble' ><p class='name' style='margin-bottom: 5px'><a style='color: white' href=javascript:void(0); onclick='showhouse("+data[i].lng+","+data[i].lat+")' >" + data[i].city + "</a></p><p class='number'>" + data[i].fccount + "</p></div>",
 						style: {
 							color: 'white',
 							fontSize: "12px",
@@ -217,7 +231,7 @@ function setHouseData(map) {
 						var customMarker = createMarker({
 							point: new BMap.Point(data[j].lng, data[j].lat),
 
-							 html:"<div class='bubble-3 bubble'><p class='name' style='margin-bottom: 5px;font-size: 14px'> <a style='color: white'  href=javascript:void(0); onclick='showSecondDirect("+data[j].lng+","+data[j].lat+")' >" + data[j].xmmc + "</a></p><p class='number' style='color: white;font-size: 14px'>" + data[j].jzmj + "</p></div>",
+							 html:"<div class='bubble-3 bubble'><p class='name' style='margin-bottom: 5px;font-size: 14px'> <a style='color: white'  href=javascript:void(0); onclick='showSecondDirect("+data[j].lng+","+data[j].lat+","+"\""+data[j].pk+"\""+")' >" + data[j].xmmc + "</a></p><p class='number' style='color: white;font-size: 14px'>" + data[j].jzmj + "</p></div>",
 							style: {
 								color: 'white',
 								fontSize: "12px",
@@ -257,7 +271,7 @@ function setLaneData(map) {
 				for (var i in data) {
 					var customMarker = createMarker({
 						point: new BMap.Point(data[i].lat, data[i].lng),
-						html: "<div class='bubble'><p class='name'>" + data[i].city + "</p><p class='number'>" + data[i].dccount + "</p></div>",
+						html: "<div class='bubble' onclick='showhouse("+data[i].lng+","+data[i].lat+")'><p class='name'>" + data[i].city + "</p><p class='number'>" + data[i].dccount + "</p></div>",
 						style: {
 							color: 'white',
 							fontSize: "12px",
@@ -284,8 +298,8 @@ function setLaneData(map) {
 			function (data) {
 				for (var j in data) {
 					var customMarker = createMarker({
-						point: new BMap.Point(data[j].lat, data[j].lng),
-						html: "<div class='bubble'><p class='name'>" + data[j].tdsyr
+						point: new BMap.Point(data[j].lng, data[j].lat),
+						html: "<div class='bubble' onclick='showSecondDC("+data[j].lng+","+data[j].lat+","+"\""+data[j].pk+"\""+")'><p  class='name'>" + data[j].tdsyr
             + "</p><p class='number'>" + data[j].syqmj + "</p></div>",
 						style: {
 							color: 'white',
@@ -321,6 +335,7 @@ function createHouseContainer(data) {
 		}
 	}
 
+
 	$("#houseDataDiv").empty().append(list.join(''));
 }/**
  * 生成小于11级时地图左侧栏展示内容地产
@@ -348,7 +363,7 @@ function initDirectOfHouse(data) {
 	houseMapData = data;
 	var htmlArr = [];
 
-	htmlArr.push('<li onclick="showhouse('+data.lat+','+data.lng+')" class="list-item">');
+	htmlArr.push('<li onclick="showhouse('+data.lng+','+data.lat+')" class="list-item">');
 	htmlArr.push('<a href="javascript:void(0);" >');
 
 	htmlArr.push('<p class="item-des">');
@@ -368,7 +383,7 @@ function initDirectOfHouse(data) {
 function initDirectOfLane(data) {
 	var htmlArr = [];
 
-	htmlArr.push('<li onclick="showhouse('+data.lat+','+data.lng+')" class="list-item">');
+	htmlArr.push('<li onclick="showhouse('+data.lng+','+data.lat+')" class="list-item">');
 	htmlArr.push('<a href="javascript:void(0);">');
 
 	htmlArr.push('<p class="item-des">');
@@ -384,13 +399,15 @@ function initDirectOfLane(data) {
 }
 
 
-function showSecondDirect(lng, lat) {
+function showSecondDirect(lng, lat,id) {
 	 var point = new BMap.Point(lng, lat);
 
 		var infoWindow = new BMap.InfoWindow(info);  // 创建信息窗口对象
-		var fczbh = '1001C11000000001JUT0';
+		var fczbh = id;
 		var self = this;
 	  Application.map.openInfoWindow(infoWindow, point);
+	infoWindow.disableAutoPan();
+	infoWindow.disableCloseOnClick();
 		initFCPanel(fczbh,function (data) {
 			var dataFc= data.fangChanPanelXinxi;
 			$('#yezhu').text(dataFc.yezhu);
@@ -416,29 +433,67 @@ function showSecondDirect(lng, lat) {
 
 }
 
+
+function showSecondDC(lng, lat, id) {
+	var point = new BMap.Point(lng, lat);
+	var infoWindow = new BMap.InfoWindow(dcInfo);  // 创建信息窗口对象
+	infoWindow.disableAutoPan();
+	infoWindow.disableCloseOnClick();
+	Application.map.openInfoWindow(infoWindow, point);
+	showDCDetails(id)
+}
+
+function showDCDetails(id) {
+	$('#details').empty();
+
+			$("#details").append(dcInfo);
+			initDCPanel(id, function (data) {
+				var dataDc= data.diChanPanelXinxi;
+				$('#tdsyr').text(dataDc.tdsyr);
+				$('#symj').text(dataDc.symj);
+				$('#zuoluo').text(dataDc.zuoluo);
+				$('#tdzbh').text(dataDc.tdzbh);
+				$('#zzdate').text(dataDc.zzdate);
+				initBarChart("barChart");
+				initAccordion();
+				var dataOhter = data.diChanPanelDuiyingFangChanXinxi;
+				for (var i = 0, len =dataOhter.length; i < len ; i++) {
+					var list = otherInfoDc(dataOhter[i]);
+					$("#dydcxx").append(list.join(''));
+				}
+			})
+			// $('#details').append(test);
+
+
+}
+
+function initDCPanel(id, callback) {
+
+	Application.Util.ajaxConstruct(Application.serverHost, 'POST', {'tdzbh': id, userid: Application.userid}, 'text/xml;charset=UTF-8', function (data) {
+			callback(data);
+		}, function name(params) {
+			console.log('error')
+		},
+		{
+			"xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+			"xmlnsName": "jin",
+			"methodName": 'getDiChanPanel'
+		});
+}
+function otherInfoDc(data) {
+	var htmlArr = [];
+
+	htmlArr.push('<li class="list-item">');
+	htmlArr.push('<div style="width: 100%;padding: 10px 20px">');
+
+	htmlArr.push('<div><span>'+data.fwmc+'</span></div>');
+	htmlArr.push('<div><span>'+data.fwsyqr+'</span></div>');
+
+	htmlArr.push('</div> </li>');
+	return htmlArr;
+
+}
 function initTreeOfZone() {
-// 	$.post("http://127.0.0.1:8088/" + new Date().getTime(),
-// 		setParam(
-// 			'/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
-// 			{'userid':Application.userid},
-// 			'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
-// 			'getLocationByCurrentUser'
-// 		), function (data) {
-// 			var startindex = data.indexOf('<ns1:return>');
-// 			var endindex = data.indexOf('</ns1:return>');
-// 			data = data.substring(startindex+12,endindex)
-// 			var treeData = JSON.parse(data);
-// 			$('#treeOfZone').treeview({ expandIcon: "glyphicon glyphicon-stop",
-// 				levels: 1,
-// 				color:'#2a6496',
-// 				showCheckbox: true,
-// 				showBorder: false,
-// 				backColor: "#f6f7fa",
-// 				onNodeChecked:addZoneQueryData,
-// 				onNodeSelected:showMapCenter,
-// 				onNodeUnchecked: minusZoneQueryData,
-// 				data: changeZoneData(treeData)});
-// 		});
 
 	Application.Util.ajaxConstruct(Application.serverHost, 'POST', 	{'userid':Application.userid}, 'text/xml;charset=UTF-8', function (data) {
 		$('#treeOfZone').treeview({ expandIcon: "glyphicon glyphicon-plus",
@@ -461,27 +516,6 @@ function initTreeOfZone() {
 	});
 }
 function initTreeOfCompany() {
-// 	$.post("http://127.0.0.1:8088/" + new Date().getTime(),
-// 		setParam(
-// 			'/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
-// 			{'userid':Application.userid},
-// 			'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
-// 			'getHierarchyOrg'
-// 		), function (data) {
-// 			var startindex = data.indexOf('<ns1:return>');
-// 			var endindex = data.indexOf('</ns1:return>');
-// 			data = data.substring(startindex+12,endindex)
-// 			var treeData = JSON.parse(data);
-// 			$('#treeOfCompany').treeview({ expandIcon: "glyphicon glyphicon-stop",
-// 				levels: 1,
-// 				color:'#2a6496',
-// 				showCheckbox: true,
-// 				showBorder: false,
-// 				backColor: "#f6f7fa",
-// 				onNodeChecked:addCompanyQueryData,
-// 				onNodeUnchecked: minusCompanyQueryData,
-// 				data: treeData});
-// 		});
 
 	Application.Util.ajaxConstruct(Application.serverHost, 'POST', 	{'userid':Application.userid}, 'text/xml;charset=UTF-8', function (data) {
 		$('#treeOfCompany').treeview({ expandIcon: "glyphicon glyphicon-plus",
@@ -492,7 +526,7 @@ function initTreeOfCompany() {
 			backColor: "#f6f7fa",
 			onNodeChecked:addCompanyQueryData,
 			onNodeUnchecked: minusCompanyQueryData,
-			data: changeCompanyData(data)});
+			data: data});
 	}, function name(params) {
 		console.log('error')
 	},
@@ -503,28 +537,6 @@ function initTreeOfCompany() {
 	});
 }
 function initTreeOfRetail() {
-// 	$.post("http://127.0.0.1:8088/" + new Date().getTime(),
-// 		setParam(
-// 			'/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
-// 			{'userid':Application.userid},
-// 			'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
-// 			'getYeTaiByCurrentUser'
-// 		), function (data) {
-// 			var startindex = data.indexOf('<ns1:return>');
-// 			var endindex = data.indexOf('</ns1:return>');
-// 			data = data.substring(startindex+12,endindex)
-// 			var treeData = JSON.parse(data);
-// 			$('#treeOfRetail').treeview({ expandIcon: "glyphicon glyphicon-stop",
-// 				levels: 1,
-// 				color:'#2a6496',
-// 				showCheckbox: true,
-// 				showBorder: false,
-// 				backColor: "#f6f7fa",
-// 				onNodeChecked:addRetailQueryData,
-// 				onNodeUnchecked: minusRetailQueryData,
-// 				data: changeRetailData(treeData)});
-// 		});
-
 
 	Application.Util.ajaxConstruct(Application.serverHost, 'POST', 	{'userid':Application.userid}, 'text/xml;charset=UTF-8', function (data) {
 		$('#treeOfRetail').treeview({ expandIcon: "glyphicon glyphicon-plus",
@@ -648,19 +660,6 @@ var laneDataSmallParam = {
 };
 
 function getHouseOrLaneData(param, type, callback) {
-	// $.post("http://127.0.0.1:8088/" + new Date().getTime(),
-	// 	setParam(
-	// 		'/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
-	// 		param,
-	// 		'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
-	// 		type
-	// 	), function(data){
-	// 		var startindex = data.indexOf('<ns1:return>');
-	// 		var endindex = data.indexOf('</ns1:return>');
-	// 		data = data.substring(startindex+12,endindex)
-	// 		callback(JSON.parse(data));
-	// 	});
-
 	Application.Util.ajaxConstruct(Application.serverHost, 'POST', param, 'text/xml;charset=UTF-8', function (data) {
 		callback(data);
 	}, function name(params) {
@@ -775,20 +774,6 @@ function initBarChart(id) {
 }
 
 function initFCPanel(id, callback) {
-// 	$.post("http://127.0.0.1:8088/" + new Date().getTime(),
-// 	setParam(
-// 	'/uapws/service/nc.itf.pims.web.JingYingZhuangKuang',
-// 	{'fczbh': id, userid: Application.userid},
-// 	'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
-// 	"getFangChanPanel"
-// 	), function(data){
-// 		var startindex = data.indexOf('<ns1:return>');
-// 		var endindex = data.indexOf('</ns1:return>');
-// 		data = data.substring(startindex+12,endindex)
-// 		callback(JSON.parse(data));
-// 	});
-
-
 		Application.Util.ajaxConstruct(Application.serverHost, 'POST', {'fczbh': id, userid: Application.userid}, 'text/xml;charset=UTF-8', function (data) {
 		callback(data);
 	}, function name(params) {
