@@ -224,45 +224,45 @@
         <div id="map"></div>
         <div id="searchList">
             <ul>
-                <li type="land" data-id="1001A110000000012L64">
-                    <div class="media">
-                        <div class="media-left" href="#" style="">
-                            <img src="../images/bussiness.png" alt="" style="">
-                        </div>
-                        <div class="media-body">
-                            <h4 class="media-heading"><span class="infoSeq">1</span><span class="infoName">北京城建大厦</span></h4>
-                            <div><span class="infoTitle">业主单位：</span><span class="infoContent">北京城建大厦</span></div>
-                            <div><span class="infoTitle">建筑面积：</span><span class="infoContent">23444平方米</span></div>
-                            <div><span class="infoTitle">出租率：</span><span class="infoContent">89%</span></div>
-                        </div>
-                    </div>
-                </li>
-                <li type="house" data-id="1001A11000000000XILG">
-                    <div class="media">
-                        <div class="media-left" href="#" style="">
-                            <img src="../images/bussiness.png" alt="" style="">
-                        </div>
-                        <div class="media-body">
-                            <h4 class="media-heading"><span class="infoSeq">2</span><span class="infoName">北京城建大厦</span></h4>
-                            <div><span class="infoTitle">业主单位：</span><span class="infoContent">北京城建大厦</span></div>
-                            <div><span class="infoTitle">建筑面积：</span><span class="infoContent">23444平方米</span></div>
-                            <div><span class="infoTitle">出租率：</span><span class="infoContent">89%</span></div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="media">
-                        <div class="media-left" href="#" style="">
-                            <img src="../images/bussiness.png" alt="" style="">
-                        </div>
-                        <div class="media-body">
-                            <h4 class="media-heading"><span class="infoSeq">3</span><span class="infoName">北京城建大厦</span></h4>
-                            <div><span class="infoTitle">业主单位：</span><span class="infoContent">北京城建大厦</span></div>
-                            <div><span class="infoTitle">建筑面积：</span><span class="infoContent">23444平方米</span></div>
-                            <div><span class="infoTitle">出租率：</span><span class="infoContent">89%</span></div>
-                        </div>
-                    </div>
-                </li>
+                <!--<li type="land" data-id="1001A110000000012L64">-->
+                    <!--<div class="media">-->
+                        <!--<div class="media-left" href="#" style="">-->
+                            <!--<img src="../images/bussiness.png" alt="" style="">-->
+                        <!--</div>-->
+                        <!--<div class="media-body">-->
+                            <!--<h4 class="media-heading"><span class="infoSeq">1</span><span class="infoName">北京城建大厦</span></h4>-->
+                            <!--<div><span class="infoTitle">业主单位：</span><span class="infoContent">北京城建大厦</span></div>-->
+                            <!--<div><span class="infoTitle">建筑面积：</span><span class="infoContent">23444平方米</span></div>-->
+                            <!--<div><span class="infoTitle">出租率：</span><span class="infoContent">89%</span></div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</li>-->
+                <!--<li type="house" data-id="1001A11000000000XILG">-->
+                    <!--<div class="media">-->
+                        <!--<div class="media-left" href="#" style="">-->
+                            <!--<img src="../images/bussiness.png" alt="" style="">-->
+                        <!--</div>-->
+                        <!--<div class="media-body">-->
+                            <!--<h4 class="media-heading"><span class="infoSeq">2</span><span class="infoName">北京城建大厦</span></h4>-->
+                            <!--<div><span class="infoTitle">业主单位：</span><span class="infoContent">北京城建大厦</span></div>-->
+                            <!--<div><span class="infoTitle">建筑面积：</span><span class="infoContent">23444平方米</span></div>-->
+                            <!--<div><span class="infoTitle">出租率：</span><span class="infoContent">89%</span></div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<div class="media">-->
+                        <!--<div class="media-left" href="#" style="">-->
+                            <!--<img src="../images/bussiness.png" alt="" style="">-->
+                        <!--</div>-->
+                        <!--<div class="media-body">-->
+                            <!--<h4 class="media-heading"><span class="infoSeq">3</span><span class="infoName">北京城建大厦</span></h4>-->
+                            <!--<div><span class="infoTitle">业主单位：</span><span class="infoContent">北京城建大厦</span></div>-->
+                            <!--<div><span class="infoTitle">建筑面积：</span><span class="infoContent">23444平方米</span></div>-->
+                            <!--<div><span class="infoTitle">出租率：</span><span class="infoContent">89%</span></div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</li>-->
             </ul>
         </div>
     </div>
@@ -830,8 +830,9 @@
     function initTableOfHouse() {
         Application.Util.ajaxConstruct(Application.serverHost, 'POST', houseParam, 'text/xml;charset=UTF-8', function (data) {
             if(data.rows.length>0){
-                var str = constructHouseList(data);
+                var str = constructHouseList(data.rows);
                 $("#searchList>ul").append(str);
+                initDcOrFcPanel();
             }
             else{
                 alert("查无数据!")
@@ -848,8 +849,9 @@
     function initTableOfLane() {
         Application.Util.ajaxConstruct(Application.serverHost, 'POST', laneParam, 'text/xml;charset=UTF-8', function (data) {
             if(data.rows.length>0){
-                var str = constructLandList(data);
+                var str = constructLandList(data.rows);
                 $("#searchList>ul").append(str);
+                initDcOrFcPanel();
             }
             else{
                 alert("查无数据!")
@@ -952,6 +954,53 @@
                     +'</li>'
         }
         return str;
+    }
+
+    function initDcOrFcPanel(){
+        // 点击搜索结果，跳转相关房产、地产div
+        $("#searchList li").click(function(){
+            $("#container>div").hide();
+            if($(this).attr("type")=="land"){
+                var id=$(this).attr("data-id");
+                initDCPanel(id, function (data) {
+                    var dataDc= data.diChanPanelXinxi;
+                    $('#tdsyr').text(dataDc.tdsyr);
+                    $('#symj').text(dataDc.symj);
+                    $('#dczuoluo').text(dataDc.zuoluo);
+                    $('#tdzbh').text(dataDc.tdzbh);
+                    $('#zzdate').text(dataDc.zzdate);
+                    initBarChart("barChart");
+                    initAccordion();
+                    var dataOhter = data.diChanPanelDuiyingFangChanXinxi;
+                    for (var i = 0, len =dataOhter.length; i < len ; i++) {
+                        var list = otherInfoDc(dataOhter[i]);
+                        $("#dydcxx").append(list.join(''));
+                    }
+                });
+                $("#info").show();
+            }
+            else{
+                var fczbh=$(this).attr("data-id");
+                initFCPanel(fczbh,function (data) {
+                    var dataFc = data.fangChanPanelXinxi;
+                    $('#yezhu').text(dataFc.yezhu);
+                    $('#jzmj').text(dataFc.jzmj);
+                    $('#yetai').text(dataFc.yetai);
+                    $('#zuoluo').text(dataFc.zuoluo);
+                    $('#czl').text(dataFc.chuzulv);
+                    $('#xpjdj').text(dataFc.punjundanjia);
+                    initBarChart("barChart");
+                    initAccordion();
+                    var dataOhter = data.fangChanPanelDuiyingDiChanXinxi;
+                    for (var i = 0, len = dataOhter.length; i < len; i++) {
+                        var list = otherInfo(dataOhter[i]);
+                        $("#dyfcxx").append(list.join(''));
+                    }
+                });
+                $("#houseInfo").show();
+            }
+            lastContainer="mainContainer";
+        });
     }
 </script>
 </html>
