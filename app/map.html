@@ -273,6 +273,12 @@
                 综合查询
             </div>
         </div>
+        <div id="property" class="wrapper" style="box-shadow:none;">
+            <div class="items" style="line-height: 30px;padding: 0px 15px;font-weight: 700;border: 0;text-align: center;color: #5e5e5e">
+                <label for="house"><input id="house" name="property" type="radio" checked value="1" />房产</label>
+                <label for="land"><input id="land" name="property"  type="radio" value="2" />地产</label>
+            </div>
+        </div>
         <div id="format" class="wrapper" style="border-bottom: 1px solid #e8e8e8;box-shadow:none">
             <div class="items" style="line-height: 39px;padding: 0px 18px;font-weight: 700;border: 0;border-bottom: 1px solid #e8e8e8">
                 资产业态
@@ -281,62 +287,62 @@
                 <table cellpadding="none" cellspacing="none" style="border: none;width: 100%">
                     <tr>
                         <td>
-                            <div class="circle circleSelected" >
+                            <label class="circle"  for="bussinessLand">
                                 <div class="circleButton">
                                     <i class="glyphicon glyphicon-check"></i>
                                 </div>
-                                <div class="circleButtonLabel"><label>商业用地</label></div>
-                            </div>
+                                <div class="circleButtonLabel"><label>商业用房</label><input id="bussinessLand" value="1"  type="checkbox" style="display: none" /></div>
+                            </label>
                         </td>
                         <td>
-                            <div class="circle" >
+                            <label class="circle"  for="industryLand">
                                 <div class="circleButton">
                                     <i class="glyphicon glyphicon-check"></i>
                                 </div>
-                                <div class="circleButtonLabel"><label>工业用地</label></div>
-                            </div>
+                                <div class="circleButtonLabel"><label>工业用房</label><input id="industryLand" value="5"  type="checkbox" style="display: none" /></div>
+                            </label>
                         </td>
                         <td>
-                            <div class="circle" >
+                            <label class="circle" for="building" >
                                 <div class="circleButton">
                                     <i class="glyphicon glyphicon-check"></i>
                                 </div>
-                                <div class="circleButtonLabel"><label>写字楼</label></div>
-                            </div>
+                                <div class="circleButtonLabel"><label>写字楼</label><input id="building" value="2"  type="checkbox" style="display: none" /></div>
+                            </label>
                         </td>
                         <td>
-                            <div class="circle" >
+                            <label class="circle" for="hotel" >
                                 <div class="circleButton">
                                     <i class="glyphicon glyphicon-check"></i>
                                 </div>
-                                <div class="circleButtonLabel"><label>酒店</label></div>
-                            </div>
+                                <div class="circleButtonLabel"><label for="hotel">酒店</label><input id="hotel"  value="3"  type="checkbox" style="display: none" /></div>
+                            </label>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <div class="circle" >
+                            <label class="circle" for="home" >
                                 <div class="circleButton">
                                     <i class="glyphicon glyphicon-check"></i>
                                 </div>
-                                <div class="circleButtonLabel"><label>住宅</label></div>
-                            </div>
+                                <div class="circleButtonLabel"><label>住宅</label><input id="home" value="4"  type="checkbox" style="display: none" /></div>
+                            </label>
                         </td>
                         <td>
-                            <div class="circle" >
+                            <label class="circle" for="selfUse" >
                                 <div class="circleButton">
                                     <i class="glyphicon glyphicon-check"></i>
                                 </div>
-                                <div class="circleButtonLabel"><label>自用</label></div>
-                            </div>
+                                <div class="circleButtonLabel"><label>自用</label><input id="selfUse"  value="6"  type="checkbox" style="display: none" /></div>
+                            </label>
                         </td>
                         <td>
-                            <div class="circle" >
+                            <label class="circle" for="else" >
                                 <div class="circleButton">
                                     <i class="glyphicon glyphicon-check"></i>
                                 </div>
-                                <div class="circleButtonLabel"><label>其他</label></div>
-                            </div>
+                                <div class="circleButtonLabel"><label>其他</label><input id="else"  value="7"  type="checkbox" style="display: none" /></div>
+                            </label>
                         </td>
                         <td>
                         </td>
@@ -349,12 +355,7 @@
                 运营公司
             </div>
             <div style="padding-top: 5px">
-                <select id="companySelect" data-toggle="select" name="inverse-select" class="form-control">
-                    <option>一公司</option>
-                    <option>二公司</option>
-                    <option>三公司</option>
-                    <option>四公司</option>
-                    <option>五公司</option>
+                <select id="propertyCompanySelect" data-toggle="select" name="inverse-select" class="form-control">
                 </select>
             </div>
         </div>
@@ -363,19 +364,7 @@
                 行政区划
             </div>
             <div style="padding-top: 5px">
-                <select id="areaSelect" data-toggle="select" name="inverse-select" class="form-control" >
-                    <optgroup label="北京市">
-                        <option value="1">朝阳区</option>
-                        <option value="2">海淀区</option>
-                        <option value="3">昌平区</option>
-                        <option value="4">西城区</option>
-                    </optgroup>
-                    <optgroup label="河北省">
-                        <option value="1">石家庄</option>
-                        <option value="2">保定</option>
-                        <option value="3">唐山</option>
-                        <option value="4">承德</option>
-                    </optgroup>
+                <select id="propertyAreaSelect" data-toggle="select" name="inverse-select" class="form-control" >
                 </select>
             </div>
         </div>
@@ -392,32 +381,17 @@
         </div>
         <img  style="width: 100%;height: 200px" src="../images/land.jpg" />
         <ul class="fields" style="">
-            <li><label>土地证书编号：</label><label>---</label></li>
-            <li><label>使用权人：</label><label>---</label></li>
-            <li><label>座落：</label><label>---</label></li>
-            <li><label>地类：</label><label>---</label></li>
-            <li><label>使用面积：</label><label>---</label></li>
-            <li><label>终止日期：</label><label>---</label></li>
+            <li><label>土地证书编号：</label><label id="tdsyr">---</label></li>
+            <li><label>使用权人：</label><label id="symj">---</label></li>
+            <li><label>座落：</label><label id="dczuoluo">---</label></li>
+            <li><label>地类：</label><label id="tdzbh">---</label></li>
+            <li><label>终止日期：</label><label id="zzdate">---</label></li>
         </ul>
         <div class='wrapper'>
             <ul class='items'>
                 <li>
                     <a href='#'>对应房产信息<i class="glyphicon glyphicon-chevron-right"></i></a>
-                    <ul class='sub-items'>
-                        <li>
-                            <div style="width: 100%;padding: 10px 20px">
-                                <div><span>北京城建大厦</span></div>
-                                <div><span>业主单位:北京城建大厦</span></div>
-                                <div><span>建筑面积：23444平方米</span></div>
-                            </div>
-                        </li>
-                        <li>
-                            <div style="width: 100%;padding: 10px 20px">
-                                <div><span>北京城建大厦</span></div>
-                                <div><span>业主单位:北京城建大厦</span></div>
-                                <div><span>建筑面积：23444平方米</span></div>
-                            </div>
-                        </li>
+                    <ul class='sub-items' id="dydcxx">
                     </ul>
                 </li>
             </ul>
@@ -454,13 +428,7 @@
                     <a href='#'>对方地产信息<i class="glyphicon glyphicon-chevron-right"></i></a>
                     <ul class='sub-items'>
                         <li>
-                            <ul class="fields" style="padding-left: 0px;border: none">
-                                <li><label>土地证书编号：</label><label>---</label></li>
-                                <li><label>使用权人：</label><label>---</label></li>
-                                <li><label>座落：</label><label>---</label></li>
-                                <li><label>地类：</label><label>---</label></li>
-                                <li><label>使用面积：</label><label>---</label></li>
-                                <li><label>终止日期：</label><label>---</label></li>
+                            <ul class="fields" style="padding-left: 0px;border: none" id="dyfcxx">
                             </ul>
                         </li>
                     </ul>
@@ -479,6 +447,60 @@
 <script src="../scripts/Application.Util.js"></script>
 <script type="text/javascript">
     var lastContainer="mainContainer";
+    Application.userid = getQueryString("cuserid");
+    var laneParam = {
+        'location': '',
+        'yetai': '',
+        'userid': Application.userid,
+        'gongsi': '',
+        'dijiye': 1,
+        'xianshitiaoshu': 3,
+        'tdsyr ': '',
+        'dl': '',
+        'tdxz': '',
+        'syqmj': '',
+        'zzdate': '',
+        'syqmjpx': '',
+        'zzdatepx': ''
+    };
+    var houseParam = {
+        'location': '',
+        'yetai': '',
+        'userid': Application.userid,
+        'gongsi': '',
+        'dijiye': '',
+        'xianshitiaoshu': '',
+        'tdsyr ': '',
+        'dl': '',
+        'tdxz': '',
+        'syqmj': '',
+        'zzdate': '',
+        'syqmjpx': '',
+        'zzdatepx': ''
+    };
+    var buildingParam = {
+        'location': '',
+        'yetai': '',
+        'userid': Application.userid,
+        'gongsi': '',
+        'dijiye': '',
+        'xianshitiaoshu': '',
+        'xmmc ': '',
+        'ldh ': ''
+    };
+    var hugParam = {
+        'location': '',
+        'yetai': '',
+        'userid': Application.userid,
+        'gongsi': '',
+        'dijiye': '',
+        'xianshitiaoshu': '',
+        'fjbh ': '',
+        'ldh ': ''
+    };
+    var queryZoneData = [];
+    var queryCompanyData = [];
+    var queryRetailData = [];
     $(function () {
         initmap();
 
@@ -490,28 +512,70 @@
             $("#container>div").hide();
             $("#conditionContainer").show();
             lastContainer="mainContainer";
-            initSelect();
+            getOrgAndLocation(Application.userid);
         })
 
-        $(".circle").click(function () {
-            if($(this).hasClass("circleSelected")){
-                $(this).removeClass("circleSelected");
+        $(".circleButtonLabel>input").click(function () {
+            if($(this).parents('.circle').hasClass("circleSelected")){
+                $(this).parents('.circle').removeClass("circleSelected");
             }
             else{
-                $(this).addClass("circleSelected");
+                $(this).parents('.circle').addClass("circleSelected");
             }
         });
 
         // 搜索按钮隐藏其他div，显示带搜索结果的map Div
         $("#searchButton").click(function () {
+            if($("#house").is(":checked")){
+                searchType="house";
+            }
+            else{
+                searchType="lane";
+            }
+
+
+            queryRetailData = [];
+            queryCompanyData = [];
+            queryZoneData = [];
+            var properties = $(".circleButtonLabel>input");
+            for(var i=0;i<properties.length;i++){
+                if($(properties[i]).is(":checked")){
+                    queryRetailData.push($(properties[i]).val())
+                }
+            }
+
+            var companies = $('#propertyCompanySelect').select2("val");
+            queryCompanyData = companies;
+
+            var zones =  $('#propertyAreaSelect').select2('val');
+            queryZoneData = zones;
+
+            queryDataFromTree();
+
             $("#container>div").hide();
             $("#mainContainer").removeClass("fullScreen").addClass("halfScreen").show();
-        })
+        });
 
         // 点击搜索结果，跳转相关房产、地产div
         $("#searchList li").click(function(){
             $("#container>div").hide();
             if($(this).attr("type")=="land"){
+                var id=$(this).attr("data-id");
+                initDCPanel(id, function (data) {
+                    var dataDc= data.diChanPanelXinxi;
+                    $('#tdsyr').text(dataDc.tdsyr);
+                    $('#symj').text(dataDc.symj);
+                    $('#dczuoluo').text(dataDc.zuoluo);
+                    $('#tdzbh').text(dataDc.tdzbh);
+                    $('#zzdate').text(dataDc.zzdate);
+                    initBarChart("barChart");
+                    initAccordion();
+                    var dataOhter = data.diChanPanelDuiyingFangChanXinxi;
+                    for (var i = 0, len =dataOhter.length; i < len ; i++) {
+                        var list = otherInfoDc(dataOhter[i]);
+                        $("#dydcxx").append(list.join(''));
+                    }
+                });
                 $("#info").show();
             }
             else{
@@ -534,9 +598,8 @@
                 });
                 $("#houseInfo").show();
             }
-
             lastContainer="mainContainer";
-        })
+        });
 
         $("#info div.wrapper ul.sub-items>li").click(function(){
             $("#container>div").hide();
@@ -569,8 +632,6 @@
 
             lastContainer="houseInfo";
         });
-
-        initAccordion();
     })
     //初始化地图， 百度地图API功能
     function initmap() {
@@ -582,21 +643,16 @@
         return map;
     }
 
-    function initSelect(){
-        $('#companySelect').select2({
-            placeholder:"选择公司",
-            allowClear:true,
-            theme:"bootstrap",
-            tags:true,
-            multiple: true
-        });
-        $('#areaSelect').select2({
-            placeholder:"区域",
-            allowClear:true,
-            theme:"bootstrap",
-            tags:true,
-            multiple: true
-        });
+    function getOrgAndLocation(userid) {
+        Application.Util.ajaxConstruct(Application.serverHost,'POST',{ userid: Application.userid },'text/xml;charset=UTF-8',function (data) {
+            OrgAndLocationOptions(data);
+        },function name(params) {
+            console.log('error')
+        }, {
+            "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+            "xmlnsName": "jin",
+            "methodName": "getPk_orgAndLocation"
+        })
     }
 
     function initAccordion(){
@@ -612,9 +668,6 @@
                 $this.addClass("expanded");
                 $this.find("i").addClass("glyphicon-chevron-down").removeClass("glyphicon-chevron-right");
                 $(".sub-items").filter(":visible").slideUp("normal");
-                setTimeout(function () {
-                    initBarChart("barChart");
-                },200)
             }
             $this.parent().children("ul").stop(true, true).slideToggle("normal");
         });
@@ -699,6 +752,129 @@
         }
     }
 
+    function queryDataFromTree() {
+        switch (searchType) {
+            case "lane" :
+                laneParam.dijiye = 0;
+                laneParam.xianshitiaoshu = 10;
+                laneParam.gongsi = queryCompanyData.toString();
+                laneParam.yetai = queryRetailData.toString();
+                laneParam.location = queryZoneData.toString();
+                initTableOfLane();
+                break;
+            case 'house' :
+                houseParam.dijiye = 0;
+                houseParam.xianshitiaoshu = 10;
+                houseParam.gongsi = queryCompanyData.toString();
+                houseParam.yetai = queryRetailData.toString();
+                houseParam.location = queryZoneData.toString();
+                initTableOfHouse();
+                break;
+            case 'building':
+                buildingParam.dijiye = 0;
+                buildingParam.xianshitiaoshu = 10;
+                buildingParam.gongsi = queryCompanyData.toString();
+                buildingParam.yetai = queryRetailData.toString();
+                buildingParam.location = queryZoneData.toString();
+                initTableOfBuilding();
+                break;
+            case 'hug':
+                hugParam.dijiye = 0;
+                hugParam.xianshitiaoshu = 10;
+                hugParam.gongsi = queryCompanyData.toString();
+                hugParam.yetai = queryRetailData.toString();
+                hugParam.location = queryZoneData.toString();
+                initTableOfHug();
+                break;
+        }
+    }
+
+    //生成按公司下拉列表
+    function OrgAndLocationOptions(data) {
+        var companyarr = [{ id: 'test', text: '全部' }]
+        var locationObj = {};
+        for (var i = 0, len = data.length; i < len; i++) {
+            companyarr.push({ id: data[i].firstvalue, text: data[i].secondvalue, location: data[i].location });
+            locationObj[data[i].firstvalue] = data[i].location;
+        }
+
+        $('#propertyCompanySelect').select2({
+            allowClear:true,
+            theme:"bootstrap",
+            tags:true,
+            multiple: true,
+            data: companyarr
+        }).on('select2:select', function (e) {
+            var areaArr = [];
+            areaArr.push({ id: 'test', text: '全部' });
+            for (var i = 0, len = locationObj[e.params.data.id].length; i < len; i++) {
+                areaArr.push({ id:  locationObj[e.params.data.id][i].secondvalue, text: locationObj[e.params.data.id][i].secondvalue })
+            }
+            $('#propertyAreaSelect').empty();
+            $('#propertyAreaSelect').select2({
+                allowClear:true,
+                theme:"bootstrap",
+                tags:true,
+                multiple: true,
+                data: areaArr
+            }).on('select2:select', function (event) {
+            });
+        });
+
+        $('#propertyAreaSelect').select2({
+            data: [{ id: 'test', text: "全部" }]
+        });
+    }
+
+
+    function initTableOfHouse() {
+        Application.Util.ajaxConstruct(Application.serverHost, 'POST', houseParam, 'text/xml;charset=UTF-8', function (data) {
+            if(data.rows.length>0){
+                var str = constructHouseList(data);
+                $("#searchList>ul").append(str);
+            }
+            else{
+                alert("查无数据!")
+            }
+        }, function name(params) {
+            console.log('error')
+        }, {
+            "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+            "xmlnsName": "jin",
+            "methodName": "getFcXinXi"
+        });
+    }
+
+    function initTableOfLane() {
+        Application.Util.ajaxConstruct(Application.serverHost, 'POST', laneParam, 'text/xml;charset=UTF-8', function (data) {
+            if(data.rows.length>0){
+                var str = constructLandList(data);
+                $("#searchList>ul").append(str);
+            }
+            else{
+                alert("查无数据!")
+            }
+        }, function name(params) {
+            console.log('error')
+        }, {
+            "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+            "xmlnsName": "jin",
+            "methodName": "getDcXinXi"
+        });
+    }
+
+    function initDCPanel(id, callback) {
+        Application.Util.ajaxConstruct(Application.serverHost, 'POST', {'tdzbh': id, userid: Application.userid}, 'text/xml;charset=UTF-8', function (data) {
+            callback(data);
+        }, function name(params) {
+            console.log('error')
+        }, {
+            "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+            "xmlnsName": "jin",
+            "methodName": 'getDiChanPanel'
+        });
+    };
+
     function initFCPanel(id, callback) {
         Application.Util.ajaxConstruct(Application.serverHost, 'POST', {'fczbh': id, userid: Application.userid}, 'text/xml;charset=UTF-8', function (data) {
             callback(data);
@@ -710,6 +886,72 @@
             "xmlnsName": "jin",
             "methodName": 'getFangChanPanel'
         });
+    }
+
+    function otherInfoDc(data) {
+        var htmlArr = [];
+
+        htmlArr.push('<li class="list-item">');
+        htmlArr.push('<div style="width: 100%;padding: 10px 20px">');
+
+        htmlArr.push('<div><span>'+data.fwmc+'</span></div>');
+        htmlArr.push('<div><span>'+data.fwsyqr+'</span></div>');
+
+        htmlArr.push('</div> </li>');
+        return htmlArr;
+    }
+
+    function otherInfo(data) {
+        var htmlArr = [];
+
+        htmlArr.push('<li class="list-item">');
+        htmlArr.push('<div style="width: 100%;padding: 10px 20px">');
+
+        htmlArr.push('<div><span>'+data.tdsyr+'</span></div>');
+        htmlArr.push('<div><span>'+data.zuoluo+'</span></div>');
+
+        htmlArr.push('</div> </li>');
+        return htmlArr;
+    }
+
+    function constructHouseList(data){
+        var str="";
+        for(var i=0;i<data.length;i++){
+            str+='<li type="house" data-id="'+data[i].fczbh+'">'
+                    +'<div class="media">'
+                    +'<div class="media-left" href="#">'
+                    +'<img src="'+data[i].imgSrc+'" alt="">'
+                    +'</div>'
+                    +'<div class="media-body">'
+                    +'<h4 class="media-heading"><span class="infoSeq">'+i+'</span><span class="infoName">'+data[i]["fwsyqr"]+'</span></h4>'
+                    +'<div><span class="infoTitle">项目名称：</span><span class="infoContent">'+data[i]["fwmc"]+'</span></div>'
+                    +'<div><span class="infoTitle">建筑面积：</span><span class="infoContent">'+data[i]["jzmj"]+'</span></div>'
+                    +'<div><span class="infoTitle">出租率：</span><span class="infoContent">'+data[i]["zznx"]+'</span></div>'
+                    +'</div>'
+                    +'</div>'
+                    +'</li>'
+        }
+        return str;
+    }
+
+    function constructLandList(data){
+        var str="";
+        for(var i=0;i<data.length;i++){
+            str+='<li type="land" data-id="'+data[i].tdzbh+'">'
+                    +'<div class="media">'
+                    +'<div class="media-left" href="#">'
+                    +'<img src="'+data[i].imgSrc+'" alt="">'
+                    +'</div>'
+                    +'<div class="media-body">'
+                    +'<h4 class="media-heading"><span class="infoSeq">'+i+'</span><span class="infoName">'+data[i]["tdsyr"]+'</span></h4>'
+                    +'<div><span class="infoTitle">土地使用人：</span><span class="infoContent">'+data[i]["tdsyr"]+'</span></div>'
+                    +'<div><span class="infoTitle">使用面积：</span><span class="infoContent">'+data[i]["syqmj"]+'</span></div>'
+                    +'<div><span class="infoTitle">终止日期：</span><span class="infoContent">'+data[i]["zzdate"]+'</span></div>'
+                    +'</div>'
+                    +'</div>'
+                    +'</li>'
+        }
+        return str;
     }
 </script>
 </html>
