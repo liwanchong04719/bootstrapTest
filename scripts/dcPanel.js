@@ -4,7 +4,7 @@
 var dcInfo =
   '<div id="houseInfo" style="height: 400px;width: 450px;overflow: auto;">' +
   '<h6 style="text-align: center;padding-bottom:3px;margin-top: 5px;margin-bottom: 10px;border-bottom: 1px solid #e8e8e8">地产信息</h6>' +
-  '  <img style="width: 100%;height: 200px" src=""/>' +
+  '  <img style="width: 100%;height: 200px" id="landimg" src=""/>' +
   '<ul class="fields" style="">' +
   '<li><label>土地使用人：</label><label id="tdsyr">---</label></li>' +
   '<li><label>使用面积：</label><label id="symj">---</label></li>' +
