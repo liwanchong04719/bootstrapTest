@@ -40,3 +40,7 @@ html,body{
 #section1 {
     background-image: url('../images/banner/banner1.png');
 }
+#treeOfZone>ul{
+    height: 100%;
+    overflow-y: auto;
+}

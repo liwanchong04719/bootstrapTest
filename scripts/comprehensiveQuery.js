@@ -373,12 +373,12 @@ function minusCompanyQueryData(event, node) {
     });
   return queryCompanyData;
 }function addRetailQueryData(event,node){
-  queryRetailData.push(node.nodeId);
+  queryRetailData.push(node.id);
 }
 function minusRetailQueryData(event, node) {
 
   queryRetailData = queryRetailData.filter(function (item) {
-    return item !== node.nodeId;
+    return item !== node.id;
     });
   return queryRetailData;
 }
@@ -748,7 +748,7 @@ function changeRetailData(data){
   for (var i = 0, len = data.length; i < len; i++) {
     var obj = {};
     obj.text = data[i].secondvalue;
-    obj.id = data[i].firstvalue;
+    obj.id = data[i].fristvalue;
     retailData.push(obj);
   }
   return retailData;
@@ -937,6 +937,21 @@ function setLocationParam(type) {
       break;
     case 3:
       window.location = 'map.html?cuserid=' + Application.userid;
+      break;
+
+  }
+}
+
+//bootstrap
+function changeBootstrap(type) {
+  switch (type) {
+    case 1:
+      $('#treeStrap').removeClass('col-col-md-2').addClass('col-md-10');
+
+      break;
+    case 2:
+      break;
+    case 3:
       break;
 
   }
