@@ -523,30 +523,6 @@ function getPieGraphData(company, house) {
   if(house == 'test'){
     house = "";
   }
-  // $.post("http://127.0.0.1:8088/" + new Date().getTime(),
-  //   {
-  //     "url": "118.26.130.12",
-  //     "port": '8080',
-  //     "path": "/uapws/service/nc.itf.pims.web.JingYingZhuangKuang",
-  //     "data": JSON.stringify({ 'gongsi': company, 'fczbh': house, 'userid': Application.userid }),
-  //     "ajaxoptions": {
-  //       "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
-  //       "xmlnsName": "jin",
-  //       "methodName": "ChuZuLv"
-  //     }
-  //   },
-  //   function (data) {
-  //     var startindex = data.indexOf('<ns1:return>');
-  //     var endindex = data.indexOf('</ns1:return>');
-  //     data = data.substring(startindex + 12, endindex)
-  //
-  //
-  //     //data = JSON.parse(data);
-  //     data = JSON.parse('{"yizu":"31","weizu": "69","ziyong": "0"}');
-  //
-  //     initPieStatus(data);
-  //   })
-
   Application.Util.ajaxConstruct(Application.serverHost,'POST',{ 'gongsi': company, 'fczbh': house, 'userid': Application.userid },'text/xml;charset=UTF-8',function (data) {
       initPieStatus(data);
 
@@ -559,10 +535,6 @@ function getPieGraphData(company, house) {
       "methodName": "ChuZuLv"
     }
   )
-
-
-
-
 }
 //应收款统计
 function receivablesAndstatistics(data) {
@@ -618,24 +590,6 @@ function getStatisticData(company, house, retail) {
     retail = '';
   }
 
-  // $.post("http://127.0.0.1:8088/" + new Date().getTime(),
-  //   {
-  //     "url": "118.26.130.12",
-  //     "port": '8080',
-  //     "path": "/uapws/service/nc.itf.pims.web.JingYingZhuangKuang",
-  //     "data": JSON.stringify({ 'yetai': retail, 'userid': Application.userid, 'fangchan': house, 'gongsi': company }),
-  //     "ajaxoptions": {
-  //       "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
-  //       "xmlnsName": "jin",
-  //       "methodName": "yingshoukuan"
-  //     }
-  //   },
-  //   function (data) {
-  //     //data = JSON.parse(data);
-  //     //console.log(data)
-  //     var startindex = data.indexOf('<ns1:return>');
-  //     var endindex = data.indexOf('</ns1:return>');
-  //     data = JSON.parse(data.substring(startindex + 12, endindex));
   if(company =='test'){
     company = "";
   }
@@ -645,26 +599,6 @@ function getStatisticData(company, house, retail) {
   if(retail =='test'){
     retail = "";
   }
-
-  //
-  //     //统计数据
-  //     $('#thisMonthReceivable').text(data[0].benyueyingshou);
-  //     $("#thisMonthReceived").text(data[0].shangyueshishou);
-  //     $('#thisMonthRatio').text(data[0].benyuewanchengbili);
-  //
-  //     $('#lastMonthReceivable').text(data[0].shangyueyingshou);
-  //     $('#lastMonthReceived').text(data[0].shangyueshishou);
-  //     $('#lastMonthRatio').text(data[0].shangyuewanchengbili);
-  //
-  //   }, function name(params) {
-  //     console.log('error')
-  //   },
-  //   {
-  //     "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
-  //     "xmlnsName": "jin",
-  //     "methodName": "yingshoukuan"
-  //   }
-  // );
 
   Application.Util.ajaxConstruct(Application.serverHost,'POST',{ 'yetai': retail, 'userid': Application.userid, 'fangchan': house, 'gongsi': company },'text/xml;charset=UTF-8',function (data) {
 
@@ -695,24 +629,6 @@ function getStatisticData(company, house, retail) {
 }
 //区域业态查询
 function getLocationAndYetai(userid) {
-  //  $.post("http://127.0.0.1:8088/" + new Date().getTime(),
-  //   {
-  //     "url": "118.26.130.12",
-  //     "port": '8080',
-  //     "path": "/uapws/service/nc.itf.pims.web.JingYingZhuangKuang",
-  //     "data": JSON.stringify({userid:userid}),
-  //     "ajaxoptions": {
-  //       "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
-  //       "xmlnsName": "jin",
-  //       "methodName": "getLocationAndYetai"
-  //     }
-  //   },
-  //   function (data) {
-  //     data = JSON.parse(data);
-  //     console.log(data)
-
-  //     etRegionAndRetail(data);
-  // })
 
   Application.Util.ajaxConstruct(Application.serverHost,'POST',{userid:userid},'text/xml;charset=UTF-8',function (data) {
       getRegionAndRetail(data);
@@ -727,9 +643,6 @@ function getLocationAndYetai(userid) {
     }
   )
 
-
-  // var data = [{ "firstvalue": 1, "secondvalue": "东城区", "yetai": [{ "firstvalue": "6", "secondvalue": "自用" }] }, { "firstvalue": 2, "secondvalue": "西城区", "yetai": [{ "firstvalue": "6", "secondvalue": "自用" }] }, { "firstvalue": 2, "secondvalue": "西城区", "yetai": [{ "firstvalue": "6", "secondvalue": "自用" }] }, { "firstvalue": 3, "secondvalue": "朝阳区", "yetai": [{ "firstvalue": "2", "secondvalue": "写字楼" }] }, { "firstvalue": 5, "secondvalue": "石景山区", "yetai": [{ "firstvalue": "4", "secondvalue": "住宅" }, { "firstvalue": "5", "secondvalue": "工业用房" }, { "firstvalue": "3", "secondvalue": "酒店" }] }, { "firstvalue": 7, "secondvalue": "门头沟区", "yetai": [] }, { "firstvalue": 13, "secondvalue": "怀柔区", "yetai": [] }];
-  // getRegionAndRetail(data);
 }
 
 
@@ -807,25 +720,6 @@ function getBarData(location, retail) {
   if(retail == 'test'){
     retail = "";
   }
-  // $.post("http://127.0.0.1:8088/" + new Date().getTime(),
-  //   {
-  //     "url": "118.26.130.12",
-  //     "port": '8080',
-  //     "path": "/uapws/service/nc.itf.pims.web.JingYingZhuangKuang",
-  //     "data": JSON.stringify({ 'location': location, 'yetai': retail, 'userid': Application.userid }),
-  //     "ajaxoptions": {
-  //       "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
-  //       "xmlnsName": "jin",
-  //       "methodName": "ZhuZhuangTu"
-  //     }
-  //   },
-  //   function (data) {
-  //     var startindex = data.indexOf('<ns1:return>');
-  //     var endindex = data.indexOf('</ns1:return>');
-  //     data = data.substring(startindex + 12, endindex)
-  //     data = JSON.parse(data);
-  //     initBarChart(data);
-  //   })
 
   Application.Util.ajaxConstruct(Application.serverHost,'POST',{ 'location': location, 'yetai': retail, 'userid': Application.userid },'text/xml;charset=UTF-8',function (data) {
       initBarChart(data);
@@ -839,9 +733,6 @@ function getBarData(location, retail) {
       "methodName": "ZhuZhuangTu"
     }
   )
-
-
-
 }
 
 
