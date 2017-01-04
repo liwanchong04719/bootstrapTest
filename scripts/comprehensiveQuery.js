@@ -686,8 +686,10 @@ function showFCDetails(id) {
         $('#zuoluo').text(dataFc.zuoluo);
         $('#czl').text(dataFc.chuzulv);
         $('#xpjdj').text(dataFc.punjundanjia);
-        $('#houseimg').attr('src',dataFc.img[0].accessory_id)
-        initBarChart("barChart");
+        if(dataFc.img[0]){
+          $('#houseimg').attr('src',dataFc.img[0].accessory_id);
+        }
+        initBarChart("barChart",data.fangChanPanelZhuZhuangTu);
         initAccordion();
         var dataOhter = data.fangChanPanelDuiyingDiChanXinxi;
         for (var i = 0, len =dataOhter.length; i < len ; i++) {
@@ -715,7 +717,7 @@ function showDCDetails(id) {
         $('#tdzbh').text(dataDc.tdzbh);
         $('#zzdate').text(dataDc.zzdate);
         $('#landimg').attr('src',dataDc.img[0].accessory_id)
-        initBarChart("barChart");
+        initBarChart("barChart",dataDc);
         initAccordion();
         var dataOhter = data.diChanPanelDuiyingFangChanXinxi;
         for (var i = 0, len =dataOhter.length; i < len ; i++) {
@@ -806,9 +808,22 @@ function initFCPanel(id, callback) {
 		"methodName": 'getFangChanPanel'
 	});
 }
-function initBarChart(id) {
+function initBarChart(id,data) {
   var dom = document.getElementById(id);
   var myChart = echarts.init(dom);
+
+  var xAxis = [];
+  var chuzulv = [];
+  var danjia = [];
+
+  for(var i=0,len =data.length; i<len; i++){
+    xAxis.push(data[i].year);
+    chuzulv.push(data[i].chuzulv);
+    danjia.push(data[i].pingjundanjia);
+  }
+
+
+
   var app = {};
   option = {
     backgroundColor: '#fff',
@@ -835,7 +850,7 @@ function initBarChart(id) {
     xAxis: [
       {
         type: 'category',
-        data: ['北京城建集团投资有限公司', '城建置业', '3公司', '4公司', '5公司', '6公司', '7公司', '8公司', '9公司', '10公司', '11公司', '12公司']
+        data: xAxis
       }
     ],
     yAxis: [
@@ -861,7 +876,7 @@ function initBarChart(id) {
         itemStyle:{
           normal:{color:'#0099FF'}
         },
-        data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 90, 100, 32.6, 20.0, 6.4, 3.3]
+        data:chuzulv
       },
       {
         name: '单价',
@@ -870,7 +885,7 @@ function initBarChart(id) {
         itemStyle:{
           normal:{color:'#C06410'}
         },
-        data:[2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
+        data:danjia
       }
     ]
   };

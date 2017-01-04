@@ -456,7 +456,7 @@ function showDCDetails(id) {
 				$('#zuoluo').text(dataDc.zuoluo);
 				$('#tdzbh').text(dataDc.tdzbh);
 				$('#zzdate').text(dataDc.zzdate);
-				initBarChart("barChart");
+				initBarChart("barChart",dataDc);
 				initAccordion();
 				var dataOhter = data.diChanPanelDuiyingFangChanXinxi;
 				for (var i = 0, len =dataOhter.length; i < len ; i++) {
