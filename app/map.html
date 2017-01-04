@@ -511,26 +511,26 @@
         $("#searchInput").focus(function () {
             $("#container>div").hide();
             $("#conditionContainer").show();
-            lastContainer="mainContainer";
+            lastContainer = "mainContainer";
             getOrgAndLocation(Application.userid);
         })
 
         $(".circleButtonLabel>input").click(function () {
-            if($(this).parents('.circle').hasClass("circleSelected")){
+            if ($(this).parents('.circle').hasClass("circleSelected")) {
                 $(this).parents('.circle').removeClass("circleSelected");
             }
-            else{
+            else {
                 $(this).parents('.circle').addClass("circleSelected");
             }
         });
 
         // 搜索按钮隐藏其他div，显示带搜索结果的map Div
         $("#searchButton").click(function () {
-            if($("#house").is(":checked")){
-                searchType="house";
+            if ($("#house").is(":checked")) {
+                searchType = "house";
             }
-            else{
-                searchType="lane";
+            else {
+                searchType = "lane";
             }
 
 
@@ -538,8 +538,8 @@
             queryCompanyData = [];
             queryZoneData = [];
             var properties = $(".circleButtonLabel>input");
-            for(var i=0;i<properties.length;i++){
-                if($(properties[i]).is(":checked")){
+            for (var i = 0; i < properties.length; i++) {
+                if ($(properties[i]).is(":checked")) {
                     queryRetailData.push($(properties[i]).val())
                 }
             }
@@ -547,7 +547,7 @@
             var companies = $('#propertyCompanySelect').select2("val");
             queryCompanyData = companies;
 
-            var zones =  $('#propertyAreaSelect').select2('val');
+            var zones = $('#propertyAreaSelect').select2('val');
             queryZoneData = zones;
 
             queryDataFromTree();
@@ -557,12 +557,12 @@
         });
 
         // 点击搜索结果，跳转相关房产、地产div
-        $("#searchList li").click(function(){
+        $("#searchList li").click(function () {
             $("#container>div").hide();
-            if($(this).attr("type")=="land"){
-                var id=$(this).attr("data-id");
+            if ($(this).attr("type") == "land") {
+                var id = $(this).attr("data-id");
                 initDCPanel(id, function (data) {
-                    var dataDc= data.diChanPanelXinxi;
+                    var dataDc = data.diChanPanelXinxi;
                     $('#tdsyr').text(dataDc.tdsyr);
                     $('#symj').text(dataDc.symj);
                     $('#dczuoluo').text(dataDc.zuoluo);
@@ -571,16 +571,16 @@
                     initBarChart("barChart");
                     initAccordion();
                     var dataOhter = data.diChanPanelDuiyingFangChanXinxi;
-                    for (var i = 0, len =dataOhter.length; i < len ; i++) {
+                    for (var i = 0, len = dataOhter.length; i < len; i++) {
                         var list = otherInfoDc(dataOhter[i]);
                         $("#dydcxx").append(list.join(''));
                     }
                 });
                 $("#info").show();
             }
-            else{
-                var fczbh=$(this).attr("data-id");
-                initFCPanel(fczbh,function (data) {
+            else {
+                var fczbh = $(this).attr("data-id");
+                initFCPanel(fczbh, function (data) {
                     var dataFc = data.fangChanPanelXinxi;
                     $('#yezhu').text(dataFc.yezhu);
                     $('#jzmj').text(dataFc.jzmj);
@@ -598,49 +598,50 @@
                 });
                 $("#houseInfo").show();
             }
-            lastContainer="mainContainer";
+            lastContainer = "mainContainer";
         });
 
-        $("#info div.wrapper ul.sub-items>li").click(function(){
+        $("#info div.wrapper ul.sub-items>li").click(function () {
             $("#container>div").hide();
             $("#houseInfo").show();
 
-            lastContainer="info";
+            lastContainer = "info";
         });
 
-        $("#conditionBack").click(function(){
+        $("#conditionBack").click(function () {
             $("#container>div").hide();
             $("#mainContainer").show();
-            lastContainer="conditionContainer";
+            lastContainer = "conditionContainer";
         });
 
-        $("#landInfoBack").click(function(){
+        $("#landInfoBack").click(function () {
             $("#container>div").hide();
             $("#mainContainer").show();
-            lastContainer="info";
+            lastContainer = "info";
         });
 
-        $("#hourseInfoBack").click(function(){
-            if(lastContainer=="info"){
+        $("#hourseInfoBack").click(function () {
+            if (lastContainer == "info") {
                 $("#container>div").hide();
                 $("#info").show();
             }
-            else{
+            else {
                 $("#container>div").hide();
                 $("#mainContainer").show();
             }
 
-            lastContainer="houseInfo";
+            lastContainer = "houseInfo";
         });
-    })
+    });
+    var map ;
     //初始化地图， 百度地图API功能
     function initmap() {
-        var map = new BMap.Map("map", { minZoom: Application.minZoom, enableHighResolution: true });    // 创建Map实例
+        map = new BMap.Map("map", { minZoom: Application.minZoom, enableHighResolution: true });    // 创建Map实例
 
         map.centerAndZoom(new BMap.Point(Application.initCenter[0],Application.initCenter[1]), Application.initZoom);  // 初始化地图,设置中心点坐标和地图级别
         map.setCurrentCity("北京");          // 设置地图显示的城市 此项是必须设置的
         map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
-        return map;
+//        return map;
     }
 
     function getOrgAndLocation(userid) {
@@ -830,8 +831,15 @@
     function initTableOfHouse() {
         Application.Util.ajaxConstruct(Application.serverHost, 'POST', houseParam, 'text/xml;charset=UTF-8', function (data) {
             if(data.rows.length>0){
+                $("#searchList>ul").empty();
+                map.clearOverlays();
                 var str = constructHouseList(data.rows);
                 $("#searchList>ul").append(str);
+                for (var j in data.rows) {
+                    var point = new BMap.Point(data.rows[j].lng, data.rows[j].lat);
+                    var marker =new BMap.Marker(point);
+                    map.addOverlay(marker);
+                }
                 initDcOrFcPanel();
             }
             else{
@@ -849,8 +857,15 @@
     function initTableOfLane() {
         Application.Util.ajaxConstruct(Application.serverHost, 'POST', laneParam, 'text/xml;charset=UTF-8', function (data) {
             if(data.rows.length>0){
+                map.clearOverlays();
+                $("#searchList>ul").empty();
                 var str = constructLandList(data.rows);
                 $("#searchList>ul").append(str);
+                for (var j in data) {
+                    var point = new BMap.Point(data.rows[j].lng, data.rows[j].lat);
+                    var marker =new BMap.Marker(point);
+                    map.addOverlay(marker);
+                }
                 initDcOrFcPanel();
             }
             else{
@@ -1002,5 +1017,20 @@
             lastContainer="mainContainer";
         });
     }
+
+    //生成marker
+    function createMarker(options) {
+        var opts = {
+            position: options.point   // 指定文本标注所在的地理位置
+        };
+        var label = new BMap.Label("", opts);
+        label.setContent(options.html);
+        label.setStyle(options.style);
+        label.addEventListener('mouseover', function (event) {
+            event.target.setZIndex(1000)
+        });
+        return label;
+    }
+
 </script>
 </html>
