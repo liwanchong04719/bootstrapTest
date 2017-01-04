@@ -191,8 +191,8 @@
     <div class="row" style="margin-left: 0px;margin-right: 0px;color: #C5C2BC">
         <div style="border-radius: 4px;background-color: #fff;padding: 20px 10px">
             <div style="text-align: center">
-                <label>本月应收：</label> <label><span style="color: #FF904F;font-size: 20px" id="thisMonthReceivable">1</span></label>
-                <label>本月实收：</label> <label><span style="color: #FF904F;font-size: 20px" id="thisMonthReceived">1</span></label>
+                <label>本月单位应收：</label> <label><span style="color: #FF904F;font-size: 20px" id="thisMonthReceivable">1</span></label>
+                <label>本月单位实收：</label> <label><span style="color: #FF904F;font-size: 20px" id="thisMonthReceived">1</span></label>
                 <!--<label>完成比例：</label> <label><span id="thisMonthRatio">1</span></label>-->
             </div>
             <div style="text-align: center">
@@ -794,13 +794,13 @@
 
         Application.Util.ajaxConstruct(Application.serverHost,'POST',{ 'yetai': retail, 'userid': Application.userid, 'fangchan': house, 'gongsi': company },'text/xml;charset=UTF-8',function (data) {
                     //统计数据
-                    $('#thisMonthReceivable').text(data[0].benyueyingshou);
-                    $("#thisMonthReceived").text(data[0].shangyueshishou);
-                    $('#thisMonthRatio').text(data[0].benyuewanchengbili);
+                    $('#thisMonthReceivable').text(data[0].benyueyingshou+'元');
+                    $("#thisMonthReceived").text(data[0].shangyueshishou+'元');
+                    $('#thisMonthRatio').text(data[0].benyuewanchengbili+'元');
 
-                    $('#lastMonthReceivable').text(data[0].shangyueyingshou);
-                    $('#lastMonthReceived').text(data[0].shangyueshishou);
-                    $('#lastMonthRatio').text(data[0].shangyuewanchengbili);
+                    $('#lastMonthReceivable').text(data[0].shangyueyingshou+'元');
+                    $('#lastMonthReceived').text(data[0].shangyueshishou+'元');
+                    $('#lastMonthRatio').text(data[0].shangyuewanchengbili+'元');
 
                 },function name(params) {
                     console.log('error')

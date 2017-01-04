@@ -605,13 +605,13 @@ function getStatisticData(company, house, retail) {
           //data = JSON.parse(data);
           //console.log(data)
             //统计数据
-          $('#thisMonthReceivable').text(data[0].benyueyingshou);
-          $("#thisMonthReceived").text(data[0].shangyueshishou);
-          $('#thisMonthRatio').text(data[0].benyuewanchengbili);
+          $('#thisMonthReceivable').text(data[0].benyueyingshou+'元');
+          $("#thisMonthReceived").text(data[0].shangyueshishou+'元');
+          $('#thisMonthRatio').text(data[0].benyuewanchengbili+'元');
 
-          $('#lastMonthReceivable').text(data[0].shangyueyingshou);
-          $('#lastMonthReceived').text(data[0].shangyueshishou);
-          $('#lastMonthRatio').text(data[0].shangyuewanchengbili);
+          $('#lastMonthReceivable').text(data[0].shangyueyingshou+'元');
+          $('#lastMonthReceived').text(data[0].shangyueshishou+'元');
+          $('#lastMonthRatio').text(data[0].shangyuewanchengbili+'元');
 
 
 
