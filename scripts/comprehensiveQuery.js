@@ -211,7 +211,8 @@ function initTreeOfCompany() {
   Application.Util.ajaxConstruct(Application.serverHost, 'POST',   {'userid':Application.userid}, 'text/xml;charset=UTF-8', function (data) {
 
       $('#treeOfZone').treeview({ expandIcon: "glyphicon glyphicon-plus",
-        levels: 1,
+        levels: 1000000000000000000000000000000000000000,
+        showTags: true,
         color:'#2a6496',
         showCheckbox: true,
         showBorder: false,
@@ -255,7 +256,7 @@ function initTreeOfZone() {
   Application.Util.ajaxConstruct(Application.serverHost, 'POST',   {'userid':Application.userid}, 'text/xml;charset=UTF-8', function (data) {
 
       $('#treeOfCompany').treeview({ expandIcon: "glyphicon glyphicon-plus",
-        levels: 1,
+        levels: 99,
         color:'#2a6496',
         showCheckbox: true,
         showBorder: false,
@@ -685,6 +686,7 @@ function showFCDetails(id) {
         $('#zuoluo').text(dataFc.zuoluo);
         $('#czl').text(dataFc.chuzulv);
         $('#xpjdj').text(dataFc.punjundanjia);
+        $('#houseimg').attr('src',dataFc.img[0].accessory_id)
         initBarChart("barChart");
         initAccordion();
         var dataOhter = data.fangChanPanelDuiyingDiChanXinxi;
@@ -712,6 +714,7 @@ function showDCDetails(id) {
         $('#zuoluo').text(dataDc.zuoluo);
         $('#tdzbh').text(dataDc.tdzbh);
         $('#zzdate').text(dataDc.zzdate);
+        $('#landimg').attr('src',dataDc.img[0].accessory_id)
         initBarChart("barChart");
         initAccordion();
         var dataOhter = data.diChanPanelDuiyingFangChanXinxi;
