@@ -190,9 +190,10 @@ function initBarChart(data) {
   var xAxis= [];
   var chuzulv = [];
   var pingjundanjia = [];
-
+  var fullNames = [];
   for (var item in data){
-    xAxis.push(data[item].name);
+    fullNames.push(data[item].name)
+    xAxis.push(data[item].shortname);
     chuzulv.push(data[item].chuzulv*100);
     pingjundanjia.push(data[item].pingjundanjia)
   }
@@ -200,7 +201,16 @@ function initBarChart(data) {
   option = {
     backgroundColor: '#fff',
     tooltip: {
-      trigger: 'axis'
+      trigger: 'axis',
+      formatter: function (params,ticket,callback) {
+        var fullname = fullNames[params[0].dataIndex];
+        var res = params[0].name;
+        for (var i = 0, l = params.length; i < l; i++) {
+          res += '<br/>' + params[i].seriesName + ' : ' + params[i].value;
+        }
+
+        return fullname + res;
+      }
     },
     toolbox: {
       show: true,
@@ -225,7 +235,7 @@ function initBarChart(data) {
         //data: ['北京城建集团投资有限公司', '城建置业', '3公司', '4公司', '5公司', '6公司', '7公司', '8公司', '9公司', '10公司', '11公司', '12公司']
         data:xAxis,
         axisLabel:{
-          show:false,
+          show:true,
         interval:'auto',
         rotate:45,
         margin:2,
