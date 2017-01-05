@@ -836,7 +836,7 @@
     function houseOfLogin() {
         Application.Util.ajaxConstruct(Application.serverHost, 'POST', houseParam, 'text/xml;charset=UTF-8', function (data) {
             if(data.rows.length>0){
-                for (var j in data.rows) {
+                for (var j = 0, len = data.rows.length; j < len; j++)  {
                     var point = new BMap.Point(data.rows[j].lng, data.rows[j].lat);
                     var marker =new BMap.Marker(point);
                     map.addOverlay(marker);
@@ -860,7 +860,7 @@
                 map.clearOverlays();
                 var str = constructHouseList(data.rows);
                 $("#searchList>ul").append(str);
-                for (var j in data.rows) {
+                for (var j = 0, len = data.rows.length; j < len; j++) {
                     var point = new BMap.Point(data.rows[j].lng, data.rows[j].lat);
                     var marker =new BMap.Marker(point);
                     map.addOverlay(marker);
@@ -883,7 +883,7 @@
         Application.Util.ajaxConstruct(Application.serverHost, 'POST', laneParam, 'text/xml;charset=UTF-8', function (data) {
             if(data.rows.length>0){
                 map.clearOverlays();
-                for (var j in data) {
+                for (var j = 0, len = data.rows.length; j < len; j++) {
                     var point = new BMap.Point(data.rows[j].lng, data.rows[j].lat);
                     var marker =new BMap.Marker(point);
                     map.addOverlay(marker);
@@ -907,7 +907,7 @@
                 $("#searchList>ul").empty();
                 var str = constructLandList(data.rows);
                 $("#searchList>ul").append(str);
-                for (var j in data) {
+                for (var j = 0, len = data.rows.length; j < len; j++) {
                     var point = new BMap.Point(data.rows[j].lng, data.rows[j].lat);
                     var marker =new BMap.Marker(point);
                     map.addOverlay(marker);

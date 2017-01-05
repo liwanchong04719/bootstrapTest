@@ -706,6 +706,35 @@ function showFCDetails(id) {
         $('#zuoluo').text(dataFc.zuoluo);
         $('#czl').text(dataFc.chuzulv);
         $('#xpjdj').text(dataFc.punjundanjia);
+        $('#fczbh').text(dataFc.fczbh);
+        $('#tdzbh').text(dataFc.tdzbh);
+        $('#gyqk').text(dataFc.gyqk);
+        $('#djtime').text(dataFc.djtime);
+        $('#fwxz').text(dataFc.fwxz);
+        $('#ghyt').text(dataFc.ghyt);
+        $('#zcengshu').text(dataFc.zcengshu);
+        $('#tnjzmj').text(dataFc.tnjzmj);
+        $('#dihao').text(dataFc.dihao);
+        $('#fzdw').text(dataFc.fzdw);
+        $('#fztime').text(dataFc.fztime);
+        $('#qita').text(dataFc.qita);
+        $('#fwmc').text(dataFc.fwmc);
+        $('#bdcdyh').text(dataFc.bdcdyh);
+        $('#qllx').text(dataFc.qllx);
+        $('#qlqtzk').text(dataFc.qlqtzk);
+        $('#syqx').text(dataFc.syqx);
+        $('#fczlx').text(dataFc.fczlx);
+        $('#qllxd').text(dataFc.qllxd);
+        $('#qllxf').text(dataFc.qllxf);
+        $('#fwqlxz').text(dataFc.fwqlxz);
+        $('#gyzdmj').text(dataFc.gyzdmj);
+        $('#fwjzmj').text(dataFc.fwjzmj);
+        $('#location').text(dataFc.location);
+        $('#tdsyqqdfs').text(dataFc.tdsyqqdfs);
+        $('#tdsynx_s').text(dataFc.tdsynx_s);
+        $('#tdsynx_e').text(dataFc.tdsynx_e);
+        $('#sfxnsc').text(dataFc.sfxnsc);
+        $('#tdqlxz').text(dataFc.tdqlxz);
         if(dataFc.img[0]){
           $('#houseimg').attr('src',dataFc.img[0].accessory_id);
         }
@@ -736,6 +765,17 @@ function showDCDetails(id) {
         $('#zuoluo').text(dataDc.zuoluo);
         $('#tdzbh').text(dataDc.tdzbh);
         $('#zzdate').text(dataDc.zzdate);
+        $('#fzdate').text(dataDc.fzdate);
+        $('#tdxz').text(dataDc.tdxz);
+        $('#dwid').text(dataDc.dwid);
+        $('#dihao').text(dataDc.dihao);
+        $('#tuhao').text(dataDc.tuhao);
+        $('#qdjg').text(dataDc.qdjg);
+        $('#dymj').text(dataDc.dymj);
+        $('#fzdw').text(dataDc.fzdw);
+        $('#ftmj').text(dataDc.ftmj);
+        $('#sfxnsc').text(dataDc.sfxnsc);
+
         $('#landimg').attr('src',dataDc.img[0].accessory_id)
         initBarChart("barChart",dataDc);
         initAccordion();

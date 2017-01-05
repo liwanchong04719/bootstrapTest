@@ -11,6 +11,17 @@ var dcInfo =
   '<li><label>座落：</label><label id="zuoluo">---</label></li>' +
   '<li><label>土地证编号：</label><label id="tdzbh">---</label></li>' +
   '<li><label>终止日期：</label><label id="zzdate">---</label></li>' +
+  '<li><label>土地性质：</label><label id="tdxz">---</label></li>' +
+  '<li><label>发证日期：</label><label id="fzdate">---</label></li>' +
+  '<li><label>地物ID：</label><label id="dwid">---</label></li>' +
+  '<li><label>地号：</label><label id="dihao">---</label></li>' +
+  '<li><label>图号：</label><label id="图号">---</label></li>' +
+  '<li><label>取得价格：</label><label id="qdjg">---</label></li>' +
+  '<li><label>使用权类型：</label><label id="syqtype">---</label></li>' +
+  '<li><label>独用面积：</label><label id="dymj">---</label></li>' +
+  '<li><label>发证单位：</label><label id="fzdw">---</label></li>' +
+  '<li><label>分摊面积：</label><label id="ftmj">---</label></li>' +
+  '<li><label>是否虚拟生成：</label><label id="sfxnsc">---</label></li>' +
   '</ul>' +
   '<div class="wrapper">' +
   '<ul class="items">' +
