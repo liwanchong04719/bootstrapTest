@@ -425,20 +425,40 @@ function handleFormatterDC(v,row) {
 }
 function changeData(type) {
   switch (type) {
-    case 1:
+    case 1 :
       tableType = 'lane';
+      laneParam.dijiye = 0;
+      laneParam.xianshitiaoshu = 10;
+      laneParam.gongsi = queryCompanyData.toString();
+      laneParam.yetai = queryRetailData.toString();
+      laneParam.location = queryZoneData.toString();
       initTableOfLane();
       break;
-    case 2:
+    case 2 :
       tableType = 'house';
+      houseParam.dijiye = 0;
+      houseParam.xianshitiaoshu = 10;
+      houseParam.gongsi = queryCompanyData.toString();
+      houseParam.yetai = queryRetailData.toString();
+      houseParam.location = queryZoneData.toString();
       initTableOfHouse();
       break;
     case 3:
       tableType = 'building';
+      buildingParam.dijiye = 0;
+      buildingParam.xianshitiaoshu = 10;
+      buildingParam.gongsi = queryCompanyData.toString();
+      buildingParam.yetai = queryRetailData.toString();
+      buildingParam.location = queryZoneData.toString();
       initTableOfBuilding();
       break;
     case 4:
       tableType = 'hug';
+      hugParam.dijiye = 0;
+      hugParam.xianshitiaoshu = 10;
+      hugParam.gongsi = queryCompanyData.toString();
+      hugParam.yetai = queryRetailData.toString();
+      hugParam.location = queryZoneData.toString();
       initTableOfHug();
       break;
   }

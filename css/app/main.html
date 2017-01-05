@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=9" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <title>Map查询界面</title>
+    <link rel="stylesheet" type="text/css"
+          href="../lib/Flat-UI-master/dist/css/vendor/bootstrap/css/bootstrap.min.css"/>
+    <link href="../lib/select2-master/dist/css/select2.css" rel="stylesheet">
+    <link href="../lib/select2-master/dist/css/select2-bootstrap-theme.css" rel="stylesheet">
+    <link rel="stylesheet" href="../lib/accordion-multi-menu/css/style.css">
+    <style>
+        html,body{
+            font-family: 'Microsoft YaHei', '微软雅黑', '黑体', Arial, 'Times New Roman', sans-serif;
+        }
+
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <div class="items" style="line-height: 39px;padding: 0px 18px;font-weight: 700;border: 0;border-bottom: 1px solid #e8e8e8">
+        资产盘点
+    </div>
+    <div class="items" style="line-height: 30px;padding: 0px 18px;background-color: #F8F8F7;color: #81CEF5;font-weight: 700;border: 0">
+        现有资产
+    </div>
+    <div class="items" style="padding: 5px 18px;border: 0;color: #C5C2BC" >
+        <div style="width: 100%">
+            <div style="display: inline-block;width: 33%;margin-right: -3px;text-align: center">
+                <div style="line-height: 18px">
+                    <span>地产（块）</span>
+                </div>
+                <div style="line-height: 30px">
+                    <span class="landcount" style="color: #FF904F;font-size: 20px">
+                        100
+                    </span>
+                </div>
+            </div>
+            <div style="display: inline-block;width: 33%;margin-right: -3px;text-align: center">
+                <div style="line-height: 18px">
+                    <span>房产（座）</span>
+                </div>
+                <div style="line-height: 30px">
+                <span class="housecount" style="color: #FF904F;font-size: 20px">
+                    230
+                </span>
+                </div>
+            </div>
+            <div style="display: inline-block;width: 33%;margin-right: -3px;text-align: center">
+                <div style="line-height: 18px">
+                    <span>房源（套）</span>
+                </div>
+                <div style="line-height: 30px">
+                    <span class="departmentcount" style="color: #FF904F;font-size: 20px">
+                        23413
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="items" style="line-height: 30px;padding: 0px 18px;background-color: #F8F8F7;color: #81CEF5;font-weight: 700;border: 0">
+        本月新增
+    </div>
+    <div class="items" style="padding: 5px 18px;border: 0;color: #C5C2BC" >
+        <div style="width: 100%">
+            <div style="display: inline-block;width: 33%;margin-right: -3px;text-align: center">
+                <div style="line-height: 18px">
+                    <span>地产（块）</span>
+                </div>
+                <div style="line-height: 30px">
+                    <span class="landcountchange" style="color: #FF904F;font-size: 20px">
+                        2
+                    </span>
+                </div>
+            </div>
+            <div style="display: inline-block;width: 33%;margin-right: -3px;text-align: center">
+                <div style="line-height: 18px">
+                    <span>房产（座）</span>
+                </div>
+                <div style="line-height: 30px">
+                <span class="housecountchange" style="color: #FF904F;font-size: 20px">
+                    11
+                </span>
+                </div>
+            </div>
+            <div style="display: inline-block;width: 33%;margin-right: -3px;text-align: center">
+                <div style="line-height: 18px">
+                    <span>房源（套）</span>
+                </div>
+                <div style="line-height: 30px">
+                    <span class="departmentcountchange"  style="color: #FF904F;font-size: 20px">
+                        324
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="items" style="line-height: 30px;padding: 0px 18px;color: #81CEF5;font-weight: 700;border:0;border-top:1px solid #e8e8e8;border-bottom:1px solid #e8e8e8">
+        业态比率
+    </div>
+    <div class="items" style="height:220px;padding: 0px 18px;background-color: #F8F8F7;border: 0;padding-top: 30px;padding-bottom: 10px">
+        <div style="margin-top: -29px">
+            <form class="form-inline">
+                <label for="propertyCompanySelect" style="color: #1e3657;font-weight: 700">按公司：</label>
+                <select id="propertyCompanySelect" data-toggle="select" name="inverse-select" style="min-width: 100px;max-width: 100px" >
+
+                </select>
+                <label for="propertyAreaSelect" style="color: #1e3657;font-weight: 700">按区域：</label>
+                <select id="propertyAreaSelect" data-toggle="select" name="inverse-select" style="min-width: 100px">
+
+                </select>
+            </form>
+        </div>
+        <!--<div id="pieChart" style="width: 200px;height: 100%;"></div>-->
+        <div class="row" style="margin-left: 0px;margin-right: 0px">
+            <div style="width: 100%;height: 220px">
+                <div id="pieChart" style="height: 100%"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="items" style="margin-top:90px;maline-height: 39px;color: #81CEF5;padding: 0px 18px;font-weight: 700;border: 0;border-bottom: 1px solid #e8e8e8">
+        经营状况
+    </div>
+
+
+    <div style="width: 100%;padding: 10px 20px;padding-top: 30px;margin-top: 20px">
+        <div style="margin-top: -29px">
+            <form class="form-inline">
+                <label style="color: #1e3657;font-weight: 700">区域：</label>
+                <select id="managementsituationcompanyselect" data-toggle="select" name="inverse-select" style="min-width: 100px;max-width: 100px">
+
+                </select>
+                <label   style="color: #1e3657;font-weight: 700">持有房产：</label>
+                <select id="managementsituationhouseselect" data-toggle="select" name="inverse-select" style="min-width: 100px">
+
+                </select>
+            </form>
+        </div>
+        <div class="row" style="margin-left: 0px;margin-right: 0px">
+            <div style="width: 100%;height: 220px">
+                <div id="pieStatus" style="height: 100%"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <div style="width: 100%;padding: 10px 20px;padding-top: 30px">
+            <div style="margin-top: -29px">
+                <form class="form-inline">
+                    <label style="color: #1e3657;font-weight: 700">区域：</label>
+                    <select id="managementsituationregionselect" data-toggle="select" name="inverse-select" style="min-width: 100px">
+
+                    </select>
+                    <label   style="color: #1e3657;font-weight: 700">按业态：</label>
+                    <select id="managementsituationretailselect" data-toggle="select" name="inverse-select" style="min-width: 100px">
+
+                    </select>
+                </form>
+            </div>
+
+            <div class="row" style="margin-left: 0px;margin-right: 0px">
+                <div style="width: 100%;height: 260px">
+                    <div id="barChart" style="height: 100%"></div>
+                </div>
+            </div>
+        </div>
+
+
+    <div class="row" style="margin-left: 0px;margin-right: 0px;margin-top: 20px">
+        <div class="title-info" style="line-height: 30px;padding: 0px 18px;color: #81CEF5;font-weight: 700;border:0;border-top:1px solid #e8e8e8;border-bottom:1px solid #e8e8e8">应收款统计</div>
+    </div>
+    <div class="row" style="border-radius: 4px;background-color: #fff;margin-right: 0px;margin-left: 0px;padding-top: 5px;color: #81CEF5;font-weight: 700">
+        <form class="form-inline" style="text-align: center">
+            <label style="color: #1e3657;font-weight: 700">按公司：</label>
+            <select id="statisticscompany" data-toggle="select" name="inverse-select" class="form-control" style="max-width:100px">
+
+            </select>
+            <label style="color: #1e3657;font-weight: 700">对应房产：</label>
+            <select id="statisticshouse" data-toggle="select" name="inverse-select" class="form-control"  style="max-width:100px">
+
+            </select>
+            <label style="color: #1e3657;font-weight: 700">按业态：</label>
+            <select id="statisticsretail" data-toggle="select" name="inverse-select" class="form-control"  style="max-width:100px">
+
+            </select>
+        </form>
+    </div>
+    <div class="row" style="margin-left: 0px;margin-right: 0px;color: #C5C2BC">
+        <div style="border-radius: 4px;background-color: #fff;padding: 20px 10px">
+            <div style="text-align: center">
+                <label>本月单位应收：</label> <label><span style="color: #FF904F;font-size: 20px" id="thisMonthReceivable">1</span></label>
+                <label>本月单位实收：</label> <label><span style="color: #FF904F;font-size: 20px" id="thisMonthReceived">1</span></label>
+                <!--<label>完成比例：</label> <label><span id="thisMonthRatio">1</span></label>-->
+            </div>
+            <div style="text-align: center">
+                <label>上月应收：</label> <label><span style="color: #FF904F;font-size: 20px" id="lastMonthReceivable">1</span></label>
+                <label>上月实收：</label> <label><span style="color: #FF904F;font-size: 20px" id="lastMonthReceived">1</span></label>
+                <!--<label>完成比例：</label> <label><span id="lastMonthRatio">1</span></label>-->
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+</body>
+<script src="../lib/Flat-UI-master/dist/js/vendor/jquery.min.js"></script>
+<script src="../lib/select2-master/dist/js/select2.full.min.js"></script>
+<script src="../lib/echarts/echarts.js"></script>
+<script src="../scripts/Application.js"></script>
+<script src="../scripts/Application.Util.js"></script>
+<script type="text/javascript">
+    $(function () {
+
+        getExistingAssets(Application.userid);
+        getExistingChanges(Application.userid);
+        getOrgAndLocation(Application.userid);
+        getLocationAndYetai(Application.userid);
+
+        //经营状况出租率
+        getManagementSituation()
+        $.fn.select2.defaults.set("theme", "bootstrap");
+//        initPieChart([
+//            {value:335, name:'自用'},
+//            {value:310, name:'工业用房'},
+//            {value:234, name:'商业用房'},
+//            {value:135, name:'办公楼'}
+//        ]);
+
+//        $('#propertyCompanySelect').select2({
+//            data: [{ id: '', text: "全部" }]
+//        })
+//        $('#propertyAreaSelect').select2({
+//            data: [{ id: '', text: "全部" }]
+//        })
+//
+//        initBarChart();
+//        $('#managementsituationregionselect').select2({
+//            data: [{ id: '', text: "全部" }]
+//        })
+//        $('#managementsituationretailselect').select2({
+//            data: [{ id: '', text: "全部" }]
+//        })
+
+    })
+
+    function initPieChart(data) {
+        var dom = document.getElementById("pieChart");
+        var myChart = echarts.init(dom);
+        var app = {};
+        option = null;
+        app.title = '';
+
+        option = {
+            backgroundColor: '#fff',
+            title: {
+                text: '',
+                subtext: '',
+                x: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            legend: {
+                orient: 'horizontal',
+                x: 'center',
+                y: 'bottom',
+                data: ['自用', '工业用房', '商业用房', '办公楼']
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    mark: { show: true },
+                    dataView: { show: false, readOnly: false },
+                    magicType: {
+                        show: true,
+                        type: ['pie', 'funnel'],
+                        option: {
+                            funnel: {
+                                x: '25%',
+                                width: '50%',
+                                funnelAlign: 'left',
+                                max: 1548
+                            }
+                        }
+                    },
+                    restore: { show: false },
+                    saveAsImage: { show: true }
+                }
+            },
+            calculable: true,
+            series: [
+                {
+                    name: '访问来源',
+                    type: 'pie',
+                    radius: ['50%', '70%'],
+                    data: data
+                }
+            ]
+        };
+        if (option && typeof option === "object") {
+            myChart.setOption(option, true);
+        }
+    }
+
+    function initBarChart(data) {
+        var dom = document.getElementById("barChart");
+        var myChart = echarts.init(dom);
+        var app = {};
+        option = {
+            backgroundColor: '#fff',
+            calculable: true,
+            xAxis: [
+                {
+                    type: 'category',
+                    data: ['北京公司', '城建置业', '3公司', '4公司', '5公司', '6公司', '7公司', '8公司', '9公司', '10公司', '11公司', '12公司']
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    name: '100%',
+                    axisLabel: {
+                        formatter: '{value}'
+                    }
+                },
+                {
+                    type: 'value',
+                    name: '单价',
+                    axisLabel: {
+                        formatter: '{value}元'
+                    }
+                }
+            ],
+            series: [
+                {
+                    name: '出租率',
+                    type: 'bar',
+                    itemStyle: {
+                        normal: { color: '#0099FF' }
+                    },
+                    data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 90, 100, 32.6, 20.0, 6.4, 3.3]
+                },
+                {
+                    name: '单价',
+                    type: 'line',
+                    yAxisIndex: 1,
+                    itemStyle: {
+                        normal: { color: '#C06410' }
+                    },
+                    data: [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
+                }
+            ]
+        };
+
+        if (option && typeof option === "object") {
+            myChart.setOption(option, true);
+        }
+    }
+
+
+    //资产盘点/现有资产
+
+    function getExistingAssets(userid) {
+
+        Application.Util.ajaxConstruct(Application.serverHost, 'POST', { userid: Application.userid }, 'text/xml;charset=UTF-8', function (data) {
+
+                    $('.landcount').text(data.dcCount);
+                    $('.housecount').text(data.fcCount);
+                    $('.departmentcount').text(data.fyCount);
+                }, function name(params) {
+                    console.log('error')
+                },
+                {
+                    "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+                    "xmlnsName": "jin",
+                    "methodName": "xianyouzichan"
+                }
+        );
+
+    }
+
+
+    /**
+     * 资产改变情况
+     * @param userid
+     */
+    function getExistingChanges(userid) {
+        Application.Util.ajaxConstruct(Application.serverHost, 'POST', { userid: Application.userid }, 'text/xml;charset=UTF-8', function (data) {
+
+                    $('.landcountchange').text(data.dcCount);
+                    $('.housecountchange').text(data.fcCount);
+                    $('.departmentcountchange').text(data.fyCount);
+                }, function name(params) {
+                    console.log('error')
+                },
+                {
+                    "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+                    "xmlnsName": "jin",
+                    "methodName": "benyuexinzeng"
+                }
+        );
+
+    }
+
+
+    //资产盘点环状图
+    function getOrgAndLocation(userid) {
+//
+//          $.post("http://127.0.0.1:8088/" + new Date().getTime(),
+//             {
+//               "url": "118.26.130.12",
+//               "port": '8080',
+//               "path": "/uapws/service/nc.itf.pims.web.JingYingZhuangKuang",
+//               "data": JSON.stringify({userid:userid}),
+//               "ajaxoptions": {
+//                 "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+//                 "xmlnsName": "jin",
+//                 "methodName": "getPk_orgAndLocation"
+//               }
+//             },
+//             function (data) {
+//                 var startindex = data.indexOf('<ns1:return>');
+//                 var endindex = data.indexOf('</ns1:return>');
+//                 data = data.substring(startindex + 12, endindex)
+//               data = JSON.parse(data);
+//               //console.log(data)
+//         OrgAndLocationOptions(data)
+//
+//         })
+        Application.Util.ajaxConstruct(Application.serverHost,'POST',{ userid: Application.userid },'text/xml;charset=UTF-8',function (data) {
+                    OrgAndLocationOptions(data);
+                },function name(params) {
+                    console.log('error')
+                },
+                {
+                    "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+                    "xmlnsName": "jin",
+                    "methodName": "getPk_orgAndLocation"
+                }
+        )
+
+    }
+
+    //生成按公司下拉列表
+    function OrgAndLocationOptions(data) {
+        var companyarr = [{ id: 'test', text: "全部" }]
+        var locationObj = {};
+        for (var i = 0, len = data.length; i < len; i++) {
+            companyarr.push({ id: data[i].firstvalue, text: data[i].secondvalue, location: data[i].location });
+            locationObj[data[i].firstvalue] = data[i].location;
+        }
+
+        $('#propertyCompanySelect').select2(
+                {
+                    data: companyarr
+                }
+        ).on('select2:select', function (e) {
+
+            getCircleGraphData(e.params.data.id, "");
+            var areaArr = [];
+            areaArr.push({ id: 'test', text: '全部' });
+            for (var i = 0, len = locationObj[e.params.data.id].length; i < len; i++) {
+                areaArr.push({ id:  locationObj[e.params.data.id][i].firstvalue, text: locationObj[e.params.data.id][i].secondvalue })
+            }
+            $('#propertyAreaSelect').empty();
+            $('#propertyAreaSelect').select2({
+                data: areaArr
+            }).on('select2:select', function (event) {
+                getCircleGraphData(e.params.data.id, event.params.data.text);
+            });
+
+        });
+
+        $('#propertyAreaSelect').select2({
+            data: [{ id: 'test', text: "全部" }]
+        })
+
+        getCircleGraphData('', '');
+
+    }
+
+
+    //业态比率环状图
+    function getCircleGraphData(company, area) {
+        if(company =='test'){
+            company ="";
+        }
+        if(area == 'test'){
+            area ='test';
+        }
+//         $.post("http://127.0.0.1:8088/" + new Date().getTime(),
+//           {
+//             "url": "118.26.130.12",
+//             "port": '8080',
+//             "path": "/uapws/service/nc.itf.pims.web.JingYingZhuangKuang",
+//             "data": JSON.stringify({ 'gongsi': company, 'location': area, 'userid': '1001ZZ10000000018FJF' }),
+//             "ajaxoptions": {
+//               "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+//               "xmlnsName": "jin",
+//               "methodName": "zichanpandianhuanzhuangtu"
+//             }
+//           },
+//           function (data) {
+//             var startindex = data.indexOf('<ns1:return>');
+//             var endindex = data.indexOf('</ns1:return>');
+//             data = data.substring(startindex + 12, endindex)
+//             data = JSON.parse(data);
+//             var pieData = [];
+//             for (var i = 0, len = data.length; i < len; i++) {
+//               pieData.push({ name: data[i].fristvalue, value: data[i].secondvalue });
+//             }
+//
+//             initPieChart(pieData);
+//           })
+
+
+        Application.Util.ajaxConstruct(Application.serverHost,'POST',{ 'gongsi': company, 'location': area, 'userid': Application.userid },'text/xml;charset=UTF-8',function (data) {
+                    var pieData = [];
+                    for (var i = 0, len = data.length; i < len; i++) {
+                        pieData.push({ name: data[i].fristvalue, value: data[i].secondvalue });
+                    }
+
+                    initPieChart(pieData);
+                },function name(params) {
+                    console.log('error')
+                },
+                {
+                    "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+                    "xmlnsName": "jin",
+                    "methodName": "zichanpandianhuanzhuangtu"
+                }
+        )
+
+
+    }
+
+
+
+    //区域业态查询
+    function getLocationAndYetai(userid) {
+//          $.post("http://127.0.0.1:8088/" + new Date().getTime(),
+//           {
+//             "url": "118.26.130.12",
+//             "port": '8080',
+//             "path": "/uapws/service/nc.itf.pims.web.JingYingZhuangKuang",
+//             "data": JSON.stringify({userid:userid}),
+//             "ajaxoptions": {
+//               "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+//               "xmlnsName": "jin",
+//               "methodName": "getLocationAndYetai"
+//             }
+//           },
+//           function (data) {
+//               var startindex = data.indexOf('<ns1:return>');
+//               var endindex = data.indexOf('</ns1:return>');
+//               data = data.substring(startindex + 12, endindex)
+//             data = JSON.parse(data);
+//             console.log(data)
+//
+//             getRegionAndRetail(data);
+//         })
+
+        Application.Util.ajaxConstruct(Application.serverHost,'POST',{userid:userid},'text/xml;charset=UTF-8',function (data) {
+                    getRegionAndRetail(data);
+
+                },function name(params) {
+                    console.log('error')
+                },
+                {
+                    "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+                    "xmlnsName": "jin",
+                    "methodName": "getLocationAndYetai"
+                }
+        )
+
+    }
+
+
+
+    function getRegionAndRetail(data) {
+        var regionarr = [{ id: 'test', text: '全部' }]
+        var retailObj = {};
+        var locationObj = {};
+        for (var i = 0, len = data.length; i < len; i++) {
+            regionarr.push({ id: data[i].firstvalue, text: data[i].secondvalue, retail: data[i].yetai });
+
+        }
+
+        $('#managementsituationregionselect').select2(
+                {
+                    data: regionarr
+                }
+        )
+
+                .on('select2:select', function (e) {
+
+                    //getBarData(e.params.data.text, "");
+
+
+
+                    if (e.params.data.retail) {
+                        var retailArr = [];
+                        retailArr.push({ id: 'test', text: '全部' });
+                        for (var i = 0, len = e.params.data.retail.length; i < len; i++) {
+                            retailArr.push({ id: e.params.data.retail[i].firstvalue, text: e.params.data.retail[i].secondvalue })
+                        }
+                        $('#managementsituationretailselect').empty();
+                        $('#managementsituationretailselect').select2({
+                            data: retailArr
+                        }).on('select2:select', function (event) {
+                            getBarData(e.params.data.text, event.params.data.id);
+                        });
+                    }
+
+                    // else {
+                    //   //
+                    //   initOfRetail(function (data) {
+                    //     var retails = [];
+                    //     retails.push({ id: "", text: "全部" });
+                    //     for (var i = 0, len = data.length; i < len; i++) {
+                    //       retails.push({ id: data[i].fristvalue, text: data[i].secondvalue });
+                    //     }
+                    //     $('#managementsituationretailselect').empty();
+                    //     $('#managementsituationretailselect').select2({
+                    //       data: retails
+                    //     }).on('select2:select', function (event) {
+                    //       getBarData(e.params.data.text, event.params.data.text);
+                    //     });
+                    //
+                    //   })
+                    // }
+
+
+                });
+
+        $('#managementsituationretailselect').select2({
+            data: [{ id: 'test', text: "全部" }]
+        })
+        //初始化
+        //getBarData("", "");
+
+    }
+    //经营状况,出租率
+
+    function getManagementSituation() {
+        Application.Util.ajaxConstruct(Application.serverHost,'POST',{ userid: Application.userid },'text/xml;charset=UTF-8',function (data) {
+                    getCompanyAndHouse(data);
+                    receivablesAndstatistics(data);
+                },function name(params) {
+                    console.log('error')
+                },
+                {
+                    "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+                    "xmlnsName": "jin",
+                    "methodName": "getPk_orgAndfcname"
+                }
+        )
+
+    }
+
+
+    function getCompanyAndHouse(data) {
+        var companyarr = [{ id: 'test', text: '全部' ,fangchan:[{id:'test',text:"全部"}]}]
+        var locationObj = {};
+        for (var i = 0, len = data.length; i < len; i++) {
+            companyarr.push({ id: data[i].firstvalue, text: data[i].secondvalue, location: data[i].fangchan });
+            locationObj[data[i].firstvalue] = data[i].fangchan;
+        }
+
+        $('#managementsituationcompanyselect').select2(
+                {
+                    data: companyarr
+                }
+        ).on('select2:select', function (e) {
+
+            getPieGraphData(e.params.data.id, "");
+            var areaArr = [];
+            areaArr.push({ id: 'test', text: '全部' });
+            for (var i = 0, len = locationObj[e.params.data.id].length; i < len; i++) {
+                areaArr.push({ id: locationObj[e.params.data.id][i].firstvalue, text: locationObj[e.params.data.id][i].secondvalue })
+            }
+            $('#managementsituationhouseselect').empty();
+            $('#managementsituationhouseselect').select2({
+                data: areaArr
+            }).on('select2:select', function (event) {
+                getPieGraphData(e.params.data.id, event.params.data.id);
+            });
+
+        });
+
+
+        $('#managementsituationhouseselect').select2({
+            data: [{ id: 'test', text: "全部" }]
+        })
+
+        //初始化
+        getPieGraphData("", "");
+
+    }
+
+
+    //应收款统计
+    function receivablesAndstatistics(data) {
+        var companyarr = [{ id: 'test', text: '全部' }]
+        var locationObj = {};
+        for (var i = 0, len = data.length; i < len; i++) {
+            companyarr.push({ id: data[i].firstvalue, text: data[i].secondvalue, location: data[i].fangchan });
+            locationObj[data[i].firstvalue] = data[i].fangchan;
+        }
+
+        $('#statisticscompany').select2(
+                {
+                    data: companyarr
+                }
+        ).on('select2:select', function (e) {
+
+            //getPieGraphData(e.params.data.id, "");
+            var areaArr = [];
+            areaArr.push({ id: 'test', text: '全部' });
+
+            getStatisticData(e.params.data.id,$('#statisticshouse').select2('val'),$('#statisticsretail').select2('val'))
+
+            for (var i = 0, len = locationObj[e.params.data.id].length; i < len; i++) {
+
+                areaArr.push({ id: locationObj[e.params.data.id][i].firstvalue, text: locationObj[e.params.data.id][i].secondvalue })
+            }
+            $('#statisticshouse').empty();
+            $('#statisticshouse').select2({
+                data: areaArr
+            }).on('select2:select', function (event) {
+                //getPieGraphData(e.params.data.id, event.params.data.text);
+                getStatisticData($('#statisticscompany').select2('val'),event.params.data.id,$('#statisticsretail').select2('val'))
+            });
+
+        });
+
+        $('#statisticshouse').select2({
+            data: [{ id: 'test', text: "全部" }]
+        })
+        //初始化
+        getStatisticData("", "","");
+    }
+
+
+    function getPieGraphData(company, house) {
+        if(company == 'test'){
+            company = "";
+        }
+
+        if(house == 'test'){
+            house = "";
+        }
+        Application.Util.ajaxConstruct(Application.serverHost,'POST',{ 'gongsi': company, 'fczbh': house, 'userid': Application.userid },'text/xml;charset=UTF-8',function (data) {
+                    initPieStatus(data);
+
+                },function name(params) {
+                    console.log('error')
+                },
+                {
+                    "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+                    "xmlnsName": "jin",
+                    "methodName": "ChuZuLv"
+                }
+        )
+    }
+
+    //统计数据
+    function getStatisticData(company, house, retail) {
+        if(company === '全部') {
+            company = '';
+        }
+        if(house === '全部') {
+            house = '';
+        }
+        if(retail === '全部') {
+            retail = '';
+        }
+
+        if(company =='test'){
+            company = "";
+        }
+        if(house =='test'){
+            house = "";
+        }
+        if(retail =='test'){
+            retail = "";
+        }
+
+        Application.Util.ajaxConstruct(Application.serverHost,'POST',{ 'yetai': retail, 'userid': Application.userid, 'fangchan': house, 'gongsi': company },'text/xml;charset=UTF-8',function (data) {
+                    //统计数据
+                    $('#thisMonthReceivable').text(data[0].benyueyingshou+'元');
+                    $("#thisMonthReceived").text(data[0].shangyueshishou+'元');
+                    $('#thisMonthRatio').text(data[0].benyuewanchengbili+'元');
+
+                    $('#lastMonthReceivable').text(data[0].shangyueyingshou+'元');
+                    $('#lastMonthReceived').text(data[0].shangyueshishou+'元');
+                    $('#lastMonthRatio').text(data[0].shangyuewanchengbili+'元');
+
+                },function name(params) {
+                    console.log('error')
+                },
+                {
+                    "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+                    "xmlnsName": "jin",
+                    "methodName": "yingshoukuan"
+                }
+        )
+
+
+    }
+
+    function initPieStatus(data) {
+        var dom = document.getElementById("pieStatus");
+        var myChart = echarts.init(dom);
+        var app = {};
+        option = null;
+        app.title = '';
+
+        option = {
+            backgroundColor: '#fff',
+            title: {
+                text: '',
+                subtext: '',
+                x: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            legend: {
+                orient: 'horizontal',
+                x: 'center',
+                y: 'bottom',
+                data: ['已租', '未租', '自用']
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    mark: { show: false },
+                    dataView: { show: false, readOnly: false },
+                    magicType: {
+                        show: true,
+                        type: ['pie', 'funnel'],
+                        option: {
+                            funnel: {
+                                x: '25%',
+                                width: '50%',
+                                funnelAlign: 'left',
+                                max: 1548
+                            }
+                        }
+                    },
+                    restore: { show: false },
+                    saveAsImage: { show: true }
+                }
+            },
+            calculable: true,
+            series: [
+                {
+                    name: '',
+                    type: 'pie',
+                    radius: '55%',
+                    center: ['50%', '50%'],
+                    data: [
+                        { value: data.yizu, name: '已租' },
+                        { value: data.weizu, name: '未租' },
+                        { value: data.ziyong, name: '自用' }
+                    ]
+                }
+            ]
+        };
+
+        if (option && typeof option === "object") {
+            myChart.setOption(option, true);
+        }
+    }
+
+    //区域业态查询
+    function getLocationAndYetai(userid) {
+
+        Application.Util.ajaxConstruct(Application.serverHost,'POST',{userid:userid},'text/xml;charset=UTF-8',function (data) {
+                    getRegionAndRetail(data);
+
+                },function name(params) {
+                    console.log('error')
+                },
+                {
+                    "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+                    "xmlnsName": "jin",
+                    "methodName": "getLocationAndYetai"
+                }
+        )
+
+    }
+    function getRegionAndRetail(data) {
+        var regionarr = [{ id: 'test', text: '全部' }]
+        var retailObj = {};
+        var locationObj = {};
+        for (var i = 0, len = data.length; i < len; i++) {
+            regionarr.push({ id: data[i].firstvalue, text: data[i].secondvalue, retail: data[i].yetai });
+
+        }
+
+        $('#managementsituationregionselect').select2(
+                {
+                    data: regionarr
+                }
+        )
+
+                .on('select2:select', function (e) {
+
+                    getBarData(e.params.data.text, "");
+
+
+
+                    if (e.params.data.retail) {
+                        var retailArr = [];
+                        retailArr.push({ id: 'test', text: '全部' });
+                        for (var i = 0, len = e.params.data.retail.length; i < len; i++) {
+                            retailArr.push({ id: e.params.data.retail[i].firstvalue, text: e.params.data.retail[i].secondvalue })
+                        }
+                        $('#managementsituationretailselect').empty();
+                        $('#managementsituationretailselect').select2({
+                            data: retailArr
+                        }).on('select2:select', function (event) {
+                            getBarData(e.params.data.text, event.params.data.id);
+                        });
+                    }
+
+                    // else {
+                    //   //
+                    //   initOfRetail(function (data) {
+                    //     var retails = [];
+                    //     retails.push({ id: "", text: "全部" });
+                    //     for (var i = 0, len = data.length; i < len; i++) {
+                    //       retails.push({ id: data[i].fristvalue, text: data[i].secondvalue });
+                    //     }
+                    //     $('#managementsituationretailselect').empty();
+                    //     $('#managementsituationretailselect').select2({
+                    //       data: retails
+                    //     }).on('select2:select', function (event) {
+                    //       getBarData(e.params.data.text, event.params.data.text);
+                    //     });
+                    //
+                    //   })
+                    // }
+
+
+                });
+
+        $('#managementsituationretailselect').select2({
+            data: [{ id: 'test', text: "全部" }]
+        })
+        //初始化
+        getBarData("", "");
+
+    }
+
+    //柱状图
+    function getBarData(location, retail) {
+        if (location == "全部") {
+            location = "";
+        }
+        if(retail == 'test'){
+            retail = "";
+        }
+
+        Application.Util.ajaxConstruct(Application.serverHost,'POST',{ 'location': location, 'yetai': retail, 'userid': Application.userid },'text/xml;charset=UTF-8',function (data) {
+                    initBarChart(data);
+
+                },function name(params) {
+                    console.log('error')
+                },
+                {
+                    "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
+                    "xmlnsName": "jin",
+                    "methodName": "ZhuZhuangTu"
+                }
+        )
+    }
+
+
+    function initBarChart(data) {
+        var dom = document.getElementById("barChart");
+        var myChart = echarts.init(dom);
+        var app = {};
+
+
+
+        var xAxis= [];
+        var chuzulv = [];
+        var pingjundanjia = [];
+
+        for (var item in data){
+            xAxis.push(data[item].name);
+            chuzulv.push(data[item].chuzulv*100);
+            pingjundanjia.push(data[item].pingjundanjia)
+        }
+
+        option = {
+            backgroundColor: '#fff',
+            tooltip: {
+                trigger: 'axis'
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    mark: { show: false },
+                    dataView: { show: false, readOnly: false },
+                    magicType: { show: false, type: ['line', 'bar'] },
+                    restore: { show: false },
+                    saveAsImage: { show: true }
+                }
+            },
+            calculable: true,
+            legend: {
+                orient: 'horizontal',
+                x: 'center',
+                y: 'bottom',
+                data: ['出租率', '单价']
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    //data: ['北京城建集团投资有限公司', '城建置业', '3公司', '4公司', '5公司', '6公司', '7公司', '8公司', '9公司', '10公司', '11公司', '12公司']
+                    data:xAxis,
+                    axisLabel:{
+                        interval:0,
+                        rotate:45,
+                        margin:2,
+                        textStyle:{
+                            color:"#222"
+                        }
+                    },
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    name: '100%',
+                    axisLabel: {
+                        formatter: '{value}'
+                    }
+                },
+                {
+                    type: 'value',
+                    name: '单价',
+                    axisLabel: {
+                        formatter: '{value}元'
+                    }
+                }
+            ],
+            series: [
+                {
+                    name: '出租率',
+                    type: 'bar',
+                    itemStyle: {
+                        normal: { color: '#0099FF' }
+                    },
+                    //data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 90, 100, 32.6, 20.0, 6.4, 3.3]
+                    data:chuzulv
+                },
+                {
+                    name: '单价',
+                    type: 'line',
+                    yAxisIndex: 1,
+                    itemStyle: {
+                        normal: { color: '#C06410' }
+                    },
+                    //data: [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
+                    data:pingjundanjia
+                }
+            ]
+        };
+
+        if (option && typeof option === "object") {
+            myChart.setOption(option, true);
+        }
+    }
+
+</script>
+</html>

@@ -453,8 +453,8 @@
         'yetai': '',
         'userid': Application.userid,
         'gongsi': '',
-        'dijiye': '',
-        'xianshitiaoshu': '',
+        'dijiye': 1,
+        'xianshitiaoshu': 3,
         'tdsyr ': '',
         'dl': '',
         'tdxz': '',
@@ -523,11 +523,6 @@
                 $(this).parents('.circle').addClass("circleSelected");
             }
         });
-         //登录时数据
-        houseOfLogin();
-        laneOfLogin();
-
-
 
         // 搜索按钮隐藏其他div，显示带搜索结果的map Div
         $("#searchButton").click(function () {
@@ -832,27 +827,7 @@
         });
     }
 
-     //登录时显示的数据
-    function houseOfLogin() {
-        Application.Util.ajaxConstruct(Application.serverHost, 'POST', houseParam, 'text/xml;charset=UTF-8', function (data) {
-            if(data.rows.length>0){
-                for (var j in data.rows) {
-                    var point = new BMap.Point(data.rows[j].lng, data.rows[j].lat);
-                    var marker =new BMap.Marker(point);
-                    map.addOverlay(marker);
-                }
-            }
-            else{
-                alert("查无数据!")
-            }
-        }, function name(params) {
-            console.log('error')
-        }, {
-            "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
-            "xmlnsName": "jin",
-            "methodName": "getFcXinXi"
-        });
-    }
+
     function initTableOfHouse() {
         Application.Util.ajaxConstruct(Application.serverHost, 'POST', houseParam, 'text/xml;charset=UTF-8', function (data) {
             if(data.rows.length>0){
@@ -878,28 +853,7 @@
             "methodName": "getFcXinXi"
         });
     }
-    // 登录时显示的lane数据
-    function  laneOfLogin() {
-        Application.Util.ajaxConstruct(Application.serverHost, 'POST', laneParam, 'text/xml;charset=UTF-8', function (data) {
-            if(data.rows.length>0){
-                map.clearOverlays();
-                for (var j in data) {
-                    var point = new BMap.Point(data.rows[j].lng, data.rows[j].lat);
-                    var marker =new BMap.Marker(point);
-                    map.addOverlay(marker);
-                }
-            }
-            else{
-                alert("查无数据!")
-            }
-        }, function name(params) {
-            console.log('error')
-        }, {
-            "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
-            "xmlnsName": "jin",
-            "methodName": "getDcXinXi"
-        });
-    }
+
     function initTableOfLane() {
         Application.Util.ajaxConstruct(Application.serverHost, 'POST', laneParam, 'text/xml;charset=UTF-8', function (data) {
             if(data.rows.length>0){
