@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=9" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="stylesheet" type="text/css"
+          href="../lib/Flat-UI-master/dist/css/vendor/bootstrap/css/bootstrap.min.css"/>
+    <link href="../lib/select2-master/dist/css/select2.css" rel="stylesheet">
+    <link href="../lib/select2-master/dist/css/select2-bootstrap-theme.css" rel="stylesheet">
+    <link rel="stylesheet" href="../lib/accordion-multi-menu/css/style.css">
+    <title>主界面</title>
+    <style type="text/css">
+        .circle{
+            text-align: center;
+        }
+        .circle .glyphicon-check{
+            visibility: hidden;
+        }
+
+        .circleButton{
+            width: 48px;
+            height: 48px;
+            border-radius: 20px;
+            background: url("../images/bussiness.png");
+            display: inline-block;
+        }
+        .circleButtonLabel{
+            text-align: center;
+            padding: 5px 0px;
+        }
+
+        .circleSelected{
+
+        }
+
+        .circleSelected  .glyphicon-check{
+            color: #00CC00;
+            top: 35px;
+            left: 25px;
+            visibility: visible;
+        }
+        .circleSelected  .circleButtonLabel{
+            color: #90111a;
+        }
+    </style>
+</head>
+<body style="padding: 50px 20px">
+<div style="width: 100%;padding: 5px 10px;height:170px; ">
+    <table cellpadding="none" cellspacing="none" style="border: none;width: 100%">
+        <tr>
+            <td>
+                <a href="main.html?cuserid=1001A11000000000W417" class="circle"  style="display: block;color: #2c3e50;">
+                    <div class="circleButton" style="background: url(../images/main.png);border-radius: 4px">
+                        <i class="glyphicon glyphicon-check"></i>
+                    </div>
+                    <div class="circleButtonLabel"><label>首页</label></div>
+                </a>
+            </td>
+            <td>
+                <a href="map.html?cuserid=1001A11000000000W417" class="circle"  style="display: block;color: #2c3e50">
+                    <div class="circleButton" style="background: url(../images/map.png);border-radius: 4px">
+                        <i class="glyphicon glyphicon-check"></i>
+                    </div>
+                    <div class="circleButtonLabel"><label>查询</label></div>
+                </a>
+            </td>
+            <td>
+                <div class="circle"  style="visibility: hidden">
+                    <div class="circleButton">
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="circle"  style="visibility: hidden">
+                    <div class="circleButton">
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
