@@ -121,13 +121,14 @@
                 <li><a href="#hugDiv" onclick="changeData(4)" data-toggle="tab">房源</a></li>
             </ul>
             <div id="myTabContent" class="tab-content" style="height: 100%">
-                <div class="tab-pane fade in active" id="laneDiv" style="height: 100%">
+                <div class="tab-pane fade in active" id="laneDiv">
                     <table id="tableOfLane"
                            data-toggle="table"
                            data-pagination="true"
                            data-height="540"
                            data-page-size="10"
                            data-page-list="[5,8,10]"
+                           data-resizable="true"
                            data-query-params="queryLaneDataByPage"
                            data-side-pagination="server"
                            data-pagination-first-text="首页"
@@ -149,12 +150,13 @@
                         </thead>
                     </table>
                 </div>
-                <div class="tab-pane fade" id="houseDiv" style="height: 100%">
+                <div class="tab-pane fade" id="houseDiv">
                     <table id="tableOfHouse"
                            data-toggle="table"
                            data-pagination="true"
                            data-page-size="10"
-                           data-height="540"
+                           data-height="440"
+                           data-resizable="true"
                            data-page-list="[5,8,10]"
                            data-side-pagination="server"
                            data-pagination-first-text="首页"
@@ -176,12 +178,13 @@
                         </thead>
                     </table>
                 </div>
-                <div class="tab-pane fade" id="buildingDiv" style="height: 100%">
+                <div class="tab-pane fade" id="buildingDiv">
                     <table id="tableOfBuilding"
                            data-toggle="table"
                            data-pagination="true"
                            data-page-size="10"
-                           data-height="540"
+                           data-height="500"
+                           data-resizable="true"
                            data-page-list="[5,8,10]"
                            data-side-pagination="server"
                            data-pagination-first-text="首页"
@@ -199,13 +202,14 @@
                         </thead>
                     </table>
                 </div>
-                <div class="tab-pane fade" id="hugDiv" style="height: 100%">
+                <div class="tab-pane fade" id="hugDiv">
                     <table id="tableOfHug"
                            data-toggle="table"
                            data-pagination="true"
                            data-page-size="10"
                            data-page-list="[5,8,10]"
-                           data-height="540"
+                           data-height="500"
+                           data-resizable="true"
                            data-side-pagination="server"
                            data-pagination-first-text="首页"
                            data-pagination-pre-text="前一页"
