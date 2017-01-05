@@ -32,7 +32,7 @@ var dcInfo =
   '<div id="barChart" style="height: 250px;width: 350px">' +
   '</div></li></ul> </li>' +
   '<li>' +
-  '<a href="#">对方房产信息<i class="glyphicon glyphicon-chevron-right"></i></a>' +
+  '<a href="#">对应房产信息<i class="glyphicon glyphicon-chevron-right"></i></a>' +
   '<ul class="sub-items" id="dydcxx">' +
   '</ul>' +
   '</li>' +
