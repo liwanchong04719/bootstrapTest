@@ -766,6 +766,9 @@
                 laneParam.gongsi = queryCompanyData.toString();
                 laneParam.yetai = queryRetailData.toString();
                 laneParam.location = queryZoneData.toString();
+                if(laneParam.location === 'test') {
+                    laneParam.location = '';
+                }
                 initTableOfLane();
                 break;
             case 'house' :
@@ -774,6 +777,10 @@
                 houseParam.gongsi = queryCompanyData.toString();
                 houseParam.yetai = queryRetailData.toString();
                 houseParam.location = queryZoneData.toString();
+                if(houseParam.location === 'test') {
+                    houseParam.location = '';
+                }
+
                 initTableOfHouse();
                 break;
             case 'building':
