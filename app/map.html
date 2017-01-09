@@ -764,6 +764,9 @@
                 laneParam.dijiye = 0;
                 laneParam.xianshitiaoshu = 10;
                 laneParam.gongsi = queryCompanyData.toString();
+                if(laneParam.gongsi === 'test') {
+                    laneParam.gongsi = '';
+                }
                 laneParam.yetai = queryRetailData.toString();
                 laneParam.location = queryZoneData.toString();
                 if(laneParam.location === 'test') {
@@ -775,6 +778,9 @@
                 houseParam.dijiye = 0;
                 houseParam.xianshitiaoshu = 10;
                 houseParam.gongsi = queryCompanyData.toString();
+                if(houseParam.gongsi === 'test') {
+                    houseParam.gongsi = '';
+                }
                 houseParam.yetai = queryRetailData.toString();
                 houseParam.location = queryZoneData.toString();
                 if(houseParam.location === 'test') {
@@ -782,22 +788,6 @@
                 }
 
                 initTableOfHouse();
-                break;
-            case 'building':
-                buildingParam.dijiye = 0;
-                buildingParam.xianshitiaoshu = 10;
-                buildingParam.gongsi = queryCompanyData.toString();
-                buildingParam.yetai = queryRetailData.toString();
-                buildingParam.location = queryZoneData.toString();
-                initTableOfBuilding();
-                break;
-            case 'hug':
-                hugParam.dijiye = 0;
-                hugParam.xianshitiaoshu = 10;
-                hugParam.gongsi = queryCompanyData.toString();
-                hugParam.yetai = queryRetailData.toString();
-                hugParam.location = queryZoneData.toString();
-                initTableOfHug();
                 break;
         }
     }
@@ -844,8 +834,18 @@
         Application.Util.ajaxConstruct(Application.serverHost, 'POST', houseParam, 'text/xml;charset=UTF-8', function (data) {
             if(data.rows.length>0){
                 for (var j = 0, len = data.rows.length; j < len; j++)  {
-                    var point = new BMap.Point(data.rows[j].lng, data.rows[j].lat);
-                    var marker =new BMap.Marker(point);
+                    var point = new BMap.Point(data.rows[j].lng, data.rows[j].lat );
+                    var marker =new BMap.Marker(point,{title: JSON.stringify(data.rows[j])});
+                    (function () {
+                        marker.addEventListener('click',function (e) {
+                            $("#searchList>ul").empty();
+                            $("#mainContainer").removeClass("fullScreen").addClass("halfScreen").show();
+                            var str = constructHouseList([JSON.parse(this.z.title)]);
+                            $("#searchList>ul").append(str);
+                            initDcOrFcPanel();
+                        })
+                    })()
+
                     map.addOverlay(marker);
                 }
             }
@@ -853,7 +853,7 @@
                 alert("查无数据!")
             }
         }, function name(params) {
-            console.log('error')
+            console.log('error');
         }, {
             "xmlns": 'xmlns:jin="http://web.pims.itf.nc/JingYingZhuangKuang"',
             "xmlnsName": "jin",
@@ -863,15 +863,27 @@
     function initTableOfHouse() {
         Application.Util.ajaxConstruct(Application.serverHost, 'POST', houseParam, 'text/xml;charset=UTF-8', function (data) {
             if(data.rows.length>0){
+                var points = [];
                 $("#searchList>ul").empty();
                 map.clearOverlays();
                 var str = constructHouseList(data.rows);
                 $("#searchList>ul").append(str);
                 for (var j = 0, len = data.rows.length; j < len; j++) {
                     var point = new BMap.Point(data.rows[j].lng, data.rows[j].lat);
-                    var marker =new BMap.Marker(point);
+                    points.push(point);
+                    var marker =new BMap.Marker(point,{title: JSON.stringify(data.rows[j])});
+                    (function () {
+                        marker.addEventListener('click',function (e) {
+                            $("#searchList>ul").empty();
+                            $("#mainContainer").removeClass("fullScreen").addClass("halfScreen").show();
+                            var str = constructHouseList([JSON.parse(this.z.title)]);
+                            $("#searchList>ul").append(str);
+                            initDcOrFcPanel();
+                        })
+                    })()
                     map.addOverlay(marker);
                 }
+                map.setViewport(points);
                 initDcOrFcPanel();
             }
             else{
@@ -892,7 +904,17 @@
                 map.clearOverlays();
                 for (var j = 0, len = data.rows.length; j < len; j++) {
                     var point = new BMap.Point(data.rows[j].lng, data.rows[j].lat);
-                    var marker =new BMap.Marker(point);
+                    var marker =new BMap.Marker(point,{title: JSON.stringify(data.rows[j])});
+                    (function () {
+                        marker.addEventListener('click',function (e) {
+                            $("#searchList>ul").empty();
+                            $("#mainContainer").removeClass("fullScreen").addClass("halfScreen").show();
+                            var str = constructLandList([JSON.parse(this.z.title)]);
+                            $("#searchList>ul").append(str);
+                            initDcOrFcPanel();
+                        })
+                    })()
+
                     map.addOverlay(marker);
                 }
             }
@@ -910,15 +932,27 @@
     function initTableOfLane() {
         Application.Util.ajaxConstruct(Application.serverHost, 'POST', laneParam, 'text/xml;charset=UTF-8', function (data) {
             if(data.rows.length>0){
+                var points = [];
                 map.clearOverlays();
                 $("#searchList>ul").empty();
                 var str = constructLandList(data.rows);
                 $("#searchList>ul").append(str);
                 for (var j = 0, len = data.rows.length; j < len; j++) {
                     var point = new BMap.Point(data.rows[j].lng, data.rows[j].lat);
-                    var marker =new BMap.Marker(point);
+                    points.push(point);
+                    var marker =new BMap.Marker(point,{title: JSON.stringify(data.rows[j])});
+                    (function () {
+                        marker.addEventListener('click',function (e) {
+                            $("#searchList>ul").empty();
+                            $("#mainContainer").removeClass("fullScreen").addClass("halfScreen").show();
+                            var str = constructHouseList([JSON.parse(this.z.title)]);
+                            $("#searchList>ul").append(str);
+                            initDcOrFcPanel();
+                        })
+                    })()
                     map.addOverlay(marker);
                 }
+                map.setViewport(points);
                 initDcOrFcPanel();
             }
             else{
