@@ -6,6 +6,8 @@ Application = {};
 Application.isproxy = true;
 //服务地址
 Application.serverHost = 'http://192.168.3.20:8080/uapws/service/nc.itf.pims.web.JingYingZhuangKuang';
+//show服务地址
+Application.showServerHost =  'http://192.168.3.20:8080/uapws/service/nc.itf.pims.zjzs.Izjzc';
 //地图初始化中心
 Application.initCenter = [116.404, 39.915];
 //地图初始化级别

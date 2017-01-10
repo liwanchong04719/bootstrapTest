@@ -135,9 +135,11 @@
         }
 
 
-        #searchList>ul{
+        #searchList>ul {
             padding-left: 0px;
             list-style-type: none;
+            height: 375px;
+            overflow-y: auto;
         }
 
         #searchList>ul>li{
@@ -203,7 +205,7 @@
         }
     </style>
 </head>
-<body>
+<body style="overflow: hidden;">
 <div id="container" class="mapUI">
     <div id="mainContainer" class="fulllScreen">
         <div id="searchBar" class="normal">
@@ -224,45 +226,7 @@
         <div id="map"></div>
         <div id="searchList">
             <ul>
-                <!--<li type="land" data-id="1001A110000000012L64">-->
-                    <!--<div class="media">-->
-                        <!--<div class="media-left" href="#" style="">-->
-                            <!--<img src="../images/bussiness.png" alt="" style="">-->
-                        <!--</div>-->
-                        <!--<div class="media-body">-->
-                            <!--<h4 class="media-heading"><span class="infoSeq">1</span><span class="infoName">北京城建大厦</span></h4>-->
-                            <!--<div><span class="infoTitle">业主单位：</span><span class="infoContent">北京城建大厦</span></div>-->
-                            <!--<div><span class="infoTitle">建筑面积：</span><span class="infoContent">23444平方米</span></div>-->
-                            <!--<div><span class="infoTitle">出租率：</span><span class="infoContent">89%</span></div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</li>-->
-                <!--<li type="house" data-id="1001A11000000000XILG">-->
-                    <!--<div class="media">-->
-                        <!--<div class="media-left" href="#" style="">-->
-                            <!--<img src="../images/bussiness.png" alt="" style="">-->
-                        <!--</div>-->
-                        <!--<div class="media-body">-->
-                            <!--<h4 class="media-heading"><span class="infoSeq">2</span><span class="infoName">北京城建大厦</span></h4>-->
-                            <!--<div><span class="infoTitle">业主单位：</span><span class="infoContent">北京城建大厦</span></div>-->
-                            <!--<div><span class="infoTitle">建筑面积：</span><span class="infoContent">23444平方米</span></div>-->
-                            <!--<div><span class="infoTitle">出租率：</span><span class="infoContent">89%</span></div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</li>-->
-                <!--<li>-->
-                    <!--<div class="media">-->
-                        <!--<div class="media-left" href="#" style="">-->
-                            <!--<img src="../images/bussiness.png" alt="" style="">-->
-                        <!--</div>-->
-                        <!--<div class="media-body">-->
-                            <!--<h4 class="media-heading"><span class="infoSeq">3</span><span class="infoName">北京城建大厦</span></h4>-->
-                            <!--<div><span class="infoTitle">业主单位：</span><span class="infoContent">北京城建大厦</span></div>-->
-                            <!--<div><span class="infoTitle">建筑面积：</span><span class="infoContent">23444平方米</span></div>-->
-                            <!--<div><span class="infoTitle">出租率：</span><span class="infoContent">89%</span></div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</li>-->
+
             </ul>
         </div>
     </div>
@@ -554,7 +518,6 @@
 
             var zones = $('#propertyAreaSelect').select2('val');
             queryZoneData = zones;
-
             queryDataFromTree();
 
             $("#container>div").hide();
@@ -763,12 +726,12 @@
             case "lane" :
                 laneParam.dijiye = 0;
                 laneParam.xianshitiaoshu = 10;
-                laneParam.gongsi = queryCompanyData.toString();
+                laneParam.gongsi = queryCompanyData? queryCompanyData.toString() : '';
                 if(laneParam.gongsi === 'test') {
                     laneParam.gongsi = '';
                 }
                 laneParam.yetai = queryRetailData.toString();
-                laneParam.location = queryZoneData.toString();
+                laneParam.location = queryZoneData? queryZoneData.toString() : '';
                 if(laneParam.location === 'test') {
                     laneParam.location = '';
                 }
@@ -777,12 +740,12 @@
             case 'house' :
                 houseParam.dijiye = 0;
                 houseParam.xianshitiaoshu = 10;
-                houseParam.gongsi = queryCompanyData.toString();
+                houseParam.gongsi =queryCompanyData? queryCompanyData.toString() : '';
                 if(houseParam.gongsi === 'test') {
                     houseParam.gongsi = '';
                 }
                 houseParam.yetai = queryRetailData.toString();
-                houseParam.location = queryZoneData.toString();
+                houseParam.location =queryZoneData? queryZoneData.toString() : '';
                 if(houseParam.location === 'test') {
                     houseParam.location = '';
                 }

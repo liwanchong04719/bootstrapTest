@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+ <head>
+ <script src="../lib/Flat-UI-master/dist/js/vendor/jquery.min.js"></script>
+ 
+ 
+ <script src="../scripts/Application.js"></script>
+ <script src="../scripts/Application.Util.js"></script>
+
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>持有资产租赁合同录入情况统计</title>
+<!--<script>-->
+ <!---->
+
+
+<!--$(document).ready(function(){-->
+
+
+<!--getDatas();-->
+ <!--function getDatas() {-->
+
+  <!--Application.Util.ajaxConstruct(Application.showServerHost,'POST',{ },'text/xml;charset=UTF-8',function (data) {-->
+        <!--$.each(data, function(index,item){-->
+	<!--html+="<tr><td>"+item.name+" </td><td>"+item.ylrs+" </td><td>"+item.zongshu+" </td><td>"+item.baifenbi+" </td><td>"+item.ylrs7+" </td> </tr>"-->
+	<!--var html = "<tr><th>公司名称</th><th>已录入数</th><th>录入总数</th><th>完成比例</th><th>七天录入情况</th></tr>"-->
+
+<!--$('#adtb').html(html);-->
+  <!--})-->
+    <!--},function name(params) {-->
+      <!--console.log('error')-->
+    <!--},-->
+    <!--{-->
+      <!--"xmlns": 'xmlns:izj="http://zjzs.pims.itf.nc/Izjzc"',-->
+      <!--"xmlnsName": "izj",-->
+      <!--"methodName": "getGongSiName"-->
+    <!--})-->
+<!--}-->
+<!--})-->
+
+<!--</script>-->
+
+ </head>
+ <body>
+
+<h1 align="center">持有资产租赁合同录入情况统计</h1>
+<progress value='5' max='6'></progress>
+<table border="1" width="1000" align="center"  id="adtb" >
+    <tr>
+        <td>
+            <progress value="1" max="5"></progress>
+        </td>
+    </tr>
+</table>
+ </body>
+</html>

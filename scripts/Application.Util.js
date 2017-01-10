@@ -83,7 +83,11 @@ Application.Util.ajaxConstruct = function (url, type, data, dataType, successFuc
          data =data['responseText'] || data;
          var startindex = data.indexOf('<ns1:return>');
          var endindex = data.indexOf('</ns1:return>');
-         data = data.substring(startindex + 12, endindex);
+         if(data.indexOf('![CDATA[') !==-1) {
+            data = data.substring(startindex + 19, endindex-2);
+         }else{
+             data = data.substring(startindex + 12, endindex);
+         }
          data = JSON.parse(data);
          successFuc (data)
        },
