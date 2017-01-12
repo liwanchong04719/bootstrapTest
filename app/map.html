@@ -345,10 +345,10 @@
         </div>
         <img  style="width: 100%;height: 200px" src="../images/land.jpg" />
         <ul class="fields" style="">
-            <li><label>土地证书编号：</label><label id="tdsyr">---</label></li>
-            <li><label>使用权人：</label><label id="symj">---</label></li>
+            <li><label>使用权人：</label><label id="tdsyr">---</label></li>
+            <li><label>使用面积：</label><label id="symj">---</label></li>
             <li><label>座落：</label><label id="dczuoluo">---</label></li>
-            <li><label>地类：</label><label id="tdzbh">---</label></li>
+            <li><label>土地证书编号：</label><label id="tdzbh">---</label></li>
             <li><label>终止日期：</label><label id="zzdate">---</label></li>
         </ul>
         <div class='wrapper'>
@@ -727,12 +727,12 @@
                 laneParam.dijiye = 0;
                 laneParam.xianshitiaoshu = 10;
                 laneParam.gongsi = queryCompanyData? queryCompanyData.toString() : '';
-                if(laneParam.gongsi === 'test') {
+                if(laneParam.gongsi === 'test'||laneParam.gongsi === '全部') {
                     laneParam.gongsi = '';
                 }
                 laneParam.yetai = queryRetailData.toString();
                 laneParam.location = queryZoneData? queryZoneData.toString() : '';
-                if(laneParam.location === 'test') {
+                if(laneParam.location === 'test'||laneParam.location === '全部') {
                     laneParam.location = '';
                 }
                 initTableOfLane();
@@ -741,12 +741,12 @@
                 houseParam.dijiye = 0;
                 houseParam.xianshitiaoshu = 10;
                 houseParam.gongsi =queryCompanyData? queryCompanyData.toString() : '';
-                if(houseParam.gongsi === 'test') {
+                if(houseParam.gongsi === 'test'||houseParam.gongsi === '全部') {
                     houseParam.gongsi = '';
                 }
                 houseParam.yetai = queryRetailData.toString();
                 houseParam.location =queryZoneData? queryZoneData.toString() : '';
-                if(houseParam.location === 'test') {
+                if(houseParam.location === 'test'||houseParam.location === '全部') {
                     houseParam.location = '';
                 }
 
@@ -757,7 +757,7 @@
 
     //生成按公司下拉列表
     function OrgAndLocationOptions(data) {
-        var companyarr = [{ id: 'test', text: '全部' }]
+        var companyarr = [];
         var locationObj = {};
         for (var i = 0, len = data.length; i < len; i++) {
             companyarr.push({ id: data[i].firstvalue, text: data[i].secondvalue, location: data[i].location });
@@ -772,7 +772,7 @@
             data: companyarr
         }).on('select2:select', function (e) {
             var areaArr = [];
-            areaArr.push({ id: 'test', text: '全部' });
+//            areaArr.push({ id: 'test', text: '全部' });
             for (var i = 0, len = locationObj[e.params.data.id].length; i < len; i++) {
                 areaArr.push({ id:  locationObj[e.params.data.id][i].secondvalue, text: locationObj[e.params.data.id][i].secondvalue })
             }
@@ -984,7 +984,7 @@
     function constructHouseList(data){
         var str="";
         for(var i=0;i<data.length;i++){
-            str+='<li type="house" data-id="'+data[i].fczbh+'">'
+            str+='<li type="house" data-id="'+data[i].zhujian+'">'
                     +'<div class="media">'
                     +'<div class="media-left" href="#">'
                     +'<img src="'+data[i].imgSrc+'" alt="">'
@@ -1004,7 +1004,7 @@
     function constructLandList(data){
         var str="";
         for(var i=0;i<data.length;i++){
-            str+='<li type="land" data-id="'+data[i].tdzbh+'">'
+            str+='<li type="land" data-id="'+data[i].zhujian+'">'
                     +'<div class="media">'
                     +'<div class="media-left" href="#">'
                     +'<img src="'+data[i].imgSrc+'" alt="">'

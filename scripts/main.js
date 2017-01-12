@@ -352,7 +352,7 @@ function getOrgAndLocation(userid) {
 
 //生成按公司下拉列表
 function OrgAndLocationOptions(data) {
-  var companyarr = [{ id: 'test', text: '全部' }]
+  var companyarr = []
   var locationObj = {};
   for (var i = 0, len = data.length; i < len; i++) {
     companyarr.push({ id: data[i].firstvalue, text: data[i].secondvalue, location: data[i].location });
@@ -379,9 +379,12 @@ function OrgAndLocationOptions(data) {
     });
 
   });
-
+  var firstLocation = [];
+  for(var k = 0, lenK = data[0].location.length; k <lenK; k++) {
+    firstLocation.push({id: data[0].location[k].firstvalue, text: data[0].location[k].secondvalue})
+  }
   $('#propertyAreaSelect').select2({
-    data: [{ id: 'test', text: "全部" }]
+    data: firstLocation
   })
 
   getCircleGraphData('', '');
@@ -434,7 +437,7 @@ function getManagementSituation() {
 
 
 function getCompanyAndHouse(data) {
-  var companyarr = [{ id: 'test', text: '全部' ,fangchan:[{id:'test',text:"全部"}]}]
+  var companyarr = []
   var locationObj = {};
   for (var i = 0, len = data.length; i < len; i++) {
     companyarr.push({ id: data[i].firstvalue, text: data[i].secondvalue, location: data[i].fangchan });
@@ -462,9 +465,12 @@ function getCompanyAndHouse(data) {
 
   });
 
-
+  var firstLocation = [];
+  for(var k = 0, lenK = data[0].fangchan.length; k <lenK; k++) {
+    firstLocation.push({id: data[0].fangchan[k].firstvalue, text: data[0].fangchan[k].secondvalue})
+  }
   $('#managementsituationhouseselect').select2({
-    data: [{ id: 'test', text: "全部" }]
+    data: firstLocation
   })
 
   //初始化
@@ -496,7 +502,7 @@ function getPieGraphData(company, house) {
 }
 //应收款统计
 function receivablesAndstatistics(data) {
-  var companyarr = [{ id: 'test', text: '全部' }]
+  var companyarr = [];
   var locationObj = {};
   for (var i = 0, len = data.length; i < len; i++) {
     companyarr.push({ id: data[i].firstvalue, text: data[i].secondvalue, location: data[i].fangchan });
@@ -528,9 +534,12 @@ function receivablesAndstatistics(data) {
     });
 
   });
-
+  var firstLocation = [];
+  for(var k = 0, lenK = data[0].fangchan.length; k <lenK; k++) {
+    firstLocation.push({id: data[0].fangchan[k].firstvalue, text: data[0].fangchan[k].secondvalue})
+  }
   $('#statisticshouse').select2({
-    data: [{ id: 'test', text: "全部" }]
+    data: firstLocation
   })
   //初始化
   getStatisticData("", "","");
@@ -607,7 +616,7 @@ function getLocationAndYetai(userid) {
 
 
 function getRegionAndRetail(data) {
-  var regionarr = [{ id: 'test', text: '全部' }]
+  var regionarr = [];
   var retailObj = {};
   var locationObj = {};
   for (var i = 0, len = data.length; i < len; i++) {
@@ -661,9 +670,12 @@ function getRegionAndRetail(data) {
 
 
     });
-
+  var firstLocation = [];
+  for(var k = 0, lenK = data[0].yetai.length; k <lenK; k++) {
+    firstLocation.push({id: data[0].yetai[k].firstvalue, text: data[0].yetai[k].secondvalue})
+  }
   $('#managementsituationretailselect').select2({
-    data: [{ id: 'test', text: "全部" }]
+    data: firstLocation
   })
   //初始化
   getBarData("", "");
