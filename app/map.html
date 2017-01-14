@@ -389,7 +389,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href='#'>对方地产信息<i class="glyphicon glyphicon-chevron-right"></i></a>
+                    <a href='#'>对应地产信息<i class="glyphicon glyphicon-chevron-right"></i></a>
                     <ul class='sub-items'>
                         <li>
                             <ul class="fields" style="padding-left: 0px;border: none" id="dyfcxx">
@@ -522,51 +522,6 @@
 
             $("#container>div").hide();
             $("#mainContainer").removeClass("fullScreen").addClass("halfScreen").show();
-        });
-
-        // 点击搜索结果，跳转相关房产、地产div
-        $("#searchList li").click(function () {
-            $("#container>div").hide();
-            if ($(this).attr("type") == "land") {
-                var id = $(this).attr("data-id");
-                initDCPanel(id, function (data) {
-                    var dataDc = data.diChanPanelXinxi;
-                    $('#tdsyr').text(dataDc.tdsyr);
-                    $('#symj').text(dataDc.symj);
-                    $('#dczuoluo').text(dataDc.zuoluo);
-                    $('#tdzbh').text(dataDc.tdzbh);
-                    $('#zzdate').text(dataDc.zzdate);
-                    initBarChart("barChart");
-                    initAccordion();
-                    var dataOhter = data.diChanPanelDuiyingFangChanXinxi;
-                    for (var i = 0, len = dataOhter.length; i < len; i++) {
-                        var list = otherInfoDc(dataOhter[i]);
-                        $("#dydcxx").append(list.join(''));
-                    }
-                });
-                $("#info").show();
-            }
-            else {
-                var fczbh = $(this).attr("data-id");
-                initFCPanel(fczbh, function (data) {
-                    var dataFc = data.fangChanPanelXinxi;
-                    $('#yezhu').text(dataFc.yezhu);
-                    $('#jzmj').text(dataFc.jzmj);
-                    $('#yetai').text(dataFc.yetai);
-                    $('#zuoluo').text(dataFc.zuoluo);
-                    $('#czl').text(dataFc.chuzulv);
-                    $('#xpjdj').text(dataFc.punjundanjia);
-                    initBarChart("barChart");
-                    initAccordion();
-                    var dataOhter = data.fangChanPanelDuiyingDiChanXinxi;
-                    for (var i = 0, len = dataOhter.length; i < len; i++) {
-                        var list = otherInfo(dataOhter[i]);
-                        $("#dyfcxx").append(list.join(''));
-                    }
-                });
-                $("#houseInfo").show();
-            }
-            lastContainer = "mainContainer";
         });
 
         $("#info div.wrapper ul.sub-items>li").click(function () {
@@ -725,7 +680,7 @@
         switch (searchType) {
             case "lane" :
                 laneParam.dijiye = 0;
-                laneParam.xianshitiaoshu = 10;
+//                laneParam.xianshitiaoshu = 10;
                 laneParam.gongsi = queryCompanyData? queryCompanyData.toString() : '';
                 if(laneParam.gongsi === 'test'||laneParam.gongsi === '全部') {
                     laneParam.gongsi = '';
@@ -739,7 +694,7 @@
                 break;
             case 'house' :
                 houseParam.dijiye = 0;
-                houseParam.xianshitiaoshu = 10;
+//                houseParam.xianshitiaoshu = 10;
                 houseParam.gongsi =queryCompanyData? queryCompanyData.toString() : '';
                 if(houseParam.gongsi === 'test'||houseParam.gongsi === '全部') {
                     houseParam.gongsi = '';
@@ -772,7 +727,7 @@
             data: companyarr
         }).on('select2:select', function (e) {
             var areaArr = [];
-//            areaArr.push({ id: 'test', text: '全部' });
+            areaArr.push({ id: 'test', text: '全部' });
             for (var i = 0, len = locationObj[e.params.data.id].length; i < len; i++) {
                 areaArr.push({ id:  locationObj[e.params.data.id][i].secondvalue, text: locationObj[e.params.data.id][i].secondvalue })
             }
@@ -958,7 +913,7 @@
     function otherInfoDc(data) {
         var htmlArr = [];
 
-        htmlArr.push('<li class="list-item">');
+        htmlArr.push('<li type="house" class="list-item" id="'+data.tdzbh_pk+'" onclick="dcOrFcPanel(event)">');
         htmlArr.push('<div style="width: 100%;padding: 10px 20px">');
 
         htmlArr.push('<div><span>'+data.fwmc+'</span></div>');
@@ -971,7 +926,7 @@
     function otherInfo(data) {
         var htmlArr = [];
 
-        htmlArr.push('<li class="list-item">');
+        htmlArr.push('<li type="land" class="list-item" id="'+data.tdzbh_pk+'" onclick="dcOrFcPanel(event)">');
         htmlArr.push('<div style="width: 100%;padding: 10px 20px">');
 
         htmlArr.push('<div><span>'+data.tdsyr+'</span></div>');
@@ -1020,7 +975,50 @@
         }
         return str;
     }
-
+    function dcOrFcPanel(event) {
+        $('#houseInfo').hide();
+        $('#info').hide();
+        if(event.currentTarget.type=="land"){
+            var id = event.currentTarget.id;
+            initDCPanel(id, function (data) {
+                var dataDc= data.diChanPanelXinxi;
+                $('#tdsyr').text(dataDc.tdsyr);
+                $('#symj').text(dataDc.symj);
+                $('#dczuoluo').text(dataDc.zuoluo);
+                $('#tdzbh').text(dataDc.tdzbh);
+                $('#zzdate').text(dataDc.zzdate);
+                initBarChart("barChart");
+                initAccordion();
+                var dataOhter = data.diChanPanelDuiyingFangChanXinxi;
+                for (var i = 0, len =dataOhter.length; i < len ; i++) {
+                    var list = otherInfoDc(dataOhter[i]);
+                    $("#dydcxx").append(list.join(''));
+                }
+            });
+            $("#info").show();
+        }
+        else{
+            var fczbh= event.currentTarget.id;
+            initFCPanel(fczbh,function (data) {
+                var dataFc = data.fangChanPanelXinxi;
+                $('#yezhu').text(dataFc.yezhu);
+                $('#jzmj').text(dataFc.jzmj);
+                $('#yetai').text(dataFc.yetai);
+                $('#zuoluo').text(dataFc.zuoluo);
+                $('#czl').text(dataFc.chuzulv);
+                $('#xpjdj').text(dataFc.punjundanjia);
+                initBarChart("barChart");
+                initAccordion();
+                var dataOhter = data.fangChanPanelDuiyingDiChanXinxi;
+                for (var i = 0, len = dataOhter.length; i < len; i++) {
+                    var list = otherInfo(dataOhter[i]);
+                    $("#dyfcxx").append(list.join(''));
+                }
+            });
+            $("#houseInfo").show();
+        }
+        lastContainer="mainContainer";
+    }
     function initDcOrFcPanel(){
         // 点击搜索结果，跳转相关房产、地产div
         $("#searchList li").click(function(){
@@ -1037,6 +1035,7 @@
                     initBarChart("barChart");
                     initAccordion();
                     var dataOhter = data.diChanPanelDuiyingFangChanXinxi;
+                    $("#dydcxx").empty();
                     for (var i = 0, len =dataOhter.length; i < len ; i++) {
                         var list = otherInfoDc(dataOhter[i]);
                         $("#dydcxx").append(list.join(''));
@@ -1057,6 +1056,7 @@
                     initBarChart("barChart");
                     initAccordion();
                     var dataOhter = data.fangChanPanelDuiyingDiChanXinxi;
+                    $("#dyfcxx").empty();
                     for (var i = 0, len = dataOhter.length; i < len; i++) {
                         var list = otherInfo(dataOhter[i]);
                         $("#dyfcxx").append(list.join(''));
