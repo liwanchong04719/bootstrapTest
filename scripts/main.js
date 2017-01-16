@@ -139,9 +139,9 @@ function initPieChart(data) {
     },
     legend: {
       orient: 'horizontal',
-      x: 'center',
+      x: 'left',
       y: 'bottom',
-      data: ['自用', '工业用房', '商业用房', '办公楼']
+      data: ['住宅']
     },
     toolbox: {
       show: true,
