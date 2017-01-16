@@ -141,7 +141,11 @@ function initPieChart(data) {
       orient: 'horizontal',
       x: 'left',
       y: 'bottom',
+<<<<<<< HEAD
       data: ['住宅']
+=======
+      data: ['自用', '酒店', '商住房', '住宅','写字楼','工业用房','其他']
+>>>>>>> bt/master
     },
     toolbox: {
       show: true,
