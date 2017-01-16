@@ -141,7 +141,7 @@ function initPieChart(data) {
       orient: 'horizontal',
       x: 'center',
       y: 'bottom',
-      data: ['自用', '工业用房', '商业用房', '办公楼']
+      data: ['自用', '酒店', '商住房', '住宅','写字楼','工业用房','其他']
     },
     toolbox: {
       show: true,
