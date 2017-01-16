@@ -1,5 +1,6 @@
 var showIndex = 1;
 var clickFlag = false;
+var center = null;
 $(document).ready(function () {
 	//点击tab
     $("div.bhoechie-tab-menu>div.list-group>a").click(function (e) {
@@ -58,23 +59,21 @@ $(document).ready(function () {
 	var map = initmap();
 	Application.map = map;
 	//根据地图级别绘制图标
-	$('#zoom').text(map.getZoom())
+	$('#zoom').text(map.getZoom());
+	map.addEventListener('zoomstart',function () {
+		center = null;
+	})
 	map.addEventListener('tilesloaded', function () {
 		$('#zoom').text(map.getZoom());
-		if(clickFlag){
-			if(showIndex === 2) {
-				setLaneData(map);
-			} else {
-				setHouseData(map);
-			}
-			clickFlag = false;
-		}else{
+
+		if(!center){
 			if(showIndex === 2) {
 				setLaneData(map);
 			} else {
 				setHouseData(map);
 			}
 		}
+
 
 	});
 })
@@ -132,6 +131,10 @@ function locationDc(lng, lat) {
 /***
  * 生成大于11级的侧边栏房产
  */
+
+
+
+
 function initLiItemOfHose(data) {
 	locationFcData = data;
 	var htmlArr = [];
@@ -256,6 +259,7 @@ function setHouseData(map) {
 
 function showhouse(lng,lat) {
 	Application.map.centerAndZoom(new BMap.Point(lat, lng), 16);
+
 }
 
 /**
@@ -322,6 +326,9 @@ function setLaneData(map) {
 /**
  * 生成小于11级时地图左侧栏展示内容房产
  */
+
+
+
 function createHouseContainer(data) {
 	var list = [];
 
@@ -331,10 +338,13 @@ function createHouseContainer(data) {
 			list = list.concat(initDirectOfHouse(data[i]));
 		}
 		else if (Application.map.getZoom() >= Application.direct + 1) {
+			center = new BMap.Point(data[0].lng, data[0].lat);
 			list = list.concat(initLiItemOfHose(data[i]));
 		}
 	}
-
+	if(center){
+		Application.map.centerAndZoom(center,16);
+	}
 
 	$("#houseDataDiv").empty().append(list.join(''));
 }/**
