@@ -273,7 +273,7 @@
                 orient: 'horizontal',
                 x: 'center',
                 y: 'bottom',
-                data: ['自用', '工业用房', '商业用房', '办公楼']
+                data: ['自用', '工业用房', '商住房', '住宅','写字楼', '酒店', '其他']
             },
             toolbox: {
                 show: true,
@@ -904,10 +904,9 @@
                     type: 'category',
                     //data: ['北京城建集团投资有限公司', '城建置业', '3公司', '4公司', '5公司', '6公司', '7公司', '8公司', '9公司', '10公司', '11公司', '12公司']
                     data:xAxis,
-                    show:false,
                     axisLabel:{
-                        show:false,
-                        interval:0,
+                        show:true,
+                        interval:'auto',
                         rotate:45,
                         margin:2,
                         textStyle:{
@@ -939,7 +938,7 @@
                     itemStyle: {
                         normal: { color: '#0099FF' }
                     },
-                    //data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 90, 100, 32.6, 20.0, 6.4, 3.3]
+
                     data:chuzulv
                 },
                 {
@@ -949,7 +948,7 @@
                     itemStyle: {
                         normal: { color: '#C06410' }
                     },
-                    //data: [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
+
                     data:pingjundanjia
                 }
             ]

@@ -343,7 +343,7 @@
                 地产信息
             </div>
         </div>
-        <img  style="width: 100%;height: 200px" src="../images/land.jpg" />
+        <img  style="width: 100%;height: 200px" id="landImg"/>
         <ul class="fields" style="">
             <li><label>使用权人：</label><label id="tdsyr">---</label></li>
             <li><label>使用面积：</label><label id="symj">---</label></li>
@@ -368,7 +368,7 @@
                 房产信息
             </div>
         </div>
-        <img  style="width: 100%;height: 200px" src="../images/house.jpg" />
+        <img  style="width: 100%;height: 200px"  id="houseImg" />
         <ul class="fields" style="">
             <li><label>业主：</label><label id="yezhu">---</label></li>
             <li><label>建筑面积：</label><label id="jzmj">---</label></li>
@@ -580,6 +580,11 @@
     }
 
     function initAccordion(){
+        if ($(".items > li > a").hasClass("expanded")) {
+            $(".items > li > a").removeClass("expanded");
+            $(".items > li > a").find('i').addClass("glyphicon-chevron-right").removeClass("glyphicon-chevron-down");
+        }
+        $(".items > li > a").unbind('click');
         $(".items > li > a").click(function(e) {
             e.preventDefault();
             var $this = $(this);
@@ -942,7 +947,7 @@
             str+='<li type="house" data-id="'+data[i].zhujian+'">'
                     +'<div class="media">'
                     +'<div class="media-left" href="#">'
-                    +'<img src="'+data[i].imgSrc+'" alt="">'
+                    +'<img src="'+data[i].img+'" alt="">'
                     +'</div>'
                     +'<div class="media-body">'
                     +'<h4 class="media-heading"><span class="infoSeq">'+i+'</span><span class="infoName">'+data[i]["fwsyqr"]+'</span></h4>'
@@ -962,7 +967,7 @@
             str+='<li type="land" data-id="'+data[i].zhujian+'">'
                     +'<div class="media">'
                     +'<div class="media-left" href="#">'
-                    +'<img src="'+data[i].imgSrc+'" alt="">'
+                    +'<img src="'+data[i].img+'" alt="">'
                     +'</div>'
                     +'<div class="media-body">'
                     +'<h4 class="media-heading"><span class="infoSeq">'+i+'</span><span class="infoName">'+data[i]["tdsyr"]+'</span></h4>'
@@ -987,6 +992,8 @@
                 $('#dczuoluo').text(dataDc.zuoluo);
                 $('#tdzbh').text(dataDc.tdzbh);
                 $('#zzdate').text(dataDc.zzdate);
+
+                $('#landImg').attr('src', dataDc.img[0].accessory_id);
                 initBarChart("barChart");
                 initAccordion();
                 var dataOhter = data.diChanPanelDuiyingFangChanXinxi;
@@ -1007,6 +1014,8 @@
                 $('#zuoluo').text(dataFc.zuoluo);
                 $('#czl').text(dataFc.chuzulv);
                 $('#xpjdj').text(dataFc.punjundanjia);
+
+                $('#houseImg').attr('src', dataFc.img[0].accessory_id);
                 initBarChart("barChart");
                 initAccordion();
                 var dataOhter = data.fangChanPanelDuiyingDiChanXinxi;
