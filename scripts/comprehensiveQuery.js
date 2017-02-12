@@ -357,27 +357,34 @@ $(function () {
 
   });
 function addZoneQueryData(event,node){
+  event.preventDefault();
   queryZoneData.push(node.text);
 }
 function minusZoneQueryData(event, node) {
-
+  event.preventDefault();
   queryZoneData = queryZoneData.filter(function (item) {
     return item !== node.text;
     });
   return queryZoneData;
-}function addCompanyQueryData(event,node){
+}
+function addCompanyQueryData(event,node){
+  // event.preventDefault();
   queryCompanyData.push(node.id);
+    $('#treeOfZone').treeview('checkNode', [ node.nodeId, { silent: true } ]);
 }
 function minusCompanyQueryData(event, node) {
+  event.preventDefault();
   queryCompanyData = queryCompanyData.filter(function (item) {
     return item !== node.id;
     });
   return queryCompanyData;
-}function addRetailQueryData(event,node){
+}
+function addRetailQueryData(event,node){
+  event.preventDefault();
   queryRetailData.push(node.id);
 }
 function minusRetailQueryData(event, node) {
-
+  event.preventDefault();
   queryRetailData = queryRetailData.filter(function (item) {
     return item !== node.id;
     });
