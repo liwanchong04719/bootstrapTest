@@ -139,7 +139,7 @@ function initPieChart(data) {
     },
     legend: {
       orient: 'horizontal',
-      x: 'center',
+      x: 'left',
       y: 'bottom',
       data: ['自用', '酒店', '商住房', '住宅','写字楼','工业用房','其他']
     },
