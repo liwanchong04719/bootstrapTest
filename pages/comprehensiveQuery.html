@@ -27,7 +27,21 @@
             float: inherit;
             margin-left: 0px;
         }
+        .bootstrap-table{
+            height: 100%;
+        }
+        .fixed-table-body{
+            height: 100%;
+        }
 
+        .fixed-table-container{
+            height: 90%;
+        }
+
+        #attachment .section{
+            background: fixed center center no-repeat;
+            background-size: 50%;
+        }
 
     </style>
 
@@ -89,14 +103,14 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 bhoechie-tab"
-                                     style="padding-right: 0px;padding-left:0px;
+                                     style="padding-right: 0px;padding-left:0px; height: 100%;
                                      border-radius: 1px;
                                      border-right: 1px solid #f5f5f5">
                                     <div class="bhoechie-tab-content active" style="overflow: visible;padding-right: 0px;padding-left:0px;padding-top: 0px;height: 100%">
                                         <div id="treeOfZone" style="height: 100%"></div>
                                     </div>
                                     <div class="bhoechie-tab-content" style="padding-right: 0px;padding-left:0px;padding-top: 0px">
-                                        <div id="treeOfCompany" style="overflow: visible"></div>
+                                        <div id="treeOfCompany" style="overflow: hidden"></div>
                                     </div>
                                     <div class="bhoechie-tab-content" style="padding-right: 0px;padding-left:0px;padding-top: 0px">
                                         <div id="treeOfRetail"></div>
@@ -123,11 +137,11 @@
                 <li><a href="#hugDiv" onclick="changeData(4)" data-toggle="tab">房源</a></li>
             </ul>
             <div id="myTabContent" class="tab-content" style="height: 100%">
-                <div class="tab-pane fade in active" id="laneDiv">
+                <div class="tab-pane fade in active" id="laneDiv" style="height:100%;">
                     <table id="tableOfLane"
                            data-toggle="table"
                            data-pagination="true"
-                           data-height="540"
+
                            data-page-size="10"
                            data-page-list="[5,8,10]"
                            data-resizable="true"
@@ -152,12 +166,12 @@
                         </thead>
                     </table>
                 </div>
-                <div class="tab-pane fade" id="houseDiv">
+                <div class="tab-pane fade" id="houseDiv" style="height: 100%">
                     <table id="tableOfHouse"
                            data-toggle="table"
                            data-pagination="true"
                            data-page-size="10"
-                           data-height="440"
+
                            data-resizable="true"
                            data-page-list="[5,8,10]"
                            data-side-pagination="server"
@@ -180,12 +194,12 @@
                         </thead>
                     </table>
                 </div>
-                <div class="tab-pane fade" id="buildingDiv">
+                <div class="tab-pane fade" id="buildingDiv" style="height: 100%">
                     <table id="tableOfBuilding"
                            data-toggle="table"
                            data-pagination="true"
                            data-page-size="10"
-                           data-height="500"
+
                            data-resizable="true"
                            data-page-list="[5,8,10]"
                            data-side-pagination="server"
@@ -204,13 +218,13 @@
                         </thead>
                     </table>
                 </div>
-                <div class="tab-pane fade" id="hugDiv">
+                <div class="tab-pane fade" id="hugDiv" style="height: 100%">
                     <table id="tableOfHug"
                            data-toggle="table"
                            data-pagination="true"
                            data-page-size="10"
                            data-page-list="[5,8,10]"
-                           data-height="500"
+
                            data-resizable="true"
                            data-side-pagination="server"
                            data-pagination-first-text="首页"

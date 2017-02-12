@@ -605,7 +605,8 @@ function showFCAttachment(pk) {
           for (var i = 0, len = data.length; i < len; i++) {
             var imgDiv = document.createElement("div");
             imgDiv.setAttribute("class", "section");
-            imgDiv.style.background = "url("+data[i].accessory_id+")";
+            imgDiv.style.background = "url("+data[i].accessory_id+") fixed center center no-repeat";
+            imgDiv.style.backgroundSize ='50%';
             $('.sections').append(imgDiv);
           }
           $("#attachment").PageSwitch({
@@ -674,7 +675,8 @@ function showDCAttachment(pk) {
           for (var i = 0, len = data.length; i < len; i++) {
             var imgDiv = document.createElement("div");
             imgDiv.setAttribute("class", "section");
-            imgDiv.style.background = "url("+data[i].accessory_id+")";
+            imgDiv.style.background = "url("+data[i].accessory_id+") fixed center center no-repeat";
+            imgDiv.style.backgroundSize ='50%';
             $('.sections').append(imgDiv);
           }
           $("#attachment").PageSwitch({

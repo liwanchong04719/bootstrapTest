@@ -8,6 +8,11 @@ $(document).ready(function () {
         $(this).siblings('a.active').removeClass("active");
         $(this).addClass("active");
         var index = $(this).index();
+			if(index === 0) {
+				 queryZoneData = [];
+				 queryCompanyData = [];
+				 queryRetailData = [];
+			}
 			  if(index === 1) {
 					showIndex = index
 					houseDataParam.yetai = queryRetailData.toString();
@@ -267,12 +272,24 @@ function showhouse(lng,lat,location) {
 
 	Application.map.clearOverlays();
 	if(showIndex ==1){
+
+
 		var para = {
 			'location': location,
 			'yetai': '',
 			'userid': Application.userid,
 			'gongsi': ''
 		};
+		if(queryCompanyData.length !=0){
+			para.gongsi = queryCompanyData.toString();
+		}
+		if(queryZoneData.length !=0){
+			para.location = queryZoneData.toString();
+		}
+		if(queryRetailData.length !=0){
+			para.yetai = queryRetailData.toString();
+		}
+
 		getHouseOrLaneData(
 			para,
 			'getFcXinxi_map',
@@ -315,6 +332,17 @@ function showhouse(lng,lat,location) {
 			'syqmjpx':'',
 			'zzdatepx':''
 		};
+
+		if(queryCompanyData.length !=0){
+			para.gongsi = queryCompanyData.toString();
+		}
+		if(queryZoneData.length !=0){
+			para.location = queryZoneData.toString();
+		}
+		if(queryRetailData.length !=0){
+			para.yetai = queryRetailData.toString();
+		}
+
 		getHouseOrLaneData(para1
 			,
 			'getDcXinXi',
