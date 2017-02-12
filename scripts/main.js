@@ -395,6 +395,9 @@ function getCircleGraphData(company, area) {
   if(company =='test'){
     company = "";
   }
+  if(area === 'test' || area ==='全部') {
+      area = '';
+  }
 
   Application.Util.ajaxConstruct(Application.serverHost,'POST',{ 'gongsi': company, 'location': area, 'userid': Application.userid },'text/xml;charset=UTF-8',function (data) {
       var pieData = [];
