@@ -607,9 +607,22 @@
         });
     }
 
-    function initBarChart(id) {
+    function initBarChart(id,data) {
         var dom = document.getElementById(id);
         var myChart = echarts.init(dom);
+
+        var xAxis = [];
+        var chuzulv = [];
+        var danjia = [];
+
+        for(var i=0,len =data.length; i<len; i++){
+            xAxis.push(data[i].year);
+            chuzulv.push(data[i].chuzulv);
+            danjia.push(data[i].pingjundanjia);
+        }
+
+
+
         var app = {};
         option = {
             backgroundColor: '#fff',
@@ -623,7 +636,7 @@
                     dataView: { show: false, readOnly: false },
                     magicType: { show: false, type: ['line', 'bar'] },
                     restore: { show: false },
-                    saveAsImage: { show: false }
+                    saveAsImage: { show: true }
                 }
             },
             calculable: true,
@@ -636,7 +649,7 @@
             xAxis: [
                 {
                     type: 'category',
-                    data: ['北京城建集团投资有限公司', '城建置业', '3公司', '4公司', '5公司', '6公司', '7公司', '8公司', '9公司', '10公司', '11公司', '12公司']
+                    data: xAxis
                 }
             ],
             yAxis: [
@@ -662,7 +675,7 @@
                     itemStyle:{
                         normal:{color:'#0099FF'}
                     },
-                    data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 90, 100, 32.6, 20.0, 6.4, 3.3]
+                    data:chuzulv
                 },
                 {
                     name: '单价',
@@ -671,7 +684,7 @@
                     itemStyle:{
                         normal:{color:'#C06410'}
                     },
-                    data:[2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
+                    data:danjia
                 }
             ]
         };
@@ -680,7 +693,6 @@
             myChart.setOption(option, true);
         }
     }
-
     function queryDataFromTree() {
         switch (searchType) {
             case "lane" :
@@ -824,7 +836,7 @@
     function  laneOfLogin() {
         Application.Util.ajaxConstruct(Application.serverHost, 'POST', laneParam, 'text/xml;charset=UTF-8', function (data) {
             if(data.rows.length>0){
-                map.clearOverlays();
+//                map.clearOverlays();
                 for (var j = 0, len = data.rows.length; j < len; j++) {
                     var point = new BMap.Point(data.rows[j].lng, data.rows[j].lat);
                     var marker =new BMap.Marker(point,{title: JSON.stringify(data.rows[j])});
@@ -994,7 +1006,7 @@
                 $('#zzdate').text(dataDc.zzdate);
 
                 $('#landImg').attr('src', dataDc.img[0].accessory_id);
-                initBarChart("barChart");
+                initBarChart("barChart", dataDc);
                 initAccordion();
                 var dataOhter = data.diChanPanelDuiyingFangChanXinxi;
                 for (var i = 0, len =dataOhter.length; i < len ; i++) {
@@ -1016,7 +1028,7 @@
                 $('#xpjdj').text(dataFc.punjundanjia);
 
                 $('#houseImg').attr('src', dataFc.img[0].accessory_id);
-                initBarChart("barChart");
+                initBarChart("barChart", dataFc);
                 initAccordion();
                 var dataOhter = data.fangChanPanelDuiyingDiChanXinxi;
                 for (var i = 0, len = dataOhter.length; i < len; i++) {
@@ -1041,7 +1053,8 @@
                     $('#dczuoluo').text(dataDc.zuoluo);
                     $('#tdzbh').text(dataDc.tdzbh);
                     $('#zzdate').text(dataDc.zzdate);
-                    initBarChart("barChart");
+                    initBarChart("barChart", dataDc);
+                    $('#landImg').attr('src', dataDc.img[0].accessory_id);
                     initAccordion();
                     var dataOhter = data.diChanPanelDuiyingFangChanXinxi;
                     $("#dydcxx").empty();
@@ -1062,7 +1075,8 @@
                     $('#zuoluo').text(dataFc.zuoluo);
                     $('#czl').text(dataFc.chuzulv);
                     $('#xpjdj').text(dataFc.punjundanjia);
-                    initBarChart("barChart");
+                    initBarChart("barChart",  dataFc);
+                    $('#houseImg').attr('src', dataFc.img[0].accessory_id);
                     initAccordion();
                     var dataOhter = data.fangChanPanelDuiyingDiChanXinxi;
                     $("#dyfcxx").empty();
