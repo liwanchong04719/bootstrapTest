@@ -118,12 +118,17 @@ function pageselectCallback(page_index, data, createfunc, jq) {
 	return false;
 }
 var locationFcData;
-function locationFc(lng, lat) {
+function locationFc(lng, lat,cla) {
+	$('.bubble').css('background-color','rgba(57,172,106,0.9)');
+	$('.'+cla).css('background-color','rgba(228,57,60,0.9)');
+
 	clickFlag = true;
 	var point = new BMap.Point(lng, lat);
 	Application.map.centerAndZoom(point, 16);
 }
-function locationDc(lng, lat) {
+function locationDc(lng, lat,cla) {
+	$('.bubble').css('background-color','rgba(57,172,106,0.9)');
+	$('.'+cla).css('background-color','rgba(228,57,60,0.9)');
 	clickFlag = true;
 	var point = new BMap.Point(lng, lat);
 	Application.map.centerAndZoom(point, 16);
@@ -139,7 +144,7 @@ function initLiItemOfHose(data) {
 	locationFcData = data;
 	var htmlArr = [];
 
-	htmlArr.push('<li class="list-item" onclick="locationFc('+data.lng+','+data.lat+')">');
+	htmlArr.push('<li class="list-item" onclick="locationFc('+data.lng+','+data.lat+',\''+data.pk+'\')">');
 	htmlArr.push('<a href="#" >');
 	htmlArr.push('<div class="item-aside">');
 	htmlArr.push('<img alt="示例图片" src="' + data.img + '">');
@@ -169,8 +174,8 @@ function initLiItemOfLane(data) {
 
 	var htmlArr = [];
 
-	htmlArr.push('<li class="list-item" onclick="locationDc('+data.lng+','+data.lat+')">');
-	htmlArr.push('<a href=javascript:void(0) target="_blank">');
+	htmlArr.push('<li class="list-item" onclick="locationDc('+data.lng+','+data.lat+',\''+data.pk+'\')">');
+	htmlArr.push('<a href=javascript:void(0)>');
 	htmlArr.push('<div class="item-aside">');
 	htmlArr.push('<img alt="示例图片" src="' + data.img + '">');
 	htmlArr.push('</div>');
@@ -182,7 +187,7 @@ function initLiItemOfLane(data) {
 	htmlArr.push('<span class="item-replace-com" data-origin="">' + data.tdsyr + '</span>');
 	htmlArr.push('</p>');
 	htmlArr.push('<p class="item-community">');
-	htmlArr.push('<span class="item-replace-com" data-origin="">' + data.zl + '</span>');
+	// htmlArr.push('<span class="item-replace-com" data-origin="">' + data.zl + '</span>');
 	htmlArr.push('</p>');
 
 	htmlArr.push('</div>');
@@ -205,7 +210,7 @@ function setHouseData(map) {
 				for (var i in data) {
 					var customMarker = createMarker({
 						point: new BMap.Point(data[i].lat, data[i].lng),
-						html: "<div class='bubble' ><p class='name' style='margin-bottom: 5px'><a style='color: white' href=javascript:void(0); onclick='showhouse("+data[i].lng+","+data[i].lat+")' >" + data[i].city + "</a></p><p class='number'>" + data[i].fccount + "</p></div>",
+						html: "<div class='bubble' ><p class='name' style='margin-bottom: 5px'><a style='color: white' href=javascript:void(0); onclick='showhouse("+data[i].lng+','+data[i].lat+',\"'+data[i].city+"\")' >" + data[i].city + "</a></p><p class='number'>" + data[i].fccount + "</p></div>",
 						style: {
 							color: 'white',
 							fontSize: "12px",
@@ -257,8 +262,89 @@ function setHouseData(map) {
 }
 
 
-function showhouse(lng,lat) {
-	Application.map.centerAndZoom(new BMap.Point(lat, lng), 16);
+function showhouse(lng,lat,location) {
+	//Application.map.centerAndZoom(new BMap.Point(lat, lng), 16);
+
+	Application.map.clearOverlays();
+	if(showIndex ==1){
+		var para = {
+			'location': location,
+			'yetai': '',
+			'userid': Application.userid,
+			'gongsi': ''
+		};
+		getHouseOrLaneData(
+			para,
+			'getFcXinxi_map',
+			function (data) {
+				for (var j in data) {
+					var href = "../pages/housePanel.html?fczbh=" + data[j].xmmc;
+					var customMarker = createMarker({
+						point: new BMap.Point(data[j].lng, data[j].lat),
+
+						html:"<div class='bubble-3 bubble "+data[j].pk+"'><p class='name' style='margin-bottom: 5px;font-size: 14px'> <a style='color: white'  href=javascript:void(0); onclick='showSecondDirect("+data[j].lng+","+data[j].lat+","+"\""+data[j].pk+"\""+")' >" + data[j].xmmc + "</a></p><p class='number' style='color: white;font-size: 14px'>" + data[j].jzmj + "</p></div>",
+						style: {
+							color: 'white',
+							fontSize: "12px",
+							height: "20px",
+							lineHeight: "20px",
+							fontFamily: "微软雅黑",
+							border: 'none'
+						}
+					})
+					Application.map.addOverlay(customMarker);
+
+				}
+				createHouse(data);
+			}
+		)
+
+	}else{
+		var para1 = {
+			'location': location,
+			'yetai': '',
+			'userid': Application.userid,
+			'gongsi': '',
+			'dijiye':'',
+			'xianshitiaoshu':'',
+			'tdsyr ':'',
+			'dl':'',
+			'tdxz':'',
+			'syqmj':'',
+			'zzdate':'',
+			'syqmjpx':'',
+			'zzdatepx':''
+		};
+		getHouseOrLaneData(para1
+			,
+			'getDcXinXi',
+			function (data) {
+				data = data.rows
+				for (var i in data) {
+					var customMarker = createMarker({
+						point: new BMap.Point(data[i].lng, data[i].lat),
+						html: "<div class='bubble "+data[i].pk+"' onclick='showSecondDC("+data[i].lng+","+data[i].lat+","+"\""+data[i].pk+"\""+")'><p class='name'>" + data[i].dlwz + "</p><p class='number'>" + data[i].syqmj + "</p></div>",
+						style: {
+							color: 'white',
+							fontSize: "12px",
+							height: "20px",
+							lineHeight: "20px",
+							fontFamily: "微软雅黑",
+							border: 'none'
+						}
+					})
+					Application.map.addOverlay(customMarker);
+
+					// initPagination();
+				}
+				createlane(data);
+			}
+		)
+
+	}
+
+
+
 
 }
 
@@ -275,7 +361,7 @@ function setLaneData(map) {
 				for (var i in data) {
 					var customMarker = createMarker({
 						point: new BMap.Point(data[i].lat, data[i].lng),
-						html: "<div class='bubble' onclick='showhouse("+data[i].lng+","+data[i].lat+")'><p class='name'>" + data[i].city + "</p><p class='number'>" + data[i].dccount + "</p></div>",
+						html: "<div class='bubble' onclick='showhouse("+data[i].lng+","+data[i].lat+","+"\""+data[i].city+"\""+")'><p class='name'>" + data[i].city + "</p><p class='number'>" + data[i].dccount + "</p></div>",
 						style: {
 							color: 'white',
 							fontSize: "12px",
@@ -323,6 +409,27 @@ function setLaneData(map) {
 
 	}
 }
+
+
+function createHouse(data) {
+	var list = [];
+
+	for (var i = 0, len = data.length; i < len; i++) {
+
+			center = new BMap.Point(data[0].lng, data[0].lat);
+			list = list.concat(initLiItemOfHose(data[i]));
+
+	}
+	if(center){
+		Application.map.centerAndZoom(center,16);
+	}
+
+	$("#houseDataDiv").empty().append(list.join(''));
+
+
+}
+
+
 /**
  * 生成小于11级时地图左侧栏展示内容房产
  */
@@ -347,7 +454,28 @@ function createHouseContainer(data) {
 	}
 
 	$("#houseDataDiv").empty().append(list.join(''));
-}/**
+}
+
+
+function createlane(data) {
+	var list = []
+
+	for (var i = 0, len = data.length; i < len; i++) {
+
+			center = new BMap.Point(data[0].lng, data[0].lat);
+			list = list.concat(initLiItemOfLane(data[i]));
+
+	}
+
+	if(center){
+		Application.map.centerAndZoom(center,16);
+	}
+	$("#laneDataDiv").empty().append(list.join(''));
+
+
+}
+
+/**
  * 生成小于11级时地图左侧栏展示内容地产
  */
 function createLaneContainer(data) {
@@ -359,10 +487,14 @@ function createLaneContainer(data) {
 			list = list.concat(initDirectOfLane(data[i]));
 		}
 		else if (Application.map.getZoom() >= Application.direct + 1) {
+			center = new BMap.Point(data[0].lng, data[0].lat);
 			list = list.concat(initLiItemOfLane(data[i]));
 		}
 	}
 
+	if(center){
+		Application.map.centerAndZoom(center,16);
+	}
 	$("#laneDataDiv").empty().append(list.join(''));
 }
 var houseMapData;
@@ -373,7 +505,7 @@ function initDirectOfHouse(data) {
 	houseMapData = data;
 	var htmlArr = [];
 
-	htmlArr.push('<li onclick="showhouse('+data.lng+','+data.lat+')" class="list-item">');
+	htmlArr.push('<li onclick="showhouse('+data.lng+','+data.lat+',\''+data.city+'\')" class="list-item">');
 	htmlArr.push('<a href="javascript:void(0);" >');
 
 	htmlArr.push('<p class="item-des">');
@@ -393,7 +525,7 @@ function initDirectOfHouse(data) {
 function initDirectOfLane(data) {
 	var htmlArr = [];
 
-	htmlArr.push('<li onclick="showhouse('+data.lng+','+data.lat+')" class="list-item">');
+	htmlArr.push('<li onclick="showhouse('+data.lng+','+data.lat+',\''+data.city+'\')" class="list-item">');
 	htmlArr.push('<a href="javascript:void(0);">');
 
 	htmlArr.push('<p class="item-des">');
@@ -416,7 +548,7 @@ function showSecondDirect(lng, lat,id) {
 		var fczbh = id;
 		var self = this;
 	  Application.map.openInfoWindow(infoWindow, point);
-	infoWindow.disableAutoPan();
+	//infoWindow.disableAutoPan();
 	infoWindow.disableCloseOnClick();
 		initFCPanel(fczbh,function (data) {
 			var dataFc= data.fangChanPanelXinxi;
@@ -476,7 +608,7 @@ function showSecondDirect(lng, lat,id) {
 function showSecondDC(lng, lat, id) {
 	var point = new BMap.Point(lng, lat);
 	var infoWindow = new BMap.InfoWindow(dcInfo);  // 创建信息窗口对象
-	infoWindow.disableAutoPan();
+	//infoWindow.disableAutoPan();
 	infoWindow.disableCloseOnClick();
 	Application.map.openInfoWindow(infoWindow, point);
 	showDCDetails(id)
