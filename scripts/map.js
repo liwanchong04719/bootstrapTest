@@ -125,8 +125,8 @@ function pageselectCallback(page_index, data, createfunc, jq) {
 var locationFcData;
 function locationFc(lng, lat,cla) {
 	$('.bubble').css('background-color','rgba(57,172,106,0.9)');
-	$('.'+cla).css('background-color','rgba(228,57,60,0.9)');
-
+	$('.'+cla).css({'background-color':'rgba(228,57,60,0.9)'});
+	$('.'+cla).parent().css('z-index','1000000');
 	clickFlag = true;
 	var point = new BMap.Point(lng, lat);
 	Application.map.centerAndZoom(point, 16);
@@ -134,6 +134,7 @@ function locationFc(lng, lat,cla) {
 function locationDc(lng, lat,cla) {
 	$('.bubble').css('background-color','rgba(57,172,106,0.9)');
 	$('.'+cla).css('background-color','rgba(228,57,60,0.9)');
+	$('.'+cla).parent().css({'z-index':10000000});
 	clickFlag = true;
 	var point = new BMap.Point(lng, lat);
 	Application.map.centerAndZoom(point, 16);
