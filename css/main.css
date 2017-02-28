@@ -81,6 +81,11 @@ html,body{
     padding-bottom: 8px;
 }
 
+#information{
+    height: 100%;
+    overflow: auto;
+}
+
 #information>li>a{
     font-size: 14px;
     font-family: 'Microsoft YaHei', '微软雅黑', '黑体', Arial, 'Times New Roman', sans-serif;
