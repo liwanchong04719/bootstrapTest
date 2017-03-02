@@ -728,7 +728,7 @@ function showSecondDirect(lng, lat,id) {
 				$($('#tdqlxz')[0].parentNode).hide();
 			}
 			$('#tdqlxz').text(dataFc.tdqlxz);
-			initBarChart("barChart",data.fangChanPanelZhuZhuangTu);
+			//initBarChart("barChart",data.fangChanPanelZhuZhuangTu);
 			initAccordion();
 			var dataOhter = data.fangChanPanelDuiyingDiChanXinxi;
 			for (var i = 0, len =dataOhter.length; i < len ; i++) {
@@ -841,7 +841,7 @@ function showDCDetails(id) {
 					$($('#syqtype')[0].parentNode).hide();
 				}
 				$('#syqtype').text(dataDc.syqtype);
-				initBarChart("barChart",dataDc);
+				//initBarChart("barChart",dataDc);
 				initAccordion();
 				var dataOhter = data.diChanPanelDuiyingFangChanXinxi;
 				for (var i = 0, len =dataOhter.length; i < len ; i++) {

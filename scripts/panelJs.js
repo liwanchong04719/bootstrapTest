@@ -44,12 +44,12 @@ var info =
   '</ul>' +
   '<div class="wrapper">' +
   '<ul class="items">' +
-  '<li>' +
-  '<a href="#">出租率及平均单价趋势 <i class="glyphicon glyphicon-chevron-right"></i></a>' +
-  '<ul class="sub-items">' +
-  '<li>' +
-  '<div id="barChart" style="height: 250px;width: 350px">' +
-  '</div></li></ul> </li>' +
+  // '<li>' +
+  // '<a href="#">出租率及平均单价趋势 <i class="glyphicon glyphicon-chevron-right"></i></a>' +
+  // '<ul class="sub-items">' +
+  // '<li>' +
+  // '<div id="barChart" style="height: 250px;width: 350px">' +
+  // '</div></li></ul> </li>' +
   '<li>' +
   '<a href="#">对应地产信息<i class="glyphicon glyphicon-chevron-right"></i></a>' +
   '<ul class="sub-items" id="dyfcxx">' +
