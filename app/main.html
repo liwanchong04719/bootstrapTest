@@ -103,12 +103,14 @@
     <div class="items" style="height:250px;padding: 0px 18px;background-color: #F8F8F7;border: 0;padding-top: 30px;padding-bottom: 10px">
         <div style="margin-top: -29px">
             <form class="form-inline">
-                <label for="propertyCompanySelect" style="color: #1e3657;font-weight: 700">按公司：</label>
-                <select id="propertyCompanySelect" data-toggle="select" name="inverse-select" style="min-width: 100px;max-width: 100px" >
+                <label for="propertyCompanySelect" style="color: #1e3657;font-weight: 500">按公司：</label>
+                <select id="propertyCompanySelect" data-toggle="select" name="inverse-select"  >
 
                 </select>
-                <label for="propertyAreaSelect" style="color: #1e3657;font-weight: 700">按区域：</label>
-                <select id="propertyAreaSelect" data-toggle="select" name="inverse-select" style="min-width: 100px">
+            </form>
+            <form class="form-inline">
+                <label for="propertyAreaSelect" style="color: #1e3657;font-weight: 500">按区域：</label>
+                <select id="propertyAreaSelect" data-toggle="select" name="inverse-select" style="width: 220px">
 
                 </select>
             </form>
@@ -129,18 +131,15 @@
     <div style="width: 100%;padding: 10px 20px;padding-top: 30px;margin-top: 20px">
         <div style="margin-top: -29px">
             <form class="form-inline">
-                <label style="color: #1e3657;font-weight: 700">公司：</label>
-                <select id="managementsituationcompanyselect" data-toggle="select" name="inverse-select" style="min-width: 100px;">
-
-                </select>
-
-            </form>
-            <form class="form-inline">
-                <label   style="color: #1e3657;font-weight: 700">持有房产：</label>
-                <select id="managementsituationhouseselect" data-toggle="select" name="inverse-select" style="min-width: 100px">
-
+                <label style="padding-left:25px;color: #1e3657;font-weight: 500">公司：</label>
+                <select id="managementsituationcompanyselect" data-toggle="select" name="inverse-select" style="width: 279px;">
                 </select>
             </form>
+            <from class="form-inline">
+                <label   style="color: #1e3657;font-weight: 500">持有房产：</label>
+                <select id="managementsituationhouseselect" data-toggle="select" name="inverse-select">
+                </select>
+            </from>
         </div>
         <div class="row" style="margin-left: 0px;margin-right: 0px">
             <div style="width: 100%;height: 220px">
@@ -154,15 +153,10 @@
             <div style="margin-top: -29px">
                 <form class="form-inline">
                     <label style="color: #1e3657;font-weight: 700">区域：</label>
-                    <select id="managementsituationregionselect" data-toggle="select" name="inverse-select" style="min-width: 100px">
-
+                    <select id="managementsituationregionselect" data-toggle="select" name="inverse-select" style="min-width: 100px;max-width:100px">
                     </select>
-
-                </form>
-                <form class="form-inline">
                     <label   style="color: #1e3657;font-weight: 700">按业态：</label>
-                    <select id="managementsituationretailselect" data-toggle="select" name="inverse-select" style="min-width: 100px">
-
+                    <select id="managementsituationretailselect" data-toggle="select" name="inverse-select" style="min-width: 100px;max-width:100px">
                     </select>
                 </form>
             </div>
@@ -181,33 +175,56 @@
     <div class="row" style="padding-left: 30px" >
         <form class="form-inline">
             <label style="color: #1e3657;font-weight: 700">公司：</label>
-            <select id="statisticscompany" data-toggle="select" name="inverse-select" class="form-control" style="max-width:100px">
+            <select id="statisticscompany" data-toggle="select" name="inverse-select" style="min-width:100px;max-width:100px">
 
             </select>
             <label style="color: #1e3657;font-weight: 700">房产：</label>
-            <select id="statisticshouse" data-toggle="select" name="inverse-select" class="form-control"  style="max-width:100px">
+            <select id="statisticshouse" data-toggle="select" name="inverse-select" style="min-width:100px;max-width:100px">
 
             </select>
 
         </form>
         <form class="form-inline">
             <label style="color: #1e3657;font-weight: 700">业态：</label>
-            <select id="statisticsretail" data-toggle="select" name="inverse-select" class="form-control"  style="max-width:100px">
+            <select id="statisticsretail" data-toggle="select" name="inverse-select"  style="min-width:100px;max-width:100px">
 
             </select>
         </form>
     </div>
     <div class="row" style="margin-left: 0px;margin-right: 0px;color: #C5C2BC">
         <div style="border-radius: 4px;background-color: #fff;padding: 20px 10px">
-            <div style="text-align: center">
-                <label>本月单位应收：</label> <label><span style="color: #FF904F;font-size: 20px" id="thisMonthReceivable">1</span></label>
-                <label>本月单位实收：</label> <label><span style="color: #FF904F;font-size: 20px" id="thisMonthReceived">1</span></label>
-                <!--<label>完成比例：</label> <label><span id="thisMonthRatio">1</span></label>-->
+            <div style="width: 100%">
+                <div style="display: inline-block;text-align: right">
+                    <label>本月单位应收：</label>
+                </div>
+                <div style="display: inline-block;">
+                    <label><span style="color: #FF904F;font-size: 20px" id="thisMonthReceivable">1</span></label>
+                </div>
             </div>
-            <div style="text-align: center">
-                <label>上月应收：</label> <label><span style="color: #FF904F;font-size: 20px" id="lastMonthReceivable">1</span></label>
-                <label>上月实收：</label> <label><span style="color: #FF904F;font-size: 20px" id="lastMonthReceived">1</span></label>
-                <!--<label>完成比例：</label> <label><span id="lastMonthRatio">1</span></label>-->
+            <div style="width: 100%">
+                <div style="display: inline-block;text-align: right">
+                    <label>本月单位实收：</label>
+                </div>
+                <div style="display: inline-block;">
+                    <label><span style="color: #FF904F;font-size: 20px" id="thisMonthReceived">1</span></label>
+                </div>
+
+            </div>
+            <div style="width: 100%;padding-left: 20px">
+                <div style="display: inline-block; text-align: right">
+                    <label>上月应收：</label>
+                </div>
+                <div style="display: inline-block;">
+                    <label><span style="color: #FF904F;font-size: 20px" id="lastMonthReceivable">1</span></label>
+                </div>
+            </div>
+            <div style="width: 100%;padding-left: 20px">
+                <div style="display: inline-block; text-align: right">
+                    <label>上月实收：</label>
+                </div>
+                <div style="display: inline-block;">
+                    <label><span style="color: #FF904F;font-size: 20px" id="lastMonthReceived">1</span></label>
+                </div>
             </div>
         </div>
     </div>
@@ -273,7 +290,7 @@
                 orient: 'horizontal',
                 x: 'center',
                 y: 'bottom',
-                data: ['自用', '工业用房', '商住房', '住宅','写字楼', '酒店', '其他']
+                data: []
             },
             toolbox: {
                 show: true,

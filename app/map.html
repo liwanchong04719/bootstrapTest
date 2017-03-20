@@ -218,7 +218,7 @@
             </div>
             <div id="searchStartBar">
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i><a href='#'  onclick="backToMain()" class="glyphicon glyphicon-search"></a></span>
                     <input id="searchInput" type="search" class="form-control"  readonly="readonly" style="background-color: #fff;"/>
                 </div>
             </div>
@@ -380,15 +380,6 @@
         <div class='wrapper'>
             <ul class='items'>
                 <li>
-                    <a href='#'>出租率及平均单价趋势 <i class="glyphicon glyphicon-chevron-right"></i></a>
-                    <ul class='sub-items'>
-                        <li>
-                            <div id="barChart" style="height: 250px;width: 350px">
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-                <li>
                     <a href='#'>对应地产信息<i class="glyphicon glyphicon-chevron-right"></i></a>
                     <ul class='sub-items'>
                         <li>
@@ -418,7 +409,7 @@
         'userid': Application.userid,
         'gongsi': '',
         'dijiye': '',
-        'xianshitiaoshu': '',
+        'xianshitiaoshu': '100000',
         'tdsyr ': '',
         'dl': '',
         'tdxz': '',
@@ -433,7 +424,7 @@
         'userid': Application.userid,
         'gongsi': '',
         'dijiye': '',
-        'xianshitiaoshu': '',
+        'xianshitiaoshu': '100000',
         'tdsyr ': '',
         'dl': '',
         'tdxz': '',
@@ -697,7 +688,7 @@
         switch (searchType) {
             case "lane" :
                 laneParam.dijiye = 0;
-//                laneParam.xianshitiaoshu = 10;
+                laneParam.xianshitiaoshu = 10000;
                 laneParam.gongsi = queryCompanyData? queryCompanyData.toString() : '';
                 if(laneParam.gongsi === 'test'||laneParam.gongsi === '全部') {
                     laneParam.gongsi = '';
@@ -711,7 +702,7 @@
                 break;
             case 'house' :
                 houseParam.dijiye = 0;
-//                houseParam.xianshitiaoshu = 10;
+                houseParam.xianshitiaoshu = 10000;
                 houseParam.gongsi =queryCompanyData? queryCompanyData.toString() : '';
                 if(houseParam.gongsi === 'test'||houseParam.gongsi === '全部') {
                     houseParam.gongsi = '';
@@ -766,11 +757,12 @@
 
      //登录时显示的数据
     function houseOfLogin() {
+        var myIcon = new BMap.Icon("../images/houseMarker.png", new BMap.Size(24, 24));
         Application.Util.ajaxConstruct(Application.serverHost, 'POST', houseParam, 'text/xml;charset=UTF-8', function (data) {
             if(data.rows.length>0){
                 for (var j = 0, len = data.rows.length; j < len; j++)  {
                     var point = new BMap.Point(data.rows[j].lng, data.rows[j].lat );
-                    var marker =new BMap.Marker(point,{title: JSON.stringify(data.rows[j])});
+                    var marker =new BMap.Marker(point,{title: JSON.stringify(data.rows[j]), icon: myIcon});
                     (function () {
                         marker.addEventListener('click',function (e) {
                             $("#searchList>ul").empty();
@@ -834,12 +826,13 @@
     }
     // 登录时显示的lane数据
     function  laneOfLogin() {
+        var myIcon = new BMap.Icon("../images/landMarker.png", new BMap.Size(24, 24));
         Application.Util.ajaxConstruct(Application.serverHost, 'POST', laneParam, 'text/xml;charset=UTF-8', function (data) {
             if(data.rows.length>0){
 //                map.clearOverlays();
                 for (var j = 0, len = data.rows.length; j < len; j++) {
                     var point = new BMap.Point(data.rows[j].lng, data.rows[j].lat);
-                    var marker =new BMap.Marker(point,{title: JSON.stringify(data.rows[j])});
+                    var marker =new BMap.Marker(point,{title: JSON.stringify(data.rows[j]), icon: myIcon});
                     (function () {
                         marker.addEventListener('click',function (e) {
                             $("#searchList>ul").empty();
@@ -965,7 +958,7 @@
                     +'<h4 class="media-heading"><span class="infoSeq">'+i+'</span><span class="infoName">'+data[i]["fwsyqr"]+'</span></h4>'
                     +'<div><span class="infoTitle">项目名称：</span><span class="infoContent">'+data[i]["fwmc"]+'</span></div>'
                     +'<div><span class="infoTitle">建筑面积：</span><span class="infoContent">'+data[i]["jzmj"]+'</span></div>'
-                    +'<div><span class="infoTitle">出租率：</span><span class="infoContent">'+data[i]["zznx"]+'</span></div>'
+                    +'<div><span class="infoTitle">运营公司：</span><span class="infoContent">'+data[i]["yygs"]+'</span></div>'
                     +'</div>'
                     +'</div>'
                     +'</li>'
@@ -1053,7 +1046,7 @@
                     $('#dczuoluo').text(dataDc.zuoluo);
                     $('#tdzbh').text(dataDc.tdzbh);
                     $('#zzdate').text(dataDc.zzdate);
-                    initBarChart("barChart", dataDc);
+//                    initBarChart("barChart", dataDc);
                     $('#landImg').attr('src', dataDc.img[0].accessory_id);
                     initAccordion();
                     var dataOhter = data.diChanPanelDuiyingFangChanXinxi;
@@ -1075,7 +1068,7 @@
                     $('#zuoluo').text(dataFc.zuoluo);
                     $('#czl').text(dataFc.chuzulv);
                     $('#xpjdj').text(dataFc.punjundanjia);
-                    initBarChart("barChart",  dataFc);
+//                    initBarChart("barChart",  dataFc);
                     $('#houseImg').attr('src', dataFc.img[0].accessory_id);
                     initAccordion();
                     var dataOhter = data.fangChanPanelDuiyingDiChanXinxi;
@@ -1104,6 +1097,9 @@
         });
         return label;
     }
-
+ // 返回main.html
+    function backToMain() {
+        window.location = 'main.html?cuserid=' + Application.userid;
+    }
 </script>
 </html>
