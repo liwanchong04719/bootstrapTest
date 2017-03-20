@@ -374,9 +374,10 @@ function OrgAndLocationOptions(data) {
     $('#propertyAreaSelect').empty();
     $('#propertyAreaSelect').select2({
       data: areaArr
-    }).on('select2:select', function (event) {
-      getCircleGraphData(e.params.data.id, event.params.data.text);
-    });
+    })
+    //   .on('select2:select', function (event) {
+    //   getCircleGraphData(e.params.data.id == '全部'?'':e.params.data.id, event.params.data.text);
+    // });
 
   });
   var firstLocation = [];
@@ -385,6 +386,8 @@ function OrgAndLocationOptions(data) {
   }
   $('#propertyAreaSelect').select2({
     data: firstLocation
+  }).on('select2:select', function (event) {
+    getCircleGraphData($('#propertyCompanySelect').val() == '全部'?'':$('#propertyCompanySelect').val(), event.params.data.text);
   })
 
   getCircleGraphData('', '');
@@ -462,10 +465,7 @@ function getCompanyAndHouse(data) {
     $('#managementsituationhouseselect').empty();
     $('#managementsituationhouseselect').select2({
       data: areaArr
-    }).on('select2:select', function (event) {
-      getPieGraphData(e.params.data.id, event.params.data.id);
-    });
-
+    })
   });
 
   var firstLocation = [];
@@ -474,7 +474,10 @@ function getCompanyAndHouse(data) {
   }
   $('#managementsituationhouseselect').select2({
     data: firstLocation
-  })
+  }).on('select2:select', function (event) {
+    getPieGraphData( $('#managementsituationhouseselect').val() == '全部'?'':$('#managementsituationhouseselect').val(), event.params.data.id);
+  });
+
 
   //初始化
   getPieGraphData("", "");
@@ -675,7 +678,10 @@ function getRegionAndRetail(data) {
     });
   var firstLocation = [];
   for(var k = 0, lenK = data[0].yetai.length; k <lenK; k++) {
-    firstLocation.push({id: data[0].yetai[k].firstvalue, text: data[0].yetai[k].secondvalue})
+    if(data[0].yetai[k].firstvalue){
+      firstLocation.push({id: data[0].yetai[k].firstvalue, text: data[0].yetai[k].secondvalue})
+    }
+
   }
   $('#managementsituationretailselect').select2({
     data: firstLocation
@@ -752,7 +758,7 @@ function initWarningInfo() {
               var li = document.createElement("li");
               var a = document.createElement('a');
               a.href = 'command://' + encodeURIComponent("CONTRACT_LINK_QUEEY")+"&"+encodeURIComponent(data[i].htpk);
-              a.appendChild(document.createTextNode(data[i].message));
+              a.appendChild(document.createTextNode('('+data[i].yjlx+')'+data[i].message));
               // a.setAttribute("onclick", function () {
               //     alert(waringData.id);
               // });

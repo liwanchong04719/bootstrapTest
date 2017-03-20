@@ -125,15 +125,20 @@ function pageselectCallback(page_index, data, createfunc, jq) {
 var locationFcData;
 function locationFc(lng, lat,cla) {
 	$('.bubble').css('background-color','rgba(57,172,106,0.9)');
-	$('.'+cla).css('background-color','rgba(228,57,60,0.9)');
-
+	$('.'+cla).css({'background-color':'rgba(228,57,60,0.9)'});
+	$('.'+cla).parent().css('z-index','1000000');
 	clickFlag = true;
+
+
+
+
 	var point = new BMap.Point(lng, lat);
 	Application.map.centerAndZoom(point, 16);
 }
 function locationDc(lng, lat,cla) {
 	$('.bubble').css('background-color','rgba(57,172,106,0.9)');
 	$('.'+cla).css('background-color','rgba(228,57,60,0.9)');
+	$('.'+cla).parent().css({'z-index':10000000});
 	clickFlag = true;
 	var point = new BMap.Point(lng, lat);
 	Application.map.centerAndZoom(point, 16);
@@ -149,10 +154,10 @@ function initLiItemOfHose(data) {
 	locationFcData = data;
 	var htmlArr = [];
 
-	htmlArr.push('<li class="list-item" onclick="locationFc('+data.lng+','+data.lat+',\''+data.pk+'\')">');
+	htmlArr.push('<li class="list-item '+data.pk+' " onclick="locationFc('+data.lng+','+data.lat+',\''+data.pk+'\')">');
 	htmlArr.push('<a href="#" >');
 	htmlArr.push('<div class="item-aside">');
-	htmlArr.push('<img alt="示例图片" src="' + data.img + '">');
+	htmlArr.push('<img alt="示例图片" src="' + data.img.accessory_id + '">');
 	htmlArr.push('</div>');
 	htmlArr.push('<div class="item-main">');
 	htmlArr.push('<p class="item-tle">' + data.xmmc + '</p>');
@@ -179,7 +184,7 @@ function initLiItemOfLane(data) {
 
 	var htmlArr = [];
 
-	htmlArr.push('<li class="list-item" onclick="locationDc('+data.lng+','+data.lat+',\''+data.pk+'\')">');
+	htmlArr.push('<li class="list-item '+data.zhujian+' " onclick="locationDc('+data.lng+','+data.lat+',\''+data.zhujian+'\')">');
 	htmlArr.push('<a href=javascript:void(0)>');
 	htmlArr.push('<div class="item-aside">');
 	htmlArr.push('<img alt="示例图片" src="' + data.img + '">');
@@ -351,7 +356,7 @@ function showhouse(lng,lat,location) {
 				for (var i in data) {
 					var customMarker = createMarker({
 						point: new BMap.Point(data[i].lng, data[i].lat),
-						html: "<div class='bubble "+data[i].pk+"' onclick='showSecondDC("+data[i].lng+","+data[i].lat+","+"\""+data[i].pk+"\""+")'><p class='name'>" + data[i].dlwz + "</p><p class='number'>" + data[i].syqmj + "</p></div>",
+						html: "<div class='bubble "+data[i].pk+"' onclick='showSecondDC("+data[i].lng+","+data[i].lat+","+"\""+data[i].zhujian+"\""+")'><p class='name'>" + data[i].dlwz + "</p><p class='number'>" + data[i].syqmj + "</p></div>",
 						style: {
 							color: 'white',
 							fontSize: "12px",
@@ -417,7 +422,7 @@ function setLaneData(map) {
 				for (var j in data) {
 					var customMarker = createMarker({
 						point: new BMap.Point(data[j].lng, data[j].lat),
-						html: "<div class='bubble' onclick='showSecondDC("+data[j].lng+","+data[j].lat+","+"\""+data[j].pk+"\""+")'><p  class='name'>" + data[j].tdsyr
+						html: "<div class='bubble' onclick='showSecondDC("+data[j].lng+","+data[j].lat+","+"\""+data[j].zhujian+"\""+")'><p  class='name'>" + data[j].tdsyr
             + "</p><p class='number'>" + data[j].syqmj + "</p></div>",
 						style: {
 							color: 'white',
@@ -580,42 +585,150 @@ function showSecondDirect(lng, lat,id) {
 	infoWindow.disableCloseOnClick();
 		initFCPanel(fczbh,function (data) {
 			var dataFc= data.fangChanPanelXinxi;
+
+			$('#houseimg').attr('src',dataFc.img[0].accessory_id);
+			if(!dataFc.yezhu){
+				$($('#yezhu')[0].parentNode).hide();
+			}
 			$('#yezhu').text(dataFc.yezhu);
+			if(!dataFc.jzmj){
+				$($('#jzmj')[0].parentNode).hide();
+			}
 			$('#jzmj').text(dataFc.jzmj);
+			if(!dataFc.yetai){
+				$($('#yetai')[0].parentNode).hide();
+			}
 			$('#yetai').text(dataFc.yetai);
+			if(!dataFc.zuoluo){
+				$($('#zuoluo')[0].parentNode).hide();
+			}
 			$('#zuoluo').text(dataFc.zuoluo);
+			if(!dataFc.chuzulv){
+				$($('#czl')[0].parentNode).hide();
+			}
 			$('#czl').text(dataFc.chuzulv);
+			if(!dataFc.punjundanjia){
+				$($('#xpjdj')[0].parentNode).hide();
+			}
 			$('#xpjdj').text(dataFc.punjundanjia);
+			if(!dataFc.fczbh){
+				$($('#fczbh')[0].parentNode).hide();
+			}
 			$('#fczbh').text(dataFc.fczbh);
+
+			if(!dataFc.tdzbh){
+				$($('#tdzbh')[0].parentNode).hide();
+			}
 			$('#tdzbh').text(dataFc.tdzbh);
+			if(!dataFc.gyqk){
+				$($('#gyqk')[0].parentNode).hide();
+			}
 			$('#gyqk').text(dataFc.gyqk);
+			if(!dataFc.djtime){
+				$($('#djtime')[0].parentNode).hide();
+			}
 			$('#djtime').text(dataFc.djtime);
+			if(!dataFc.fwxz){
+				$($('#fwxz')[0].parentNode).hide();
+			}
 			$('#fwxz').text(dataFc.fwxz);
+			if(!dataFc.ghyt){
+				$($('#ghyt')[0].parentNode).hide();
+			}
 			$('#ghyt').text(dataFc.ghyt);
+			if(!dataFc.zcengshu){
+				$($('#zcengshu')[0].parentNode).hide();
+			}
 			$('#zcengshu').text(dataFc.zcengshu);
+			if(!dataFc.tnjzmj){
+				$($('#tnjzmj')[0].parentNode).hide();
+			}
 			$('#tnjzmj').text(dataFc.tnjzmj);
+			if(!dataFc.dihao){
+				$($('#dihao')[0].parentNode).hide();
+			}
 			$('#dihao').text(dataFc.dihao);
+			if(!dataFc.fzdw){
+				$($('#fzdw')[0].parentNode).hide();
+			}
 			$('#fzdw').text(dataFc.fzdw);
+			if(!dataFc.fztime){
+				$($('#fztime')[0].parentNode).hide();
+			}
 			$('#fztime').text(dataFc.fztime);
+			if(!dataFc.qita){
+				$($('#qita')[0].parentNode).hide();
+			}
 			$('#qita').text(dataFc.qita);
+			if(!dataFc.fwmc){
+				$($('#fwmc')[0].parentNode).hide();
+			}
 			$('#fwmc').text(dataFc.fwmc);
+			if(!dataFc.bdcdyh){
+				$($('#bdcdyh')[0].parentNode).hide();
+			}
 			$('#bdcdyh').text(dataFc.bdcdyh);
+			if(!dataFc.qllx){
+				$($('#qllx')[0].parentNode).hide();
+			}
 			$('#qllx').text(dataFc.qllx);
+			if(!dataFc.qlqtzk){
+				$($('#qlqtzk')[0].parentNode).hide();
+			}
 			$('#qlqtzk').text(dataFc.qlqtzk);
+			if(!dataFc.syqx){
+				$($('#syqx')[0].parentNode).hide();
+			}
 			$('#syqx').text(dataFc.syqx);
+			if(!dataFc.fczlx){
+				$($('#fczlx')[0].parentNode).hide();
+			}
 			$('#fczlx').text(dataFc.fczlx);
+			if(!dataFc.qllxd){
+				$($('#qllxd')[0].parentNode).hide();
+			}
 			$('#qllxd').text(dataFc.qllxd);
+			if(!dataFc.qllxf){
+				$($('#qllxf')[0].parentNode).hide();
+			}
 			$('#qllxf').text(dataFc.qllxf);
+			if(!dataFc.fwqlxz){
+				$($('#fwqlxz')[0].parentNode).hide();
+			}
 			$('#fwqlxz').text(dataFc.fwqlxz);
+			if(!dataFc.gyzdmj){
+				$($('#gyzdmj')[0].parentNode).hide();
+			}
 			$('#gyzdmj').text(dataFc.gyzdmj);
+			if(!dataFc.fwjzmj){
+				$($('#fwjzmj')[0].parentNode).hide();
+			}
 			$('#fwjzmj').text(dataFc.fwjzmj);
+			if(!dataFc.location){
+				$($('#location')[0].parentNode).hide();
+			}
 			$('#location').text(dataFc.location);
+			if(!dataFc.tdsyqqdfs){
+				$($('#tdsyqqdfs')[0].parentNode).hide();
+			}
 			$('#tdsyqqdfs').text(dataFc.tdsyqqdfs);
+			if(!dataFc.tdsynx_s){
+				$($('#tdsynx_s')[0].parentNode).hide();
+			}
 			$('#tdsynx_s').text(dataFc.tdsynx_s);
+			if(!dataFc.tdsynx_e){
+				$($('#tdsynx_e')[0].parentNode).hide();
+			}
 			$('#tdsynx_e').text(dataFc.tdsynx_e);
+			if(!dataFc.sfxnsc){
+				$($('#sfxnsc')[0].parentNode).hide();
+			}
 			$('#sfxnsc').text(dataFc.sfxnsc);
+			if(!dataFc.tdqlxz){
+				$($('#tdqlxz')[0].parentNode).hide();
+			}
 			$('#tdqlxz').text(dataFc.tdqlxz);
-			initBarChart("barChart",data.fangChanPanelZhuZhuangTu);
+			//initBarChart("barChart",data.fangChanPanelZhuZhuangTu);
 			initAccordion();
 			var dataOhter = data.fangChanPanelDuiyingDiChanXinxi;
 			for (var i = 0, len =dataOhter.length; i < len ; i++) {
@@ -624,7 +737,17 @@ function showSecondDirect(lng, lat,id) {
 			}
 		})
 
-		//图片加载完毕重绘infowindow
+
+	var container = $('#housecontentlist'),
+		scrollTo = $('li.'+id);
+	container.scrollTop(0);
+	container.scrollTop(
+		//scrollTo.position().top +100
+		scrollTo.offset().top - container.offset().top
+	);
+
+
+	//图片加载完毕重绘infowindow
 		// document.getElementById('imgDemo').onload = function (){
 		// 	infoWindow.redraw();   //防止在网速较慢，图片未加载时，生成的信息框高度比图片的总高度小，导致图片部分被隐藏
 		// }
@@ -648,22 +771,77 @@ function showDCDetails(id) {
 			$("#details").append(dcInfo);
 			initDCPanel(id, function (data) {
 				var dataDc= data.diChanPanelXinxi;
+
+				$('#landimg').attr('src',dataDc.img[0].accessory_id);
+
+				if(!dataDc.tdsyr){
+					$($('#tdsyr')[0].parentNode).hide();
+				}
 				$('#tdsyr').text(dataDc.tdsyr);
+
+				if(!dataDc.symj){
+					$($('#symj')[0].parentNode).hide();
+				}
 				$('#symj').text(dataDc.symj);
+				if(!dataDc.zuoluo){
+					$($('#zuoluo')[0].parentNode).hide();
+				}
 				$('#zuoluo').text(dataDc.zuoluo);
+				if(!dataDc.tdzbh){
+					$($('#tdzbh')[0].parentNode).hide();
+				}
 				$('#tdzbh').text(dataDc.tdzbh);
+				if(!dataDc.zzdate){
+					$($('#zzdate')[0].parentNode).hide();
+				}
 				$('#zzdate').text(dataDc.zzdate);
+				if(!dataDc.zzdate){
+					$($('#fzdate')[0].parentNode).hide();
+				}
 				$('#fzdate').text(dataDc.fzdate);
+
+				if(!dataDc.tdxz){
+					$($('#tdxz')[0].parentNode).hide();
+				}
 				$('#tdxz').text(dataDc.tdxz);
+				if(!dataDc.dwid){
+					$($('#dwid')[0].parentNode).hide();
+				}
 				$('#dwid').text(dataDc.dwid);
+				if(!dataDc.dihao){
+					$($('#dihao')[0].parentNode).hide();
+				}
 				$('#dihao').text(dataDc.dihao);
+				if(!dataDc.tuhao){
+					$($('#tuhao')[0].parentNode).hide();
+				}
 				$('#tuhao').text(dataDc.tuhao);
+				if(!dataDc.qdjg){
+					$($('#qdjg')[0].parentNode).hide();
+				}
 				$('#qdjg').text(dataDc.qdjg);
+				if(!dataDc.dymj){
+					$($('#dymj')[0].parentNode).hide();
+				}
 				$('#dymj').text(dataDc.dymj);
+				if(!dataDc.fzdw){
+					$($('#fzdw')[0].parentNode).hide();
+				}
 				$('#fzdw').text(dataDc.fzdw);
+				if(!dataDc.ftmj){
+					$($('#ftmj')[0].parentNode).hide();
+				}
 				$('#ftmj').text(dataDc.ftmj);
+				if(!dataDc.sfxnsc){
+					$($('#sfxnsc')[0].parentNode).hide();
+				}
 				$('#sfxnsc').text(dataDc.sfxnsc);
-				initBarChart("barChart",dataDc);
+
+				if(!dataDc.syqtype){
+					$($('#syqtype')[0].parentNode).hide();
+				}
+				$('#syqtype').text(dataDc.syqtype);
+				//initBarChart("barChart",dataDc);
 				initAccordion();
 				var dataOhter = data.diChanPanelDuiyingFangChanXinxi;
 				for (var i = 0, len =dataOhter.length; i < len ; i++) {
@@ -672,6 +850,13 @@ function showDCDetails(id) {
 				}
 			})
 			// $('#details').append(test);
+	var container = $('#lanecontentlist'),
+		scrollTo = $('li.'+id);
+	container.scrollTop(0);
+	container.scrollTop(
+		//scrollTo.position().top +100
+		scrollTo.offset().top - container.offset().top
+	);
 
 
 }

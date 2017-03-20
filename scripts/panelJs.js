@@ -19,6 +19,9 @@ var info =
   '<li><label>总层数：</label><label id="zcengshu">---</label></li>' +
   '<li><label>套内建筑面积：</label><label id="tnjzmj">---</label></li>' +
   '<li><label>地号：</label><label id="dihao">---</label></li>' +
+  '<li><label>发证单位：</label><label id="fzdw">---</label></li>' +
+  '<li><label>发证时间：</label><label id="fztime">---</label></li>' +
+  '<li><label>其他：</label><label id="qita">---</label></li>' +
   '<li><label>房屋名称：</label><label id="fwmc">---</label></li>' +
   '<li><label>权利类型：</label><label id="qllx">---</label></li>' +
   '<li><label>权利其他状况：</label><label id="qlqtzk">---</label></li>' +
@@ -30,17 +33,16 @@ var info =
   '<li><label>地理位置：</label><label id="location">---</label></li>' +
   '<li><label>土地使用权取得方式：</label><label id="tdsyqqdfs">---</label></li>' +
   '<li><label>土地使用年限开始：</label><label id="tdsynx_s">---</label></li>' +
-  '<li><label>土地使用年限结束：</label><label id=" tdsynx_e">---</label></li>' +
   '<li><label>土地（权利）性质</label><label id="tdqlxz">---</label></li>' +
   '</ul>' +
   '<div class="wrapper">' +
   '<ul class="items">' +
-  '<li>' +
-  '<a href="#">出租率及平均单价趋势 <i class="glyphicon glyphicon-chevron-right"></i></a>' +
-  '<ul class="sub-items">' +
-  '<li>' +
-  '<div id="barChart" style="height: 250px;width: 350px">' +
-  '</div></li></ul> </li>' +
+  // '<li>' +
+  // '<a href="#">出租率及平均单价趋势 <i class="glyphicon glyphicon-chevron-right"></i></a>' +
+  // '<ul class="sub-items">' +
+  // '<li>' +
+  // '<div id="barChart" style="height: 250px;width: 350px">' +
+  // '</div></li></ul> </li>' +
   '<li>' +
   '<a href="#">对应地产信息<i class="glyphicon glyphicon-chevron-right"></i></a>' +
   '<ul class="sub-items" id="dyfcxx">' +

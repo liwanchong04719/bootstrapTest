@@ -107,6 +107,10 @@ html,body{
     position: relative;
 }
 #treeOfCompany>ul{
-    height: 100%;
     overflow-y: auto;
+}
+
+
+.list-item{
+    position: relative;
 }
